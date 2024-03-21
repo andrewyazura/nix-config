@@ -6,7 +6,10 @@
     description = "Andrew Yatsura";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [ firefox zsh ];
+    shell = pkgs.zsh;
   };
+
+  programs.zsh.enable = true;
 
   nixpkgs.config.allowUnfree = true;
 
