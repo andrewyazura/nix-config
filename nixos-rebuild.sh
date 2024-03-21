@@ -6,6 +6,7 @@ pushd ~/nixos
 
 if [[ -z `git status --porcelain` ]]; then
     echo "No changes in configuration, exiting."
+    popd
     exit 1
 fi
 
