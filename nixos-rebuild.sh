@@ -14,9 +14,9 @@ nixfmt .
 
 echo "Rebuilding NixOS configuration..."
 
-sudo nixos-rebuild switch --flake .#nixos
+sudo nixos-rebuild switch --flake .#ga401
 
-generation_tag = $(nixos-rebuild list-generations --flake . | grep current | awk '{ print $1, $3, $4 }')
+generation_tag=$(nixos-rebuild list-generations --flake . | grep current | awk '{ print $1, $3, $4 }')
 
 git commit -am "rebuild: $generation_tag"
 git push

@@ -12,17 +12,19 @@
 
   outputs = inputs@{ nixpkgs, home-manager, ... }: {
     nixosConfigurations = {
-      nixos = nixpkgs.lib.nixosSystem {
+      ga401 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+
         modules = [
-          ./configuration.nix
+          ./hosts/ga401
 
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
 
-            home-manager.users.andrew = import ./home.nix;
+            home-manager.extraSpecialArgs = inputs;
+            home-manager.users.andrew = import ./home;
           }
         ];
       };
