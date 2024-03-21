@@ -15,18 +15,13 @@
     lshw
 
     vscode
+    insomnia
+
+    spotify
+
     telegram-desktop
     discord
     firefox
     thunderbird
-    spotify
   ];
-
-  programs = {
-    git = {
-      enable = true;
-      userName = "Andrew Yatsura";
-      userEmail = "andrewyazura203@proton.me";
-    };
-  };
 }

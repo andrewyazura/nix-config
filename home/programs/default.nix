@@ -1,1 +1,1 @@
-{ imports = [ ./common.nix ]; }
+{ imports = [ ./common.nix ./git.nix ]; }
