@@ -5,10 +5,10 @@
     isNormalUser = true;
     description = "Andrew Yatsura";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [ firefox zsh ];
-    shell = pkgs.zsh;
+    packages = with pkgs; [ firefox ];
   };
 
+  users.defaultUserShell = pkgs.zsh;
   programs.zsh.enable = true;
 
   nixpkgs.config.allowUnfree = true;
@@ -22,7 +22,7 @@
     options = "--delete-older-than 1w";
   };
 
-  environment.systemPackages = with pkgs; [ git vim wget curl nixfmt ];
+  environment.systemPackages = with pkgs; [ git vim wget curl nixfmt zsh ];
 
   environment.variables.EDITOR = "vim";
 
