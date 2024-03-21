@@ -5,10 +5,9 @@
 { config, pkgs, lib, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -84,10 +83,7 @@
     isNormalUser = true;
     description = "Andrew Yatsura";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      firefox
-    #  thunderbird
-    ];
+    packages = with pkgs; [ firefox ];
   };
 
   # Allow unfree packages
@@ -97,12 +93,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    git
-    vim
-    wget
-    curl
-  ];
+  environment.systemPackages = with pkgs; [ git vim wget curl nixfmt ];
 
   environment.variables.EDITOR = "vim";
 
@@ -130,9 +121,7 @@
     driSupport = true;
     driSupport32Bit = true;
 
-    extraPackages = with pkgs; [
-      vaapiVdpau
-    ];
+    extraPackages = with pkgs; [ vaapiVdpau ];
   };
 
   hardware.nvidia = {
@@ -148,7 +137,8 @@
     prime = {
       offload = {
         enable = lib.mkOverride 990 true;
-        enableOffloadCmd = lib.mkIf config.hardware.nvidia.prime.offload.enable true;
+        enableOffloadCmd =
+          lib.mkIf config.hardware.nvidia.prime.offload.enable true;
       };
 
       amdgpuBusId = "PCI:4:0:0";
