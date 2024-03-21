@@ -16,6 +16,7 @@
 
     vscode
     insomnia
+    obsidian
 
     spotify
 
