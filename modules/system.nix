@@ -1,4 +1,6 @@
 { pkgs, lib, ... }: {
+  boot.loader.systemd-boot.configurationLimit = 10;
+
   users.users.andrew = {
     isNormalUser = true;
     description = "Andrew Yatsura";
@@ -8,7 +10,14 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  nix.settings.auto-optimise-store = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 1w";
+  };
 
   environment.systemPackages = with pkgs; [ git vim wget curl nixfmt ];
 
