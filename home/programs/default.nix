@@ -1,1 +1,1 @@
-{ imports = [ ./common.nix ./git.nix ]; }
+{ imports = [ ./common.nix ./git.nix ./zsh.nix ]; }

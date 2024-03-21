@@ -5,7 +5,7 @@
     isNormalUser = true;
     description = "Andrew Yatsura";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [ firefox ];
+    packages = with pkgs; [ firefox zsh ];
   };
 
   nixpkgs.config.allowUnfree = true;
