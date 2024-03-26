@@ -1,5 +1,10 @@
 { config, pkgs, lib, ... }: {
-  imports = [ ./hardware-configuration.nix ../../modules/system.nix ];
+  imports = [
+    ../../modules/system.nix
+    ../../modules/i3.nix
+
+    ./hardware-configuration.nix
+  ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
