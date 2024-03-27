@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   environment.pathsToLink = [ "/libexec" ];
 
-  services.gnome3.gnome-keyring.enable = true;
+  services.gnome.gnome-keyring.enable = true;
 
   services.xserver = {
     enable = true;
