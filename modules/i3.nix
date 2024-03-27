@@ -11,7 +11,7 @@
     windowManager.i3 = {
       enable = true;
 
-      extraPackages = with pkgs; [ dmenu i3status i3lock feh ];
+      extraPackages = with pkgs; [ dmenu i3status i3lock feh dunst acpi ];
     };
 
     xkb = {
