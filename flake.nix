@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    minegrub.url = "github:Lxtharia/minegrub-theme";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -17,6 +18,7 @@
 
         modules = [
           ./hosts/ga401
+          inputs.minegrub.nixosModules.default
 
           home-manager.nixosModules.home-manager
           {
