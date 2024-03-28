@@ -20,7 +20,7 @@
     vscode
     insomnia
     obsidian
-
+    kitty
     spotify
 
     telegram-desktop
