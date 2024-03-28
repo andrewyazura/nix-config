@@ -2,8 +2,8 @@
 
 BLANK='#00000000'
 CLEAR='#ffffff22'
-DEFAULT='#ff00ffcc'
-TEXT='#ee00eeee'
+DEFAULT='#076070'
+TEXT='#076070'
 WRONG='#880000bb'
 VERIFYING='#bb00bbbb'
 
@@ -27,8 +27,7 @@ i3lock \
 --keyhl-color=$WRONG         \
 --bshl-color=$WRONG          \
 \
---screen 0                   \
---blur 10                    \
+--image=~/.config/i3/lock.png \
 --clock                      \
 --indicator                  \
 --time-str="%H:%M:%S"        \
