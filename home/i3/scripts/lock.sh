@@ -27,9 +27,8 @@ i3lock \
 --keyhl-color=$WRONG         \
 --bshl-color=$WRONG          \
 \
---image=~/.config/i3/lock.jpg \
+--image=/home/$USER/.config/i3/lock.jpg \
 --clock                      \
 --indicator                  \
 --time-str="%H:%M:%S"        \
 --date-str="%A, %Y-%m-%d"    \
---keylayout 0                \
