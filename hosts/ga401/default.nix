@@ -2,6 +2,7 @@
   imports = [
     ../../modules/system.nix
     ../../modules/i3.nix
+    ../../modules/fonts.nix
 
     ./hardware-configuration.nix
   ];
