@@ -13,7 +13,7 @@
       enable = true;
       extraPackages = with pkgs; [ dmenu i3status i3lock feh dunst acpi ];
       extraSessionCommands = ''
-        eval $(gnome-keyring-daemon --daemonize)
+        eval $(gnome-keyring-daemon --start)
         export GNOME_KEYRING_CONTROL GNOME_KEYRING_PID GPG_AGENT_INFO SSH_AUTH_SOCK
       '';
     };
