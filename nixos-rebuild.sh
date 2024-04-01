@@ -11,6 +11,7 @@ if [[ -z `git status --porcelain` ]]; then
 fi
 
 nixfmt .
+git add .
 
 echo "Rebuilding NixOS configuration..."
 
