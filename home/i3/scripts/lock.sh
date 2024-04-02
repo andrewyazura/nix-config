@@ -1,5 +1,6 @@
 #!/bin/sh
 
+IMAGE=$(shuf -e -n1 /home/$USER/.config/i3/wallpapers/**/*)
 BLANK='#00000000'
 DEFAULT='#ffffffff'
 WRONG='#561616ff'
@@ -26,7 +27,7 @@ i3lock \
 --keyhl-color=$WRONG         \
 --bshl-color=$WRONG          \
 \
---image=/home/$USER/.config/i3/lock.jpg \
+--image=$IMAGE               \
 --clock                      \
 --indicator                  \
 --time-str="%H:%M"           \
