@@ -27,5 +27,6 @@
     discord
     firefox
     thunderbird
+    chromium
   ];
 }
