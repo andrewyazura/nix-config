@@ -7,6 +7,7 @@
     unzip
 
     ripgrep
+    imagemagick
 
     cowsay
     which
