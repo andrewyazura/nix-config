@@ -23,6 +23,7 @@
     kitty
     spotify
 
+    beeper
     telegram-desktop
     discord
     firefox
