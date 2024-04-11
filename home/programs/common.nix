@@ -7,7 +7,6 @@
     unzip
 
     ripgrep
-    imagemagick
 
     cowsay
     which
@@ -27,6 +26,7 @@
     beeper
     telegram-desktop
     discord
+
     firefox
     thunderbird
     chromium
