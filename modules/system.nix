@@ -22,10 +22,19 @@
     options = "--delete-older-than 1w";
   };
 
-  environment.systemPackages = with pkgs; [ git vim wget curl nixfmt zsh ];
-  environment.variables.EDITOR = "vim";
+  environment.systemPackages = with pkgs; [
+    git
+    vim
+    neovim
+    wget
+    curl
+    nixfmt
+    zsh
+  ];
+  environment.variables.EDITOR = "nvim";
 
   programs.dconf.enable = true;
+  programs.neovim.enable = true;
 
   services.printing.enable = true;
 
