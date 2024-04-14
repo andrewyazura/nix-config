@@ -30,6 +30,7 @@
     curl
     nixfmt
     zsh
+    pulseaudio
   ];
   environment.variables.EDITOR = "nvim";
 
