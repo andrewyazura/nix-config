@@ -1,10 +1,10 @@
 { lib, pkgs, ... }: {
   home.packages = with pkgs; [
-    beeper
     chromium
     cowsay
     discord
     firefox
+    flameshot
     insomnia
     kitty
     lshw

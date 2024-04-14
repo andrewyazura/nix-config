@@ -22,7 +22,7 @@ current_generation=$(nixos-rebuild list-generations --flake . | grep current)
 generation_tag=$(echo $current_generation | awk '{ print $1 }')
 generation_description=$(echo $current_generation | awk '{ print $3, $4 }')
 
-git commit -am "generation: $generation_tag - $generation_description"
+git commit -m "generation: $generation_tag - $generation_description"
 git push
 
 popd

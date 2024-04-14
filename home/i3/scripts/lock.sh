@@ -27,7 +27,6 @@ i3lock \
 --keyhl-color=$WRONG         \
 --bshl-color=$WRONG          \
 \
---image=$IMAGE               \
 --clock                      \
---indicator                  \
+--image=$IMAGE               \
 --time-str="%H:%M"           \
