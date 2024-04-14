@@ -1,34 +1,27 @@
 { lib, pkgs, ... }: {
   home.packages = with pkgs; [
-    zsh
-    oh-my-zsh
-
-    zip
-    unzip
-
-    ripgrep
-
-    cowsay
-    which
-    tree
-    neofetch
-
-    pciutils
-    usbutils
-    lshw
-
-    vscode
-    insomnia
-    obsidian
-    kitty
-    spotify
-
     beeper
-    telegram-desktop
-    discord
-
-    firefox
-    thunderbird
     chromium
+    cowsay
+    discord
+    firefox
+    insomnia
+    kitty
+    lshw
+    neofetch
+    obsidian
+    oh-my-zsh
+    pciutils
+    ripgrep
+    spotify
+    telegram-desktop
+    thunderbird
+    tree
+    unzip
+    usbutils
+    vscode
+    which
+    zip
+    zsh
   ];
 }
