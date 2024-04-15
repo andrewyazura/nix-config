@@ -187,3 +187,6 @@ bindsym $mod+r mode "resize"
 
 # Lock screen
 bindsym $mod+Mod1+l exec ~/.config/i3/scripts/lock.sh
+
+# Start flameshot
+bindsym Print exec "flameshot gui"
