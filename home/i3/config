@@ -39,7 +39,7 @@ exec --no-startup-id /home/$USER/.config/i3/scripts/update_wallpaper.sh
 
 # keyboard setup
 exec "setxkbmap -layout us,de"
-exec "setxkbmap -option 'grp:alt_shift_toggle'"
+exec "setxkbmap -option 'grp:win_space_toggle'"
 
 # polybar
 exec_always --no-startup-id /home/$USER/.config/polybar/launch.sh
