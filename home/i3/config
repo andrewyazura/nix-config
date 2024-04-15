@@ -192,4 +192,4 @@ bindsym $mod+Mod1+l exec ~/.config/i3/scripts/lock.sh
 bindsym Print exec "flameshot gui"
 
 # Gaps
-gaps inner 10px
+gaps inner 8px
