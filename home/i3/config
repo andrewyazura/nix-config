@@ -193,6 +193,3 @@ bindsym Print exec "flameshot gui"
 
 # Outer gaps
 gaps outer 10px
-
-# Inner gaps
-gaps inner 10px
