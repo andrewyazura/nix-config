@@ -19,9 +19,8 @@
     };
 
     xkb = {
-      layout = "us,ua";
+      layout = "us";
       variant = "";
-      options = "grp:win_space_toggle";
     };
   };
 }
