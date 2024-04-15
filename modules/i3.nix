@@ -19,7 +19,7 @@
     };
 
     xkb = {
-      layout = "us,ua,de";
+      layout = "us,ua";
       variant = "";
       options = "grp:alt_shift_toggle";
     };
