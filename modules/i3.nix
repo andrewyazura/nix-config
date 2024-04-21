@@ -21,7 +21,7 @@
     xkb = {
       layout = "us,ua";
       variant = "";
-      options = "grp:alt_shift_toggle";
+      options = "grp:win_space_toggle";
     };
   };
 }
