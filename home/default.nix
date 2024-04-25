@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./programs ./i3 ./polybar ./neovim ];
+  imports = [ ./programs ./i3 ./polybar ./neovim ./kitty ];
 
   home = {
     username = "andrew";
