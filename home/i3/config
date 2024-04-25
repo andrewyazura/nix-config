@@ -37,6 +37,9 @@ exec --no-startup-id nm-applet
 # set wallpaper
 exec --no-startup-id /home/$USER/.config/i3/scripts/update_wallpaper.sh
 
+# start picom
+exec --no-startup-id picom -b
+
 # polybar
 exec_always --no-startup-id /home/$USER/.config/polybar/launch.sh
 
