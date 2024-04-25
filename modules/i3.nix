@@ -2,6 +2,7 @@
   environment.pathsToLink = [ "/libexec" ];
 
   services.gnome.gnome-keyring.enable = true;
+  services.picom.enable = true;
 
   services.xserver = {
     enable = true;
