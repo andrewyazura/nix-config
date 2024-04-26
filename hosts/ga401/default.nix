@@ -43,8 +43,10 @@
     nvidiaSettings = true;
     open = false;
 
-    powerManagement.enable = false;
-    powerManagement.finegrained = false;
+    powerManagement = {
+      enable = false;
+      finegrained = false;
+    };
 
     prime = {
       offload = {
