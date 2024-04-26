@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }: {
   imports = [
     ../../modules/system.nix
-    ../../modules/i3.nix
+    ../../modules/hyprland.nix
     ../../modules/fonts.nix
 
     ./hardware-configuration.nix
@@ -43,8 +43,10 @@
     nvidiaSettings = true;
     open = false;
 
-    powerManagement.enable = false;
-    powerManagement.finegrained = false;
+    powerManagement = {
+      enable = false;
+      finegrained = false;
+    };
 
     prime = {
       offload = {
