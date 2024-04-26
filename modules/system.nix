@@ -38,6 +38,19 @@
   programs.neovim.enable = true;
 
   services.printing.enable = true;
+  services = {
+    xserver = {
+      enable = true;
+      displayManager.gdm.enable = true;
+      desktopManager.gnome.enable = true;
+
+      xkb = {
+        layout = "us,ua";
+        variant = "";
+        options = "grp:win_space_toggle";
+      };
+    };
+  };
 
   sound.enable = true;
   hardware.pulseaudio.enable = false;

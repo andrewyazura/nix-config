@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./programs ./neovim ./kitty ./hyprland ];
+  imports = [ ./programs ./neovim ./kitty ];
 
   home = {
     username = "andrew";
