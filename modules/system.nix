@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }: {
+{ pkgs, ... }: {
   boot.loader.systemd-boot.configurationLimit = 10;
 
   users.users.andrew = {
@@ -10,6 +10,8 @@
 
   users.defaultUserShell = pkgs.zsh;
   programs.zsh.enable = true;
+  programs.dconf.enable = true;
+  programs.neovim.enable = true;
 
   nixpkgs.config.allowUnfree = true;
 
@@ -25,17 +27,12 @@
   environment.systemPackages = with pkgs; [
     git
     vim
-    neovim
     wget
     curl
     nixfmt
-    zsh
     pulseaudio
   ];
   environment.variables.EDITOR = "nvim";
-
-  programs.dconf.enable = true;
-  programs.neovim.enable = true;
 
   services.printing.enable = true;
   services = {

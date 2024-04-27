@@ -10,29 +10,26 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # hyprland.url = "github:hyprwm/Hyprland";
-    # hyprland-plugins = {
-    #   url = "github:hyprwm/Hyprland-plugins";
-    #   inputs.hyprland.follows = "hyprland";
-    # };
+    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland-plugins = {
+      url = "github:hyprwm/Hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, ... }: {
+  outputs = inputs@{ nixpkgs, home-manager, minegrub, ... }: {
     nixosConfigurations = {
       ga401 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-
         specialArgs = { inherit inputs; };
         modules = [
           ./hosts/ga401
-          inputs.minegrub.nixosModules.default
+          minegrub.nixosModules.default
 
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-
-            home-manager.extraSpecialArgs = inputs;
             home-manager.users.andrew = import ./home;
           }
         ];
