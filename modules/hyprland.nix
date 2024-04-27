@@ -24,5 +24,5 @@
     package = inputs.hyprland.packages."${pkgs.system}".hyprland;
   };
 
-  environment.systemPackages = with pkgs; [ wofi hyprlock ];
+  environment.systemPackages = with pkgs; [ hyprlock wofi ];
 }
