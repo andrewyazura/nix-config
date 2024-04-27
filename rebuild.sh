@@ -2,7 +2,7 @@
 
 set -e
 
-pushd ~/nixos
+pushd ~/nixos > /dev/null 2>&1
 
 if [[ -z `git status --porcelain` ]]; then
     echo "No changes in configuration, exiting."
@@ -25,4 +25,4 @@ generation_description=$(echo $current_generation | awk '{ print $3, $4 }')
 git commit -m "generation: $generation_tag - $generation_description"
 git push
 
-popd
+popd > /dev/null 2>&1
