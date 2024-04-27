@@ -4,7 +4,9 @@
     plugins = with inputs.hyprland-plugins.packages."${pkgs.system}"; [
       hyprbars
       hyprtrails
-    ]; # ++ [ inputs.hy3.packages."${pkgs.system}".hy3 ];
+      borders-plus-plus
+    ];
+    # ++ [ inputs.hy3.packages."${pkgs.system}".hy3 ];
   };
 
   home.file.".config/hypr" = {
