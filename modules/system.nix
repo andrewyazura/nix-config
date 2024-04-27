@@ -34,20 +34,6 @@
   ];
   environment.variables.EDITOR = "nvim";
 
-  services = {
-    xserver = {
-      enable = true;
-      displayManager.gdm.enable = true;
-      desktopManager.gnome.enable = true;
-
-      xkb = {
-        layout = "us,ua";
-        variant = "";
-        options = "grp:win_space_toggle";
-      };
-    };
-  };
-
   hardware.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
