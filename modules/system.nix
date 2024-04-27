@@ -34,7 +34,6 @@
   ];
   environment.variables.EDITOR = "nvim";
 
-  services.printing.enable = true;
   services = {
     xserver = {
       enable = true;
@@ -49,15 +48,19 @@
     };
   };
 
-  sound.enable = true;
   hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    jack.enable = true;
+    wireplumber.enable = true;
   };
+
+  # pulseaudio server uses this to acquire realtime priority
+  # https://nixos.org/manual/nixos/stable/options#opt-security.rtkit.enable
+  security.rtkit.enable = true;
 
   time.timeZone = "Europe/Warsaw";
 

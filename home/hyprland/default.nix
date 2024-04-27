@@ -1,7 +1,10 @@
 { pkgs, inputs, ... }: {
   wayland.windowManager.hyprland = {
     enable = true;
-    # plugins = with inputs.hyprland-plugins.packages."${pkgs.system}"; [ ];
+    plugins = with inputs.hyprland-plugins.packages."${pkgs.system}"; [
+      hyprbars
+      hyprtrails
+    ]; # ++ [ inputs.hy3.packages."${pkgs.system}".hy3 ];
   };
 
   home.file.".config/hypr" = {

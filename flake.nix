@@ -15,6 +15,11 @@
       url = "github:hyprwm/Hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
     };
+
+    hy3 = {
+      url = "github:outfoxxed/hy3?ref=hl0.39.1";
+      inputs.hyprland.follows = "hyprland";
+    };
   };
 
   outputs = inputs@{ nixpkgs, home-manager, minegrub, ... }: {
@@ -30,6 +35,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = { inherit inputs; };
             home-manager.users.andrew = import ./home;
           }
         ];
