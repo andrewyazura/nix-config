@@ -1,21 +1,14 @@
 { pkgs, inputs, ... }: {
   services = {
-    xserver = {
-      enable = false;
-      displayManager = {
-        defaultSession = "hyprland";
-        sddm = {
-          enable = true;
-          wayland.enable = true;
-        };
-      };
-
-      xkb = {
-        layout = "us,ua";
-        variant = "";
-        options = "grp:win_space_toggle";
+    displayManager = {
+      defaultSession = "hyprland";
+      sddm = {
+        enable = true;
+        wayland.enable = true;
       };
     };
+
+    xserver.enable = false;
   };
 
   programs.hyprland = {
@@ -24,5 +17,5 @@
     package = inputs.hyprland.packages."${pkgs.system}".hyprland;
   };
 
-  environment.systemPackages = with pkgs; [ hyprlock wofi ];
+  environment.systemPackages = with pkgs; [ hyprlock hyprpaper wofi ];
 }
