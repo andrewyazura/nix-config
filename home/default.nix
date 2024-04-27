@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  imports = [ ./programs ./neovim ./kitty ];
+  imports = [ ./programs ./neovim ./kitty ./hyprland ];
 
   home = {
     username = "andrew";

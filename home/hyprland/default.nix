@@ -1,9 +1,13 @@
-{ hyprland, ... }: {
-  imports = [ hyprland.homeManagerModules.default ];
+{ pkgs, inputs, ... }: {
+  wayland.windowManager.hyprland = {
+    enable = true;
+    # plugins = with inputs.hyprland-plugins.packages."${pkgs.system}"; [ ];
+  };
 
-  wayland.windowManager.hyprland.enable = true;
-
-  home.file.".config/hypr/hyprland.conf".source = ./hyprland.conf;
+  home.file.".config/hypr" = {
+    source = ./hypr;
+    recursive = true;
+  };
 
   systemd.user.sessionVariables = {
     "NIXOS_OZONE_WL" = "1";

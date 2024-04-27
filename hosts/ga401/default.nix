@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }: {
   imports = [
     ../../modules/system.nix
-    # ../../modules/hyprland.nix
+    ../../modules/hyprland.nix
     ../../modules/fonts.nix
 
     ./hardware-configuration.nix
