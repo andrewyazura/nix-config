@@ -9,6 +9,7 @@
     };
 
     xserver.enable = false;
+    gnome.gnome-keyring.enable = true;
   };
 
   programs.hyprland = {
