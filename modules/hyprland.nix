@@ -11,6 +11,8 @@
     xserver.enable = false;
   };
 
+  security.pam.services.sddm.enableGnomeKeyring = true;
+
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;

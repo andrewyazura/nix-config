@@ -12,7 +12,6 @@
   programs.zsh.enable = true;
   programs.dconf.enable = true;
   programs.neovim.enable = true;
-  programs.seahorse.enable = true;
   programs.ssh.startAgent = true;
 
   services.gnome.gnome-keyring.enable = true;
