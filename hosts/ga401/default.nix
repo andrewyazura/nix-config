@@ -8,7 +8,10 @@
   ];
 
   boot.loader = {
-    efi = { canTouchEfiVariables = true; };
+    efi = {
+      canTouchEfiVariables = true;
+      efiSysMountPoint = "/boot";
+    };
 
     grub = {
       enable = true;
@@ -16,10 +19,10 @@
       device = "nodev";
       useOSProber = true;
 
-      minegrub-theme = {
-        enable = true;
-        splash = "100% Flakes!";
-      };
+      # minegrub-theme = {
+      #   enable = true;
+      #   splash = "100% Flakes!";
+      # };
     };
   };
 

@@ -3,7 +3,8 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    minegrub.url = "github:Lxtharia/minegrub-theme";
+    # minegrub is causing issues: https://github.com/Lxtharia/minegrub-theme/issues/54
+    # minegrub.url = "github:Lxtharia/minegrub-theme";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -22,14 +23,14 @@
     };
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, minegrub, ... }: {
+  outputs = inputs@{ nixpkgs, home-manager, ... }: {
     nixosConfigurations = {
       ga401 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
         modules = [
           ./hosts/ga401
-          minegrub.nixosModules.default
+          # minegrub.nixosModules.default
 
           home-manager.nixosModules.home-manager
           {
