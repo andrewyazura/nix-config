@@ -8,7 +8,6 @@
       borders-plus-plus
     ];
     # ++ [ inputs.hy3.packages."${pkgs.system}".hy3 ];
-    settings = { };
   };
 
   home.file.".config/hypr" = {
