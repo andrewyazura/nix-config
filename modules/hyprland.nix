@@ -1,4 +1,5 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, inputs, ... }:
+{
   services = {
     displayManager = {
       defaultSession = "hyprland";
@@ -18,5 +19,9 @@
     package = inputs.hyprland.packages."${pkgs.system}".hyprland;
   };
 
-  environment.systemPackages = with pkgs; [ hyprlock hyprpaper wofi ];
+  environment.systemPackages = with pkgs; [
+    hyprlock
+    hyprpaper
+    wofi
+  ];
 }

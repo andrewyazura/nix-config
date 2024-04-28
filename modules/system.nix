@@ -1,10 +1,14 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   boot.loader.systemd-boot.configurationLimit = 10;
 
   users.users.andrew = {
     isNormalUser = true;
     description = "Andrew Yatsura";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     packages = with pkgs; [ firefox ];
   };
 
@@ -17,7 +21,10 @@
   nixpkgs.config.allowUnfree = true;
 
   nix.settings.auto-optimise-store = true;
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   nix.gc = {
     automatic = true;

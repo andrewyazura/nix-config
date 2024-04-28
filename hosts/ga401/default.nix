@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
   imports = [
     ../../modules/system.nix
     ../../modules/hyprland.nix
@@ -54,8 +60,7 @@
     prime = {
       offload = {
         enable = lib.mkOverride 990 true;
-        enableOffloadCmd =
-          lib.mkIf config.hardware.nvidia.prime.offload.enable true;
+        enableOffloadCmd = lib.mkIf config.hardware.nvidia.prime.offload.enable true;
       };
 
       amdgpuBusId = "PCI:4:0:0";
