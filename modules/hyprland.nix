@@ -2,6 +2,7 @@
   services = {
     displayManager = {
       defaultSession = "hyprland";
+
       sddm = {
         enable = true;
         wayland.enable = true;
@@ -10,8 +11,6 @@
 
     xserver.enable = false;
   };
-
-  security.pam.services.sddm.enableGnomeKeyring = true;
 
   programs.hyprland = {
     enable = true;
