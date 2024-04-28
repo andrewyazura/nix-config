@@ -4,7 +4,9 @@
     enable = true;
     plugins = with inputs.hyprland-plugins.packages."${pkgs.system}"; [
       hyprbars
+      hyprexpo
       hyprtrails
+      hyprwinwrap
       borders-plus-plus
     ];
     # ++ [ inputs.hy3.packages."${pkgs.system}".hy3 ];
