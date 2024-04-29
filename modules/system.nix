@@ -38,7 +38,6 @@
     wget
     curl
     nixfmt-rfc-style
-    pulseaudio
   ];
   environment.variables.EDITOR = "nvim";
 

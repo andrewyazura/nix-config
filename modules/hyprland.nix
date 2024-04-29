@@ -22,6 +22,7 @@
   environment.systemPackages = with pkgs; [
     hyprlock
     hyprpaper
+    hyprshot
     wofi
   ];
 }

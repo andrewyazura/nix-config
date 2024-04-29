@@ -5,7 +5,6 @@
     cowsay
     discord
     firefox
-    flameshot
     insomnia
     kitty
     lshw
