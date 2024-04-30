@@ -1,6 +1,6 @@
 { pkgs, inputs, ... }:
 {
-  imports = [ inputs.hyprland.nixosModules.default ];
+  # imports = [ inputs.hyprland.nixosModules.default ];
 
   services = {
     displayManager = {
