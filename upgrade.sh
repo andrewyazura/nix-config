@@ -5,6 +5,6 @@ set -e
 pushd ~/nixos > /dev/null 2>&1
 
 sudo nix flake update
-sudo nixos-rebuild switch --flake .#ga401
+./rebuild.sh
 
 popd > /dev/null 2>&1
