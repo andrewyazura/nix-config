@@ -1,7 +1,5 @@
 { pkgs, inputs, ... }:
 {
-  # imports = [ inputs.hyprland.nixosModules.default ];
-
   services = {
     displayManager = {
       defaultSession = "hyprland";
