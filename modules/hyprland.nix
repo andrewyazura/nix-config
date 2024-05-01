@@ -19,6 +19,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    # hyprland
     hyprlock
     hyprpaper
     hyprshot
