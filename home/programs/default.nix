@@ -1,7 +1,1 @@
-{
-  imports = [
-    ./common.nix
-    ./git.nix
-    ./zsh.nix
-  ];
-}
+{ imports = [ ./common.nix ./git.nix ./zsh.nix ]; }

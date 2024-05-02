@@ -1,13 +1,7 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}:
-{
+{ config, pkgs, lib, ... }: {
   imports = [
     ../../modules/system.nix
-    ../../modules/hyprland.nix
+    ../../modules/sway.nix
     ../../modules/fonts.nix
 
     ./hardware-configuration.nix
@@ -24,11 +18,6 @@
       efiSupport = true;
       device = "nodev";
       useOSProber = true;
-
-      # minegrub-theme = {
-      #   enable = true;
-      #   splash = "100% Flakes!";
-      # };
     };
   };
 
@@ -60,7 +49,8 @@
     prime = {
       offload = {
         enable = lib.mkOverride 990 true;
-        enableOffloadCmd = lib.mkIf config.hardware.nvidia.prime.offload.enable true;
+        enableOffloadCmd =
+          lib.mkIf config.hardware.nvidia.prime.offload.enable true;
       };
 
       amdgpuBusId = "PCI:4:0:0";
