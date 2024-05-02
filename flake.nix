@@ -36,6 +36,7 @@
           specialArgs = {
             inherit inputs;
           };
+
           modules = [
             ./hosts/ga401
             # minegrub.nixosModules.default
