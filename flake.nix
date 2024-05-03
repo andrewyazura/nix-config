@@ -3,18 +3,11 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    minegrub.url = "github:Lxtharia/minegrub-theme";
 
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # hyprland.url = "github:hyprwm/Hyprland";
-    # hyprland-plugins = {
-    #   url = "github:hyprwm/Hyprland-plugins";
-    #   inputs.hyprland.follows = "hyprland";
-    # };
   };
 
   outputs = inputs@{ nixpkgs, home-manager, ... }: {
@@ -25,7 +18,6 @@
         specialArgs = { inherit inputs; };
         modules = [
           ./hosts/ga401
-          inputs.minegrub.nixosModules.default
 
           home-manager.nixosModules.home-manager
           {
