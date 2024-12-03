@@ -4,7 +4,6 @@
     kitty
     waybar
     hyprlock
-    hyprcursor
     hyprpaper
     dunst
   ];
