@@ -3,8 +3,9 @@
     ../../home/core.nix
 
     ../../home/dev
-    ../../home/programs
     ../../home/hyprland
+    ../../home/kitty
+    ../../home/programs
   ];
 
   programs.git = {
