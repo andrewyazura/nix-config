@@ -81,6 +81,11 @@
     ];
   };
 
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+  };
+
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     substituters = ["https://hyprland.cachix.org"];
