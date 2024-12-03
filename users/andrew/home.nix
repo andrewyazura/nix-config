@@ -4,6 +4,7 @@
 
     ../../home/dev
     ../../home/programs
+    ../../home/hyprland
   ];
 
   programs.git = {
