@@ -24,6 +24,7 @@
         system = "x86_64-linux";
         modules = [
           ./hosts/r7-x3d
+	  ./users/${username}/system.nix
 
           home-manager.nixosModules.home-manager {
             home-manager.useGlobalPkgs = true;

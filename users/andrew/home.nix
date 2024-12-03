@@ -3,6 +3,7 @@
     ../../home/core.nix
 
     ../../home/dev
+    ../../home/programs
   ];
 
   programs.git = {

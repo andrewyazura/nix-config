@@ -82,15 +82,8 @@
     ];
   };
 
-  # Install firefox.
-  programs.firefox.enable = true;
-
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  environment.systemPackages = with pkgs; [
-    vim
-    git
-  ];
-  environment.variables.EDITOR = "vim";
+  nixpkgs.config.allowUnfree = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
