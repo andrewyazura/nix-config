@@ -1,8 +1,10 @@
 {
-  description = "NixOS system-wide configuration";
+  description = "nix configuration";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs = {
+      url = "github:nixos/nixpkgs/nixos-unstable";
+    };
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -10,19 +12,24 @@
     };
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, ... }: {
+  outputs = inputs@{
+    nixpkgs,
+    home-manager,
+    ...
+  }: {
     nixosConfigurations = {
-      ga401 = nixpkgs.lib.nixosSystem {
+      r7-x3d = let
+        username = "andrew";
+      in nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-
         modules = [
-          ./hosts/ga401
+          ./hosts/r7-x3d
 
-          home-manager.nixosModules.home-manager
-          {
+          home-manager.nixosModules.home-manager {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.andrew = import ./home;
+            home-manager.extraSpecialArgs = { inherit username; };
+            home-manager.users.${username} = import ./users/${username}/home.nix;
           }
         ];
       };
