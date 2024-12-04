@@ -4,6 +4,7 @@
 
     ../../home/dev
     ../../home/kitty
+    ../../home/mangohud
     ../../home/programs
   ];
 

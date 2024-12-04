@@ -1,7 +1,8 @@
 { pkgs, ... }: {
   environment.systemPackages = with pkgs; [
+    discord
     kitty
-    spotify
     obsidian
+    spotify
   ];
 }

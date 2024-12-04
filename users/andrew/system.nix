@@ -1,6 +1,6 @@
 {
   imports = [
-    ../../modules/gaming
+    ../../modules/gaming.nix
     ../../modules/programs.nix
   ];
 }
