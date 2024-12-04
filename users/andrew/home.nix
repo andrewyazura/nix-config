@@ -3,7 +3,6 @@
     ../../home/core.nix
 
     ../../home/dev
-    ../../home/hyprland
     ../../home/kitty
     ../../home/programs
   ];
