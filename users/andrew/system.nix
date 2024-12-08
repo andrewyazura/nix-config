@@ -1,6 +1,12 @@
 {
   imports = [
-    ../../modules/gaming.nix
-    ../../modules/programs.nix
+    ../../system/gaming
+    ../../system/programs
   ];
+
+  users.users.andrew = {
+    isNormalUser = true;
+    description = "Andrew Yatsura";
+    extraGroups = [ "networkmanager" "wheel" ];
+  };
 }

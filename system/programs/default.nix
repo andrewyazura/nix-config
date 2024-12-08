@@ -1,6 +1,9 @@
 { pkgs, ... }: {
   environment.systemPackages = with pkgs; [
-    discord
+    vesktop
+    # (discord.override {
+    #   withVencord = true;
+    # })
     kitty
     obsidian
     spotify
