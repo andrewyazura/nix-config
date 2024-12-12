@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   imports = [
-    ../../home/core.nix
+    ../../home
     ../../home/dev
     ../../home/gnome
     ../../home/kitty
