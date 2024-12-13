@@ -25,6 +25,11 @@
         current-workspace-only = true;
       };
 
+      "org/gnome/mutter" = {
+        dynamic-workspaces = true;
+        edge-tiling = false;
+      };
+
       "org/gtk/gtk4/settings/file-chooser" = {
         show-hidden = true;
       };
@@ -39,6 +44,18 @@
       
       "org/gnome/desktop/peripherals/mouse" = {
         accel-profile = "flat";
+      };
+
+      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+        binding = "<Super>t";
+        command = "kitty";
+        name = "Terminal";
+      };
+
+      "org/gnome/settings-daemon/plugins/media-keys" = {
+        custom-keybindings = [ "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" ];
+        help = [];
+        screensaver = [ "<Super>Escape" ];
       };
     };
   };
