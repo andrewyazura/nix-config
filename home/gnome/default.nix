@@ -34,17 +34,18 @@
         show-hidden = true;
       };
 
+      "org/gnome/desktop/peripherals/mouse" = {
+        accel-profile = "flat";
+      };
+
       "org/gnome/shell/keybindings" = {
         toggle-message-tray = [];
       };
 
       "org/gnome/desktop/wm/keybindings" = {
+        close = [ "<Super>q" ];
         minimize = [];
-      };
-      
-      "org/gnome/desktop/peripherals/mouse" = {
-        accel-profile = "flat";
-      };
+      };      
 
       "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
         binding = "<Super>t";
