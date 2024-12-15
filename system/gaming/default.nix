@@ -1,8 +1,6 @@
 { pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     mangohud
-    oversteer
-    usb-modeswitch # for oversteer
   ];
 
   programs = {

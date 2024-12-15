@@ -4,6 +4,7 @@
     obsidian
     ripgrep
     spotify
+    telegram-desktop
     vesktop # fixed screensharing
     wl-clipboard
   ];
