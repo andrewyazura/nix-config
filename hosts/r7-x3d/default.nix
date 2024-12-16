@@ -5,14 +5,17 @@
     ../../system/audio
     ../../system/fonts
     ../../system/nix
+    ../../system/minegrub
 
     ./hardware-configuration.nix
   ];
 
   boot.loader = {
-    systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
-    systemd-boot.configurationLimit = 10;
+    systemd-boot = {
+      enable = true;
+      configurationLimit = 10;
+    };
   };
 
   networking.hostName = "r7-x3d";

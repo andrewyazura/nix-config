@@ -17,13 +17,13 @@
   # adding usb-modeswitch or usb-modeswitch-data to udev packages doesn't help
   # similar issue: https://github.com/NixOS/nixpkgs/issues/11647
 
-  services.udev = {
-    packages = with pkgs; [
-      usb-modeswitch-data
-    ];
-
-    extraRules = ''
-      ATTR{idVendor}=="046d", ATTR{idProduct}=="c261", RUN+="usb_modeswitch '%b/%k'"
-    '';
-  };
+  # services.udev = {
+  #   packages = with pkgs; [
+  #     usb-modeswitch-data
+  #   ];
+  #
+  #   extraRules = ''
+  #     ATTR{idVendor}=="046d", ATTR{idProduct}=="c261", RUN+="usb_modeswitch '%b/%k'"
+  #   '';
+  # };
 }

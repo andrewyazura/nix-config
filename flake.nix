@@ -10,6 +10,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    minegrub-theme = {
+      url = "github:Lxtharia/minegrub-theme";
+    };
   };
 
   outputs = inputs@{
@@ -32,6 +36,8 @@
             home-manager.extraSpecialArgs = inputs // { inherit username; };
             home-manager.users.${username} = import ./users/${username}/home.nix;
           }
+
+          inputs.minegrub-theme.nixosModules.default
         ];
       };
     };
