@@ -5,7 +5,6 @@
     ../../system/audio
     ../../system/fonts
     ../../system/nix
-    ../../system/minegrub
 
     ./hardware-configuration.nix
   ];
