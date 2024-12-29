@@ -59,6 +59,11 @@
         config = toLuaFile ./configs/treesitter.lua;
       }
       nvim-treesitter-context
+
+      {
+        plugin = which-key-nvim;
+        config = toLuaFile ./configs/which-key.lua;
+      }
     ];
   };
 }
