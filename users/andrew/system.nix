@@ -1,7 +1,6 @@
 { pkgs, ... }: {
   imports = [
     ../../system/gaming
-    ../../system/gnome
     ../../system/oversteer
     ../../system/programs
   ];
