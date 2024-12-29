@@ -1,10 +1,11 @@
 { pkgs, ... }: {
   imports = [
     ../../home
-    ../../home/dev.nix
+    ../../home/git
     ../../home/gnome
     ../../home/kitty
     ../../home/mangohud
+    ../../home/neovim
     ../../home/programs
     ../../home/zsh
   ];
