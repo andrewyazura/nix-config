@@ -1,9 +1,6 @@
 { pkgs, ... }: {
-  imports = [
-    ../../system/gaming
-    ../../system/oversteer
-    ../../system/programs
-  ];
+  imports =
+    [ ../../system/gaming ../../system/oversteer ../../system/programs ];
 
   programs.zsh.enable = true;
 

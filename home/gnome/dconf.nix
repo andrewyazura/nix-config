@@ -6,7 +6,8 @@ with lib.hm.gvariant;
 {
   dconf.settings = {
     "apps/seahorse/listing" = {
-      keyrings-selected = [ "secret-service:///org/freedesktop/secrets/collection/login" ];
+      keyrings-selected =
+        [ "secret-service:///org/freedesktop/secrets/collection/login" ];
     };
 
     "apps/seahorse/windows/key-manager" = {
@@ -24,12 +25,24 @@ with lib.hm.gvariant;
       window-width = 1274;
     };
 
-    "org/gnome/Geary" = {
-      migrated-config = true;
-    };
+    "org/gnome/Geary" = { migrated-config = true; };
 
     "org/gnome/Totem" = {
-      active-plugins = [ "rotation" "apple-trailers" "vimeo" "screensaver" "recent" "open-directory" "movie-properties" "save-file" "mpris" "skipto" "autoload-subtitles" "variable-rate" "screenshot" ];
+      active-plugins = [
+        "rotation"
+        "apple-trailers"
+        "vimeo"
+        "screensaver"
+        "recent"
+        "open-directory"
+        "movie-properties"
+        "save-file"
+        "mpris"
+        "skipto"
+        "autoload-subtitles"
+        "variable-rate"
+        "screenshot"
+      ];
       subtitle-encoding = "UTF-8";
     };
 
@@ -54,7 +67,24 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/desktop/app-folders/folders/Utilities" = {
-      apps = [ "gnome-abrt.desktop" "gnome-system-log.desktop" "nm-connection-editor.desktop" "org.gnome.baobab.desktop" "org.gnome.Connections.desktop" "org.gnome.DejaDup.desktop" "org.gnome.Dictionary.desktop" "org.gnome.DiskUtility.desktop" "org.gnome.Evince.desktop" "org.gnome.FileRoller.desktop" "org.gnome.fonts.desktop" "org.gnome.Loupe.desktop" "org.gnome.seahorse.Application.desktop" "org.gnome.tweaks.desktop" "org.gnome.Usage.desktop" "vinagre.desktop" ];
+      apps = [
+        "gnome-abrt.desktop"
+        "gnome-system-log.desktop"
+        "nm-connection-editor.desktop"
+        "org.gnome.baobab.desktop"
+        "org.gnome.Connections.desktop"
+        "org.gnome.DejaDup.desktop"
+        "org.gnome.Dictionary.desktop"
+        "org.gnome.DiskUtility.desktop"
+        "org.gnome.Evince.desktop"
+        "org.gnome.FileRoller.desktop"
+        "org.gnome.fonts.desktop"
+        "org.gnome.Loupe.desktop"
+        "org.gnome.seahorse.Application.desktop"
+        "org.gnome.tweaks.desktop"
+        "org.gnome.Usage.desktop"
+        "vinagre.desktop"
+      ];
       categories = [ "X-GNOME-Utilities" ];
       name = "X-GNOME-Utilities.directory";
       translate = true;
@@ -75,9 +105,7 @@ with lib.hm.gvariant;
       secondary-color = "#000000";
     };
 
-    "org/gnome/desktop/calendar" = {
-      show-weekdate = false;
-    };
+    "org/gnome/desktop/calendar" = { show-weekdate = false; };
 
     "org/gnome/desktop/input-sources" = {
       mru-sources = [ (mkTuple [ "xkb" "us" ]) ];
@@ -95,12 +123,21 @@ with lib.hm.gvariant;
       enable-hot-corners = false;
     };
 
-    "org/gnome/desktop/media-handling" = {
-      autorun-never = true;
-    };
+    "org/gnome/desktop/media-handling" = { autorun-never = true; };
 
     "org/gnome/desktop/notifications" = {
-      application-children = [ "org-gnome-geary" "gnome-power-panel" "discord" "steam" "firefox" "spotify" "vesktop" "chromium-browser" "org-telegram-desktop" "org-shotcut-shotcut" ];
+      application-children = [
+        "org-gnome-geary"
+        "gnome-power-panel"
+        "discord"
+        "steam"
+        "firefox"
+        "spotify"
+        "vesktop"
+        "chromium-browser"
+        "org-telegram-desktop"
+        "org-shotcut-shotcut"
+      ];
     };
 
     "org/gnome/desktop/notifications/application/chromium-browser" = {
@@ -155,18 +192,21 @@ with lib.hm.gvariant;
     "org/gnome/desktop/screensaver" = {
       color-shading-type = "solid";
       picture-options = "zoom";
-      picture-uri = "file:///run/current-system/sw/share/backgrounds/gnome/glass-chip-l.jxl";
+      picture-uri =
+        "file:///run/current-system/sw/share/backgrounds/gnome/glass-chip-l.jxl";
       primary-color = "#26a269";
       secondary-color = "#000000";
     };
 
     "org/gnome/desktop/search-providers" = {
-      sort-order = [ "org.gnome.Settings.desktop" "org.gnome.Contacts.desktop" "org.gnome.Nautilus.desktop" ];
+      sort-order = [
+        "org.gnome.Settings.desktop"
+        "org.gnome.Contacts.desktop"
+        "org.gnome.Nautilus.desktop"
+      ];
     };
 
-    "org/gnome/desktop/session" = {
-      idle-delay = mkUint32 600;
-    };
+    "org/gnome/desktop/session" = { idle-delay = mkUint32 600; };
 
     "org/gnome/desktop/sound" = {
       event-sounds = true;
@@ -175,21 +215,17 @@ with lib.hm.gvariant;
 
     "org/gnome/desktop/wm/keybindings" = {
       close = [ "<Super>q" ];
-      minimize = [];
+      minimize = [ ];
     };
 
-    "org/gnome/epiphany" = {
-      ask-for-default = false;
-    };
+    "org/gnome/epiphany" = { ask-for-default = false; };
 
     "org/gnome/epiphany/state" = {
       is-maximized = false;
       window-size = mkTuple [ 2552 1400 ];
     };
 
-    "org/gnome/evolution-data-server" = {
-      migrated = true;
-    };
+    "org/gnome/evolution-data-server" = { migrated = true; };
 
     "org/gnome/file-roller/dialogs/extract" = {
       height = 800;
@@ -231,7 +267,34 @@ with lib.hm.gvariant;
       col-0-width = 867;
       col-26-visible = false;
       col-26-width = 0;
-      columns-order = [ 0 12 1 2 3 4 6 7 8 9 10 11 13 14 15 16 17 18 19 20 21 22 23 24 25 26 ];
+      columns-order = [
+        0
+        12
+        1
+        2
+        3
+        4
+        6
+        7
+        8
+        9
+        10
+        11
+        13
+        14
+        15
+        16
+        17
+        18
+        19
+        20
+        21
+        22
+        23
+        24
+        25
+        26
+      ];
       sort-col = 15;
       sort-order = 0;
     };
@@ -241,9 +304,7 @@ with lib.hm.gvariant;
       edge-tiling = false;
     };
 
-    "org/gnome/mutter/wayland/keybindings" = {
-      restore-shortcuts = [];
-    };
+    "org/gnome/mutter/wayland/keybindings" = { restore-shortcuts = [ ]; };
 
     "org/gnome/nautilus/preferences" = {
       default-folder-viewer = "icon-view";
@@ -266,16 +327,19 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/settings-daemon/plugins/media-keys" = {
-      custom-keybindings = [ "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" ];
-      help = [];
+      custom-keybindings = [
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+      ];
+      help = [ ];
       screensaver = [ "<Super>Escape" ];
     };
 
-    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
-      binding = "<Super>t";
-      command = "kitty";
-      name = "Terminal";
-    };
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" =
+      {
+        binding = "<Super>t";
+        command = "kitty";
+        name = "Terminal";
+      };
 
     "org/gnome/settings-daemon/plugins/power" = {
       power-button-action = "nothing";
@@ -285,15 +349,14 @@ with lib.hm.gvariant;
     "org/gnome/shell" = {
       command-history = [ "r" ];
       disable-user-extensions = false;
-      enabled-extensions = [ "pop-shell@system76.com" "pop-shell@system76.com" ];
-      favorite-apps = [];
+      enabled-extensions =
+        [ "pop-shell@system76.com" "pop-shell@system76.com" ];
+      favorite-apps = [ ];
       last-selected-power-profile = "performance";
       welcome-dialog-last-shown-version = "47.1";
     };
 
-    "org/gnome/shell/app-switcher" = {
-      current-workspace-only = true;
-    };
+    "org/gnome/shell/app-switcher" = { current-workspace-only = true; };
 
     "org/gnome/shell/extensions/pop-shell" = {
       active-hint = false;
@@ -306,13 +369,11 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/shell/keybindings" = {
-      toggle-message-tray = [];
-      toggle-quick-settings = [];
+      toggle-message-tray = [ ];
+      toggle-quick-settings = [ ];
     };
 
-    "org/gtk/gtk4/settings/file-chooser" = {
-      show-hidden = true;
-    };
+    "org/gtk/gtk4/settings/file-chooser" = { show-hidden = true; };
 
     "org/gtk/settings/file-chooser" = {
       date-format = "regular";
