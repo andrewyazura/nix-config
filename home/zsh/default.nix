@@ -10,9 +10,7 @@
       theme = "robbyrussell";
       plugins = [ "git" "kitty" ];
     };
-    
-    shellAliases = {
-      ll = "ls -l";
-    };
+
+    shellAliases = { ll = "ls -l"; };
   };
 }

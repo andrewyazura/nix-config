@@ -1,5 +1,3 @@
 { pkgs, ... }: {
-  environment.systemPackages = with pkgs.gnomeExtensions; [
-    pop-shell
-  ];
+  environment.systemPackages = with pkgs.gnomeExtensions; [ pop-shell ];
 }

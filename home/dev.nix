@@ -1,7 +1,1 @@
-{
-  imports = [
-    ./git
-    ./neovim
-    ./kitty
-  ];
-}
+{ imports = [ ./git ./neovim ./kitty ]; }

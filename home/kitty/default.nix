@@ -1,5 +1,1 @@
-{
-  home.file.".config/kitty/" = {
-    source = ./configs;
-  };
-}
+{ home.file.".config/kitty/" = { source = ./configs; }; }

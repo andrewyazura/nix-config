@@ -3,10 +3,7 @@
   # `sudo usb_modeswitch -v 046d -p c261 -c system/oversteer/modeswitch`
 
   environment = {
-    systemPackages = with pkgs; [
-      oversteer
-      usb-modeswitch
-    ];
+    systemPackages = with pkgs; [ oversteer usb-modeswitch ];
 
     # etc."usb_modeswitch.d/046d:c261".source = ./modeswitch;
   };

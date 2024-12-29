@@ -1,8 +1,15 @@
 { pkgs, ... }: {
-  programs.neovim =
-  let
-    toLua = str: "lua << EOF\n${str}\nEOF\n";
-    toLuaFile = path: "lua << EOF\n${builtins.readFile path}\nEOF\n";
+  programs.neovim = let
+    toLua = str: ''
+      lua << EOF
+      ${str}
+      EOF
+    '';
+    toLuaFile = path: ''
+      lua << EOF
+      ${builtins.readFile path}
+      EOF
+    '';
   in {
     enable = true;
     defaultEditor = true;
@@ -16,18 +23,15 @@
       ${builtins.readFile ./configs/options.lua}
     '';
 
-    extraPackages = with pkgs; [
-      ripgrep
-      wl-clipboard
-    ];
+    extraPackages = with pkgs; [ ripgrep wl-clipboard ];
 
     plugins = with pkgs.vimPlugins; [
       {
         plugin = catppuccin-nvim;
-        config = toLua "vim.g.mapleader = ' '; vim.g.maplocalleader = '\'";
+        config = toLua "vim.g.mapleader = ' '; vim.g.maplocalleader = ''";
         # this hack sets leader key before any other hotkeys are added
       }
-      
+
       diffview-nvim
       plenary-nvim
       nvim-lspconfig
@@ -39,24 +43,19 @@
 
       {
         plugin = nvim-cmp;
-      	config = toLuaFile ./configs/cmp.lua;
+        config = toLuaFile ./configs/cmp.lua;
       }
       cmp-cmdline
       cmp-path
 
       {
         plugin = telescope-nvim;
-      	config = toLuaFile ./configs/telescope.lua;
+        config = toLuaFile ./configs/telescope.lua;
       }
 
       {
-        plugin = nvim-treesitter.withPlugins (p: [
-       	  p.nix
-          p.go
-          p.python
-          p.lua
-          p.vimdoc
-        ]);
+        plugin = nvim-treesitter.withPlugins
+          (p: [ p.nix p.go p.python p.lua p.vimdoc ]);
         config = toLuaFile ./configs/treesitter.lua;
       }
       nvim-treesitter-context

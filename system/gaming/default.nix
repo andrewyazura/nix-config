@@ -1,7 +1,5 @@
-{ pkgs, ...}: {
-  environment.systemPackages = with pkgs; [
-    mangohud
-  ];
+{ pkgs, ... }: {
+  environment.systemPackages = with pkgs; [ mangohud ];
 
   programs = {
     gamescope.enable = true;

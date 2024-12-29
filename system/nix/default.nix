@@ -5,9 +5,7 @@
     options = "--delete-older-than 1w";
   };
 
-  nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ];
-  };
+  nix.settings = { experimental-features = [ "nix-command" "flakes" ]; };
 
   nixpkgs.config.allowUnfree = true;
 

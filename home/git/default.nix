@@ -1,8 +1,6 @@
 { ... }: {
   programs.git = {
     enable = true;
-    aliases = {
-      gw = "worktree";
-    };
+    aliases = { gw = "worktree"; };
   };
 }
