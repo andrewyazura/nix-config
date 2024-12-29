@@ -6,8 +6,15 @@
   in {
     enable = true;
     defaultEditor = true;
+
     viAlias = true;
     vimAlias = true;
+    vimdiffAlias = true;
+
+    extraLuaConfig = ''
+
+      ${builtins.readFile ./configs/options.lua}
+    '';
 
     extraPackages = with pkgs; [
       ripgrep
@@ -15,7 +22,12 @@
     ];
 
     plugins = with pkgs.vimPlugins; [
-      catppuccin-nvim
+      {
+        plugin = catppuccin-nvim;
+        config = toLua "vim.g.mapleader = ' '; vim.g.maplocalleader = '\'";
+        # this hack sets leader key before any other hotkeys are added
+      }
+      
       diffview-nvim
       plenary-nvim
       nvim-lspconfig
@@ -49,9 +61,5 @@
       }
       nvim-treesitter-context
     ];
-
-    extraLuaConfig = ''
-      ${builtins.readFile ./configs/options.lua}
-    '';
   };
 }
