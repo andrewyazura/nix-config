@@ -18,17 +18,12 @@
     vimAlias = true;
     vimdiffAlias = true;
 
-    extraLuaConfig = ''
-
-      ${builtins.readFile ./configs/options.lua}
-    '';
-
     extraPackages = with pkgs; [ ripgrep wl-clipboard ];
 
     plugins = with pkgs.vimPlugins; [
       {
         plugin = catppuccin-nvim;
-        config = toLua "vim.g.mapleader = ' '; vim.g.maplocalleader = ''";
+        config = toLuaFile ./configs/options.lua;
         # this hack sets leader key before any other hotkeys are added
       }
 
@@ -63,6 +58,11 @@
       {
         plugin = which-key-nvim;
         config = toLuaFile ./configs/which-key.lua;
+      }
+
+      {
+        plugin = oil-nvim;
+        config = toLua "require('oil').setup()";
       }
     ];
   };

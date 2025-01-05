@@ -4,6 +4,7 @@
   imports = [
     ../../system/audio
     ../../system/fonts
+    ../../system/minegrub
     ../../system/nix
 
     ./hardware-configuration.nix

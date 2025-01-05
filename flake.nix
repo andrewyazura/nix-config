@@ -10,6 +10,8 @@
     };
 
     minegrub-theme = { url = "github:Lxtharia/minegrub-theme"; };
+
+    ghostty = { url = "github:ghostty-org/ghostty"; };
   };
 
   outputs = inputs@{ nixpkgs, home-manager, ... }: {
@@ -32,6 +34,7 @@
 
           inputs.minegrub-theme.nixosModules.default
         ];
+        specialArgs = { inherit inputs; };
       };
     };
   };
