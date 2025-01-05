@@ -13,6 +13,5 @@
         obs-pipewire-audio-capture
       ];
     })
-    shotcut
   ];
 }

@@ -15,6 +15,8 @@ with lib.hm.gvariant;
       width = 1274;
     };
 
+    "org/gnome/Characters" = { recent-characters = [ "127482127462" ]; };
+
     "org/gnome/Console" = {
       last-window-maximised = false;
       last-window-size = mkTuple [ 652 480 ];
@@ -51,9 +53,30 @@ with lib.hm.gvariant;
       window-size = mkTuple [ 1274 698 ];
     };
 
+    "org/gnome/clocks" = {
+      world-clocks = [{
+        location = mkVariant [
+          (mkUint32 2)
+          (mkVariant [
+            "Kyiv"
+            "UKKK"
+            true
+            [ (mkTuple [ 0.8796750376437729 0.531481851870904 ]) ]
+            [ (mkTuple [ 0.8802277136047092 0.5326163158847004 ]) ]
+          ])
+        ];
+      }];
+    };
+
+    "org/gnome/clocks/state/window" = {
+      maximized = false;
+      panel-id = "timer";
+      size = mkTuple [ 1274 1400 ];
+    };
+
     "org/gnome/control-center" = {
-      last-panel = "sound";
-      window-state = mkTuple [ 1274 1400 false ];
+      last-panel = "keyboard";
+      window-state = mkTuple [ 1274 698 false ];
     };
 
     "org/gnome/desktop/app-folders" = {
@@ -144,6 +167,10 @@ with lib.hm.gvariant;
       application-id = "chromium-browser.desktop";
     };
 
+    "org/gnome/desktop/notifications/application/com-obsproject-studio" = {
+      application-id = "com.obsproject.Studio.desktop";
+    };
+
     "org/gnome/desktop/notifications/application/discord" = {
       application-id = "discord.desktop";
     };
@@ -158,6 +185,10 @@ with lib.hm.gvariant;
 
     "org/gnome/desktop/notifications/application/org-gnome-geary" = {
       application-id = "org.gnome.Geary.desktop";
+    };
+
+    "org/gnome/desktop/notifications/application/org-gnome-texteditor" = {
+      application-id = "org.gnome.TextEditor.desktop";
     };
 
     "org/gnome/desktop/notifications/application/org-shotcut-shotcut" = {
@@ -318,6 +349,10 @@ with lib.hm.gvariant;
       maximized = false;
     };
 
+    "org/gnome/portal/filechooser/chromium-browser" = {
+      last-folder-path = "/home/andrew/Pictures";
+    };
+
     "org/gnome/settings-daemon/plugins/color" = {
       night-light-enabled = false;
       night-light-schedule-automatic = false;
@@ -337,7 +372,7 @@ with lib.hm.gvariant;
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" =
       {
         binding = "<Super>t";
-        command = "kitty";
+        command = "ghostty";
         name = "Terminal";
       };
 
@@ -349,8 +384,11 @@ with lib.hm.gvariant;
     "org/gnome/shell" = {
       command-history = [ "r" ];
       disable-user-extensions = false;
-      enabled-extensions =
-        [ "pop-shell@system76.com" "pop-shell@system76.com" ];
+      enabled-extensions = [
+        "pop-shell@system76.com"
+        "pop-shell@system76.com"
+        "pop-shell@system76.com"
+      ];
       favorite-apps = [ ];
       last-selected-power-profile = "performance";
       welcome-dialog-last-shown-version = "47.1";
@@ -371,6 +409,21 @@ with lib.hm.gvariant;
     "org/gnome/shell/keybindings" = {
       toggle-message-tray = [ ];
       toggle-quick-settings = [ ];
+    };
+
+    "org/gnome/shell/world-clocks" = {
+      locations = [
+        (mkVariant [
+          (mkUint32 2)
+          (mkVariant [
+            "Kyiv"
+            "UKKK"
+            true
+            [ (mkTuple [ 0.8796750376437729 0.531481851870904 ]) ]
+            [ (mkTuple [ 0.8802277136047092 0.5326163158847004 ]) ]
+          ])
+        ])
+      ];
     };
 
     "org/gtk/gtk4/settings/file-chooser" = { show-hidden = true; };
