@@ -53,21 +53,6 @@ with lib.hm.gvariant;
       window-size = mkTuple [ 1274 698 ];
     };
 
-    "org/gnome/clocks" = {
-      world-clocks = [{
-        location = mkVariant [
-          (mkUint32 2)
-          (mkVariant [
-            "Kyiv"
-            "UKKK"
-            true
-            [ (mkTuple [ 0.8796750376437729 0.531481851870904 ]) ]
-            [ (mkTuple [ 0.8802277136047092 0.5326163158847004 ]) ]
-          ])
-        ];
-      }];
-    };
-
     "org/gnome/clocks/state/window" = {
       maximized = false;
       panel-id = "timer";
@@ -409,21 +394,6 @@ with lib.hm.gvariant;
     "org/gnome/shell/keybindings" = {
       toggle-message-tray = [ ];
       toggle-quick-settings = [ ];
-    };
-
-    "org/gnome/shell/world-clocks" = {
-      locations = [
-        (mkVariant [
-          (mkUint32 2)
-          (mkVariant [
-            "Kyiv"
-            "UKKK"
-            true
-            [ (mkTuple [ 0.8796750376437729 0.531481851870904 ]) ]
-            [ (mkTuple [ 0.8802277136047092 0.5326163158847004 ]) ]
-          ])
-        ])
-      ];
     };
 
     "org/gtk/gtk4/settings/file-chooser" = { show-hidden = true; };
