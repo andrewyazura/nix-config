@@ -1,6 +1,7 @@
 { pkgs, ... }: {
   imports = [
     ../../home
+    ../../home/cs2
     ../../home/ghostty
     ../../home/git
     ../../home/gnome
