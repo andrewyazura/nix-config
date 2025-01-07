@@ -5,7 +5,6 @@
     ../../home/ghostty
     ../../home/git
     ../../home/gnome
-    ../../home/kitty
     ../../home/mangohud
     ../../home/neovim
     ../../home/programs

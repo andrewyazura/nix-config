@@ -1,6 +1,5 @@
 { pkgs, inputs, ... }: {
   environment.systemPackages = with pkgs; [
-    kitty
     inputs.ghostty.packages.x86_64-linux.default
     obsidian
     spotify

@@ -8,7 +8,7 @@
     oh-my-zsh = {
       enable = true;
       theme = "robbyrussell";
-      plugins = [ "git" "kitty" ];
+      plugins = [ "git" ];
     };
 
     shellAliases = { ll = "ls -l"; };
