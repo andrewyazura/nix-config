@@ -5,6 +5,7 @@
     spotify
     telegram-desktop
     vesktop # fixed screensharing
+
     (wrapOBS {
       plugins = with obs-studio-plugins; [
         wlrobs
@@ -12,5 +13,9 @@
         obs-pipewire-audio-capture
       ];
     })
+
+    tree
+    neofetch
+    nixfmt
   ];
 }
