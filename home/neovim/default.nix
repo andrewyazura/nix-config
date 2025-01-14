@@ -19,12 +19,19 @@
     vimdiffAlias = true;
 
     extraPackages = with pkgs; [
-      ripgrep
       wl-clipboard
-      black
-      isort
-      nixfmt
-      stylua
+      # required by:
+      nodejs_22 # treesitter
+      tree-sitter # treesitter
+      ripgrep # telescope
+      fd # telescope
+      black # conform
+      isort # conform
+      nixfmt # conform
+      stylua # conform
+      lua-language-server # lsp
+      ruff # lsp
+      nil # lsp
     ];
 
     plugins = with pkgs.vimPlugins; [
@@ -35,8 +42,13 @@
       }
 
       diffview-nvim
+      nvim-web-devicons
+      mini-icons
       plenary-nvim
-      nvim-lspconfig
+      {
+        plugin = nvim-lspconfig;
+        config = toLuaFile ./configs/lsp.lua;
+      }
 
       {
         plugin = gitsigns-nvim;
