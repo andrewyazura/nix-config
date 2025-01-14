@@ -30,6 +30,7 @@
       nixfmt # conform
       stylua # conform
       lua-language-server # lsp
+      pyright # lsp
       ruff # lsp
       nil # lsp
     ];
@@ -61,6 +62,8 @@
       }
       cmp-cmdline
       cmp-path
+      cmp-nvim-lsp
+      cmp-buffer
 
       {
         plugin = telescope-nvim;

@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{
   imports = [
     ../../home
     ../../home/cs2

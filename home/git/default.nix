@@ -5,7 +5,7 @@
       ps = "push";
       pl = "pull";
       a = "add";
-      c = "commit";
+      c = "commit -m";
       l = "log";
       s = "status";
     };
