@@ -10,4 +10,5 @@ wk.add({
 	{ "<leader>gp", desc = "prev usage" },
 	{ "<leader>h", group = "+harpoon" },
 	{ "<leader>w", proxy = "<C-w>", group = "+windows" },
+	{ "<leader>F", desc = "format buffer" },
 })

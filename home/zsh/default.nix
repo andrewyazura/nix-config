@@ -11,6 +11,13 @@
       plugins = [ "git" ];
     };
 
-    shellAliases = { ll = "ls -l"; };
+    shellAliases = {
+      ll = "ls -l";
+      gw = "git worktree";
+      gpl = "git pull";
+      gps = "git push";
+      gc = "git commit";
+      gst = "git status";
+    };
   };
 }

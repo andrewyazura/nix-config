@@ -18,7 +18,14 @@
     vimAlias = true;
     vimdiffAlias = true;
 
-    extraPackages = with pkgs; [ ripgrep wl-clipboard ];
+    extraPackages = with pkgs; [
+      ripgrep
+      wl-clipboard
+      black
+      isort
+      nixfmt
+      stylua
+    ];
 
     plugins = with pkgs.vimPlugins; [
       {
@@ -63,6 +70,11 @@
       {
         plugin = oil-nvim;
         config = toLua "require('oil').setup()";
+      }
+
+      {
+        plugin = conform-nvim;
+        config = toLuaFile ./configs/conform.lua;
       }
     ];
   };
