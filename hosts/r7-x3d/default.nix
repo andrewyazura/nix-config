@@ -16,8 +16,11 @@
     };
   };
 
-  networking.hostName = "r7-x3d";
-  networking.networkmanager.enable = true;
+  networking = {
+    hostName = "r7-x3d";
+    networkmanager.enable = true;
+    nameservers = [ "1.1.1.1" ];
+  };
 
   services.xserver = {
     enable = true;

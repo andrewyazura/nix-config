@@ -1,6 +1,10 @@
 { pkgs, ... }: {
-  imports =
-    [ ../../system/gaming ../../system/logitech-g920 ../../system/programs ];
+  imports = [
+    ../../system/gaming
+    ../../system/logitech-g920
+    ../../system/programs
+    ../../system/wooting
+  ];
 
   programs.zsh.enable = true;
 
