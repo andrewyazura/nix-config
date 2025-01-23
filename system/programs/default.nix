@@ -17,5 +17,7 @@
     tree
     neofetch
     nixfmt
+
+    ffmpeg
   ];
 }
