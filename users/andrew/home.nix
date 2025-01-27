@@ -8,11 +8,7 @@
     ../../home/mangohud
     ../../home/neovim
     ../../home/programs
+    ../../home/work
     ../../home/zsh
   ];
-
-  programs.git = {
-    userName = "Andrew Yatsura";
-    userEmail = "andrewyazura203@proton.me";
-  };
 }

@@ -19,5 +19,6 @@
     nixfmt
 
     ffmpeg
+    git-crypt
   ];
 }

@@ -1,0 +1,2 @@
+home/work/** filter=git-crypt diff=git-crypt
+system/work/** filter=git-crypt diff=git-crypt

@@ -4,6 +4,7 @@
     ../../system/logitech-g920
     ../../system/programs
     ../../system/wooting
+    ../../system/work
   ];
 
   programs.zsh.enable = true;

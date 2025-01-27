@@ -1,13 +1,6 @@
 {
-  programs.git = {
-    enable = true;
-    aliases = {
-      ps = "push";
-      pl = "pull";
-      a = "add";
-      c = "commit -m";
-      l = "log";
-      s = "status";
-    };
-  };
+  programs.git.enable = true;
+  home.file.".gitconfig".source = ./.gitconfig;
+  home.file.".personal.gitconfig".source = ./.personal.gitconfig;
+  home.file.".spacedevlab.gitconfig".source = ./.spacedevlab.gitconfig;
 }
