@@ -8,6 +8,7 @@
     ../../home/mangohud
     ../../home/neovim
     ../../home/programs
+    ../../home/ssh
     ../../home/work
     ../../home/zsh
   ];
