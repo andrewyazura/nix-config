@@ -73,14 +73,18 @@ with lib.hm.gvariant;
     "org/gnome/desktop/interface" = {
       clock-show-seconds = false;
       clock-show-weekday = true;
-      color-scheme = "default";
+      color-scheme = "prefer-dark";
       enable-hot-corners = false;
       toolkit-accessibility = false;
     };
 
     "org/gnome/desktop/notifications" = {
-      application-children = [ "gnome-power-panel" "steam" "vesktop" "firefox" "org-telegram-desktop" ];
+      application-children = [ "gnome-power-panel" "steam" "vesktop" "firefox" "org-telegram-desktop" "org-gnome-settings" ];
       show-in-lock-screen = false;
+    };
+
+    "org/gnome/desktop/notifications/application/chromium-browser" = {
+      application-id = "chromium-browser.desktop";
     };
 
     "org/gnome/desktop/notifications/application/firefox" = {
@@ -89,6 +93,10 @@ with lib.hm.gvariant;
 
     "org/gnome/desktop/notifications/application/gnome-power-panel" = {
       application-id = "gnome-power-panel.desktop";
+    };
+
+    "org/gnome/desktop/notifications/application/org-gnome-settings" = {
+      application-id = "org.gnome.Settings.desktop";
     };
 
     "org/gnome/desktop/notifications/application/org-telegram-desktop" = {
@@ -179,7 +187,7 @@ with lib.hm.gvariant;
 
     "org/gnome/settings-daemon/plugins/media-keys" = {
       custom-keybindings = [ "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" ];
-      screensaver = [ "<Shift><Super>Escape" ];
+      screensaver = [ "<Super>x" ];
     };
 
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {

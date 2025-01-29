@@ -9,11 +9,13 @@
   ];
 
   boot.loader = {
-    efi.canTouchEfiVariables = true;
-    systemd-boot = {
+    grub = {
       enable = true;
+      device = "nodev";
+      useOSProber = true;
       configurationLimit = 10;
     };
+    efi.canTouchEfiVariables = true;
   };
 
   networking = {
