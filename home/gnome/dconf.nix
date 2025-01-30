@@ -20,8 +20,8 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/control-center" = {
-      last-panel = "keyboard";
-      window-state = mkTuple [ 980 640 false ];
+      last-panel = "display";
+      window-state = mkTuple [ 1447 640 false ];
     };
 
     "org/gnome/desktop/app-folders" = {
@@ -201,7 +201,8 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/shell" = {
-      disable-user-extensions = true;
+      disable-user-extensions = false;
+      enabled-extensions = [ "status-icons@gnome-shell-extensions.gcampax.github.com" ];
       favorite-apps = [ "org.gnome.Nautilus.desktop" ];
       last-selected-power-profile = "performance";
       welcome-dialog-last-shown-version = "47.2";

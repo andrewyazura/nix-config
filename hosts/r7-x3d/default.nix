@@ -12,9 +12,10 @@
     grub = {
       enable = true;
       device = "nodev";
-      useOSProber = true;
+      efiSupport = true;
       configurationLimit = 10;
     };
+
     efi.canTouchEfiVariables = true;
   };
 
