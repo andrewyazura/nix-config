@@ -5,6 +5,15 @@ with lib.hm.gvariant;
 
 {
   dconf.settings = {
+    "apps/seahorse/listing" = {
+      keyrings-selected = [ "secret-service:///org/freedesktop/secrets/collection/login" ];
+    };
+
+    "apps/seahorse/windows/key-manager" = {
+      height = 520;
+      width = 1162;
+    };
+
     "org/gnome/Console" = {
       last-window-maximised = false;
       last-window-size = mkTuple [ 1276 480 ];
@@ -135,6 +144,15 @@ with lib.hm.gvariant;
       close = [ "<Super>q" ];
     };
 
+    "org/gnome/epiphany" = {
+      ask-for-default = false;
+    };
+
+    "org/gnome/epiphany/state" = {
+      is-maximized = false;
+      window-size = mkTuple [ 1024 768 ];
+    };
+
     "org/gnome/evolution-data-server" = {
       migrated = true;
     };
@@ -169,6 +187,7 @@ with lib.hm.gvariant;
 
     "org/gnome/nautilus/window-state" = {
       initial-size = mkTuple [ 890 550 ];
+      initial-size-file-chooser = mkTuple [ 890 550 ];
     };
 
     "org/gnome/nm-applet/eap/6c909423-197f-4862-9ab1-a4c771e2ffab" = {
@@ -179,6 +198,10 @@ with lib.hm.gvariant;
     "org/gnome/nm-applet/eap/ca442079-d825-48b9-aedf-2eea2b3131f8" = {
       ignore-ca-cert = false;
       ignore-phase2-ca-cert = false;
+    };
+
+    "org/gnome/portal/filechooser/steam" = {
+      last-folder-path = "/home/andrew/Videos";
     };
 
     "org/gnome/settings-daemon/plugins/color" = {
@@ -202,8 +225,9 @@ with lib.hm.gvariant;
 
     "org/gnome/shell" = {
       disable-user-extensions = false;
+      disabled-extensions = [ "apps-menu@gnome-shell-extensions.gcampax.github.com" "light-style@gnome-shell-extensions.gcampax.github.com" "system-monitor@gnome-shell-extensions.gcampax.github.com" "user-theme@gnome-shell-extensions.gcampax.github.com" "window-list@gnome-shell-extensions.gcampax.github.com" "workspace-indicator@gnome-shell-extensions.gcampax.github.com" ];
       enabled-extensions = [ "status-icons@gnome-shell-extensions.gcampax.github.com" ];
-      favorite-apps = [ "org.gnome.Nautilus.desktop" ];
+      favorite-apps = [];
       last-selected-power-profile = "performance";
       welcome-dialog-last-shown-version = "47.2";
     };
