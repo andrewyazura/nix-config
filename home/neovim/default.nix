@@ -76,6 +76,8 @@
         config = toLuaFile ./configs/treesitter.lua;
       }
       nvim-treesitter-context
+      nvim-treesitter-refactor
+      nvim-treesitter-textobjects
 
       {
         plugin = which-key-nvim;
