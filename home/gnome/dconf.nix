@@ -83,6 +83,7 @@ with lib.hm.gvariant;
       clock-show-seconds = false;
       clock-show-weekday = true;
       color-scheme = "prefer-dark";
+      enable-animations = false;
       enable-hot-corners = false;
       toolkit-accessibility = false;
     };
@@ -170,7 +171,7 @@ with lib.hm.gvariant;
       col-26-visible = false;
       col-26-width = 0;
       columns-order = [ 0 12 1 2 3 4 6 7 8 9 10 11 13 14 15 16 17 18 19 20 21 22 23 24 25 26 ];
-      sort-col = 0;
+      sort-col = 15;
       sort-order = 0;
     };
 
