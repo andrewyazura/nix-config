@@ -53,7 +53,7 @@
 
       {
         plugin = gitsigns-nvim;
-        config = toLua "require('gitsigns').setup()";
+        config = toLuaFile ./configs/gitsigns.lua;
       }
 
       {
