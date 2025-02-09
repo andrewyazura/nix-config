@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  environment.systemPackages = with pkgs; [ mangohud ];
+  environment.systemPackages = [ pkgs.mangohud ];
 
   programs = {
     gamemode.enable = true;
