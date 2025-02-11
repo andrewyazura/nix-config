@@ -2,6 +2,7 @@
   imports = [
     ../../system/audio
     ../../system/fonts
+    ../../system/gnome
     ../../system/minegrub
     ../../system/nix
 
@@ -27,18 +28,10 @@
 
   services.xserver = {
     enable = true;
-
-    displayManager = {
-      defaultSession = "plasma";
-      sddm.enable = true;
+    xkb = {
+      layout = "us";
+      variant = "";
     };
-
-    desktopManager.plasma6.enable = true;
-  };
-
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
   };
 
   hardware.graphics = {
