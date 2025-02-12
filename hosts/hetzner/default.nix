@@ -34,7 +34,7 @@
     username = {
       isNormalUser = true;
       extraGroups = [ "wheel" ];
-      openssh.authorizedKeys.keys = import ../../../ssh-keys.nix;
+      openssh.authorizedKeys.keys = import ../../ssh-keys.nix;
     };
   };
 
