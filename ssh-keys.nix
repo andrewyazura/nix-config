@@ -1,0 +1,1 @@
+[ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILkI4R/WKl8OMJeBUsn/BsPJQ4oTJIQm9AkQCB+APvUG andrewyazura203@proton.me" ]
