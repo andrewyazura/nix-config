@@ -31,7 +31,7 @@
 
   users.users = {
     root.hashedPassword = "!";
-    username = {
+    andrew = {
       isNormalUser = true;
       extraGroups = [ "wheel" ];
       openssh.authorizedKeys.keys = import ../../ssh-keys.nix;
