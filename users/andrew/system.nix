@@ -3,7 +3,6 @@
     ../../system/gaming
     ../../system/logitech-g920
     ../../system/programs
-    ../../system/vmware
     ../../system/wooting
     ../../system/work
   ];
