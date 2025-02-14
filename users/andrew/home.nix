@@ -9,6 +9,7 @@
     ../../home/neovim
     ../../home/programs
     ../../home/ssh
+    ../../home/vesktop
     ../../home/work
     ../../home/zsh
   ];
