@@ -15,6 +15,7 @@
       device = "nodev";
       efiSupport = true;
       configurationLimit = 10;
+      gfxmodeEfi = "3840x2160";
     };
 
     efi.canTouchEfiVariables = true;
