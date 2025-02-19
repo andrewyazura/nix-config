@@ -1,11 +1,9 @@
-{ pkgs, ... }: {
-  imports = [
-    ../../system/gaming
-    ../../system/logitech-g920
-    ../../system/programs
-    ../../system/wooting
-    ../../system/work
-  ];
+{ pkgs, lib, hostname, ... }: {
+  imports = [ ../../system/programs ../../system/wooting ../../system/work ]
+    ++ lib.optionals (hostname == "r7-x3d") [
+      ../../system/gaming
+      ../../system/logitech-g920
+    ];
 
   programs.zsh.enable = true;
 
