@@ -28,9 +28,35 @@ with lib.hm.gvariant;
       last-save-directory = "file:///home/andrew/Downloads";
     };
 
+    "org/gnome/Totem" = {
+      active-plugins = [ "open-directory" "variable-rate" "screensaver" "screenshot" "save-file" "recent" "skipto" "vimeo" "apple-trailers" "autoload-subtitles" "rotation" "movie-properties" "mpris" ];
+      subtitle-encoding = "UTF-8";
+    };
+
+    "org/gnome/calculator" = {
+      accuracy = 9;
+      angle-units = "degrees";
+      base = 10;
+      button-mode = "basic";
+      number-format = "automatic";
+      show-thousands = false;
+      show-zeroes = false;
+      source-currency = "";
+      source-units = "degree";
+      target-currency = "";
+      target-units = "radian";
+      window-maximized = false;
+      window-size = mkTuple [ 360 625 ];
+      word-size = 64;
+    };
+
     "org/gnome/control-center" = {
-      last-panel = "display";
+      last-panel = "background";
       window-state = mkTuple [ 1447 640 false ];
+    };
+
+    "org/gnome/desktop/a11y/applications" = {
+      screen-reader-enabled = false;
     };
 
     "org/gnome/desktop/app-folders" = {
@@ -57,12 +83,8 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/desktop/background" = {
-      color-shading-type = "solid";
-      picture-options = "zoom";
-      picture-uri = "file:///run/current-system/sw/share/backgrounds/gnome/amber-l.jxl";
-      picture-uri-dark = "file:///run/current-system/sw/share/backgrounds/gnome/amber-d.jxl";
-      primary-color = "#ff7800";
-      secondary-color = "#000000";
+      primary-color = "#3a4ba0";
+      secondary-color = "#2f302f";
     };
 
     "org/gnome/desktop/calendar" = {
@@ -83,8 +105,15 @@ with lib.hm.gvariant;
       clock-show-seconds = false;
       clock-show-weekday = true;
       color-scheme = "prefer-dark";
+      cursor-size = 24;
+      cursor-theme = "breeze_cursors";
       enable-animations = false;
       enable-hot-corners = false;
+      font-name = "Noto Sans,  10";
+      icon-theme = "breeze-dark";
+      scaling-factor = mkUint32 1;
+      text-scaling-factor = 1.0;
+      toolbar-style = "text";
       toolkit-accessibility = false;
     };
 
@@ -103,6 +132,10 @@ with lib.hm.gvariant;
 
     "org/gnome/desktop/notifications/application/gnome-power-panel" = {
       application-id = "gnome-power-panel.desktop";
+    };
+
+    "org/gnome/desktop/notifications/application/org-gnome-nautilus" = {
+      application-id = "org.gnome.Nautilus.desktop";
     };
 
     "org/gnome/desktop/notifications/application/org-gnome-settings" = {
@@ -132,13 +165,18 @@ with lib.hm.gvariant;
     "org/gnome/desktop/screensaver" = {
       color-shading-type = "solid";
       picture-options = "zoom";
-      picture-uri = "file:///run/current-system/sw/share/backgrounds/gnome/amber-l.jxl";
-      primary-color = "#ff7800";
-      secondary-color = "#000000";
+      picture-uri = "file:///nix/store/w3mj0f5ffgb5979niijmc3sn0xlpwr4v-simple-blue-2016-02-19/share/backgrounds/nixos/nix-wallpaper-simple-blue.png";
+      primary-color = "#3a4ba0";
+      secondary-color = "#2f302f";
     };
 
     "org/gnome/desktop/search-providers" = {
       sort-order = [ "org.gnome.Settings.desktop" "org.gnome.Contacts.desktop" "org.gnome.Nautilus.desktop" ];
+    };
+
+    "org/gnome/desktop/sound" = {
+      event-sounds = true;
+      theme-name = "__custom";
     };
 
     "org/gnome/desktop/wm/keybindings" = {
@@ -158,10 +196,40 @@ with lib.hm.gvariant;
       migrated = true;
     };
 
+    "org/gnome/file-roller/dialogs/extract" = {
+      height = 800;
+      recreate-folders = true;
+      skip-newer = false;
+      width = 1000;
+    };
+
+    "org/gnome/file-roller/file-selector" = {
+      show-hidden = false;
+      sidebar-size = 300;
+      sort-method = "name";
+      sort-type = "ascending";
+      window-size = mkTuple [ (-1) (-1) ];
+    };
+
+    "org/gnome/file-roller/listing" = {
+      list-mode = "as-folder";
+      name-column-width = 68;
+      show-path = false;
+      sort-method = "name";
+      sort-type = "ascending";
+    };
+
+    "org/gnome/file-roller/ui" = {
+      sidebar-width = 200;
+      window-height = 480;
+      window-width = 600;
+    };
+
     "org/gnome/gnome-system-monitor" = {
       current-tab = "processes";
       show-dependencies = false;
       show-whose-processes = "user";
+      window-height = 793;
       window-width = 1224;
     };
 
@@ -178,6 +246,14 @@ with lib.hm.gvariant;
     "org/gnome/mutter" = {
       dynamic-workspaces = true;
       edge-tiling = false;
+    };
+
+    "org/gnome/nautilus/icon-view" = {
+      default-zoom-level = "small";
+    };
+
+    "org/gnome/nautilus/list-view" = {
+      use-tree-view = false;
     };
 
     "org/gnome/nautilus/preferences" = {
@@ -222,6 +298,7 @@ with lib.hm.gvariant;
 
     "org/gnome/settings-daemon/plugins/power" = {
       power-button-action = "nothing";
+      sleep-inactive-ac-type = "nothing";
     };
 
     "org/gnome/shell" = {
