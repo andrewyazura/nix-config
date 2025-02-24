@@ -6,7 +6,8 @@ with lib.hm.gvariant;
 {
   dconf.settings = {
     "apps/seahorse/listing" = {
-      keyrings-selected = [ "secret-service:///org/freedesktop/secrets/collection/login" ];
+      keyrings-selected =
+        [ "secret-service:///org/freedesktop/secrets/collection/login" ];
     };
 
     "apps/seahorse/windows/key-manager" = {
@@ -14,9 +15,7 @@ with lib.hm.gvariant;
       width = 1162;
     };
 
-    "org/gnome/Characters" = {
-      recent-characters = [ "\129362" ];
-    };
+    "org/gnome/Characters" = { recent-characters = [ "129362" ]; };
 
     "org/gnome/Console" = {
       last-window-maximised = false;
@@ -33,7 +32,21 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/Totem" = {
-      active-plugins = [ "open-directory" "variable-rate" "screensaver" "screenshot" "save-file" "recent" "skipto" "vimeo" "apple-trailers" "autoload-subtitles" "rotation" "movie-properties" "mpris" ];
+      active-plugins = [
+        "open-directory"
+        "variable-rate"
+        "screensaver"
+        "screenshot"
+        "save-file"
+        "recent"
+        "skipto"
+        "vimeo"
+        "apple-trailers"
+        "autoload-subtitles"
+        "rotation"
+        "movie-properties"
+        "mpris"
+      ];
       subtitle-encoding = "UTF-8";
     };
 
@@ -54,14 +67,9 @@ with lib.hm.gvariant;
       word-size = 64;
     };
 
-    "org/gnome/control-center" = {
-      last-panel = "wifi";
-      window-state = mkTuple [ 640 1447 false ];
-    };
+    "org/gnome/control-center" = { last-panel = "wifi"; };
 
-    "org/gnome/desktop/a11y/applications" = {
-      screen-reader-enabled = false;
-    };
+    "org/gnome/desktop/a11y/applications" = { screen-reader-enabled = false; };
 
     "org/gnome/desktop/app-folders" = {
       folder-children = [ "Utilities" "YaST" "Pardus" ];
@@ -74,7 +82,21 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/desktop/app-folders/folders/Utilities" = {
-      apps = [ "org.freedesktop.GnomeAbrt.desktop" "nm-connection-editor.desktop" "org.gnome.baobab.desktop" "org.gnome.Connections.desktop" "org.gnome.DejaDup.desktop" "org.gnome.DiskUtility.desktop" "org.gnome.Evince.desktop" "org.gnome.FileRoller.desktop" "org.gnome.font-viewer.desktop" "org.gnome.Loupe.desktop" "org.gnome.seahorse.Application.desktop" "org.gnome.tweaks.desktop" "org.gnome.Usage.desktop" ];
+      apps = [
+        "org.freedesktop.GnomeAbrt.desktop"
+        "nm-connection-editor.desktop"
+        "org.gnome.baobab.desktop"
+        "org.gnome.Connections.desktop"
+        "org.gnome.DejaDup.desktop"
+        "org.gnome.DiskUtility.desktop"
+        "org.gnome.Evince.desktop"
+        "org.gnome.FileRoller.desktop"
+        "org.gnome.font-viewer.desktop"
+        "org.gnome.Loupe.desktop"
+        "org.gnome.seahorse.Application.desktop"
+        "org.gnome.tweaks.desktop"
+        "org.gnome.Usage.desktop"
+      ];
       categories = [ "X-GNOME-Utilities" ];
       name = "X-GNOME-Utilities.directory";
       translate = true;
@@ -91,13 +113,9 @@ with lib.hm.gvariant;
       secondary-color = "#2f302f";
     };
 
-    "org/gnome/desktop/calendar" = {
-      show-weekdate = false;
-    };
+    "org/gnome/desktop/calendar" = { show-weekdate = false; };
 
-    "org/gnome/desktop/datetime" = {
-      automatic-timezone = true;
-    };
+    "org/gnome/desktop/datetime" = { automatic-timezone = true; };
 
     "org/gnome/desktop/input-sources" = {
       mru-sources = [ (mkTuple [ "xkb" "us" ]) (mkTuple [ "xkb" "ua" ]) ];
@@ -107,14 +125,10 @@ with lib.hm.gvariant;
 
     "org/gnome/desktop/interface" = {
       clock-show-seconds = false;
-      clock-show-weekday = true;
+      clock-show-weekday = false;
       color-scheme = "prefer-dark";
-      cursor-size = 24;
-      cursor-theme = "breeze_cursors";
       enable-animations = false;
       enable-hot-corners = false;
-      font-name = "Noto Sans,  10";
-      icon-theme = "breeze-dark";
       scaling-factor = mkUint32 1;
       text-scaling-factor = 1.0;
       toolbar-style = "text";
@@ -122,7 +136,14 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/desktop/notifications" = {
-      application-children = [ "gnome-power-panel" "steam" "vesktop" "firefox" "org-telegram-desktop" "org-gnome-settings" ];
+      application-children = [
+        "gnome-power-panel"
+        "steam"
+        "vesktop"
+        "firefox"
+        "org-telegram-desktop"
+        "org-gnome-settings"
+      ];
       show-in-lock-screen = false;
     };
 
@@ -162,9 +183,7 @@ with lib.hm.gvariant;
       application-id = "vmware-player.desktop";
     };
 
-    "org/gnome/desktop/peripherals/mouse" = {
-      accel-profile = "flat";
-    };
+    "org/gnome/desktop/peripherals/mouse" = { accel-profile = "flat"; };
 
     "org/gnome/desktop/peripherals/touchpad" = {
       two-finger-scrolling-enabled = true;
@@ -173,13 +192,18 @@ with lib.hm.gvariant;
     "org/gnome/desktop/screensaver" = {
       color-shading-type = "solid";
       picture-options = "zoom";
-      picture-uri = "file:///nix/store/w3mj0f5ffgb5979niijmc3sn0xlpwr4v-simple-blue-2016-02-19/share/backgrounds/nixos/nix-wallpaper-simple-blue.png";
+      picture-uri =
+        "file:///nix/store/w3mj0f5ffgb5979niijmc3sn0xlpwr4v-simple-blue-2016-02-19/share/backgrounds/nixos/nix-wallpaper-simple-blue.png";
       primary-color = "#3a4ba0";
       secondary-color = "#2f302f";
     };
 
     "org/gnome/desktop/search-providers" = {
-      sort-order = [ "org.gnome.Settings.desktop" "org.gnome.Contacts.desktop" "org.gnome.Nautilus.desktop" ];
+      sort-order = [
+        "org.gnome.Settings.desktop"
+        "org.gnome.Contacts.desktop"
+        "org.gnome.Nautilus.desktop"
+      ];
     };
 
     "org/gnome/desktop/sound" = {
@@ -187,26 +211,20 @@ with lib.hm.gvariant;
       theme-name = "__custom";
     };
 
-    "org/gnome/desktop/wm/keybindings" = {
-      close = [ "<Super>q" ];
-    };
+    "org/gnome/desktop/wm/keybindings" = { close = [ "<Super>q" ]; };
 
     "org/gnome/desktop/wm/preferences" = {
       button-layout = "icon:minimize,maximize,close";
     };
 
-    "org/gnome/epiphany" = {
-      ask-for-default = false;
-    };
+    "org/gnome/epiphany" = { ask-for-default = false; };
 
     "org/gnome/epiphany/state" = {
       is-maximized = false;
       window-size = mkTuple [ 1024 768 ];
     };
 
-    "org/gnome/evolution-data-server" = {
-      migrated = true;
-    };
+    "org/gnome/evolution-data-server" = { migrated = true; };
 
     "org/gnome/file-roller/dialogs/extract" = {
       height = 800;
@@ -250,7 +268,34 @@ with lib.hm.gvariant;
       col-0-width = 305;
       col-26-visible = false;
       col-26-width = 0;
-      columns-order = [ 0 12 1 2 3 4 6 7 8 9 10 11 13 14 15 16 17 18 19 20 21 22 23 24 25 26 ];
+      columns-order = [
+        0
+        12
+        1
+        2
+        3
+        4
+        6
+        7
+        8
+        9
+        10
+        11
+        13
+        14
+        15
+        16
+        17
+        18
+        19
+        20
+        21
+        22
+        23
+        24
+        25
+        26
+      ];
       sort-col = 15;
       sort-order = 0;
     };
@@ -260,13 +305,9 @@ with lib.hm.gvariant;
       edge-tiling = false;
     };
 
-    "org/gnome/nautilus/icon-view" = {
-      default-zoom-level = "small";
-    };
+    "org/gnome/nautilus/icon-view" = { default-zoom-level = "small"; };
 
-    "org/gnome/nautilus/list-view" = {
-      use-tree-view = false;
-    };
+    "org/gnome/nautilus/list-view" = { use-tree-view = false; };
 
     "org/gnome/nautilus/preferences" = {
       default-folder-viewer = "icon-view";
@@ -298,15 +339,18 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/settings-daemon/plugins/media-keys" = {
-      custom-keybindings = [ "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" ];
+      custom-keybindings = [
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+      ];
       screensaver = [ "<Super>x" ];
     };
 
-    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
-      binding = "<Super>t";
-      command = "ghostty";
-      name = "Terminal";
-    };
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" =
+      {
+        binding = "<Super>t";
+        command = "ghostty";
+        name = "Terminal";
+      };
 
     "org/gnome/settings-daemon/plugins/power" = {
       power-button-action = "nothing";
@@ -315,20 +359,24 @@ with lib.hm.gvariant;
 
     "org/gnome/shell" = {
       disable-user-extensions = false;
-      disabled-extensions = [ "apps-menu@gnome-shell-extensions.gcampax.github.com" "light-style@gnome-shell-extensions.gcampax.github.com" "system-monitor@gnome-shell-extensions.gcampax.github.com" "user-theme@gnome-shell-extensions.gcampax.github.com" "window-list@gnome-shell-extensions.gcampax.github.com" "workspace-indicator@gnome-shell-extensions.gcampax.github.com" ];
-      enabled-extensions = [ "status-icons@gnome-shell-extensions.gcampax.github.com" ];
-      favorite-apps = [];
+      disabled-extensions = [
+        "apps-menu@gnome-shell-extensions.gcampax.github.com"
+        "light-style@gnome-shell-extensions.gcampax.github.com"
+        "system-monitor@gnome-shell-extensions.gcampax.github.com"
+        "user-theme@gnome-shell-extensions.gcampax.github.com"
+        "window-list@gnome-shell-extensions.gcampax.github.com"
+        "workspace-indicator@gnome-shell-extensions.gcampax.github.com"
+      ];
+      enabled-extensions =
+        [ "status-icons@gnome-shell-extensions.gcampax.github.com" ];
+      favorite-apps = [ ];
       last-selected-power-profile = "performance";
       welcome-dialog-last-shown-version = "47.2";
     };
 
-    "org/gnome/shell/app-switcher" = {
-      current-workspace-only = true;
-    };
+    "org/gnome/shell/app-switcher" = { current-workspace-only = true; };
 
-    "org/gnome/shell/world-clocks" = {
-      locations = [];
-    };
+    "org/gnome/shell/world-clocks" = { locations = [ ]; };
 
     "org/gtk/gtk4/settings/file-chooser" = {
       date-format = "regular";
