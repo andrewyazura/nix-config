@@ -6,14 +6,6 @@
     telegram-desktop
     vesktop # fixed screensharing
 
-    (wrapOBS {
-      plugins = with obs-studio-plugins; [
-        wlrobs
-        obs-backgroundremoval
-        obs-pipewire-audio-capture
-      ];
-    })
-
     tree
     neofetch
     nixfmt

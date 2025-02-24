@@ -3,6 +3,7 @@
     ++ lib.optionals (hostname == "r7-x3d") [
       ../../system/gaming
       ../../system/logitech-g920
+      ../../system/obs
     ];
 
   programs.zsh.enable = true;
