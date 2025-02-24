@@ -1,11 +1,7 @@
 { pkgs, ... }: {
-  environment.systemPackages = with pkgs; [
-    mangohud
-    (lutris.override { })
-  ];
+  environment.systemPackages = with pkgs; [ mangohud ];
 
   programs = {
-    gamemode.enable = true;
     gamescope.enable = true;
     steam.enable = true;
   };

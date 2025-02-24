@@ -14,6 +14,10 @@ with lib.hm.gvariant;
       width = 1162;
     };
 
+    "org/gnome/Characters" = {
+      recent-characters = [ "\129362" ];
+    };
+
     "org/gnome/Console" = {
       last-window-maximised = false;
       last-window-size = mkTuple [ 1276 480 ];
@@ -51,8 +55,8 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/control-center" = {
-      last-panel = "background";
-      window-state = mkTuple [ 1447 640 false ];
+      last-panel = "wifi";
+      window-state = mkTuple [ 640 1447 false ];
     };
 
     "org/gnome/desktop/a11y/applications" = {
@@ -154,6 +158,10 @@ with lib.hm.gvariant;
       application-id = "vesktop.desktop";
     };
 
+    "org/gnome/desktop/notifications/application/vmware-player" = {
+      application-id = "vmware-player.desktop";
+    };
+
     "org/gnome/desktop/peripherals/mouse" = {
       accel-profile = "flat";
     };
@@ -181,6 +189,10 @@ with lib.hm.gvariant;
 
     "org/gnome/desktop/wm/keybindings" = {
       close = [ "<Super>q" ];
+    };
+
+    "org/gnome/desktop/wm/preferences" = {
+      button-layout = "icon:minimize,maximize,close";
     };
 
     "org/gnome/epiphany" = {
