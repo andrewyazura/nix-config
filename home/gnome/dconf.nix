@@ -74,7 +74,7 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/control-center" = {
-      last-panel = "wifi";
+      last-panel = "display";
       window-state = mkTuple [ 980 640 false ];
     };
 
@@ -318,6 +318,7 @@ with lib.hm.gvariant;
     "org/gnome/mutter" = {
       dynamic-workspaces = true;
       edge-tiling = false;
+      # experimental-features = [ "scale-monitor-framebuffer" ];
     };
 
     "org/gnome/nautilus/icon-view" = { default-zoom-level = "small"; };
@@ -392,6 +393,8 @@ with lib.hm.gvariant;
     "org/gnome/shell/app-switcher" = { current-workspace-only = true; };
 
     "org/gnome/shell/world-clocks" = { locations = [ ]; };
+
+    "org/gnome/tweaks" = { show-extensions-notice = false; };
 
     "org/gtk/gtk4/settings/file-chooser" = {
       date-format = "regular";
