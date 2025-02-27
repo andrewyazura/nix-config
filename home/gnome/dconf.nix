@@ -27,6 +27,12 @@ with lib.hm.gvariant;
       window-width = 725;
     };
 
+    "org/gnome/Snapshot" = {
+      is-maximized = false;
+      window-height = 640;
+      window-width = 800;
+    };
+
     "org/gnome/TextEditor" = {
       last-save-directory = "file:///home/andrew/Downloads";
     };
@@ -67,7 +73,10 @@ with lib.hm.gvariant;
       word-size = 64;
     };
 
-    "org/gnome/control-center" = { last-panel = "wifi"; };
+    "org/gnome/control-center" = {
+      last-panel = "wifi";
+      window-state = mkTuple [ 980 640 false ];
+    };
 
     "org/gnome/desktop/a11y/applications" = { screen-reader-enabled = false; };
 
@@ -127,8 +136,12 @@ with lib.hm.gvariant;
       clock-show-seconds = false;
       clock-show-weekday = false;
       color-scheme = "prefer-dark";
+      cursor-size = 24;
+      cursor-theme = "Adwaita";
       enable-animations = false;
       enable-hot-corners = false;
+      font-name = "Roboto,  10";
+      icon-theme = "Adwaita";
       scaling-factor = mkUint32 1;
       text-scaling-factor = 1.0;
       toolbar-style = "text";
@@ -205,6 +218,8 @@ with lib.hm.gvariant;
         "org.gnome.Nautilus.desktop"
       ];
     };
+
+    "org/gnome/desktop/session" = { idle-delay = mkUint32 900; };
 
     "org/gnome/desktop/sound" = {
       event-sounds = true;
@@ -397,7 +412,7 @@ with lib.hm.gvariant;
       show-hidden = false;
       show-size-column = true;
       show-type-column = true;
-      sidebar-width = 157;
+      sidebar-width = 168;
       sort-column = "name";
       sort-directories-first = false;
       sort-order = "ascending";
