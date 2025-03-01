@@ -7,6 +7,7 @@
     ../../home/neovim
     ../../home/programs
     ../../home/ssh
+    ../../home/steam
     ../../home/vesktop
     ../../home/work
     ../../home/zsh
