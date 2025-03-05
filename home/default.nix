@@ -1,4 +1,9 @@
 { username, ... }: {
+  programs = {
+    firefox.enable = true;
+    chromium.enable = true;
+  };
+
   home = {
     inherit username;
     homeDirectory = "/home/${username}";
