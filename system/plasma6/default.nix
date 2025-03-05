@@ -20,4 +20,6 @@ in {
     systemPackages = [ askpass ];
     sessionVariables = { SSH_ASKPASS_REQUIRE = "prefer"; };
   };
+
+  hardware.bluetooth.enable = true;
 }
