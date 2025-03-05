@@ -2,7 +2,7 @@
   imports = [
     ../../system/audio
     ../../system/fonts
-    ../../system/gnome
+    ../../system/plasma6
     ../../system/minegrub
     ../../system/nix
 

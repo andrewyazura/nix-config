@@ -3,7 +3,6 @@
     ../../home
     ../../home/ghostty
     ../../home/git
-    ../../home/gnome
     ../../home/neovim
     ../../home/ssh
     ../../home/vesktop
@@ -11,7 +10,5 @@
   ] ++ lib.optionals (hostname == "r7-x3d") [
     ../../home/cs2
     ../../home/mangohud
-  ] ++ lib.optionals (hostname == "ga401") [
-    ../../home/work
-  ];
+  ] ++ lib.optionals (hostname == "ga401") [ ../../home/gnome ../../home/work ];
 }
