@@ -7,9 +7,12 @@
 
   modules = {
     audio.enable = true;
+    fonts.enable = true;
     gnome.enable = true;
     networking.enable = true;
     nix.enable = true;
+    programs.enable = true;
+    work.enable = true;
   };
 
   boot.loader = {

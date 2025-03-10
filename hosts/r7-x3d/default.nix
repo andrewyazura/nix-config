@@ -7,6 +7,7 @@
 
   modules = {
     audio.enable = true;
+    fonts.enable = true;
     gaming.enable = true;
     guitar.enable = true;
     logitech-g920.enable = true;
@@ -15,7 +16,9 @@
     nix.enable = true;
     obs.enable = true;
     plasma6.enable = true;
+    programs.enable = true;
     wooting.enable = true;
+    work.enable = true;
   };
 
   boot.loader = {

@@ -1,15 +1,9 @@
-{ pkgs, ... }: {
+{ pkgs, username, ... }: {
   imports = [ ../../system ];
-
-  modules = {
-    fonts.enable = true;
-    programs.enable = true;
-    work.enable = true;
-  };
 
   programs.zsh.enable = true;
 
-  users.users.andrew = {
+  users.users.${username} = {
     isNormalUser = true;
     description = "Andrew Yatsura";
     extraGroups = [ "networkmanager" "wheel" ];
