@@ -20,6 +20,9 @@ in {
 
       ffmpeg
       git-crypt
+
+      chromium
+      firefox
     ];
   };
 }

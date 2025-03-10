@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  imports = [ ../../system ../../system/home-manager ];
+  imports = [ ../../system ];
 
   modules = {
     fonts.enable = true;

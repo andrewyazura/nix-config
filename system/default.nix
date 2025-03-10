@@ -5,6 +5,7 @@
     ./gaming
     ./gnome
     ./guitar
+    ./home-manager
     ./hyprland
     ./logitech-g920
     ./minegrub
