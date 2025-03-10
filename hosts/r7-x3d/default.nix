@@ -11,6 +11,7 @@
     guitar.enable = true;
     logitech-g920.enable = true;
     minegrub.enable = true;
+    networking.enable = true;
     nix.enable = true;
     obs.enable = true;
     plasma6.enable = true;
@@ -27,12 +28,6 @@
     };
 
     efi.canTouchEfiVariables = true;
-  };
-
-  networking = {
-    hostName = "r7-x3d";
-    networkmanager.enable = true;
-    nameservers = [ "1.1.1.1" ];
   };
 
   services.xserver = {

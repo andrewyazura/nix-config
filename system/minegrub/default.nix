@@ -1,7 +1,9 @@
-{ lib, config, ... }:
+{ lib, config, inputs, ... }:
 with lib;
 let cfg = config.modules.minegrub;
 in {
+  imports = [ inputs.minegrub-theme.nixosModules.default ];
+
   options.modules.minegrub = {
     enable = mkEnableOption "Enable minegrub configuration";
   };

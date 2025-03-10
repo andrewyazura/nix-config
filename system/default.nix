@@ -8,6 +8,7 @@
     ./hyprland
     ./logitech-g920
     ./minegrub
+    ./networking
     ./nix
     ./obs
     ./plasma6

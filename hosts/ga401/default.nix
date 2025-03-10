@@ -8,18 +8,13 @@
   modules = {
     audio.enable = true;
     gnome.enable = true;
+    networking.enable = true;
     nix.enable = true;
   };
 
   boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
-  };
-
-  networking = {
-    hostName = "ga401";
-    networkmanager.enable = true;
-    nameservers = [ "1.1.1.1" ];
   };
 
   services.xserver = {

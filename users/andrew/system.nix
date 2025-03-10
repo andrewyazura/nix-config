@@ -1,10 +1,10 @@
-{ pkgs, lib, hostname, ... }: {
-  imports = [ ../../system ]
-    ++ lib.optionals (hostname == "ga401") [ ../../home/work ];
+{ pkgs, ... }: {
+  imports = [ ../../system ../../system/home-manager ];
 
   modules = {
     fonts.enable = true;
     programs.enable = true;
+    work.enable = true;
   };
 
   programs.zsh.enable = true;
