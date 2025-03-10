@@ -1,11 +1,11 @@
 { pkgs, lib, hostname, ... }: {
-  imports = [ ../../system/programs ] ++ lib.optionals (hostname == "r7-x3d") [
-    ../../system/gaming
-    ../../system/guitar
-    ../../system/logitech-g920
-    ../../system/obs
-    ../../system/wooting
-  ] ++ lib.optionals (hostname == "ga401") [ ../../home/work ];
+  imports = [ ../../system ]
+    ++ lib.optionals (hostname == "ga401") [ ../../home/work ];
+
+  modules = {
+    fonts.enable = true;
+    programs.enable = true;
+  };
 
   programs.zsh.enable = true;
 

@@ -1,12 +1,15 @@
 {
   imports = [
-    ../../system/audio
-    ../../system/fonts
-    ../../system/gnome
-    ../../system/nix
+    ../../system
 
     ./hardware-configuration.nix
   ];
+
+  modules = {
+    audio.enable = true;
+    gnome.enable = true;
+    nix.enable = true;
+  };
 
   boot.loader = {
     systemd-boot.enable = true;

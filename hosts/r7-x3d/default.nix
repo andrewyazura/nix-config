@@ -1,13 +1,21 @@
 {
   imports = [
-    ../../system/audio
-    ../../system/fonts
-    ../../system/plasma6
-    ../../system/minegrub
-    ../../system/nix
+    ../../system
 
     ./hardware-configuration.nix
   ];
+
+  modules = {
+    audio.enable = true;
+    gaming.enable = true;
+    guitar.enable = true;
+    logitech-g920.enable = true;
+    minegrub.enable = true;
+    nix.enable = true;
+    obs.enable = true;
+    plasma6.enable = true;
+    wooting.enable = true;
+  };
 
   boot.loader = {
     grub = {
