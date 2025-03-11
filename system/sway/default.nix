@@ -7,13 +7,19 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ slurp wl-clipboard mako ];
-
     services.gnome.gnome-keyring.enable = true;
 
     programs.sway = {
       enable = true;
       wrapperFeatures.gtk = true;
+      extraPackages = with pkgs; [
+        mako
+        slurp
+        swayidle
+        swaylock
+        tofi
+        wl-clipboard
+      ];
     };
   };
 }
