@@ -11,7 +11,7 @@
     gaming.enable = true;
     gnome.enable = true;
     guitar.enable = true;
-    hyprland.enable = true;
+    hyprland.enable = false;
     logitech-g920.enable = true;
     minegrub.enable = true;
     networking.enable = true;
@@ -25,7 +25,7 @@
   home-manager.users.${username}.modules = {
     cs2.enable = true;
     gnome.enable = true;
-    hyprland.enable = true;
+    hyprland.enable = false;
     mangohud.enable = true;
   };
 
