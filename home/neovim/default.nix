@@ -1,99 +1,111 @@
-{ pkgs, ... }: {
-  programs.neovim = let
-    toLua = str: ''
-      lua << EOF
-      ${str}
-      EOF
-    '';
-    toLuaFile = path: ''
-      lua << EOF
-      ${builtins.readFile path}
-      EOF
-    '';
-  in {
-    enable = true;
-    defaultEditor = true;
+{ lib, config, pkgs, ... }:
+with lib;
+let cfg = config.modules.neovim;
+in {
+  options.modules.neovim = {
+    enable = mkEnableOption "Enable neovim configuration";
+  };
 
-    viAlias = true;
-    vimAlias = true;
-    vimdiffAlias = true;
+  config = mkIf cfg.enable {
+    programs.neovim = let
+      toLua = str: ''
+        lua << EOF
+        ${str}
+        EOF
+      '';
+      toLuaFile = path: ''
+        lua << EOF
+        ${builtins.readFile path}
+        EOF
+      '';
+    in {
+      enable = true;
+      defaultEditor = true;
 
-    extraPackages = with pkgs; [
-      wl-clipboard
-      # required by:
-      nodejs_22 # treesitter
-      tree-sitter # treesitter
-      ripgrep # telescope
-      fd # telescope
-      black # conform
-      isort # conform
-      nixfmt # conform
-      stylua # conform
-      lua-language-server # lsp
-      pyright # lsp
-      ruff # lsp
-      nil # lsp
-    ];
+      viAlias = true;
+      vimAlias = true;
+      vimdiffAlias = true;
 
-    plugins = with pkgs.vimPlugins; [
-      {
-        plugin = catppuccin-nvim;
-        config = toLuaFile ./configs/options.lua;
-        # this hack sets leader key before any other hotkeys are added
-      }
+      extraPackages = with pkgs; [
+        wl-clipboard
+        # required by:
+        nodejs_22 # treesitter
+        tree-sitter # treesitter
 
-      diffview-nvim
-      nvim-web-devicons
-      mini-icons
-      plenary-nvim
-      {
-        plugin = nvim-lspconfig;
-        config = toLuaFile ./configs/lsp.lua;
-      }
+        ripgrep # telescope
+        fd # telescope
 
-      {
-        plugin = gitsigns-nvim;
-        config = toLuaFile ./configs/gitsigns.lua;
-      }
+        black # conform
+        isort # conform
+        nixfmt # conform
+        stylua # conform
 
-      {
-        plugin = nvim-cmp;
-        config = toLuaFile ./configs/cmp.lua;
-      }
-      cmp-cmdline
-      cmp-path
-      cmp-nvim-lsp
-      cmp-buffer
+        lua-language-server # lsp
+        pyright # lsp
+        ruff # lsp
+        nil # lsp
+      ];
 
-      {
-        plugin = telescope-nvim;
-        config = toLuaFile ./configs/telescope.lua;
-      }
+      plugins = with pkgs.vimPlugins; [
+        {
+          plugin = catppuccin-nvim;
+          config = toLuaFile ./configs/options.lua;
+          # this hack sets leader key before any other hotkeys are added
+        }
 
-      {
-        plugin = nvim-treesitter.withPlugins
-          (p: [ p.nix p.go p.python p.lua p.vimdoc ]);
-        config = toLuaFile ./configs/treesitter.lua;
-      }
-      nvim-treesitter-context
-      nvim-treesitter-refactor
-      nvim-treesitter-textobjects
+        diffview-nvim
+        nvim-web-devicons
+        mini-icons
+        plenary-nvim
+        {
+          plugin = nvim-lspconfig;
+          config = toLuaFile ./configs/lsp.lua;
+        }
 
-      {
-        plugin = which-key-nvim;
-        config = toLuaFile ./configs/which-key.lua;
-      }
+        {
+          plugin = gitsigns-nvim;
+          config = toLuaFile ./configs/gitsigns.lua;
+        }
 
-      {
-        plugin = oil-nvim;
-        config = toLua
-          "require('oil').setup({ view_options = { show_hidden = true } })";
-      }
+        {
+          plugin = nvim-cmp;
+          config = toLuaFile ./configs/cmp.lua;
+        }
+        cmp-cmdline
+        cmp-path
+        cmp-nvim-lsp
+        cmp-buffer
 
-      {
-        plugin = conform-nvim;
-        config = toLuaFile ./configs/conform.lua;
-      }
-    ];
+        {
+          plugin = telescope-nvim;
+          config = toLuaFile ./configs/telescope.lua;
+        }
+
+        {
+          plugin = nvim-treesitter.withPlugins
+            (p: [ p.nix p.go p.python p.lua p.vimdoc ]);
+          config = toLuaFile ./configs/treesitter.lua;
+        }
+        nvim-treesitter-context
+        nvim-treesitter-refactor
+        nvim-treesitter-textobjects
+
+        {
+          plugin = which-key-nvim;
+          config = toLuaFile ./configs/which-key.lua;
+        }
+
+        {
+          plugin = oil-nvim;
+          config = toLua
+            "require('oil').setup({ view_options = { show_hidden = true } })";
+        }
+
+        {
+          plugin = conform-nvim;
+          config = toLuaFile ./configs/conform.lua;
+        }
+      ];
+    };
   };
 }

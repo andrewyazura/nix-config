@@ -1,14 +1,14 @@
-{ lib, hostname, ... }: {
-  imports = [
-    ../../home
-    ../../home/ghostty
-    ../../home/git
-    ../../home/neovim
-    ../../home/ssh
-    ../../home/vesktop
-    ../../home/zsh
-  ] ++ lib.optionals (hostname == "r7-x3d") [
-    ../../home/cs2
-    ../../home/mangohud
-  ] ++ lib.optionals (hostname == "ga401") [ ../../home/gnome ../../home/work ];
+{
+  imports = [ ../../home ];
+  modules = {
+    cs2.enable = true;
+    ghostty.enable = true;
+    git.enable = true;
+    mangohud.enable = true;
+    neovim.enable = true;
+    ssh.enable = true;
+    vesktop.enable = true;
+    work.enable = true;
+    zsh.enable = true;
+  };
 }
