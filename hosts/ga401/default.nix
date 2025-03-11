@@ -15,10 +15,7 @@
     work.enable = true;
   };
 
-  home-manager.users.${username}.modules = {
-    cs2.enable = true;
-    mangohud.enable = true;
-  };
+  home-manager.users.${username}.modules = { gnome.enable = true; };
 
   boot.loader = {
     systemd-boot.enable = true;
