@@ -28,6 +28,7 @@ in {
 
       extraPackages = with pkgs; [
         wl-clipboard
+
         # required by:
         nodejs_22 # treesitter
         tree-sitter # treesitter

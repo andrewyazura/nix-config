@@ -14,6 +14,7 @@
     ./obs
     ./plasma6
     ./programs
+    ./sway
     ./wooting
     ./work
   ];

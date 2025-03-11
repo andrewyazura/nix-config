@@ -19,6 +19,7 @@ in {
       fastfetch
       ffmpeg
       git-crypt
+      wl-clipboard
 
       chromium
       firefox

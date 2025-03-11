@@ -8,6 +8,7 @@
     ./mangohud
     ./neovim
     ./ssh
+    ./sway
     ./vesktop
     ./work
     ./zsh
