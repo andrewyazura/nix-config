@@ -1,4 +1,4 @@
-{
+{ username, ... }: {
   imports = [
     ../../system
 
@@ -13,6 +13,11 @@
     nix.enable = true;
     programs.enable = true;
     work.enable = true;
+  };
+
+  home-manager.users.${username}.modules = {
+    cs2.enable = true;
+    mangohud.enable = true;
   };
 
   boot.loader = {
