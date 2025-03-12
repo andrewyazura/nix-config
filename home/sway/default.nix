@@ -4,6 +4,14 @@ let cfg = config.modules.sway;
 in {
   options.modules.sway = {
     enable = mkEnableOption "Enable sway configuration";
+
+    output = mkOption {
+      type = types.attrsOf (types.attrsOf types.str);
+      default = { };
+      description = ''
+        Forward params to wayland.windowManager.sway.config.output
+      '';
+    };
   };
 
   config = mkIf cfg.enable {
@@ -31,18 +39,7 @@ in {
           };
         };
 
-        output = {
-          DP-3 = {
-            position = "0 0";
-            mode = "3840x2160@144Hz";
-          };
-
-          HDMI-A-1 = {
-            position = "3840 0";
-            mode = "2560x1440@144Hz";
-            transform = "90";
-          };
-        };
+        output = cfg.output;
 
         focus = { followMouse = false; };
       };

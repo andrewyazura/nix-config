@@ -24,7 +24,22 @@
   home-manager.users.${username}.modules = {
     cs2.enable = true;
     mangohud.enable = true;
-    sway.enable = true;
+
+    sway = {
+      enable = true;
+      output = {
+        DP-3 = {
+          position = "0 0";
+          mode = "3840x2160@144Hz";
+        };
+
+        HDMI-A-1 = {
+          position = "3840 0";
+          mode = "2560x1440@144Hz";
+          transform = "90";
+        };
+      };
+    };
   };
 
   boot.loader = {
