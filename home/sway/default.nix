@@ -4,7 +4,6 @@ let cfg = config.modules.sway;
 in {
   options.modules.sway = {
     enable = mkEnableOption "Enable sway configuration";
-
     output = mkOption {
       type = types.attrsOf (types.attrsOf types.str);
       default = { };

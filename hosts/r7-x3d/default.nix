@@ -10,6 +10,7 @@
     fonts.enable = true;
     gaming.enable = true;
     guitar.enable = true;
+    gnome.enable = true;
     logitech-g920.enable = true;
     minegrub.enable = true;
     networking.enable = true;
@@ -24,6 +25,7 @@
   home-manager.users.${username}.modules = {
     cs2.enable = true;
     mangohud.enable = true;
+    gnome.enable = true;
 
     sway = {
       enable = true;

@@ -22,14 +22,12 @@ in {
 
     environment.shellInit = "eval $(gnome-keyring-daemon --start 2>/dev/null)";
 
-    services = {
-      gnome.gnome-keyring.enable = true;
-      greetd = {
-        enable = true;
-        settings = {
-          default_session = {
-            command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
-          };
+    services.gnome.gnome-keyring.enable = true;
+    services.greetd = {
+      enable = true;
+      settings = {
+        default_session = {
+          command = "${pkgs.greetd.tuigreet}/bin/tuigreet -r --time --cmd sway";
         };
       };
     };
