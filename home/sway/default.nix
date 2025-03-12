@@ -33,16 +33,22 @@ in {
         output = {
           DP-3 = {
             position = "0 0";
-            resolution = "3840x2160@143.990Hz";
+            mode = "3840x2160@144Hz";
           };
 
           HDMI-A-1 = {
             position = "3840 0";
-            resolution = "1440x2560@144.006Hz";
+            mode = "2560x1440@144Hz";
             transform = "90";
           };
         };
+
+        focus = { followMouse = false; };
       };
+
+      extraConfig = ''
+        focus output DP-3
+      '';
     };
   };
 }
