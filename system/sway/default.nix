@@ -7,8 +7,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    services.gnome.gnome-keyring.enable = true;
-
     programs.sway = {
       enable = true;
       wrapperFeatures.gtk = true;
@@ -21,5 +19,21 @@ in {
         wl-clipboard
       ];
     };
+
+    environment.shellInit = "eval $(gnome-keyring-daemon --start 2>/dev/null)";
+
+    services = {
+      gnome.gnome-keyring.enable = true;
+      greetd = {
+        enable = true;
+        settings = {
+          default_session = {
+            command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
+          };
+        };
+      };
+    };
+
+    programs.ssh = { startAgent = true; };
   };
 }

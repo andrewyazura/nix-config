@@ -10,6 +10,7 @@ in {
     wayland.windowManager.sway = {
       enable = true;
       wrapperFeatures.gtk = true;
+
       config = {
         modifier = "Mod4";
         terminal = "ghostty";
@@ -48,6 +49,7 @@ in {
 
       extraConfig = ''
         focus output DP-3
+        for_window [instance="cs2" class="SDL Application"] fullscreen enable
       '';
     };
   };
