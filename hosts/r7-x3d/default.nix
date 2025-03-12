@@ -9,7 +9,6 @@
     audio.enable = true;
     fonts.enable = true;
     gaming.enable = true;
-    gnome.enable = true;
     guitar.enable = true;
     logitech-g920.enable = true;
     minegrub.enable = true;
@@ -24,7 +23,6 @@
 
   home-manager.users.${username}.modules = {
     cs2.enable = true;
-    gnome.enable = true;
     mangohud.enable = true;
     sway.enable = true;
   };
@@ -39,13 +37,6 @@
     };
 
     efi.canTouchEfiVariables = true;
-  };
-
-  services.xserver = {
-    xkb = {
-      layout = "us";
-      variant = "";
-    };
   };
 
   hardware.graphics = {
