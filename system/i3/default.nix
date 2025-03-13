@@ -12,5 +12,8 @@ in {
       };
       displayManager = { defaultSession = "none+i3"; };
     };
+
+    environment.shellInit = "eval $(gnome-keyring-daemon --start 2>/dev/null)";
+    programs.ssh = { startAgent = true; };
   };
 }

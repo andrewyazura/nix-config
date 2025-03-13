@@ -7,31 +7,36 @@ in {
   };
 
   config = mkIf cfg.enable {
-    programs.sway = {
-      enable = true;
-      wrapperFeatures.gtk = true;
-      extraPackages = with pkgs; [
-        mako
-        slurp
-        swayidle
-        swaylock
-        tofi
-        wl-clipboard
-      ];
+    programs = {
+      sway = {
+        enable = true;
+        wrapperFeatures.gtk = true;
+        extraPackages = with pkgs; [
+          mako
+          slurp
+          swayidle
+          swaylock
+          tofi
+          wl-clipboard
+        ];
+      };
+
+      ssh = { startAgent = true; };
     };
 
     environment.shellInit = "eval $(gnome-keyring-daemon --start 2>/dev/null)";
 
-    services.gnome.gnome-keyring.enable = true;
-    services.greetd = {
-      enable = true;
-      settings = {
-        default_session = {
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet -r --time --cmd sway";
+    services = {
+      gnome.gnome-keyring.enable = true;
+      greetd = {
+        enable = true;
+        settings = {
+          default_session = {
+            command =
+              "${pkgs.greetd.tuigreet}/bin/tuigreet -r --time --cmd sway";
+          };
         };
       };
     };
-
-    programs.ssh = { startAgent = true; };
   };
 }
