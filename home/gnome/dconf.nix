@@ -172,6 +172,10 @@ with lib.hm.gvariant;
       application-id = "gnome-power-panel.desktop";
     };
 
+    "org/gnome/desktop/notifications/application/org-gnome-characters" = {
+      application-id = "org.gnome.Characters.desktop";
+    };
+
     "org/gnome/desktop/notifications/application/org-gnome-nautilus" = {
       application-id = "org.gnome.Nautilus.desktop";
     };
@@ -182,6 +186,10 @@ with lib.hm.gvariant;
 
     "org/gnome/desktop/notifications/application/org-telegram-desktop" = {
       application-id = "org.telegram.desktop.desktop";
+    };
+
+    "org/gnome/desktop/notifications/application/pritunl-client-electron" = {
+      application-id = "pritunl-client-electron.desktop";
     };
 
     "org/gnome/desktop/notifications/application/steam" = {
@@ -318,7 +326,6 @@ with lib.hm.gvariant;
     "org/gnome/mutter" = {
       dynamic-workspaces = true;
       edge-tiling = false;
-      # experimental-features = [ "scale-monitor-framebuffer" ];
     };
 
     "org/gnome/nautilus/icon-view" = { default-zoom-level = "small"; };
@@ -383,14 +390,24 @@ with lib.hm.gvariant;
         "window-list@gnome-shell-extensions.gcampax.github.com"
         "workspace-indicator@gnome-shell-extensions.gcampax.github.com"
       ];
-      enabled-extensions =
-        [ "status-icons@gnome-shell-extensions.gcampax.github.com" ];
+      enabled-extensions = [
+        "status-icons@gnome-shell-extensions.gcampax.github.com"
+        "pop-shell@system76.com"
+      ];
       favorite-apps = [ ];
       last-selected-power-profile = "performance";
       welcome-dialog-last-shown-version = "47.2";
     };
 
     "org/gnome/shell/app-switcher" = { current-workspace-only = true; };
+
+    "org/gnome/shell/extensions/pop-shell" = {
+      active-hint = false;
+      active-hint-border-radius = mkUint32 0;
+      gap-inner = mkUint32 0;
+      gap-outer = mkUint32 0;
+      tile-by-default = true;
+    };
 
     "org/gnome/shell/world-clocks" = { locations = [ ]; };
 

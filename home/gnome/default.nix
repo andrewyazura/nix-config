@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ lib, config, pkgs, ... }:
 with lib;
 let cfg = config.modules.gnome;
 in {
@@ -8,12 +8,14 @@ in {
 
   options.modules.gnome = {
     enable = mkEnableOption "Enable GNOME configuration";
+    enablePopShell = mkEnableOption "Enable pop-shell extension";
   };
 
-  config = mkIf cfg.enable {
-    programs.gnome-shell = {
-      enable = true;
-      # extensions = with pkgs.gnomeExtensions; [{ package = pop-shell; }];
-    };
-  };
+  config = mkMerge [
+    (mkIf cfg.enable { programs.gnome-shell.enable = true; })
+    (mkIf cfg.enablePopShell {
+      extensions = (with pkgs.gnomeExtensions; [{ package = pop-shell; }]);
+      dconf.settings."org/gnome/desktop/wm/keybindings" = { minimize = [ ]; };
+    })
+  ];
 }

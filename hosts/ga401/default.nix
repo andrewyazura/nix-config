@@ -15,16 +15,19 @@
     work.enable = true;
   };
 
-  home-manager.users.${username}.modules = { gnome.enable = true; };
+  home-manager.users.${username}.modules = {
+    gnome = {
+      enable = true;
+      enablePopShell = true;
+    };
+  };
 
   boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
   };
 
-  services.xserver = {
-    videoDrivers = [ "nvidia" ];
-  };
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware = {
     graphics.enable = true;
