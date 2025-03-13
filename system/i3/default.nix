@@ -10,7 +10,7 @@ in {
         enable = true;
         windowManager.i3.enable = true;
       };
-      services.displayManager = { defaultSession = "none+i3"; };
+      displayManager = { defaultSession = "none+i3"; };
     };
   };
 }

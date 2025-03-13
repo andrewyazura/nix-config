@@ -8,7 +8,19 @@ in {
     xsession.windowManager.i3 = {
       enable = true;
       package = pkgs.i3-gaps;
-      config = { modifier = "Mod4"; };
+      config = {
+        modifier = "Mod4";
+        terminal = "ghostty";
+
+        keybindings = {
+          "${modifier}+h" = "focus left";
+          "${modifier}+j" = "focus down";
+          "${modifier}+k" = "focus up";
+          "${modifier}+l" = "focus right";
+        };
+
+        focus = { followMouse = false; };
+      };
     };
   };
 }
