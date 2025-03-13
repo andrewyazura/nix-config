@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ lib, config, pkgs, ... }:
 with lib;
 let cfg = config.modules.i3;
 in {
@@ -11,9 +11,13 @@ in {
         windowManager.i3.enable = true;
       };
       displayManager = { defaultSession = "none+i3"; };
+      gnome.gnome-keyring.enable = true;
     };
 
-    environment.shellInit = "eval $(gnome-keyring-daemon --start 2>/dev/null)";
+    environment = {
+      systemPackages = [ pkgs.dconf ];
+      shellInit = "eval $(gnome-keyring-daemon --start 2>/dev/null)";
+    };
     programs.ssh = { startAgent = true; };
   };
 }

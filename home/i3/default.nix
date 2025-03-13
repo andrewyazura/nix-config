@@ -8,7 +8,7 @@ in {
     xsession.windowManager.i3 = {
       enable = true;
       package = pkgs.i3-gaps;
-      config = {
+      config = rec {
         modifier = "Mod4";
         terminal = "ghostty";
 
@@ -17,6 +17,9 @@ in {
           "${modifier}+j" = "focus down";
           "${modifier}+k" = "focus up";
           "${modifier}+l" = "focus right";
+
+          "${modifier}+Return" = "exec ${terminal}";
+          "${modifier}+d" = "exec dmenu_run";
         };
 
         focus = { followMouse = false; };

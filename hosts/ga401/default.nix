@@ -8,7 +8,7 @@
   modules = {
     audio.enable = true;
     fonts.enable = true;
-    gnome.enable = true;
+    i3.enable = true;
     networking.enable = true;
     nix.enable = true;
     programs.enable = true;
@@ -17,9 +17,10 @@
 
   home-manager.users.${username}.modules = {
     gnome = {
-      enable = true;
+      enable = false;
       enablePopShell = true;
     };
+    i3.enable = true;
   };
 
   boot.loader = {
