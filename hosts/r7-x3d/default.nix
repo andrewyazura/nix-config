@@ -17,7 +17,6 @@
     nix.enable = true;
     obs.enable = true;
     programs.enable = true;
-    sway.enable = true;
     wooting.enable = true;
     work.enable = true;
   };
@@ -25,10 +24,13 @@
   home-manager.users.${username}.modules = {
     cs2.enable = true;
     mangohud.enable = true;
-    gnome.enable = true;
+    gnome = {
+      enable = true;
+      enablePopShell = true;
+    };
 
     sway = {
-      enable = true;
+      enable = false;
       output = {
         DP-3 = {
           position = "0 0";

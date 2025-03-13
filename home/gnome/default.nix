@@ -14,7 +14,7 @@ in {
   config = mkMerge [
     (mkIf cfg.enable { programs.gnome-shell.enable = true; })
     (mkIf cfg.enablePopShell {
-      extensions = (with pkgs.gnomeExtensions; [{ package = pop-shell; }]);
+      programs.gnome-shell.extensions = (with pkgs.gnomeExtensions; [{ package = pop-shell; }]);
       dconf.settings."org/gnome/desktop/wm/keybindings" = { minimize = [ ]; };
     })
   ];
