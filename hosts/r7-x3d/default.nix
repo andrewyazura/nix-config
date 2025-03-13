@@ -24,10 +24,7 @@
   home-manager.users.${username}.modules = {
     cs2.enable = true;
     mangohud.enable = true;
-    gnome = {
-      enable = true;
-      enablePopShell = true;
-    };
+    gnome.enable = true;
 
     sway = {
       enable = false;
@@ -38,9 +35,8 @@
         };
 
         HDMI-A-1 = {
-          position = "3840 0";
+          position = "3840 360";
           mode = "2560x1440@144Hz";
-          transform = "90";
         };
       };
     };

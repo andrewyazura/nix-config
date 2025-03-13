@@ -7,6 +7,7 @@
     ./guitar
     ./home-manager
     ./hyprland
+    ./i3
     ./logitech-g920
     ./minegrub
     ./networking

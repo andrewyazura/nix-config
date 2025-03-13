@@ -5,6 +5,7 @@
     ./git
     ./gnome
     ./hyprland
+    ./i3
     ./mangohud
     ./neovim
     ./ssh
