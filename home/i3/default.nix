@@ -84,7 +84,11 @@ in {
           };
         };
 
-        focus = { followMouse = false; };
+        focus = {
+          followMouse = false;
+          forceWrapping = false;
+          wrapping = "no";
+        };
       };
     };
   };
