@@ -14,6 +14,7 @@ in {
         font-size = 10;
         font-family = "FiraCode Nerd Font Mono";
         theme = "catppuccin-mocha";
+        window-decoration = "none";
       };
     };
   };
