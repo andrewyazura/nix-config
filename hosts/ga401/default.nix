@@ -28,12 +28,27 @@
     efi.canTouchEfiVariables = true;
   };
 
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services = {
+    libinput.touchpad.naturalScrolling = true;
+
+    xserver = {
+      videoDrivers = [ "nvidia" ];
+
+      inputClassSections = [''
+        Identifier "swap esc and caps on built-in keyboard"
+        MatchProduct "Asus Keyboard"
+        Driver "libinput"
+        Option "XkbOptions" "caps:swapescape"
+      ''];
+    };
+  };
 
   hardware = {
     graphics.enable = true;
     nvidia.dynamicBoost.enable = false;
   };
+
+  time.timeZone = "Europe/Warsaw";
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
