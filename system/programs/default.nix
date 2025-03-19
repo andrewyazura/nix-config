@@ -15,7 +15,6 @@ in {
       vesktop # fixed screensharing
 
       tree
-      nixfmt
       fastfetch
       ffmpeg
       git-crypt

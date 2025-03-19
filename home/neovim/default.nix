@@ -38,7 +38,7 @@ in {
 
         black # conform
         isort # conform
-        nixfmt # conform
+        nixfmt-classic # conform
         stylua # conform
 
         lua-language-server # lsp
