@@ -37,8 +37,8 @@
       inputClassSections = [''
         Identifier "swap esc and caps on built-in keyboard"
         MatchProduct "Asus Keyboard"
-        Driver "libinput"
-        Option "XkbOptions" "caps:swapescape"
+        Option "XkbLayout" "us,ua"
+        Option "XkbOptions" "grp:win_space_toggle,caps:swapescape"
       ''];
     };
   };

@@ -25,7 +25,7 @@ in {
         input = {
           "type:keyboard" = {
             xkb_layout = "us,ua";
-            xkb_options = "grp:win_space_toggle,caps:escape";
+            xkb_options = "grp:win_space_toggle,caps:swapescape";
           };
 
           "12771:4898:Wooting_Wooting_60HE+" = {
