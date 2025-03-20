@@ -34,12 +34,21 @@
     xserver = {
       videoDrivers = [ "nvidia" ];
 
-      inputClassSections = [''
-        Identifier "swap esc and caps on built-in keyboard"
-        MatchProduct "Asus Keyboard"
-        Option "XkbLayout" "us,ua"
-        Option "XkbOptions" "grp:win_space_toggle,caps:swapescape"
-      ''];
+      inputClassSections = let layouts = "us,ua";
+      in [
+        ''
+          Identifier "general keyboard settings"
+          MatchIsKeyboard "on"
+          Option "XkbLayout" "${layouts}"
+          Option "XkbOptions" "grp:win_space_toggle,caps:swapescape"
+        ''
+        ''
+          Identifier "disable swapescape for wooting"
+          MatchProduct "Wooting Wooting 60HE+"
+          Option "XkbLayout" "${layouts}"
+          Option "XkbOptions" "grp:win_space_toggle"
+        ''
+      ];
     };
   };
 
