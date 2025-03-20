@@ -5,12 +5,70 @@ in {
   options.modules.i3 = { enable = mkEnableOption "Enable i3 configuration"; };
 
   config = mkIf cfg.enable {
+    services.polybar = {
+      enable = true;
+      script = "polybar top &";
+
+      config = {
+        "bar/top" = {
+          width = "100%";
+          height = 24;
+
+          radius = 0;
+          line-size = 0;
+          border-size = 0;
+
+          background = "#111111";
+          foreground = "#dddddd";
+
+          modules-left = "i3";
+          modules-right = "date battery";
+
+          font-0 = "Fira Code:pixelsize=10;0";
+        };
+
+        "module/i3" = {
+          type = "internal/i3";
+          format = "<label-state> <label-mode>";
+          index-sort = true;
+          wrapping-scroll = false;
+
+          pin-workspaces = false;
+          enable-click = false;
+        };
+
+        "module/date" = {
+          type = "internal/date";
+          interval = 1;
+
+          date = "%Y-%m-%d";
+          date-alt = "";
+
+          time = "%H:%M";
+          time-alt = "%H:%M:%S";
+
+          label = "%date% %time%";
+        };
+
+        "module/battery" = {
+          type = "internal/battery";
+          full-at = 99;
+          low-at = 20;
+
+          battery = "BAT0";
+          adapter = "AC0";
+          poll-interval = 10;
+        };
+      };
+    };
+
     xsession.windowManager.i3 = {
       enable = true;
       package = pkgs.i3-gaps;
       config = rec {
         modifier = "Mod4";
         terminal = "ghostty";
+        bars = [ ];
 
         keybindings = {
           "${modifier}+Return" = "exec ${terminal}";

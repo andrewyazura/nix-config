@@ -17,7 +17,7 @@ in {
     };
 
     environment = {
-      systemPackages = with pkgs; [ polybar dconf xclip ];
+      systemPackages = with pkgs; [ dconf xclip ];
       shellInit = "eval $(gnome-keyring-daemon --start 2>/dev/null)";
     };
 
