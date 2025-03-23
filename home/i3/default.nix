@@ -9,7 +9,20 @@ in {
       enable = true;
       script = "polybar top &";
 
-      config = {
+      config = let
+        colors = {
+          background = "#111";
+          background-alt = "#444";
+
+          foreground = "#ddd";
+          foreground-alt = "#555";
+
+          primary = "#ffb52a";
+          secondary = "#e60053";
+          alert = "#bd2c40";
+          accent = "#4bc98a";
+        };
+      in {
         "bar/top" = {
           width = "100%";
           height = 24;
@@ -18,11 +31,18 @@ in {
           line-size = 0;
           border-size = 0;
 
-          background = "#111111";
-          foreground = "#dddddd";
+          background = "${colors.background}";
+          foreground = "${colors.foreground}";
 
           modules-left = "i3";
+          modules-center = "";
           modules-right = "date battery";
+
+          module-margin-left = 1;
+          module-margin-right = 2;
+
+          padding-left = 0;
+          padding-right = 2;
 
           font-0 = "Fira Code:pixelsize=10;0";
         };
@@ -34,7 +54,29 @@ in {
           wrapping-scroll = false;
 
           pin-workspaces = false;
-          enable-click = false;
+
+          label-mode-padding = 2;
+          label-mode-foreground = "#000";
+          label-mode-background = "${colors.primary}";
+
+          label-focused = "%name%";
+          label-focused-background = "${colors.accent}";
+          label-focused-underline = "${colors.background}";
+          label-focused-foreground = "${colors.background}";
+          label-focused-padding = 2;
+
+          label-unfocused = "%name%";
+          label-unfocused-padding = 2;
+
+          label-visible = "%name%";
+          label-visible-background = "${colors.accent}";
+          label-visible-underline = "${colors.background}";
+          label-visible-padding = 2;
+
+          label-urgent = "%name%";
+          label-urgent-background = "${colors.alert}";
+          label-urgent-underline = "${colors.background}";
+          label-urgent-padding = 2;
         };
 
         "module/date" = {
