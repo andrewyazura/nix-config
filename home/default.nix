@@ -8,6 +8,7 @@
     ./i3
     ./mangohud
     ./neovim
+    ./polybar
     ./ssh
     ./sway
     ./vesktop
