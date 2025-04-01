@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  imports = [ ../../system ];
+  imports = [ ../../system/csgo-server ];
 
   nix.settings = {
     experimental-features = "nix-command flakes";
