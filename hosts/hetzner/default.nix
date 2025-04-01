@@ -55,5 +55,7 @@
   };
   networking.firewall.allowedTCPPorts = [ 22 ];
 
+  module.csgo-server.enable = true;
+
   system.stateVersion = "24.11";
 }
