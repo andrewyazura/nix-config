@@ -1,8 +1,6 @@
 { pkgs, ... }:
 
 {
-  imports = [ ../../system/csgo-server ../../system/nix ];
-
   nix.settings = {
     auto-optimise-store = true;
     trusted-users = [ "@wheel" ];
