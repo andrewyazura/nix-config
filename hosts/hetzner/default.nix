@@ -1,10 +1,9 @@
 { pkgs, ... }:
 
 {
-  imports = [ ../../system/csgo-server ];
+  imports = [ ../../system/csgo-server ../../system/nix ];
 
   nix.settings = {
-    experimental-features = "nix-command flakes";
     auto-optimise-store = true;
     trusted-users = [ "@wheel" ];
   };
@@ -23,7 +22,6 @@
 
   documentation.nixos.enable = false;
   time.timeZone = "Europe/London";
-  i18n.defaultLocale = "en_US.UTF-8";
   console.keyMap = "us";
 
   boot = {
@@ -57,7 +55,10 @@
   };
   networking.firewall.allowedTCPPorts = [ 22 ];
 
-  modules.csgo-server.enable = true;
+  modules = {
+    csgo-server.enable = true;
+    nix.enable = true;
+  };
 
   system.stateVersion = "24.11";
 }
