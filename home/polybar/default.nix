@@ -10,7 +10,10 @@ in {
     services.polybar = {
       enable = true;
       script = "polybar top &";
-      package = pkgs.polybar.override { i3Support = true; };
+      package = pkgs.polybar.override {
+        i3Support = true;
+        pulseSupport = true;
+      };
 
       config = let
         colors = {
@@ -56,7 +59,7 @@ in {
 
           modules-left = "i3";
           modules-center = "";
-          modules-right = "wifi date battery";
+          modules-right = "wifi volume date battery";
 
           module-margin-left = 2;
           module-margin-right = 2;
@@ -164,7 +167,7 @@ in {
 
           label-disconnected = "not connected";
           label-disconnected-background = "${colors.red}";
-          label-disconnected-foreground = "${colors.text}";
+          label-disconnected-foreground = "${colors.base}";
 
           ramp-signal-0 = "▁";
           ramp-signal-1 = "▂";
@@ -172,6 +175,18 @@ in {
           ramp-signal-3 = "▅";
           ramp-signal-4 = "▇";
           ramp-signal-5 = "█";
+        };
+
+        "module/volume" = {
+          type = "internal/pulseaudio";
+          format-volume = "<ramp-volume> <label-volume>";
+
+          ramp-volume-0 = "▁";
+          ramp-volume-1 = "▂";
+          ramp-volume-2 = "▃";
+          ramp-volume-3 = "▅";
+          ramp-volume-4 = "▇";
+          ramp-volume-5 = "█";
         };
       };
     };

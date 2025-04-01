@@ -35,12 +35,13 @@
     root.hashedPassword = "!";
     andrew = {
       isNormalUser = true;
-      extraGroups = [ "wheel" ];
+      extraGroups = [ "wheel" "docker" ];
       openssh.authorizedKeys.keys = import ../../ssh-keys.nix;
     };
   };
 
   security.sudo.wheelNeedsPassword = false;
+  virtualisation.docker.enable = true;
 
   services = {
     openssh = {
