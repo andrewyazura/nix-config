@@ -53,10 +53,5 @@
   };
   networking.firewall.allowedTCPPorts = [ 22 ];
 
-  modules = {
-    csgo-server.enable = true;
-    nix.enable = true;
-  };
-
   system.stateVersion = "24.11";
 }
