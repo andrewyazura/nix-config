@@ -34,7 +34,7 @@
     andrew = {
       isNormalUser = true;
       extraGroups = [ "wheel" "docker" ];
-      openssh.authorizedKeys.keys = import ../../ssh-keys.nix;
+      openssh.authorizedKeys.keys = import ../../common/ssh-keys.nix;
     };
   };
 
