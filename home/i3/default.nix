@@ -5,6 +5,9 @@ in {
   options.modules.i3 = { enable = mkEnableOption "Enable i3 configuration"; };
 
   config = mkIf cfg.enable {
+    home.file."Pictures/wallpapers/current.png".source =
+      ../../common/wallpapers/nix-black-4k.png;
+
     xsession.windowManager.i3 = {
       enable = true;
       package = pkgs.i3-gaps;
@@ -13,8 +16,33 @@ in {
         terminal = "ghostty";
         bars = [ ];
 
-        keybindings = {
+        startup = [{
+          command = "feh --bg-scale ~/Pictures/wallpapers/current.png";
+          always = true;
+        }];
+
+        keybindings = let colors = import ../../common/colors.nix;
+        in {
           "${modifier}+Return" = "exec ${terminal}";
+          "${modifier}+Escape" = "exec " + (builtins.concatStringsSep " " [
+            "i3lock"
+            "--clock"
+
+            "--color=${colors.base}"
+            "--inside-color=${colors.base}"
+            "--ring-color=${colors.blue}"
+            "--line-color=${colors.base}"
+            "--separator-color=${colors.base}"
+            "--verif-color=${colors.green}"
+            "--wrong-color=${colors.red}"
+            "--time-color=${colors.text}"
+            "--date-color=${colors.text}"
+
+            ''--verif-font="FiraCode Nerd Font"''
+            ''--wrong-font="FiraCode Nerd Font"''
+            ''--time-font="FiraCode Nerd Font"''
+            ''--date-font="FiraCode Nerd Font"''
+          ]);
           "${modifier}+d" = "exec dmenu_run";
           "${modifier}+q" = "kill";
 

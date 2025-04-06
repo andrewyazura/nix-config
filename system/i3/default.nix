@@ -8,7 +8,10 @@ in {
     services = {
       xserver = {
         enable = true;
-        windowManager.i3.enable = true;
+        windowManager.i3 = {
+          enable = true;
+          extraPackages = with pkgs; [ dmenu feh i3lock-color ];
+        };
       };
 
       libinput.enable = true;
