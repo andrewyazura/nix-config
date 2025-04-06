@@ -15,6 +15,10 @@ in {
         modifier = "Mod4";
         terminal = "ghostty";
         bars = [ ];
+        window = {
+          titlebar = false;
+          border = 0;
+        };
 
         startup = [{
           command = "feh --bg-scale ~/Pictures/wallpapers/current.png";

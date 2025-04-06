@@ -30,7 +30,7 @@ in {
           line-size = 0;
           border-size = 0;
 
-          background = "${colors.base}";
+          background = "${colors.crust}";
           foreground = "${colors.text}";
 
           modules-left = "i3";
