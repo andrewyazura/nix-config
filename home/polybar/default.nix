@@ -35,7 +35,7 @@ in {
 
           modules-left = "i3";
           modules-center = "";
-          modules-right = "wifi volume date battery";
+          modules-right = "wifi date battery";
 
           module-margin-left = 2;
           module-margin-right = 2;
@@ -151,18 +151,6 @@ in {
           ramp-signal-3 = "▅";
           ramp-signal-4 = "▇";
           ramp-signal-5 = "█";
-        };
-
-        "module/volume" = {
-          type = "internal/pulseaudio";
-          format-volume = "<ramp-volume> <label-volume>";
-
-          ramp-volume-0 = "▁";
-          ramp-volume-1 = "▂";
-          ramp-volume-2 = "▃";
-          ramp-volume-3 = "▅";
-          ramp-volume-4 = "▇";
-          ramp-volume-5 = "█";
         };
       };
     };
