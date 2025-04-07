@@ -11,11 +11,7 @@ in {
       sway = {
         enable = true;
         wrapperFeatures.gtk = true;
-        extraPackages = with pkgs; [
-          mako
-          swaylock
-          wl-clipboard
-        ];
+        extraPackages = with pkgs; [ mako grim slurp swaylock wl-clipboard ];
       };
 
       ssh = { startAgent = true; };

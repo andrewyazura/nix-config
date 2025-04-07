@@ -105,6 +105,7 @@ in {
 
           "${modifier}+r" = "mode resize";
 
+          "Print" = ''exec grim -g "$(slurp)" - | wl-copy'';
           "XF86AudioRaiseVolume" =
             "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+";
           "XF86AudioLowerVolume" =
