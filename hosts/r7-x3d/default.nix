@@ -18,8 +18,6 @@
   };
 
   home-manager.users.${username}.modules = {
-    waybar.enable = true;
-
     sway = {
       enable = true;
       output = {
@@ -33,7 +31,13 @@
           mode = "2560x1440@144Hz";
         };
       };
+
       focus-output = "DP-3";
+    };
+
+    waybar = {
+      enable = true;
+      output = [ "DP-3" ];
     };
   };
 

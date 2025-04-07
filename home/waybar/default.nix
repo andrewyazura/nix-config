@@ -4,6 +4,13 @@ let cfg = config.modules.waybar;
 in {
   options.modules.waybar = {
     enable = mkEnableOption "Enable waybar configuration";
+    output = mkOption {
+      type = types.listOf types.str;
+      default = [ ];
+      description = ''
+        Specify on which screen this bar will be displayed
+      '';
+    };
   };
 
   config = mkIf cfg.enable {
@@ -15,6 +22,7 @@ in {
         mainBar = {
           layer = "top";
           position = "top";
+          output = cfg.output;
           height = 24;
 
           modules-left = [ "sway/workspaces" ];
