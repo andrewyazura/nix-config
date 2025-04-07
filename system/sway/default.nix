@@ -13,10 +13,7 @@ in {
         wrapperFeatures.gtk = true;
         extraPackages = with pkgs; [
           mako
-          slurp
-          swayidle
           swaylock
-          tofi
           wl-clipboard
         ];
       };

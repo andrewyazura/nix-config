@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ lib, config, pkgs, ... }:
 with lib;
 let cfg = config.modules.sway;
 in {
@@ -33,7 +33,8 @@ in {
 
         modifier = "Mod4";
         terminal = "ghostty";
-        menu = "tofi-drun";
+        menu =
+          "${pkgs.dmenu}/bin/dmenu_path | ${pkgs.dmenu}/bin/dmenu | ${pkgs.findutils}/bin/xargs swaymsg exec --";
 
         keybindings = {
           "${modifier}+Escape" = "exec swaylock";
@@ -103,6 +104,12 @@ in {
             "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'";
 
           "${modifier}+r" = "mode resize";
+
+          "XF86AudioRaiseVolume" =
+            "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+";
+          "XF86AudioLowerVolume" =
+            "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
+          "XF86AudioMute" = "exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
         };
 
         input = {
@@ -113,6 +120,9 @@ in {
 
           "12771:4898:Wooting_Wooting_60HE+" = {
             xkb_options = "grp:win_space_toggle";
+            # if settings reset:
+            # swaymsg 'input "12771:4898:Wooting_Wooting_60HE+" xkb_options "grp:win_space_toggle"'
+            # swaymsg 'input "12771:4898:Wooting_Wooting_60HE+" xkb_layout "us,ua"'
           };
 
           "type:pointer" = {
