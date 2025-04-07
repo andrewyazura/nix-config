@@ -27,7 +27,7 @@
         };
 
         HDMI-A-1 = {
-          position = "3840 360";
+          position = "3840 720";
           mode = "2560x1440@144Hz";
         };
       };
@@ -36,7 +36,7 @@
     };
 
     waybar = {
-      enable = true;
+      enable = false;
       output = [ "DP-3" ];
     };
   };
