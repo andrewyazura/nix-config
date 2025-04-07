@@ -11,9 +11,17 @@ in {
         Forward params to wayland.windowManager.sway.config.output
       '';
     };
+    focus-output = mkOption {
+      type = types.nullOr types.str;
+      default = "";
+      description = ''
+        Define which output to focus by default
+      '';
+    };
   };
 
   config = mkIf cfg.enable {
+
     wayland.windowManager.sway = {
       enable = true;
       wrapperFeatures.gtk = true;
@@ -44,8 +52,10 @@ in {
       };
 
       extraConfig = ''
-        focus output DP-3
-        for_window [instance="cs2" class="SDL Application"] fullscreen enable
+        ${if cfg.focus-output != null then
+          "focus output ${cfg.focus-output}"
+        else
+          ""}
       '';
     };
   };

@@ -9,20 +9,19 @@
     audio.enable = true;
     fonts.enable = true;
     guitar.enable = true;
-    gnome.enable = true;
     networking.enable = true;
     nix.enable = true;
-    obs.enable = true;
     programs.enable = true;
+    sway.enable = true;
     wooting.enable = true;
     work.enable = true;
   };
 
   home-manager.users.${username}.modules = {
-    gnome.enable = true;
+    waybar.enable = true;
 
     sway = {
-      enable = false;
+      enable = true;
       output = {
         DP-3 = {
           position = "0 0";
@@ -34,6 +33,7 @@
           mode = "2560x1440@144Hz";
         };
       };
+      focus-output = "DP-3";
     };
   };
 
