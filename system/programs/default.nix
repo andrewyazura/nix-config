@@ -14,10 +14,11 @@ in {
       telegram-desktop
       vesktop # fixed screensharing
 
-      tree
+      btop
       fastfetch
       ffmpeg
       git-crypt
+      tree
       wl-clipboard
 
       chromium

@@ -11,7 +11,14 @@ in {
       sway = {
         enable = true;
         wrapperFeatures.gtk = true;
-        extraPackages = with pkgs; [ mako grim slurp swaylock wl-clipboard ];
+        extraPackages = with pkgs; [
+          grim
+          mako
+          playerctl
+          slurp
+          swaylock
+          wl-clipboard
+        ];
       };
 
       ssh = { startAgent = true; };
@@ -20,6 +27,7 @@ in {
     environment.shellInit = "eval $(gnome-keyring-daemon --start 2>/dev/null)";
 
     services = {
+      playerctld.enable = true;
       gnome.gnome-keyring.enable = true;
       greetd = {
         enable = true;
