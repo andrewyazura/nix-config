@@ -10,11 +10,12 @@ in {
         enable = true;
         windowManager.i3 = {
           enable = true;
-          extraPackages = with pkgs; [ dmenu feh i3lock-color ];
+          extraPackages = with pkgs; [ dmenu feh i3lock-color playerctl ];
         };
       };
 
       libinput.enable = true;
+      playerctld.enable = true;
       gnome.gnome-keyring.enable = true;
       displayManager = { defaultSession = "none+i3"; };
     };
