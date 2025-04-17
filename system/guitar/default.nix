@@ -7,7 +7,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ guitarix qjackctl reaper ];
+    environment.systemPackages = with pkgs; [ tonelib-gfx tonelib-jam qjackctl reaper  ];
 
     services.pipewire.jack.enable = true;
   };
