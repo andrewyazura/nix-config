@@ -46,6 +46,9 @@ in {
             ''--wrong-font="FiraCode Nerd Font"''
             ''--time-font="FiraCode Nerd Font"''
             ''--date-font="FiraCode Nerd Font"''
+
+            ''--time-str="%H:%M"''
+            ''--date-str="%A %B %d"''
           ]);
           "${modifier}+d" = "exec dmenu_run";
           "${modifier}+q" = "kill";
