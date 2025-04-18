@@ -17,6 +17,7 @@ in {
           playerctl
           slurp
           swaylock
+          swaylock-effects
           wl-clipboard
         ];
       };

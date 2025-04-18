@@ -37,10 +37,10 @@ in {
           "${pkgs.dmenu}/bin/dmenu_path | ${pkgs.dmenu}/bin/dmenu | ${pkgs.findutils}/bin/xargs swaymsg exec --";
 
         keybindings = {
-          "${modifier}+Escape" = "exec swaylock";
           "${modifier}+Return" = "exec ${terminal}";
-          "${modifier}+q" = "kill";
+          "${modifier}+Escape" = "exec swaylock";
           "${modifier}+d" = "exec ${menu}";
+          "${modifier}+q" = "kill";
 
           "${modifier}+${left}" = "focus left";
           "${modifier}+${down}" = "focus down";
@@ -147,6 +147,42 @@ in {
         else
           ""}
       '';
+    };
+
+    programs.swaylock = {
+      enable = true;
+      package = pkgs.swaylock-effects;
+      settings = let colors = import ../../common/colors.nix;
+      in {
+        clock = true;
+        indicator = false;
+        indicator-radius = 120;
+        indicator-thickness = 8;
+        hide-keyboard-layout = true;
+
+        color = colors.base;
+        inside-color = colors.base;
+        ring-color = colors.blue;
+        line-color = colors.base;
+        separator-color = colors.base;
+
+        inside-ver-color = colors.base;
+        ring-ver-color = colors.green;
+
+        inside-wrong-color = colors.base;
+        ring-wrong-color = colors.red;
+
+        text-color = colors.text;
+        text-clear-color = colors.text;
+        text-ver-color = colors.text;
+        text-wrong-color = colors.text;
+
+        font = "FiraCode Nerd Font";
+        font-size = 32;
+
+        timestr = "%H:%M";
+        datestr = "%A, %B %d";
+      };
     };
   };
 }
