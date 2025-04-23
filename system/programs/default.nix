@@ -16,12 +16,7 @@ in {
       vesktop # fixed screensharing
 
       btop
-      fastfetch
-      ffmpeg
       git-crypt
-      mpv
-      tree
-      wl-clipboard
 
       chromium
       firefox
