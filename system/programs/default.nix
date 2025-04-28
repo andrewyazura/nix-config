@@ -17,6 +17,7 @@ in {
 
       btop
       git-crypt
+      mpv
 
       chromium
       firefox
