@@ -25,31 +25,9 @@ in {
           always = true;
         }];
 
-        keybindings = let colors = import ../../common/colors.nix;
-        in {
+        keybindings = {
           "${modifier}+Return" = "exec ${terminal}";
-          "${modifier}+Escape" = "exec " + (builtins.concatStringsSep " " [
-            "i3lock"
-            "--clock"
-
-            "--color=${colors.base}"
-            "--inside-color=${colors.base}"
-            "--ring-color=${colors.blue}"
-            "--line-color=${colors.base}"
-            "--separator-color=${colors.base}"
-            "--verif-color=${colors.green}"
-            "--wrong-color=${colors.red}"
-            "--time-color=${colors.text}"
-            "--date-color=${colors.text}"
-
-            ''--verif-font="FiraCode Nerd Font"''
-            ''--wrong-font="FiraCode Nerd Font"''
-            ''--time-font="FiraCode Nerd Font"''
-            ''--date-font="FiraCode Nerd Font"''
-
-            ''--time-str="%H:%M"''
-            ''--date-str="%A %B %d"''
-          ]);
+          "${modifier}+Escape" = "exec xsecurelock";
           "${modifier}+d" = "exec dmenu_run";
           "${modifier}+q" = "kill";
 

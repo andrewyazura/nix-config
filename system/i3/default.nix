@@ -10,7 +10,7 @@ in {
         enable = true;
         windowManager.i3 = {
           enable = true;
-          extraPackages = with pkgs; [ dmenu feh i3lock-color playerctl ];
+          extraPackages = with pkgs; [ dmenu feh xsecurelock playerctl ];
         };
       };
 
