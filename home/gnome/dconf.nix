@@ -152,7 +152,6 @@ with lib.hm.gvariant;
       application-children = [
         "gnome-power-panel"
         "steam"
-        "vesktop"
         "firefox"
         "org-telegram-desktop"
         "org-gnome-settings"
@@ -194,10 +193,6 @@ with lib.hm.gvariant;
 
     "org/gnome/desktop/notifications/application/steam" = {
       application-id = "steam.desktop";
-    };
-
-    "org/gnome/desktop/notifications/application/vesktop" = {
-      application-id = "vesktop.desktop";
     };
 
     "org/gnome/desktop/notifications/application/vmware-player" = {

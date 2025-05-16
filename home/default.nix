@@ -11,7 +11,6 @@
     ./polybar
     ./ssh
     ./sway
-    ./vesktop
     ./waybar
     ./work
     ./zsh

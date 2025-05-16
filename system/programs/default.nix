@@ -13,7 +13,7 @@ in {
       obsidian
       spotify
       telegram-desktop
-      vesktop # fixed screensharing
+      discord
 
       btop
       git-crypt
