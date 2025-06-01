@@ -44,6 +44,7 @@ in {
         lua-language-server # lsp
         nil # lsp
         ruff # lsp
+        pyright # lsp
       ];
 
       plugins = with pkgs.vimPlugins; [

@@ -24,3 +24,7 @@ lspconfig.ruff.setup({
 		settings = {},
 	},
 })
+
+lspconfig.pyright.setup({
+	capabilities = capabilities,
+})
