@@ -42,9 +42,8 @@ in {
         stylua # conform
 
         lua-language-server # lsp
-        pyright # lsp
-        ruff # lsp
         nil # lsp
+        ruff # lsp
       ];
 
       plugins = with pkgs.vimPlugins; [
@@ -94,6 +93,11 @@ in {
         {
           plugin = which-key-nvim;
           config = toLuaFile ./configs/which-key.lua;
+        }
+
+        {
+          plugin = trouble-nvim;
+          config = toLuaFile ./configs/trouble.lua;
         }
 
         {
