@@ -36,15 +36,14 @@ in {
         ripgrep # telescope
         fd # telescope
 
-        black # conform
         isort # conform
         nixfmt-classic # conform
         stylua # conform
 
         lua-language-server # lsp
         nil # lsp
-        ruff # lsp
         pyright # lsp
+        ruff # lsp
       ];
 
       plugins = with pkgs.vimPlugins; [

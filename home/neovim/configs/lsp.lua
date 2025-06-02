@@ -18,13 +18,15 @@ lspconfig.nil_ls.setup({
 	capabilities = capabilities,
 })
 
+lspconfig.pyright.setup({
+	capabilities = capabilities,
+})
+
 lspconfig.ruff.setup({
 	capabilities = capabilities,
 	init_options = {
-		settings = {},
+		settings = {
+			logLevel = "debug",
+		},
 	},
-})
-
-lspconfig.pyright.setup({
-	capabilities = capabilities,
 })
