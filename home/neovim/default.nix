@@ -36,6 +36,7 @@ in {
         ripgrep # telescope
         fd # telescope
 
+        black # conform
         isort # conform
         nixfmt-classic # conform
         stylua # conform
