@@ -30,6 +30,7 @@ in {
     services = {
       playerctld.enable = true;
       gnome.gnome-keyring.enable = true;
+
       greetd = {
         enable = true;
         settings = {
@@ -39,6 +40,11 @@ in {
           };
         };
       };
+    };
+
+    systemd.services.greetd = {
+      serviceConfig.Type = "idle";
+      unitConfig.After = mkForce [ "multi-user.target" ];
     };
   };
 }
