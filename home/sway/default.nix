@@ -38,7 +38,7 @@ in {
 
         keybindings = {
           "${modifier}+Return" = "exec ${terminal}";
-          "${modifier}+Escape" = "exec swaylock";
+          "${modifier}+Escape" = "exec waylock";
           "${modifier}+d" = "exec ${menu}";
           "${modifier}+q" = "kill";
 
@@ -147,42 +147,6 @@ in {
         else
           ""}
       '';
-    };
-
-    programs.swaylock = {
-      enable = true;
-      package = pkgs.swaylock-effects;
-      settings = let colors = import ../../common/colors.nix;
-      in {
-        clock = true;
-        indicator = false;
-        indicator-radius = 120;
-        indicator-thickness = 8;
-        hide-keyboard-layout = true;
-
-        color = colors.base;
-        inside-color = colors.base;
-        ring-color = colors.blue;
-        line-color = colors.base;
-        separator-color = colors.base;
-
-        inside-ver-color = colors.base;
-        ring-ver-color = colors.green;
-
-        inside-wrong-color = colors.base;
-        ring-wrong-color = colors.red;
-
-        text-color = colors.text;
-        text-clear-color = colors.text;
-        text-ver-color = colors.text;
-        text-wrong-color = colors.text;
-
-        font = "FiraCode Nerd Font";
-        font-size = 32;
-
-        timestr = "%H:%M";
-        datestr = "%A, %B %d";
-      };
     };
   };
 }

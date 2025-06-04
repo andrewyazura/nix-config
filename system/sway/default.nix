@@ -16,8 +16,7 @@ in {
           mako
           playerctl
           slurp
-          swaylock
-          swaylock-effects
+          waylock
           wl-clipboard
         ];
       };
@@ -45,6 +44,13 @@ in {
     systemd.services.greetd = {
       serviceConfig.Type = "idle";
       unitConfig.After = mkForce [ "multi-user.target" ];
+    };
+
+    security.pam.services.waylock = {
+      text = ''
+        auth     include login
+        account  include login
+      '';
     };
   };
 }
