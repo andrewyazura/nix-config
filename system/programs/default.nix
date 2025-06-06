@@ -12,7 +12,6 @@ in {
 
       discord
       obsidian
-      signal-cli
       signal-desktop
       spotify
       telegram-desktop
