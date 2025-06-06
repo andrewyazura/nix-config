@@ -10,10 +10,12 @@ in {
     environment.systemPackages = with pkgs; [
       inputs.ghostty.packages.x86_64-linux.default
 
+      discord
       obsidian
+      signal-cli
+      signal-desktop
       spotify
       telegram-desktop
-      discord
 
       btop
       git-crypt
