@@ -11,7 +11,7 @@ in {
       enable = true;
       settings = {
         background-opacity = 1;
-        font-size = 10;
+        font-size = 9;
         font-family = "FiraCode Nerd Font Mono";
         theme = "catppuccin-mocha";
         window-decoration = "none";
