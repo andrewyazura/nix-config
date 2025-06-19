@@ -20,8 +20,6 @@ in {
           wl-clipboard
         ];
       };
-
-      ssh = { startAgent = true; };
     };
 
     environment.shellInit = "eval $(gnome-keyring-daemon --start 2>/dev/null)";
