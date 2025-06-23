@@ -14,15 +14,12 @@ in {
         };
       };
 
+      displayManager = { defaultSession = "none+i3"; };
+      gnome.gnome-keyring.enable = true;
       libinput.enable = true;
       playerctld.enable = true;
-      gnome.gnome-keyring.enable = true;
-      displayManager = { defaultSession = "none+i3"; };
     };
 
-    environment = {
-      systemPackages = with pkgs; [ dconf xclip ];
-      shellInit = "eval $(gnome-keyring-daemon --start 2>/dev/null)";
-    };
+    environment.systemPackages = with pkgs; [ dconf xclip ];
   };
 }
