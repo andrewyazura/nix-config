@@ -22,8 +22,6 @@ in {
       };
     };
 
-    environment.shellInit = "eval $(gnome-keyring-daemon --start 2>/dev/null)";
-
     services = {
       playerctld.enable = true;
       gnome.gnome-keyring.enable = true;
