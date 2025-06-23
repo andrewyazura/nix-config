@@ -24,7 +24,5 @@ in {
       systemPackages = with pkgs; [ dconf xclip ];
       shellInit = "eval $(gnome-keyring-daemon --start 2>/dev/null)";
     };
-
-    programs.ssh = { startAgent = true; };
   };
 }
