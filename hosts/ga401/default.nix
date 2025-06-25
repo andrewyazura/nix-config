@@ -8,8 +8,6 @@
   modules = {
     audio.enable = true;
     fonts.enable = true;
-    gaming.enable = true;
-    gnome.enable = false;
     i3.enable = true;
     networking.enable = true;
     nix.enable = true;
