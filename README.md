@@ -34,7 +34,12 @@ programs.gnupg.agent = {
 };
 ```
 
-2. Reboot
+2. Rebuild and reboot
+
+```bash
+sudo nixos-rebuild switch
+```
+
 3. Copy SSH and GPG keys from backup
 4. Import GPG keys
 
