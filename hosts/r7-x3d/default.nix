@@ -14,7 +14,6 @@
     programs.enable = true;
     sway.enable = true;
     wooting.enable = true;
-    work.enable = true;
   };
 
   home-manager.users.${username}.modules = {

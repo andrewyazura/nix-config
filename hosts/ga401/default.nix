@@ -12,7 +12,6 @@
     networking.enable = true;
     nix.enable = true;
     programs.enable = true;
-    work.enable = true;
   };
 
   home-manager.users.${username}.modules = {
