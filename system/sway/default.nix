@@ -20,11 +20,18 @@ in {
           wl-clipboard
         ];
       };
+
+      ssh = { startAgent = true; };
     };
+
+    environment.shellInit = "eval $(gnome-keyring-daemon --start 2>/dev/null)";
 
     services = {
       playerctld.enable = true;
-      gnome.gnome-keyring.enable = true;
+      gnome = {
+        gnome-keyring.enable = true;
+        gcr-ssh-agent.enable = false;
+      };
 
       greetd = {
         enable = true;
