@@ -48,7 +48,7 @@
         hetzner-x86_64 = let username = "andrew";
         in nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          modules = [ ./hosts/hetzner ../../users/${username}/home.nix ];
+          modules = [ ./hosts/hetzner ./users/${username}/system.nix ];
           specialArgs = { inherit inputs username; };
         };
       };

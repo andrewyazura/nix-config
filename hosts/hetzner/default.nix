@@ -46,6 +46,7 @@
 
   security.sudo.wheelNeedsPassword = false;
   virtualisation.docker.enable = true;
+  programs.dconf.enable = true;
 
   services = {
     openssh = {
