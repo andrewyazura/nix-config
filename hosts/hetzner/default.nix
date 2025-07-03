@@ -1,6 +1,12 @@
-{ pkgs, ... }:
+{ lib, pkgs, username, ... }:
 
 {
+  imports = [ ../../system ];
+
+  modules = { };
+
+  home-manager.users.${username}.modules = { ssh.enable = lib.mkForce false; };
+
   nix.settings = {
     auto-optimise-store = true;
     trusted-users = [ "@wheel" ];

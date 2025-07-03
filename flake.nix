@@ -45,9 +45,11 @@
           specialArgs = { inherit inputs username hostname; };
         };
 
-        hetzner-x86_64 = nixpkgs.lib.nixosSystem {
+        hetzner-x86_64 = let username = "andrew";
+        in nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          modules = [ ./hosts/hetzner ];
+          modules = [ ./hosts/hetzner ../../users/${username}/home.nix ];
+          specialArgs = { inherit inputs username; };
         };
       };
     };

@@ -6,6 +6,5 @@
     neovim.enable = true;
     ssh.enable = true;
     zsh.enable = true;
-    work.enable = true;
   };
 }
