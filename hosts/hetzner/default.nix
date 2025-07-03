@@ -3,7 +3,7 @@
 {
   imports = [ ../../system ];
 
-  modules = { };
+  modules = { nix.enable = true; };
 
   home-manager.users.${username}.modules = { ssh.enable = lib.mkForce false; };
 
