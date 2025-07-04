@@ -23,8 +23,8 @@ in {
       eula = true;
       openFirewall = true;
 
-      servers = let
-        template = {
+      servers = {
+        jj = {
           enable = true;
           package = pkgs.fabricServers.fabric-1_21_5;
 
@@ -41,23 +41,10 @@ in {
           serverProperties = {
             difficulty = "normal";
             gamemode = "survival";
-            max-players = 5;
+            max-players = 2;
             motd = "NixOS Minecraft server!";
             white-list = true;
             allow-cheats = false;
-          };
-        };
-      in {
-        main = template // {
-          serverProperties = {
-            server-port = 25564;
-            max-players = 2;
-          };
-        };
-        throwaway = template // {
-          serverProperties = {
-            server-port = 25565;
-            white-list = false;
           };
         };
       };
