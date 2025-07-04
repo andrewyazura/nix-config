@@ -50,7 +50,7 @@ in {
       in {
         main = template // {
           serverProperties = {
-            server-port = 43000;
+            server-port = 25564;
             max-players = 2;
           };
         };
