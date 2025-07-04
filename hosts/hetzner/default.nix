@@ -36,14 +36,7 @@
       [ "ahci" "xhci_pci" "virtio_pci" "virtio_scsi" "sd_mod" "sr_mod" "ext4" ];
   };
 
-  users.users = {
-    root.hashedPassword = "!";
-    andrew = {
-      isNormalUser = true;
-      extraGroups = [ "wheel" ];
-      openssh.authorizedKeys.keys = import ../../common/ssh-keys.nix;
-    };
-  };
+  users.users.root.hashedPassword = "!";
 
   security.sudo.wheelNeedsPassword = false;
   programs.dconf.enable = true;

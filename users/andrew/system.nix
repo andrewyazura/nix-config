@@ -6,10 +6,11 @@ in {
   programs.zsh.enable = true;
 
   users.users.${username} = {
+    shell = pkgs.zsh;
     isNormalUser = true;
     description = "Andrew Yatsura";
     extraGroups = [ "networkmanager" "wheel" ];
-    shell = pkgs.zsh;
+    openssh.authorizedKeys.keys = import ../../common/ssh-keys.nix;
   };
 
   home-manager = {
