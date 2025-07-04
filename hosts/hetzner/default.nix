@@ -1,11 +1,12 @@
-{ lib, pkgs, username, ... }:
+{ pkgs, ... }:
 
 {
   imports = [ ../../system ];
 
-  modules = { nix.enable = true; };
-
-  home-manager.users.${username}.modules = { ssh.enable = lib.mkForce false; };
+  modules = {
+    nix.enable = true;
+    minecraft-server.enable = true;
+  };
 
   nix.settings = {
     auto-optimise-store = true;
@@ -39,13 +40,12 @@
     root.hashedPassword = "!";
     andrew = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "docker" ];
+      extraGroups = [ "wheel" ];
       openssh.authorizedKeys.keys = import ../../common/ssh-keys.nix;
     };
   };
 
   security.sudo.wheelNeedsPassword = false;
-  virtualisation.docker.enable = true;
   programs.dconf.enable = true;
 
   services = {

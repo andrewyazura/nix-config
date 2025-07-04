@@ -1,0 +1,226 @@
+diff --git a/flake.nix b/flake.nix
+index 897b3d2..14835e6 100644
+--- a/flake.nix
++++ b/flake.nix
+@@ -45,11 +45,14 @@
+           specialArgs = { inherit inputs username hostname; };
+         };
+ 
+-        hetzner-x86_64 = let username = "andrew";
+-        in nixpkgs.lib.nixosSystem {
++        hetzner-x86_64 = nixpkgs.lib.nixosSystem {
+           system = "x86_64-linux";
+-          modules = [ ./hosts/hetzner ./users/${username}/system.nix ];
+-          specialArgs = { inherit inputs username; };
++          modules = [
++            ./hosts/hetzner
++            ./users/minecraft-server/system.nix
++            ./users/andrew/system.nix
++          ];
++          specialArgs = { inherit inputs; };
+         };
+       };
+     };
+diff --git a/home/default.nix b/home/default.nix
+index a5fff5a..80dcc41 100644
+--- a/home/default.nix
++++ b/home/default.nix
+@@ -1,4 +1,4 @@
+-{ username, ... }: {
++{
+   imports = [
+     ./cs2
+     ./ghostty
+@@ -16,12 +16,5 @@
+     ./zsh
+   ];
+ 
+-  home = {
+-    inherit username;
+-    homeDirectory = "/home/${username}";
+-
+-    stateVersion = "24.11";
+-  };
+-
+   programs.home-manager.enable = true;
+ }
+diff --git a/hosts/hetzner/default.nix b/hosts/hetzner/default.nix
+index cc7104f..d702814 100644
+--- a/hosts/hetzner/default.nix
++++ b/hosts/hetzner/default.nix
+@@ -1,11 +1,12 @@
+-{ lib, pkgs, username, ... }:
++{ pkgs, ... }:
+ 
+ {
+   imports = [ ../../system ];
+ 
+-  modules = { nix.enable = true; };
+-
+-  home-manager.users.${username}.modules = { ssh.enable = lib.mkForce false; };
++  modules = {
++    nix.enable = true;
++    minecraft-server.enable = true;
++  };
+ 
+   nix.settings = {
+     auto-optimise-store = true;
+@@ -39,13 +40,12 @@
+     root.hashedPassword = "!";
+     andrew = {
+       isNormalUser = true;
+-      extraGroups = [ "wheel" "docker" ];
++      extraGroups = [ "wheel" ];
+       openssh.authorizedKeys.keys = import ../../common/ssh-keys.nix;
+     };
+   };
+ 
+   security.sudo.wheelNeedsPassword = false;
+-  virtualisation.docker.enable = true;
+   programs.dconf.enable = true;
+ 
+   services = {
+diff --git a/system/default.nix b/system/default.nix
+index 7c99aac..fd82814 100644
+--- a/system/default.nix
++++ b/system/default.nix
+@@ -10,6 +10,7 @@
+     ./hyprland
+     ./i3
+     ./logitech-g920
++    ./minecraft-server
+     ./minegrub
+     ./networking
+     ./nix
+diff --git a/system/home-manager/default.nix b/system/home-manager/default.nix
+index 13da178..c724059 100644
+--- a/system/home-manager/default.nix
++++ b/system/home-manager/default.nix
+@@ -1,10 +1,9 @@
+-{ inputs, username, hostname, ... }: {
++{ inputs, hostname, ... }: {
+   imports = [ inputs.home-manager.nixosModules.home-manager ];
+ 
+   home-manager = {
+     useGlobalPkgs = true;
+     useUserPackages = true;
+-    extraSpecialArgs = inputs // { inherit username hostname; };
+-    users.${username} = import ../../users/${username}/home.nix;
++    extraSpecialArgs = inputs // { inherit hostname; };
+   };
+ }
+diff --git a/system/minecraft-server/default.nix b/system/minecraft-server/default.nix
+new file mode 100644
+index 0000000..ec45dcf
+--- /dev/null
++++ b/system/minecraft-server/default.nix
+@@ -0,0 +1,29 @@
++{ lib, config, pkgs, ... }:
++with lib;
++let cfg = config.modules.minecraft-server;
++in {
++  options.modules.minecraft-server = {
++    enable = mkEnableOption "Enable Minecraft server configuration";
++  };
++
++  config = mkIf cfg.enable {
++    services.minecraft-server = {
++      enable = true;
++      eula = true;
++      openFirewall = true;
++      declarative = true;
++      package = pkgs.papermcServers.papermc-1_21_5;
++
++      whitelist = { andrewyazura = "2629aa63-faec-4548-bdc0-260850cf3cbf"; };
++
++      serverProperties = {
++        difficulty = 3;
++        gamemode = 1;
++        max-players = 2;
++        motd = "NixOS Minecraft server!";
++        white-list = false;
++        allow-cheats = false;
++      };
++    };
++  };
++}
+diff --git a/users/andrew/home.nix b/users/andrew/home.nix
+index 3b4840f..e5e8866 100644
+--- a/users/andrew/home.nix
++++ b/users/andrew/home.nix
+@@ -1,4 +1,5 @@
+-{
++let username = "andrew";
++in {
+   imports = [ ../../home ];
+   modules = {
+     ghostty.enable = true;
+@@ -7,4 +8,11 @@
+     ssh.enable = true;
+     zsh.enable = true;
+   };
++
++  home = {
++    inherit username;
++    homeDirectory = "/home/${username}";
++
++    stateVersion = "24.11";
++  };
+ }
+diff --git a/users/andrew/system.nix b/users/andrew/system.nix
+index ec8c6ae..24bbd7d 100644
+--- a/users/andrew/system.nix
++++ b/users/andrew/system.nix
+@@ -1,4 +1,6 @@
+-{ pkgs, username, ... }: {
++{ pkgs, ... }:
++let username = "andrew";
++in {
+   imports = [ ../../system ];
+ 
+   programs.zsh.enable = true;
+@@ -9,4 +11,8 @@
+     extraGroups = [ "networkmanager" "wheel" ];
+     shell = pkgs.zsh;
+   };
++
++  home-manager = {
++    users.${username} = import ../../users/${username}/home.nix;
++  };
+ }
+diff --git a/users/minecraft-server/home.nix b/users/minecraft-server/home.nix
+new file mode 100644
+index 0000000..9676849
+--- /dev/null
++++ b/users/minecraft-server/home.nix
+@@ -0,0 +1,11 @@
++let username = "minecraft-server";
++in {
++  imports = [ ../../home ];
++
++  home = {
++    inherit username;
++    homeDirectory = "/home/${username}";
++
++    stateVersion = "24.11";
++  };
++}
+diff --git a/users/minecraft-server/system.nix b/users/minecraft-server/system.nix
+new file mode 100644
+index 0000000..bad262a
+--- /dev/null
++++ b/users/minecraft-server/system.nix
+@@ -0,0 +1,13 @@
++let username = "minecraft-server";
++in {
++  imports = [ ../../system ];
++
++  users.users.${username} = {
++    isNormalUser = true;
++    description = "Minecraft Server";
++  };
++
++  home-manager = {
++    users.${username} = import ../../users/${username}/home.nix;
++  };
++}
