@@ -45,6 +45,7 @@ in {
             motd = "NixOS Minecraft server!";
             white-list = true;
             allow-cheats = false;
+            online-mode = false;
           };
         };
       in {
