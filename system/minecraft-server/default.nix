@@ -51,7 +51,7 @@ in {
         main = template // {
           serverProperties = {
             server-port = 25564;
-            max-players = 2;
+            white-list = false;
           };
         };
         throwaway = template // {
