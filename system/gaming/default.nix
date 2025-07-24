@@ -7,7 +7,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ mangohud ];
+    environment.systemPackages = with pkgs; [ mangohud prismlauncher ];
 
     programs = {
       gamescope.enable = true;
