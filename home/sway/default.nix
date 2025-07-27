@@ -71,8 +71,8 @@ in {
           "${modifier}+w" = "layout tabbed";
           "${modifier}+e" = "layout toggle split";
 
-          "${modifier}+Shift+space" = "floating toggle";
-          "${modifier}+space" = "focus mode_toggle";
+          "${modifier}+Shift+n" = "floating toggle";
+          "${modifier}+n" = "focus mode_toggle";
 
           "${modifier}+1" = "workspace number 1";
           "${modifier}+2" = "workspace number 2";
