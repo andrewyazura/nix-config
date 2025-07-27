@@ -2,7 +2,13 @@ local lspconfig = require("lspconfig")
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 lspconfig.gopls.setup({
+	cmd = { "gopls" },
 	capabilities = capabilities,
+	settings = {
+		gopls = {
+			experimentalPostfixCompletions = true,
+		},
+	},
 })
 
 lspconfig.lua_ls.setup({
