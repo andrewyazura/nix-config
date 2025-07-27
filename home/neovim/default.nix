@@ -29,22 +29,27 @@ in {
       extraPackages = with pkgs; [
         wl-clipboard
 
-        # required by:
-        nodejs_22 # treesitter
-        tree-sitter # treesitter
+        # treesitter
+        nodejs_22
+        tree-sitter
 
-        ripgrep # telescope
-        fd # telescope
+        # telescope
+        ripgrep
+        fd
 
-        black # conform
-        isort # conform
-        nixfmt-classic # conform
-        stylua # conform
+        # conform
+        black
+        isort
+        nixfmt-classic
+        stylua
 
-        lua-language-server # lsp
-        nil # lsp
-        pyright # lsp
-        ruff # lsp
+        # lsp
+        go
+        gopls
+        lua-language-server
+        nil
+        pyright
+        ruff
       ];
 
       plugins = with pkgs.vimPlugins; [
