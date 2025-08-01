@@ -130,6 +130,13 @@ in {
             # swaymsg 'input "12771:4898:Wooting_Wooting_60HE+" xkb_layout "us,ua"'
           };
 
+          "12815:20580:SONIX_USB_DEVICE" = {
+            xkb_options = "grp:win_space_toggle";
+            # if settings reset:
+            # swaymsg 'input "12815:20580:SONIX_USB_DEVICE" xkb_options "grp:win_space_toggle"'
+            # swaymsg 'input "12815:20580:SONIX_USB_DEVICE" xkb_layout "us,ua"'
+          };
+
           "type:pointer" = {
             accel_profile = "flat";
             pointer_accel = "0";
