@@ -21,13 +21,13 @@
     sway = {
       enable = true;
       output = {
-        # DP-3 = {
-        #   position = "0 0";
-        #   mode = "3840x2160@144Hz";
-        # };
+        DP-3 = {
+          position = "0 0";
+          mode = "3840x2160@144Hz";
+        };
 
         HDMI-A-1 = {
-          position = "0 0";
+          position = "3840 360";
           mode = "2560x1440@144Hz";
         };
       };
