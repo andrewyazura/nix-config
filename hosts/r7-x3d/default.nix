@@ -27,7 +27,7 @@
         };
 
         HDMI-A-1 = {
-          position = "3840 360";
+          position = "3840 0";
           mode = "2560x1440@144Hz";
         };
       };
