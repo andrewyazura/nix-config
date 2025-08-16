@@ -21,23 +21,23 @@
     sway = {
       enable = true;
       output = {
-        DP-3 = {
-          position = "0 0";
-          mode = "3840x2160@144Hz";
-        };
+        # DP-3 = {
+        #   position = "0 0";
+        #   mode = "3840x2160@144Hz";
+        # };
 
         HDMI-A-1 = {
-          position = "3840 360";
+          position = "0 0";
           mode = "2560x1440@144Hz";
         };
       };
 
-      focus-output = "DP-3";
+      focus-output = "HDMI-A-1";
     };
 
     waybar = {
       enable = false;
-      output = [ "DP-3" ];
+      output = [ "HDMI-A-1" ];
     };
   };
 
@@ -47,7 +47,7 @@
       device = "nodev";
       efiSupport = true;
       configurationLimit = 10;
-      gfxmodeEfi = "3840x2160";
+      gfxmodeEfi = "2560x1440";
     };
 
     efi.canTouchEfiVariables = true;
