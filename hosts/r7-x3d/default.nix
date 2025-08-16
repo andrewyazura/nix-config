@@ -24,10 +24,11 @@
         DP-3 = {
           position = "0 0";
           mode = "3840x2160@144Hz";
+          transform = "90";
         };
 
         HDMI-A-1 = {
-          position = "3840 0";
+          position = "2160 840";
           mode = "2560x1440@144Hz";
         };
       };
