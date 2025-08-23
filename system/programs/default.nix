@@ -11,6 +11,7 @@ in {
       inputs.ghostty.packages.x86_64-linux.default
 
       discord
+      vesktop
       obsidian
       signal-desktop
       spotify

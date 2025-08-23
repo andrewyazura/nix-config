@@ -18,6 +18,8 @@
   };
 
   home-manager.users.${username}.modules = {
+    cs2.enable = true;
+
     sway = {
       enable = true;
       output = {
