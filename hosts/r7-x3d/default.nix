@@ -19,6 +19,7 @@
 
   home-manager.users.${username}.modules = {
     cs2.enable = true;
+    vesktop.enable = true;
 
     sway = {
       enable = true;
