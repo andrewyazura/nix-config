@@ -1,6 +1,5 @@
 {
   imports = [
-    ./cs2
     ./ghostty
     ./git
     ./gnome
