@@ -107,6 +107,11 @@ in {
         }
 
         {
+          plugin = todo-comments-nvim;
+          config = toLuaFile ./configs/todo-comments.lua;
+        }
+
+        {
           plugin = oil-nvim;
           config = toLua
             "require('oil').setup({ view_options = { show_hidden = true } })";

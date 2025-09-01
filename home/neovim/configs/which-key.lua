@@ -9,5 +9,5 @@ wk.add({
 	{ "<leader>gd", desc = "definition" },
 	{ "<leader>F", desc = "format buffer" },
 	{ "<leader>R", desc = "smart rename" },
-	{ "<leader>T", group = "+trouble" },
+	{ "<leader>T", group = "+toolbar" },
 })
