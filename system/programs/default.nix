@@ -14,7 +14,6 @@ in {
       obsidian
       signal-desktop
       spotify
-      telegram-desktop
 
       btop
       git-crypt
