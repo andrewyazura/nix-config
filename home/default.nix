@@ -12,7 +12,6 @@
     ./sway
     ./vesktop
     ./waybar
-    ./work
     ./zsh
   ];
 
