@@ -1,8 +1,6 @@
 { pkgs, ... }:
 let username = "andrew";
 in {
-  imports = [ ../../system ];
-
   programs.zsh.enable = true;
 
   users.users.${username} = {

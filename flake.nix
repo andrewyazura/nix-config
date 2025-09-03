@@ -22,35 +22,35 @@
     # };
   };
 
-  outputs = inputs@{ nixpkgs, nixos-hardware, ... }: {
-    nixosConfigurations = {
-      r7-x3d = let
-        username = "andrew";
-        hostname = "r7-x3d";
-      in nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [ ./hosts/${hostname} ./users/${username}/system.nix ];
-        specialArgs = { inherit inputs username hostname; };
-      };
+  outputs = inputs@{ nixpkgs, nixos-hardware, ... }:
+    let
+      mkHost = { system ? "x86_64-linux", hostname, username, specialArgs ? { }
+        , modules }:
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs hostname username; } // specialArgs;
+          modules = [ ./system ./hosts/${hostname} ./users/${username} ]
+            ++ modules;
+        };
+    in {
+      nixosConfigurations = {
+        r7-x3d = mkHost {
+          hostname = "r7-x3d";
+          username = "andrew";
+          modules = [ ];
+        };
 
-      ga401 = let
-        username = "andrew";
-        hostname = "ga401";
-      in nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/${hostname}
-          ./users/${username}/system.nix
-          nixos-hardware.nixosModules.asus-zephyrus-ga401
-        ];
-        specialArgs = { inherit inputs username hostname; };
-      };
+        ga401 = mkHost {
+          hostname = "ga401";
+          username = "andrew";
+          modules = [ nixos-hardware.nixosModules.asus-zephyrus-ga401 ];
+        };
 
-      hetzner-x86_64 = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [ ./hosts/hetzner ./users/andrew/system.nix ];
-        specialArgs = { inherit inputs; };
+        hetzner-x86_64 = mkHost {
+          hostname = "hetzner-x86_64";
+          username = "andrew";
+          modules = [ ];
+        };
       };
     };
-  };
 }

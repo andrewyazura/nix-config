@@ -1,7 +1,5 @@
 { username, ... }: {
   imports = [
-    ../../system
-
     ./hardware-configuration.nix
   ];
 
