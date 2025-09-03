@@ -46,8 +46,8 @@
           modules = [ nixos-hardware.nixosModules.asus-zephyrus-ga401 ];
         };
 
-        hetzner-x86_64 = mkHost {
-          hostname = "hetzner-x86_64";
+        hetzner = mkHost {
+          hostname = "hetzner";
           username = "andrew";
           modules = [ ];
         };
