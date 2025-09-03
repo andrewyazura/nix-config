@@ -51,10 +51,5 @@
   };
   networking.firewall.allowedTCPPorts = [ 22 ];
 
-  services.duty-reminder = {
-    enable = true;
-    environmentFile = "";
-  };
-
   system.stateVersion = "24.11";
 }
