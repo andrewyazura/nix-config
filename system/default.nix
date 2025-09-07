@@ -11,7 +11,6 @@
     ./i3
     ./logitech-g920
     ./minecraft-server
-    ./minegrub
     ./networking
     ./nix
     ./obs

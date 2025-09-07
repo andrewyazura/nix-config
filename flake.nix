@@ -9,17 +9,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    minegrub-theme = { url = "github:Lxtharia/minegrub-theme"; };
-
     ghostty = { url = "github:ghostty-org/ghostty"; };
 
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
-
-    # hyprland = { url = "github:hyprwm/Hyprland"; };
-    # hyprland-plugins = {
-    #   url = "github:hyprwm/hyprland-plugins";
-    #   inputs.hyprland.follows = "hyprland";
-    # };
   };
 
   outputs = inputs@{ nixpkgs, nixos-hardware, ... }:
