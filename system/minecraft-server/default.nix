@@ -26,7 +26,7 @@ in {
       servers = let
         template = {
           enable = true;
-          package = pkgs.fabricServers.fabric-1_21_7;
+          package = pkgs.fabricServers.fabric-1_21_8;
 
           operators = lib.listToAttrs (map (p: {
             name = p.name;

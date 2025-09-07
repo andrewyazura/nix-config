@@ -1,7 +1,6 @@
 {
   imports = [
     ./audio
-    ./csgo-server
     ./fonts
     ./gaming
     ./gnome
