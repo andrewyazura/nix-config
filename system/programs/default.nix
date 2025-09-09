@@ -19,6 +19,7 @@ in {
       git-crypt
       mpv
       tree
+      ntfs3g
 
       chromium
       firefox
