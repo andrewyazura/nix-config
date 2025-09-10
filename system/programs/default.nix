@@ -18,8 +18,9 @@ in {
       btop
       git-crypt
       mpv
-      tree
       ntfs3g
+      tree
+      yazi
 
       chromium
       firefox

@@ -10,8 +10,8 @@
     };
 
     ghostty = { url = "github:ghostty-org/ghostty"; };
-
-    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
+    nix-minecraft = { url = "github:Infinidoge/nix-minecraft"; };
+    duty-reminder-app = { url = "github:andrewyazura/duty-reminder"; };
   };
 
   outputs = inputs@{ nixpkgs, nixos-hardware, ... }:
@@ -41,7 +41,7 @@
         hetzner = mkHost {
           hostname = "hetzner";
           username = "andrew";
-          modules = [ ];
+          modules = [ inputs.duty-reminder-app.nixosModules.default ];
         };
       };
     };

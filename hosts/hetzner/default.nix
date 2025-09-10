@@ -48,7 +48,23 @@
         KbdInteractiveAuthentication = false;
       };
     };
+
+    duty-reminder = {
+      enable = true;
+      config = { port = 10000; };
+    };
+
+    nginx = {
+      enable = true;
+      recommendedProxySettings = true;
+      recommendedTlsSettings = true;
+
+      virtualHosts."duty-reminder.andrewyazura.com" = {
+        locations."/" = { proxyPass = "http://127.0.0.1:10000"; };
+      };
+    };
   };
+
   networking.firewall.allowedTCPPorts = [ 22 ];
 
   system.stateVersion = "24.11";
