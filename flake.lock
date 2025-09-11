@@ -5,11 +5,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1757377042,
-        "narHash": "sha256-LSQ45err1HKkK52bAEFz3/625lsZUEDQaRQJAzquFc4=",
+        "lastModified": 1757548256,
+        "narHash": "sha256-6YPVfph+ydrrIwYUFEe6CDCGSHDF1UH9V6cbhT/t4lo=",
         "owner": "andrewyazura",
         "repo": "duty-reminder",
-        "rev": "5f10e9794cbcf98bae74f9ea0aeaf9f0d0ae6336",
+        "rev": "688ea3e6023620fe945ddade971ad031163735ed",
         "type": "github"
       },
       "original": {
@@ -231,7 +231,28 @@
         "home-manager": "home-manager",
         "nix-minecraft": "nix-minecraft",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs_4"
+        "nixpkgs": "nixpkgs_4",
+        "sops-nix": "sops-nix"
+      }
+    },
+    "sops-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1757503115,
+        "narHash": "sha256-S9F6bHUBh+CFEUalv/qxNImRapCxvSnOzWBUZgK1zDU=",
+        "owner": "Mic92",
+        "repo": "sops-nix",
+        "rev": "0bf793823386187dff101ee2a9d4ed26de8bbf8c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Mic92",
+        "repo": "sops-nix",
+        "type": "github"
       }
     },
     "systems": {
