@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ config, pkgs, ... }: {
   modules = {
     nix.enable = true;
     minecraft-server.enable = true;
@@ -38,10 +38,10 @@
   programs.dconf.enable = true;
 
   sops.secrets."duty-reminder.env" = {
-    sopsFile = "./secrets/duty-reminder.env";
     owner = "duty-reminder";
     group = "duty-reminder";
     mode = "0400";
+    restartUnits = [ "duty-reminder.service" ];
   };
 
   services = {
@@ -57,6 +57,7 @@
     duty-reminder = {
       enable = true;
       environment = { SERVER_PORT = "10000"; };
+      environmentFile = config.sops.secrets."duty-reminder.env".path;
     };
 
     nginx = {
