@@ -1,0 +1,8 @@
+keys:
+  - &hetzner age1h866gulvflkkyf67kafydjrue8pukv3epnml63n06gw39zgr0p4sjxjsl8
+
+creation_rules:
+  - path_regex: secrets/[^/]+\.env$
+    key_groups:
+    - age:
+        - *hetzner

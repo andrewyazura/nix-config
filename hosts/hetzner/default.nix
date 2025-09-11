@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{ pkgs, ... }: {
   modules = {
     nix.enable = true;
     minecraft-server.enable = true;
@@ -39,6 +37,13 @@
   security.sudo.wheelNeedsPassword = false;
   programs.dconf.enable = true;
 
+  sops.secrets."duty-reminder.env" = {
+    sopsFile = "./secrets/duty-reminder.env";
+    owner = "duty-reminder";
+    group = "duty-reminder";
+    mode = "0400";
+  };
+
   services = {
     openssh = {
       enable = true;
@@ -51,7 +56,7 @@
 
     duty-reminder = {
       enable = true;
-      config = { port = 10000; };
+      environment = { port = 10000; };
     };
 
     nginx = {
