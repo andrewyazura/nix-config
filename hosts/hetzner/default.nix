@@ -56,7 +56,7 @@
 
     duty-reminder = {
       enable = true;
-      environment = { port = 10000; };
+      environment = { SERVER_PORT = 10000; };
     };
 
     nginx = {
