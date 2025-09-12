@@ -37,9 +37,10 @@
   security.sudo.wheelNeedsPassword = false;
   programs.dconf.enable = true;
 
+  sops.age.keyFile = "/var/lib/sops-nix/key.txt";
   sops.secrets."duty-reminder.env" = {
     sopsFile = ../../secrets/duty-reminder.env;
-    format = "binary";
+    format = "dotenv";
 
     owner = "duty-reminder";
     group = "duty-reminder";
