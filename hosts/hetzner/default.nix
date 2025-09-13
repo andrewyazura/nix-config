@@ -77,7 +77,6 @@
     postgresql = {
       enable = true;
       package = pkgs.postgresql_16;
-      dataDir = "/var/lib/postgresql/16/data";
       ensureDatabases = [ "duty_reminder" ];
 
       ensureUsers = [{
