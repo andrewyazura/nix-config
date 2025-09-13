@@ -73,6 +73,18 @@
         locations."/" = { proxyPass = "http://127.0.0.1:10000"; };
       };
     };
+
+    postgresql = {
+      enable = true;
+      package = pkgs.postgresql_16;
+      dataDir = "/var/lib/postgresql/16/data";
+      ensureDatabases = [ "duty_reminder" ];
+
+      ensureUsers = [{
+        name = "duty_reminder";
+        ensureDBOwnership = true;
+      }];
+    };
   };
 
   networking.firewall.allowedTCPPorts = [ 22 ];
