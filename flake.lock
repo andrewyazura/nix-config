@@ -5,11 +5,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1757557403,
-        "narHash": "sha256-mltdOa9Zca5mppFuu31NgMVbrPjtjUHTw/DKlklePyU=",
+        "lastModified": 1757796307,
+        "narHash": "sha256-6tF+ZTKT3YI0HwTPYJwnjXghXvlTHJJziu9Kl73dChA=",
         "owner": "andrewyazura",
         "repo": "duty-reminder",
-        "rev": "d3780fee2fc1ecbbb69988c53c278d48bebc0b06",
+        "rev": "4ffb853c2b4a068edc7999d56cac9ba3446bad2f",
         "type": "github"
       },
       "original": {
