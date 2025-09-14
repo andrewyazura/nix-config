@@ -6,3 +6,9 @@ creation_rules:
     key_groups:
     - age:
         - *hetzner
+
+  - path_regex: secrets/[^/]+\.(crt|key)$
+    key_groups:
+      - age:
+        - *hetzner
+    format: binary

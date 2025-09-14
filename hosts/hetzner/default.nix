@@ -37,15 +37,36 @@
   security.sudo.wheelNeedsPassword = false;
   programs.dconf.enable = true;
 
-  sops.age.keyFile = "/var/lib/sops-nix/key.txt";
-  sops.secrets."duty-reminder.env" = {
-    sopsFile = ../../secrets/duty-reminder.env;
-    format = "dotenv";
+  sops = {
+    age.keyFile = "/var/lib/sops-nix/key.txt";
 
-    owner = "duty-reminder";
-    group = "duty-reminder";
-    mode = "0400";
-    restartUnits = [ "duty-reminder.service" ];
+    secrets."duty-reminder.env" = {
+      sopsFile = ../../secrets/duty-reminder.env;
+      format = "dotenv";
+
+      owner = "duty-reminder";
+      group = "duty-reminder";
+      mode = "0400";
+      restartUnits = [ "duty-reminder.service" ];
+    };
+
+    secrets."andrewyazura.crt" = {
+      sopsFile = ../../secrets/andrewyazura.crt;
+      format = "binary";
+
+      owner = "nginx";
+      group = "nginx";
+      mode = "0400";
+    };
+
+    secrets."andrewyazura.key" = {
+      sopsFile = ../../secrets/andrewyazura.key;
+      format = "binary";
+
+      owner = "nginx";
+      group = "nginx";
+      mode = "0400";
+    };
   };
 
   services = {
@@ -70,6 +91,10 @@
       recommendedTlsSettings = true;
 
       virtualHosts."duty-reminder.andrewyazura.com" = {
+        forceSSL = true;
+        sslCertificate = config.sops.secrets."andrewyazura.crt".path;
+        sslCertificateKey = config.sops.secrets."andrewyazura.key".path;
+
         locations."/" = { proxyPass = "http://127.0.0.1:10000"; };
       };
     };
@@ -86,7 +111,7 @@
     };
   };
 
-  networking.firewall.allowedTCPPorts = [ 22 ];
+  networking.firewall.allowedTCPPorts = [ 22 443 8443 ];
 
   system.stateVersion = "24.11";
 }
