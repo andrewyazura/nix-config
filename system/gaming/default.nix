@@ -4,10 +4,12 @@ let cfg = config.modules.gaming;
 in {
   options.modules.gaming = {
     enable = mkEnableOption "Enable gaming configuration";
+    enableMinecraft = mkEnableOption "Enable minecraft launcher";
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ mangohud prismlauncher ];
+    environment.systemPackages = [ pkgs.mangohud ]
+      ++ lib.optionals cfg.enableMinecraft [ pkgs.prismlauncher ];
 
     programs = {
       gamescope.enable = true;

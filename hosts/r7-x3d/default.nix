@@ -1,12 +1,13 @@
 { username, ... }: {
-  imports = [
-    ./hardware-configuration.nix
-  ];
+  imports = [ ./hardware-configuration.nix ];
 
   modules = {
     audio.enable = true;
     fonts.enable = true;
-    gaming.enable = true;
+    gaming = {
+      enable = true;
+      enableMinecraft = true;
+    };
     guitar.enable = true;
     networking.enable = true;
     nix.enable = true;
