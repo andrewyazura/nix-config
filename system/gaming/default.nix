@@ -12,6 +12,7 @@ in {
       ++ lib.optionals cfg.enableMinecraft [ pkgs.prismlauncher ];
 
     programs = {
+      gamemode.enable = true;
       gamescope.enable = true;
       steam.enable = true;
     };
