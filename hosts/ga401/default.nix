@@ -1,13 +1,11 @@
 { username, ... }: {
-  imports = [
-    ./hardware-configuration.nix
-  ];
+  imports = [ ./hardware-configuration.nix ];
 
   modules = {
     audio.enable = true;
+    gnome.enable = true;
     fonts.enable = true;
     gaming.enable = true;
-    i3.enable = true;
     networking.enable = true;
     nix.enable = true;
     programs.enable = true;
@@ -15,10 +13,9 @@
 
   home-manager.users.${username}.modules = {
     gnome = {
-      enable = false;
-      enablePopShell = true;
+      enable = true;
+      enablePopShell = false;
     };
-    i3.enable = true;
     polybar.enable = true;
   };
 
