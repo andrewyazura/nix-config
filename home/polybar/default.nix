@@ -35,7 +35,7 @@ in {
 
           modules-left = "i3";
           modules-center = "";
-          modules-right = "wifi date battery";
+          modules-right = "lan wifi date battery";
 
           module-margin-left = 2;
           module-margin-right = 2;
@@ -130,6 +130,22 @@ in {
           ramp-capacity-5 = "█";
         };
 
+        "module/lan" = {
+          type = "internal/network";
+          interface = "enp4s0f3u1";
+          interface-type = "wired";
+
+          format-connected = "<label-connected>";
+          format-disconnected = "<label-disconnected>";
+
+          label-connected = "%ifname% %downspeed:7%";
+          label-connected-foreground = "${colors.mauve}";
+
+          label-disconnected = "not connected";
+          label-disconnected-background = "${colors.red}";
+          label-disconnected-foreground = "${colors.base}";
+        };
+
         "module/wifi" = {
           type = "internal/network";
           interface = "wlp2s0";
@@ -138,7 +154,7 @@ in {
           format-connected = "<ramp-signal> <label-connected>";
           format-disconnected = "<label-disconnected>";
 
-          label-connected = "%essid% %downspeed:9%";
+          label-connected = "%essid% %downspeed:7%";
           label-connected-foreground = "${colors.mauve}";
 
           label-disconnected = "not connected";

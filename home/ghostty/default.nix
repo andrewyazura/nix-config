@@ -13,7 +13,7 @@ in {
         background-opacity = 1;
         font-size = 12;
         font-family = "FiraCode Nerd Font Mono";
-        theme = "catppuccin-mocha";
+        theme = "Catppuccin Mocha";
         window-decoration = "none";
       };
     };
