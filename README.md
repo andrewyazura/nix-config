@@ -69,3 +69,9 @@ git-crypt unlock
 ```bash
 sudo nixos-rebuild switch --flake .#r7-x3d
 ```
+
+### hetzner
+
+```
+nixos-rebuild --flake .#hetzner --target-host andrew@hetzner-nix --use-remote-sudo switch
+```
