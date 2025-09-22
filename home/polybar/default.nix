@@ -54,7 +54,7 @@ in {
 
           pin-workspaces = true;
 
-          label-mode-foreground = "#000";
+          label-mode-foreground = "${colors.text}";
           label-mode-background = "${colors.blue}";
           label-mode-padding = 1;
 
@@ -136,14 +136,10 @@ in {
           interface-type = "wired";
 
           format-connected = "<label-connected>";
-          format-disconnected = "<label-disconnected>";
+          format-disconnected = "";
 
           label-connected = "%ifname% %downspeed:7%";
           label-connected-foreground = "${colors.mauve}";
-
-          label-disconnected = "not connected";
-          label-disconnected-background = "${colors.red}";
-          label-disconnected-foreground = "${colors.base}";
         };
 
         "module/wifi" = {

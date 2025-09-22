@@ -10,11 +10,14 @@ in {
     programs.ghostty = {
       enable = true;
       settings = {
-        background-opacity = 1;
-        font-size = 11;
+        background-opacity = 0.9;
         font-family = "FiraCode Nerd Font Mono";
+        font-size = 10;
         theme = "Catppuccin Mocha";
-        window-decoration = "none";
+        window-decoration = "server";
+        window-inherit-working-directory = false;
+        window-theme = "ghostty";
+        working-directory = "home";
       };
     };
   };

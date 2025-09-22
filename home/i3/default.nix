@@ -17,7 +17,32 @@ in {
         bars = [ ];
         window = {
           titlebar = false;
-          border = 0;
+          border = 2;
+        };
+
+        colors = let colors = import ../../common/colors.nix;
+        in {
+          focused = {
+            background = "${colors.mauve}";
+            border = "${colors.mauve}";
+            childBorder = "${colors.mauve}";
+            indicator = "${colors.mauve}";
+            text = "${colors.base}";
+          };
+          unfocused = {
+            background = "${colors.base}";
+            border = "${colors.base}";
+            childBorder = "${colors.base}";
+            indicator = "${colors.base}";
+            text = "${colors.text}";
+          };
+          urgent = {
+            background = "${colors.red}";
+            border = "${colors.red}";
+            childBorder = "${colors.red}";
+            indicator = "${colors.red}";
+            text = "${colors.base}";
+          };
         };
 
         startup = [{
