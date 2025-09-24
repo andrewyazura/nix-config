@@ -10,10 +10,11 @@ in {
     environment.systemPackages = with pkgs; [
       inputs.ghostty.packages.x86_64-linux.default
 
-      vesktop
+      discord
       obsidian
       signal-desktop
       spotify
+      vesktop
 
       btop
       git-crypt
