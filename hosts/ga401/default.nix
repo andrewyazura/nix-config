@@ -2,9 +2,14 @@
   imports = [ ./hardware-configuration.nix ];
 
   modules = {
+    gaming = {
+      enable = true;
+      enableMinecraft = true;
+    };
+
     audio.enable = true;
     fonts.enable = true;
-    gaming.enable = true;
+    gnome.enable = true;
     i3.enable = true;
     networking.enable = true;
     nix.enable = true;
@@ -12,6 +17,11 @@
   };
 
   home-manager.users.${username}.modules = {
+    gnome = {
+      enable = true;
+      enablePopShell = true;
+    };
+
     i3.enable = true;
     polybar.enable = true;
   };
