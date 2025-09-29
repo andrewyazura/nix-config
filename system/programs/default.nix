@@ -14,7 +14,6 @@ in {
       obsidian
       signal-desktop
       spotify
-      vesktop
 
       btop
       git-crypt

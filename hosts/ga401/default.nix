@@ -9,7 +9,6 @@
 
     audio.enable = true;
     fonts.enable = true;
-    gnome.enable = true;
     i3.enable = true;
     networking.enable = true;
     nix.enable = true;

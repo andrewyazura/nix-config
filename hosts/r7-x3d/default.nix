@@ -17,8 +17,6 @@
   };
 
   home-manager.users.${username}.modules = {
-    vesktop.enable = true;
-
     sway = {
       enable = true;
       output = {
