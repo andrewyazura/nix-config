@@ -5,8 +5,20 @@ in {
   options.modules.git = { enable = mkEnableOption "Enable git configuration"; };
 
   config = mkIf cfg.enable {
-    programs.git.enable = true;
-    home.file.".gitconfig".source = ./.gitconfig;
+    programs.git = {
+      enable = true;
+      lfs.enable = true;
+      extraConfig = {
+        "includeIf \"gitdir:~/Documents/\"" = {
+          path = "~/.personal.gitconfig";
+        };
+
+        "includeIf \"gitdir:~/Documents/spacedevlab.git/\"" = {
+          path = "~/.spacedevlab.gitconfig";
+        };
+      };
+    };
+
     home.file.".personal.gitconfig".source = ./.personal.gitconfig;
     home.file.".spacedevlab.gitconfig".source = ./.spacedevlab.gitconfig;
   };
