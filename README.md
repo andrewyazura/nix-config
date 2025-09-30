@@ -23,7 +23,7 @@ These modules are then imported by per-user and per-machine configurations:
 
 ## Instructions
 
-### r7-x3d
+### yorha2b - main pc
 
 1. Enable GPG agent in `/etc/nixos/configuration.nix`:
 
@@ -63,15 +63,15 @@ nix-shell -p git git-crypt
 git-crypt unlock
 ```
 
-9. Copy new `hardware-config.nix` to `hosts/r7-x3d/hardware-config.nix`
+9. Copy new `hardware-config.nix` to `hosts/yorha2b/hardware-config.nix`
 10. Apply config
 
 ```bash
-sudo nixos-rebuild switch --flake .#r7-x3d
+sudo nixos-rebuild switch --flake .#yorha2b
 ```
 
-### hetzner
+### bunker
 
 ```
-nixos-rebuild --flake .#hetzner --target-host andrew@hetzner-nix --use-remote-sudo switch
+nixos-rebuild --flake .#bunker --target-host andrew@bunker --use-remote-sudo switch
 ```

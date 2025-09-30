@@ -21,7 +21,7 @@
   outputs = inputs@{ nixpkgs, ... }:
     let
       mkHost = { system ? "x86_64-linux", hostname, username, specialArgs ? { }
-        , modules }:
+        , modules ? [ ] }:
         nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs hostname username; } // specialArgs;
@@ -31,20 +31,19 @@
         };
     in {
       nixosConfigurations = {
-        r7-x3d = mkHost {
-          hostname = "r7-x3d";
+        yorha2b = mkHost {
+          hostname = "yorha2b";
           username = "andrew";
-          modules = [ ];
         };
 
-        ga401 = mkHost {
-          hostname = "ga401";
+        yorha9s = mkHost {
+          hostname = "yorha9s";
           username = "andrew";
           modules = [ inputs.nixos-hardware.nixosModules.asus-zephyrus-ga401 ];
         };
 
-        hetzner = mkHost {
-          hostname = "hetzner";
+        bunker = mkHost {
+          hostname = "bunker";
           username = "andrew";
           modules = [ inputs.duty-reminder-app.nixosModules.default ];
         };
