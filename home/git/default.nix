@@ -12,14 +12,9 @@ in {
         "includeIf \"gitdir:~/Documents/\"" = {
           path = "~/.personal.gitconfig";
         };
-
-        "includeIf \"gitdir:~/Documents/spacedevlab.git/\"" = {
-          path = "~/.spacedevlab.gitconfig";
-        };
       };
     };
 
     home.file.".personal.gitconfig".source = ./.personal.gitconfig;
-    home.file.".spacedevlab.gitconfig".source = ./.spacedevlab.gitconfig;
   };
 }

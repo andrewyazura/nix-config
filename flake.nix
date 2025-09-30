@@ -25,7 +25,8 @@
         nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs hostname username; } // specialArgs;
-          modules = [ ./system ./hosts/${hostname} ./users/${username} ]
+          modules =
+            [ ./hosts ./system ./users inputs.sops-nix.nixosModules.sops ]
             ++ modules;
         };
     in {
@@ -45,10 +46,7 @@
         hetzner = mkHost {
           hostname = "hetzner";
           username = "andrew";
-          modules = [
-            inputs.duty-reminder-app.nixosModules.default
-            inputs.sops-nix.nixosModules.sops
-          ];
+          modules = [ inputs.duty-reminder-app.nixosModules.default ];
         };
       };
     };
