@@ -11,7 +11,7 @@ in {
 
       matchBlocks."*" = {
         forwardAgent = false;
-        addKeysToAgent = "no";
+        addKeysToAgent = "yes";
         compression = false;
         serverAliveInterval = 0;
         serverAliveCountMax = 3;
@@ -21,13 +21,6 @@ in {
         controlPath = "~/.ssh/master-%r@%n:%p";
         controlPersist = "no";
       };
-
-      extraConfig = ''
-        IdentityFile ~/.ssh/id_ed25519_proton
-        IdentityFile ~/.ssh/id_ed25519_spacedevlab
-        AddKeysToAgent yes
-        SetEnv TERM=xterm-256color
-      '';
     };
   };
 }

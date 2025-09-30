@@ -1,11 +1,21 @@
-{ pkgs, username, ... }: {
-  programs.zsh.enable = true;
+{ username, hostname, ... }: {
+  imports = [ ./${username} ];
 
   users.users.${username} = {
-    shell = pkgs.zsh;
     isNormalUser = true;
     extraGroups = [ "networkmanager" "wheel" ];
   };
 
-  home-manager = { users.${username} = import ./${username}/home.nix; };
+  home-manager = {
+    users.${username} = {
+      imports = [ ../home ./${username}/home ./${username}/home/${hostname} ];
+
+      home = {
+        inherit username;
+        homeDirectory = "/home/${username}";
+
+        stateVersion = "24.11";
+      };
+    };
+  };
 }
