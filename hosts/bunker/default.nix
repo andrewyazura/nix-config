@@ -72,7 +72,6 @@
   services = {
     openssh = {
       enable = true;
-      authorizedKeys.keys = import ../../common/ssh-keys.nix;
       settings = {
         PermitRootLogin = "no";
         PasswordAuthentication = false;
