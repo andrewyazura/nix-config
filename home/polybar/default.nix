@@ -35,7 +35,7 @@ in {
 
           modules-left = "i3";
           modules-center = "";
-          modules-right = "lan wifi date battery";
+          modules-right = "lan wifi volume date battery";
 
           module-margin-left = 2;
           module-margin-right = 2;
@@ -44,6 +44,17 @@ in {
           padding-right = 0;
 
           font-0 = "Fira Code Nerd Font:pixelsize=10;2";
+        };
+
+        "module/volume" = {
+          type = "internal/pulseaudio";
+
+          format-volume = "<label-volume>";
+          label-volume = "%percentage%%";
+
+          format-muted = "muted";
+          format-muted-background = "${colors.red}";
+          format-muted-foreground = "${colors.base}";
         };
 
         "module/i3" = {
