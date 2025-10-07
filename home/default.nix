@@ -1,5 +1,6 @@
 {
   imports = [
+    ./firefox
     ./ghostty
     ./git
     ./gnome
@@ -12,6 +13,7 @@
     ./sway
     ./vesktop
     ./waybar
+    ./yazi
     ./zsh
   ];
 
