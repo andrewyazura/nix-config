@@ -16,7 +16,6 @@ in {
       spotify
 
       btop
-      git-crypt
       git-lfs
       mpv
       ntfs3g
