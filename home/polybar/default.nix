@@ -43,7 +43,7 @@ in {
           padding-left = 0;
           padding-right = 0;
 
-          font-0 = "Fira Code Nerd Font:pixelsize=10;2";
+          font-0 = "Adwaita Sans Nerd Font:pixelsize=10;2";
         };
 
         "module/volume" = {

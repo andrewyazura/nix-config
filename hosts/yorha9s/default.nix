@@ -63,7 +63,7 @@
     nvidia.dynamicBoost.enable = false;
   };
 
-  time.timeZone = "Europe/Kyiv";
+  time.timeZone = "Europe/Warsaw";
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

@@ -6,6 +6,7 @@ in {
     enable = mkEnableOption "Enable fonts configuration";
   };
 
-  config =
-    mkIf cfg.enable { fonts.packages = with pkgs; [ nerd-fonts.fira-code ]; };
+  config = mkIf cfg.enable {
+    fonts.packages = with pkgs; [ adwaita-fonts nerd-fonts.adwaita-mono ];
+  };
 }
