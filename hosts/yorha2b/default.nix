@@ -35,11 +35,6 @@
 
       focus-output = "HDMI-A-1";
     };
-
-    waybar = {
-      enable = false;
-      output = [ "HDMI-A-1" ];
-    };
   };
 
   boot.loader = {

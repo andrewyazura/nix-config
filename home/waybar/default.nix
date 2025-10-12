@@ -4,13 +4,6 @@ let cfg = config.modules.waybar;
 in {
   options.modules.waybar = {
     enable = mkEnableOption "Enable waybar configuration";
-    output = mkOption {
-      type = types.listOf types.str;
-      default = [ ];
-      description = ''
-        Specify on which screen this bar will be displayed
-      '';
-    };
   };
 
   config = mkIf cfg.enable {
@@ -22,17 +15,22 @@ in {
         mainBar = {
           layer = "top";
           position = "top";
-          output = cfg.output;
-          height = 24;
+          height = 16;
 
           modules-left = [ "sway/workspaces" ];
-          modules-right = [ "network" "clock" ];
+          modules-center = [ ];
+          modules-right = [ "network#lan" "network#wifi" "pulseaudio" "clock" ];
         };
 
         "sway/workspaces" = {
           disable-scroll = true;
-          format = "{icon}";
           all-outputs = true;
+          format = "{name}";
+        };
+
+        pulseaudio = {
+          format = "{volume}%";
+          format-muted = "muted";
         };
 
         clock = {
@@ -41,11 +39,20 @@ in {
           tooltip-format = "{:%Y-%m-%d %H:%M:%S}";
         };
 
-        network = {
-          format-wifi = "{essid} {signalStrength}% {bandwidthDownBits}bps";
-          format-ethernet = "{ifname}/{ipaddr} {bandwidthDownBits}bps";
+        "network#wifi" = {
+          interface = "wlp4s0";
+          format-wifi = "{signalStrength}% {essid} {downspeed:7}";
+          format-ethernet = "";
+          format-linked = "{ifname} (no ip)";
           format-disconnected = "not connected";
-          tooltip-format = "{ifname} - {ipaddr}";
+        };
+
+        "network#lan" = {
+          interface = "enp9s0";
+          format-wifi = "";
+          format-ethernet = "{ifname} {downspeed:7}";
+          format-linked = "{ifname} (no ip)";
+          format-disconnected = "";
         };
       };
 

@@ -22,6 +22,7 @@ in {
       };
 
       ssh = { startAgent = true; };
+      waybar.enable = true;
     };
 
     environment.shellInit = "eval $(gnome-keyring-daemon --start 2>/dev/null)";
