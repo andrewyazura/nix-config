@@ -15,12 +15,9 @@ in {
       signal-desktop
       spotify
 
-      btop
+      age
       git-lfs
-      mpv
-      ntfs3g
       tree
-      yazi
 
       chromium
       firefox
