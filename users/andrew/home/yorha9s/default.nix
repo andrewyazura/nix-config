@@ -5,13 +5,11 @@
   };
 
   programs.git = {
-    enable = true;
-    lfs.enable = true;
-
     includes = [{
       condition = "gitdir:~/Documents/";
       contents = {
         gpg.format = "ssh";
+        commit.gpgsign = true;
         user.signingkey = "~/.ssh/id_ed25519_yorha9s_github_sign_2509.pub";
       };
     }];
