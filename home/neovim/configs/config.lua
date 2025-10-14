@@ -1,7 +1,7 @@
-local lspconfig = require("lspconfig")
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-lspconfig.gopls.setup({
+vim.lsp.enable("gopls")
+vim.lsp.config("gopls", {
 	cmd = { "gopls" },
 	capabilities = capabilities,
 	settings = {
@@ -18,7 +18,8 @@ lspconfig.gopls.setup({
 	},
 })
 
-lspconfig.lua_ls.setup({
+vim.lsp.enable("lua_ls")
+vim.lsp.config("lua_ls", {
 	capabilities = capabilities,
 	settings = {
 		Lua = {
@@ -31,15 +32,18 @@ lspconfig.lua_ls.setup({
 	},
 })
 
-lspconfig.nil_ls.setup({
+vim.lsp.enable("nil_ls")
+vim.lsp.config("nil_ls", {
 	capabilities = capabilities,
 })
 
-lspconfig.pyright.setup({
+vim.lsp.enable("pyright")
+vim.lsp.config("pyright", {
 	capabilities = capabilities,
 })
 
-lspconfig.ruff.setup({
+vim.lsp.enable("ruff")
+vim.lsp.config("ruff", {
 	capabilities = capabilities,
 	init_options = {
 		settings = {

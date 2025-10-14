@@ -26,6 +26,8 @@ in {
       vimAlias = true;
       vimdiffAlias = true;
 
+      extraLuaConfig = builtins.readFile ./configs/config.lua;
+
       extraPackages = with pkgs; [
         wl-clipboard
 
@@ -63,10 +65,6 @@ in {
         nvim-web-devicons
         mini-icons
         plenary-nvim
-        {
-          plugin = nvim-lspconfig;
-          config = toLuaFile ./configs/lsp.lua;
-        }
 
         {
           plugin = gitsigns-nvim;
