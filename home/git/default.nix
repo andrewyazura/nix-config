@@ -9,13 +9,15 @@ in {
       enable = true;
       lfs.enable = true;
 
-      extraConfig = {
-        "includeIf \"gitdir:~/Documents/\"" = {
-          path = "~/.personal.gitconfig";
+      includes = [{
+        condition = "gitdir:~/Documents/";
+        contents = {
+          user = {
+            name = "Andrew Yatsura";
+            email = "andrewyazura203@proton.me";
+          };
         };
-      };
+      }];
     };
-
-    home.file.".personal.gitconfig".source = ./.personal.gitconfig;
   };
 }
