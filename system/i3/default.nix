@@ -15,7 +15,6 @@ in {
       };
 
       displayManager = { defaultSession = "none+i3"; };
-      libinput.enable = true;
       playerctld.enable = true;
     };
 
