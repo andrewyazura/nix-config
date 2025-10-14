@@ -8,6 +8,7 @@ in {
     programs.git = {
       enable = true;
       lfs.enable = true;
+
       extraConfig = {
         "includeIf \"gitdir:~/Documents/\"" = {
           path = "~/.personal.gitconfig";

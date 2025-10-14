@@ -18,7 +18,7 @@ in {
       };
 
       shellAliases = {
-        ll = "ls -l";
+        ll = "ls -ahl --group-directories-first";
         gw = "git worktree";
       };
     };
