@@ -20,13 +20,9 @@ in {
           wl-clipboard
         ];
       };
-
-      ssh.startAgent = true;
     };
 
     services = {
-      gnome.gcr-ssh-agent.enable =
-        false; # required when programs.ssh.startAgent = true
       playerctld.enable = true;
 
       greetd = {

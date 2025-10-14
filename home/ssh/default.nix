@@ -8,10 +8,12 @@ in {
     programs.ssh = {
       enable = true;
       enableDefaultConfig = false;
-      addKeysToAgent = "yes";
 
       matchBlocks = {
-        "*" = { identitiesOnly = true; };
+        "*" = {
+          addKeysToAgent = "yes";
+          identitiesOnly = true;
+        };
 
         "github.com" = {
           hostname = "github.com";
