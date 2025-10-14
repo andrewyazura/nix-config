@@ -15,19 +15,14 @@ in {
       };
 
       displayManager = { defaultSession = "none+i3"; };
-      gnome = {
-        gnome-keyring.enable = true;
-        gcr-ssh-agent.enable = false;
-      };
+      gnome.gcr-ssh-agent.enable =
+        false; # required when programs.ssh.startAgent = true
       libinput.enable = true;
       playerctld.enable = true;
     };
 
-    environment = {
-      systemPackages = with pkgs; [ dconf xclip ];
-      shellInit = "eval $(gnome-keyring-daemon --start 2>/dev/null)";
-    };
+    environment = { systemPackages = with pkgs; [ dconf xclip ]; };
 
-    programs.ssh = { startAgent = true; };
+    programs.ssh.startAgent = true;
   };
 }
