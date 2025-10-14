@@ -4,7 +4,6 @@
   modules = {
     audio.enable = true;
     fonts.enable = true;
-    gnome.enable = true;
     guitar.enable = true;
     networking.enable = true;
     nix.enable = true;
@@ -14,11 +13,6 @@
   };
 
   home-manager.users.${username}.modules = {
-    gnome = {
-      enable = true;
-      enablePopShell = true;
-    };
-
     sway = {
       enable = true;
       output = {
