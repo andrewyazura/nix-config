@@ -15,14 +15,10 @@ in {
       };
 
       displayManager = { defaultSession = "none+i3"; };
-      gnome.gcr-ssh-agent.enable =
-        false; # required when programs.ssh.startAgent = true
       libinput.enable = true;
       playerctld.enable = true;
     };
 
     environment = { systemPackages = with pkgs; [ dconf xclip ]; };
-
-    programs.ssh.startAgent = true;
   };
 }
