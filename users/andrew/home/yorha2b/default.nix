@@ -12,6 +12,7 @@
       condition = "gitdir:~/Documents/";
       contents = {
         gpg.format = "ssh";
+        commit.gpgsign = true;
         user.signingkey = "~/.ssh/id_ed25519_yorha2b_github_sign_1110.pub";
       };
     }];
