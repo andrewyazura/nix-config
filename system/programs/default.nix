@@ -15,7 +15,6 @@ in {
       signal-desktop
       spotify
 
-      age
       git-lfs
       tree
 

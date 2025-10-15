@@ -25,9 +25,13 @@
         nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs hostname username; } // specialArgs;
-          modules =
-            [ ./hosts ./system ./users inputs.sops-nix.nixosModules.sops ]
-            ++ modules;
+          modules = [
+            ./hosts
+            ./system
+            ./users
+            inputs.home-manager.nixosModules.home-manager
+            inputs.sops-nix.nixosModules.sops
+          ] ++ modules;
         };
     in {
       nixosConfigurations = {

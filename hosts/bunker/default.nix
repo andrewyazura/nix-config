@@ -39,33 +39,34 @@
 
   sops = {
     age.keyFile = "/var/lib/sops-nix/key.txt";
+    secrets = {
+      "duty-reminder.env" = {
+        sopsFile = ../../secrets/duty-reminder.env;
+        format = "dotenv";
 
-    secrets."duty-reminder.env" = {
-      sopsFile = ../../secrets/duty-reminder.env;
-      format = "dotenv";
+        owner = "duty-reminder";
+        group = "duty-reminder";
+        mode = "0400";
+        restartUnits = [ "duty-reminder.service" ];
+      };
 
-      owner = "duty-reminder";
-      group = "duty-reminder";
-      mode = "0400";
-      restartUnits = [ "duty-reminder.service" ];
-    };
+      "andrewyazura.crt" = {
+        sopsFile = ../../secrets/andrewyazura.crt;
+        format = "binary";
 
-    secrets."andrewyazura.crt" = {
-      sopsFile = ../../secrets/andrewyazura.crt;
-      format = "binary";
+        owner = "nginx";
+        group = "nginx";
+        mode = "0400";
+      };
 
-      owner = "nginx";
-      group = "nginx";
-      mode = "0400";
-    };
+      "andrewyazura.key" = {
+        sopsFile = ../../secrets/andrewyazura.key;
+        format = "binary";
 
-    secrets."andrewyazura.key" = {
-      sopsFile = ../../secrets/andrewyazura.key;
-      format = "binary";
-
-      owner = "nginx";
-      group = "nginx";
-      mode = "0400";
+        owner = "nginx";
+        group = "nginx";
+        mode = "0400";
+      };
     };
   };
 
