@@ -10,6 +10,7 @@ in {
     environment.systemPackages = with pkgs; [
       inputs.ghostty.packages.x86_64-linux.default
 
+      bitwarden-cli
       discord
       obsidian
       signal-desktop
