@@ -4,7 +4,8 @@ let
   cfg = config.modules.minecraft-server;
   playerlist = [{
     name = "andrewyazura";
-    uuid = "2629aa63-faec-4548-bdc0-260850cf3cbf";
+    uuid = "c2eb76fe-7bea-3498-b396-066ba66e08ae"; # offline user
+    # uuid = "2629aa63-faec-4548-bdc0-260850cf3cbf"; # online user
     level = 4;
     bypassesPlayerLimit = true;
   }];
@@ -26,7 +27,7 @@ in {
       servers = let
         template = {
           enable = true;
-          package = pkgs.fabricServers.fabric-1_21_7;
+          package = pkgs.fabricServers.fabric-1_21_10;
 
           operators = lib.listToAttrs (map (p: {
             name = p.name;
@@ -41,23 +42,22 @@ in {
           serverProperties = {
             difficulty = "normal";
             gamemode = "survival";
-            max-players = 5;
-            motd = "NixOS Minecraft server!";
-            white-list = true;
-            allow-cheats = false;
+            max-players = 8;
+            motd = "\\u00A7b8 let dambili\\u00A7r";
             online-mode = false;
+            white-list = true;
           };
         };
       in {
         main = template // {
-          serverProperties = {
-            server-port = 25564;
-            white-list = false;
+          serverProperties = template.serverProperties // {
+            server-port = 25566;
           };
         };
         throwaway = template // {
-          serverProperties = {
-            server-port = 25565;
+          serverProperties = template.serverProperties // {
+            level-seed = "-8393641919666317235";
+            server-port = 25567;
             white-list = false;
           };
         };
