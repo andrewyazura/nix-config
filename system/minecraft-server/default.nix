@@ -40,6 +40,7 @@ in {
           }) playerlist);
 
           serverProperties = {
+            allow-cheats = false;
             difficulty = "normal";
             gamemode = "survival";
             max-players = 8;
