@@ -5,6 +5,7 @@
     ./ghostty
     ./git
     ./gnome
+    ./gpg-agent
     ./hyprland
     ./i3
     ./mangohud
