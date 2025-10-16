@@ -15,7 +15,7 @@ creation_rules:
       - *bunker
     format: binary
 
-  - path_regex: secrets/ssh_config
+  - path_regex: secrets/ssh-config
     key_groups:
     - age:
       - *yorha2b

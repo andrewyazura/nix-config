@@ -1,6 +1,4 @@
-{ config, ... }:
-let username = "andrew";
-in {
+{
   modules = {
     btop.enable = true;
     ghostty.enable = true;
@@ -10,13 +8,4 @@ in {
     yazi.enable = true;
     zsh.enable = true;
   };
-
-  sops = {
-    secrets.ssh_config = {
-      sopsFile = ../../../secrets/ssh_config;
-      format = "binary";
-    };
-  };
-
-  programs.ssh.includes = [ config.sops.secrets.ssh_config.path ];
 }
