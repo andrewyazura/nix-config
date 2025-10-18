@@ -108,7 +108,10 @@ in {
       in {
         main = template // {
           serverProperties = template.serverProperties // {
-            motd = "a nixos server";
+            motd =
+              "\\u00A7la \\u00A7r\\u00A7b\\u00A7lnixos-based\\u00A7r\\u00A7r \\u00A7lminecraft server\\u00A7r";
+            # §la §r§b§lnixos-based§r§r §lminecraft server§r
+
             server-port = 25566;
           };
         };
@@ -132,7 +135,7 @@ in {
           };
 
           serverProperties = template.serverProperties // {
-            motd = "\\u00A7b8 let dambili\\u00A7r";
+            motd = "\\u00A748 let dambili\\u00A7r";
             server-port = 25567;
             spawn-protection = 0;
           };
