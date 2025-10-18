@@ -21,3 +21,10 @@ creation_rules:
       - *yorha2b
       - *yorha9s
     format: binary
+
+  - path_regex: secrets/bw-password
+    key_groups:
+    - age:
+      - *yorha2b
+      - *yorha9s
+    format: binary
