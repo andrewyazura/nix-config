@@ -2,50 +2,77 @@
 with lib;
 let
   cfg = config.modules.minecraft-server;
-  playerlist = [
+  players = [
     {
       name = "andrewyazura";
-      uuid = "c2eb76fe-7bea-3498-b396-066ba66e08ae"; # offline user
-      # uuid = "2629aa63-faec-4548-bdc0-260850cf3cbf"; # online user
+      offlineUuid = "c2eb76fe-7bea-3498-b396-066ba66e08ae";
+      onlineUuid = "2629aa63-faec-4548-bdc0-260850cf3cbf";
       level = 4;
-      bypassesPlayerLimit = false;
+      bypassesPlayerLimit = true;
     }
     {
       name = "boober";
-      uuid = "ecff3058-99c4-3f02-b7e5-154740f59632"; # offline user
-      # uuid = "ea38893c-11c9-493d-a285-69916f41f03f"; # online user
+      offlineUuid = "ecff3058-99c4-3f02-b7e5-154740f59632";
+      onlineUuid = "ea38893c-11c9-493d-a285-69916f41f03f";
       level = 4;
       bypassesPlayerLimit = false;
     }
     {
       name = "chief";
-      uuid = "adfadefe-d090-35d2-b71e-b7ed34dfca93"; # offline user
-      # uuid = "5aa86e15-6ddd-404e-93bf-71a87f448abc"; # online user
+      offlineUuid = "adfadefe-d090-35d2-b71e-b7ed34dfca93";
+      onlineUuid = "5aa86e15-6ddd-404e-93bf-71a87f448abc";
       level = 0;
       bypassesPlayerLimit = false;
     }
     {
       name = "Singualrity";
-      uuid = "72271d99-4491-320e-8c32-bf4791c3f384"; # offline user
-      # uuid = "d2988641-9838-4fcd-ba0c-0b263205563a"; # online user
+      offlineUuid = "72271d99-4491-320e-8c32-bf4791c3f384";
+      onlineUuid = "d2988641-9838-4fcd-ba0c-0b263205563a";
       level = 0;
       bypassesPlayerLimit = false;
     }
     {
       name = "Sliparick";
-      uuid = "6def2816-d21e-35fa-bb5c-e989bed75acb"; # offline user
-      # uuid = "fec0904f-37d5-4e9f-8edc-55c3ed9cdfdf"; # online user
+      offlineUuid = "6def2816-d21e-35fa-bb5c-e989bed75acb";
+      onlineUuid = "fec0904f-37d5-4e9f-8edc-55c3ed9cdfdf";
       level = 0;
       bypassesPlayerLimit = false;
     }
     {
       name = "War_of_Lord";
-      uuid = "844cb079-11a2-3d18-bc9b-b15a7e1f1751"; # offline user
-      # uuid = "3da44920-a9d9-4925-b39c-5d47dfc6051e"; # online user
+      offlineUuid = "844cb079-11a2-3d18-bc9b-b15a7e1f1751";
+      onlineUuid = "3da44920-a9d9-4925-b39c-5d47dfc6051e";
       level = 0;
       bypassesPlayerLimit = false;
     }
   ];
+
+  getOnlinePlayers = map (p: {
+    name = p.name;
+    uuid = p.onlineUuid;
+    level = p.level;
+    bypassesPlayerLimit = p.bypassesPlayerLimit;
+  }) players;
+
+  getOfflinePlayers = map (p: {
+    name = p.name;
+    uuid = p.offlineUuid;
+    level = p.level;
+    bypassesPlayerLimit = p.bypassesPlayerLimit;
+  }) players;
+
+  getOperators = players:
+    listToAttrs (map (p: {
+      name = p.name;
+      value = removeAttrs p [ "name" ];
+    }) (filter (p: p.level > 0) players));
+
+  getWhitelist = players:
+    listToAttrs (map (p: {
+      name = p.name;
+      value = p.uuid;
+    }) players);
+
 in {
   imports = [ inputs.nix-minecraft.nixosModules.minecraft-servers ];
 
@@ -66,21 +93,14 @@ in {
           enable = true;
           package = pkgs.fabricServers.fabric-1_21_10;
 
-          operators = listToAttrs (map (p: {
-            name = p.name;
-            value = removeAttrs p [ "name" ];
-          }) (filter (p: p.level > 0) playerlist));
-
-          whitelist = listToAttrs (map (p: {
-            name = p.name;
-            value = p.uuid;
-          }) playerlist);
+          operators = getOperators getOfflinePlayers;
+          whitelist = getWhitelist getOfflinePlayers;
 
           serverProperties = {
             allow-cheats = false;
             difficulty = "normal";
             gamemode = "survival";
-            max-players = length playerlist;
+            max-players = length players;
             online-mode = false;
             white-list = true;
           };
@@ -92,7 +112,8 @@ in {
             server-port = 25566;
           };
         };
-        throwaway = template // {
+
+        bombas = template // {
           symlinks = {
             mods = pkgs.linkFarmFromDrvs "mods" (attrValues {
               Fabric-API = pkgs.fetchurl {
@@ -109,6 +130,7 @@ in {
               };
             });
           };
+
           serverProperties = template.serverProperties // {
             motd = "\\u00A7b8 let dambili\\u00A7r";
             server-port = 25567;
