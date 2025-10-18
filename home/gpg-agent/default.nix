@@ -10,6 +10,11 @@ in {
       enable = true;
       enableSshSupport = true;
       enableZshIntegration = true;
+
+      defaultCacheTtl = 36000;
+      maxCacheTtl = 36000;
+      defaultCacheTtlSsh = 36000;
+      maxCacheTtlSsh = 36000;
     };
   };
 }
