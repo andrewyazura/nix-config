@@ -8,7 +8,7 @@ let
       offlineUuid = "c2eb76fe-7bea-3498-b396-066ba66e08ae";
       onlineUuid = "2629aa63-faec-4548-bdc0-260850cf3cbf";
       level = 4;
-      bypassesPlayerLimit = true;
+      bypassesPlayerLimit = false;
     }
     {
       name = "boober";
@@ -42,6 +42,20 @@ let
       name = "War_of_Lord";
       offlineUuid = "844cb079-11a2-3d18-bc9b-b15a7e1f1751";
       onlineUuid = "3da44920-a9d9-4925-b39c-5d47dfc6051e";
+      level = 0;
+      bypassesPlayerLimit = false;
+    }
+    {
+      name = "Prorab_Vitya";
+      offlineUuid = "e53b149e-f0c2-3ff5-94eb-2980d2d63ea2";
+      onlineUuid = "3daa0578-ab59-406e-9d8c-baf24cbe9bdc";
+      level = 0;
+      bypassesPlayerLimit = false;
+    }
+    {
+      name = "GameMax"; # TODO: delete
+      offlineUuid = "e249f570-bf3b-3ff3-aa8a-12a5909698ca";
+      onlineUuid = "c0f697f2-8300-4725-ab4e-9de702b5fc21";
       level = 0;
       bypassesPlayerLimit = false;
     }
@@ -132,12 +146,10 @@ in {
       in {
         main = template // {
           serverProperties = template.serverProperties // {
+            # "§la §r§b§lnixos-based§r§r §lminecraft server§r"
             motd =
               "\\u00A7la \\u00A7r\\u00A7b\\u00A7lnixos-based\\u00A7r\\u00A7r \\u00A7lminecraft server\\u00A7r";
-            # §la §r§b§lnixos-based§r§r §lminecraft server§r
-
             server-port = 25566;
-            seed = "69420018030897796";
           };
         };
 
