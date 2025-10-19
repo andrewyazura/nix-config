@@ -6,14 +6,10 @@
     ./gnome
     ./guitar
     ./home-manager
-    ./hyprland
     ./i3
-    ./logitech-g920
     ./minecraft-server
     ./networking
     ./nix
-    ./obs
-    ./plasma6
     ./programs
     ./sway
     ./wooting
