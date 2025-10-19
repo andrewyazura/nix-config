@@ -47,14 +47,14 @@ let
     }
   ];
 
-  getOnlinePlayers = map (p: {
+  onlinePlayers = map (p: {
     name = p.name;
     uuid = p.onlineUuid;
     level = p.level;
     bypassesPlayerLimit = p.bypassesPlayerLimit;
   }) players;
 
-  getOfflinePlayers = map (p: {
+  offlinePlayers = map (p: {
     name = p.name;
     uuid = p.offlineUuid;
     level = p.level;
@@ -93,30 +93,6 @@ in {
           enable = true;
           package = pkgs.fabricServers.fabric-1_21_10;
 
-          operators = getOperators getOfflinePlayers;
-          whitelist = getWhitelist getOfflinePlayers;
-
-          serverProperties = {
-            allow-cheats = false;
-            difficulty = "normal";
-            gamemode = "survival";
-            max-players = length players;
-            online-mode = false;
-            white-list = true;
-          };
-        };
-      in {
-        main = template // {
-          serverProperties = template.serverProperties // {
-            motd =
-              "\\u00A7la \\u00A7r\\u00A7b\\u00A7lnixos-based\\u00A7r\\u00A7r \\u00A7lminecraft server\\u00A7r";
-            # §la §r§b§lnixos-based§r§r §lminecraft server§r
-
-            server-port = 25566;
-          };
-        };
-
-        bombas = template // {
           symlinks = {
             mods = pkgs.linkFarmFromDrvs "mods" (attrValues {
               Fabric-API = pkgs.fetchurl {
@@ -131,13 +107,44 @@ in {
                 sha512 =
                   "1b1b70b7ec6290d152a5f9fa3f2e68ea7895f407c561b56e91aba3fdadef277cd259879676198d6481dcc76a226ff1aa857c01ae9c41be3e963b59546074a1fc";
               };
+              SkinRestorer = pkgs.fetchurl {
+                url =
+                  "https://cdn.modrinth.com/data/ghrZDhGW/versions/MKWfnXfO/skinrestorer-2.4.3%2B1.21.9-fabric.jar";
+                sha512 =
+                  "a377133467707b88834642660a3a42137acb8abfbf80dbca87508b701aa4aca3e9d1738ef3fc098627c760e6afdea32fcdf8a5835942d291ef0640f3ef3667c5";
+              };
             });
           };
 
+          operators = getOperators offlinePlayers;
+          whitelist = getWhitelist offlinePlayers;
+
+          serverProperties = {
+            allow-cheats = false;
+            difficulty = "normal";
+            gamemode = "survival";
+            max-players = length players;
+            online-mode = false;
+            spawn-protection = 0;
+            white-list = true;
+          };
+        };
+      in {
+        main = template // {
+          serverProperties = template.serverProperties // {
+            motd =
+              "\\u00A7la \\u00A7r\\u00A7b\\u00A7lnixos-based\\u00A7r\\u00A7r \\u00A7lminecraft server\\u00A7r";
+            # §la §r§b§lnixos-based§r§r §lminecraft server§r
+
+            server-port = 25566;
+            seed = "69420018030897796";
+          };
+        };
+
+        bombas = template // {
           serverProperties = template.serverProperties // {
             motd = "\\u00A748 let dambili\\u00A7r";
             server-port = 25567;
-            spawn-protection = 0;
           };
         };
       };
