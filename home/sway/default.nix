@@ -26,14 +26,16 @@ in {
       wrapperFeatures.gtk = true;
 
       config = rec {
-
-        bars = [ ];
         left = "h";
         down = "j";
         up = "k";
         right = "l";
 
-        window.border = 2;
+        bars = [ ];
+        window = {
+          titlebar = false;
+          border = 2;
+        };
 
         colors = let colors = import ../../common/colors.nix;
         in {
