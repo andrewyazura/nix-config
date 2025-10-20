@@ -23,25 +23,25 @@ in {
         colors = let colors = import ../../common/colors.nix;
         in {
           focused = {
-            background = "${colors.mauve}";
-            border = "${colors.mauve}";
-            childBorder = "${colors.mauve}";
-            indicator = "${colors.mauve}";
-            text = "${colors.base}";
+            border = colors.mauve;
+            background = colors.mauve;
+            text = colors.base;
+            indicator = colors.mauve;
+            childBorder = colors.mauve;
           };
           unfocused = {
-            background = "${colors.base}";
-            border = "${colors.base}";
-            childBorder = "${colors.base}";
-            indicator = "${colors.base}";
-            text = "${colors.text}";
+            border = colors.base;
+            background = colors.base;
+            text = colors.text;
+            indicator = colors.base;
+            childBorder = colors.base;
           };
           urgent = {
-            background = "${colors.red}";
-            border = "${colors.red}";
-            childBorder = "${colors.red}";
-            indicator = "${colors.red}";
-            text = "${colors.base}";
+            border = colors.red;
+            background = colors.red;
+            text = colors.base;
+            indicator = colors.red;
+            childBorder = colors.red;
           };
         };
 

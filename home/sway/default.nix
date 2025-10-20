@@ -26,11 +26,39 @@ in {
       wrapperFeatures.gtk = true;
 
       config = rec {
+
         bars = [ ];
         left = "h";
         down = "j";
         up = "k";
         right = "l";
+
+        window.border = 2;
+
+        colors = let colors = import ../../common/colors.nix;
+        in {
+          focused = {
+            border = colors.mauve;
+            background = colors.mauve;
+            text = colors.base;
+            indicator = colors.mauve;
+            childBorder = colors.mauve;
+          };
+          unfocused = {
+            border = colors.base;
+            background = colors.base;
+            text = colors.text;
+            indicator = colors.base;
+            childBorder = colors.base;
+          };
+          urgent = {
+            border = colors.red;
+            background = colors.red;
+            text = colors.base;
+            indicator = colors.red;
+            childBorder = colors.red;
+          };
+        };
 
         modifier = "Mod4";
         terminal = "ghostty";
