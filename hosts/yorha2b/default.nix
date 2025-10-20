@@ -13,6 +13,7 @@
   };
 
   home-manager.users.${username}.modules = {
+    waybar.enable = true;
     sway = {
       enable = true;
       output = {

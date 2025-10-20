@@ -10,6 +10,7 @@
     ./polybar
     ./ssh
     ./sway
+    ./waybar
     ./yazi
     ./zsh
   ];

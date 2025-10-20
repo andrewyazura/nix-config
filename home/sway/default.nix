@@ -26,6 +26,7 @@ in {
       wrapperFeatures.gtk = true;
 
       config = rec {
+        bars = [ ];
         left = "h";
         down = "j";
         up = "k";
