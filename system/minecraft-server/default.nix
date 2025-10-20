@@ -21,6 +21,8 @@ let
       "3da44920-a9d9-4925-b39c-5d47dfc6051e" 0 false)
     (mkPlayer "Prorab_Vitya" "e53b149e-f0c2-3ff5-94eb-2980d2d63ea2"
       "3daa0578-ab59-406e-9d8c-baf24cbe9bdc" 0 false)
+    (mkPlayer "Fannera" "6507a34d-c795-3211-8a0c-61732ad90b96"
+      "47803ac2-9f82-4c7c-bb6b-d5536eaca3e9" 0 false)
     (mkPlayer "GameMax" "e249f570-bf3b-3ff3-aa8a-12a5909698ca"
       "c0f697f2-8300-4725-ab4e-9de702b5fc21" 0 false) # TODO: delete
   ];
@@ -103,14 +105,14 @@ in {
           };
         };
       in {
-        main = server-template // {
-          serverProperties = server-template.serverProperties // {
-            # "§la §r§b§lnixos-based§r§r §lminecraft server§r"
-            motd =
-              "\\u00A7la \\u00A7r\\u00A7b\\u00A7lnixos-based\\u00A7r\\u00A7r \\u00A7lminecraft server\\u00A7r";
-            server-port = 25566;
-          };
-        };
+        # main = server-template // {
+        #   serverProperties = server-template.serverProperties // {
+        #     # "§la §r§b§lnixos-based§r§r §lminecraft server§r"
+        #     motd =
+        #       "\\u00A7la \\u00A7r\\u00A7b\\u00A7lnixos-based\\u00A7r\\u00A7r \\u00A7lminecraft server\\u00A7r";
+        #     server-port = 25566;
+        #   };
+        # };
 
         bombas = server-template // {
           serverProperties = server-template.serverProperties // {
