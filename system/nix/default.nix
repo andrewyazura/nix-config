@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ lib, config, pkgs, ... }:
 with lib;
 let cfg = config.modules.nix;
 in {
@@ -33,6 +33,7 @@ in {
     services.pcscd.enable = true;
     programs.gnupg.agent = {
       enable = true;
+      pinentryPackage = pkgs.pinentry-curses;
       settings = { default-cache-ttl = 86400; };
     };
   };
