@@ -53,8 +53,13 @@ in {
         keybindings = {
           "${modifier}+Return" = "exec ${terminal}";
           "${modifier}+Escape" = "exec xsecurelock";
-          "${modifier}+d" = "exec dmenu_run";
           "${modifier}+q" = "kill";
+
+          "${modifier}+d" = let
+            colors = import ../../common/colors.nix;
+            args =
+              "-fn 'AdwaitaMono-12' -nb '${colors.crust}' -nf '${colors.text}' -sb '${colors.mauve}' -sf '${colors.base}'";
+          in "exec dmenu_run";
 
           "${modifier}+h" = "focus left";
           "${modifier}+j" = "focus down";

@@ -64,8 +64,11 @@ in {
 
         modifier = "Mod4";
         terminal = "ghostty";
-        menu =
-          "${pkgs.dmenu}/bin/dmenu_path | ${pkgs.dmenu}/bin/dmenu | ${pkgs.findutils}/bin/xargs swaymsg exec --";
+        menu = let
+          colors = import ../../common/colors.nix;
+          args =
+            "-fn 'AdwaitaMono-12' -nb '${colors.crust}' -nf '${colors.text}' -sb '${colors.mauve}' -sf '${colors.base}'";
+        in "${pkgs.dmenu}/bin/dmenu_path | ${pkgs.dmenu}/bin/dmenu ${args} | ${pkgs.findutils}/bin/xargs swaymsg exec --";
 
         keybindings = {
           "${modifier}+Return" = "exec ${terminal}";

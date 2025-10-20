@@ -14,7 +14,7 @@ in {
         mainBar = {
           layer = "top";
           position = "top";
-          height = 35;
+          height = 24;
           modules-left = [ "sway/workspaces" ];
           modules-center = [ ];
           modules-right = [ "network" "pulseaudio" "clock" "battery" ];
