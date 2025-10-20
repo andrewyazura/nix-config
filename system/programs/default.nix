@@ -11,17 +11,17 @@ in {
       inputs.ghostty.packages.x86_64-linux.default
 
       bitwarden-desktop
+      chromium
       discord
+      firefox
       obsidian
       signal-desktop
       spotify
 
       age
+      gemini-cli
       git-lfs
       tree
-
-      chromium
-      firefox
     ];
   };
 }
