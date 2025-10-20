@@ -58,8 +58,8 @@ in {
           "${modifier}+d" = let
             colors = import ../../common/colors.nix;
             args =
-              "-fn 'AdwaitaMono-12' -nb '${colors.crust}' -nf '${colors.text}' -sb '${colors.mauve}' -sf '${colors.base}'";
-          in "exec dmenu_run";
+              "-fn 'AdwaitaMono-8' -nb '${colors.crust}' -nf '${colors.text}' -sb '${colors.mauve}' -sf '${colors.base}'";
+          in "exec dmenu_run ${args}";
 
           "${modifier}+h" = "focus left";
           "${modifier}+j" = "focus down";
