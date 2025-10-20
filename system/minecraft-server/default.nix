@@ -105,20 +105,13 @@ in {
           };
         };
       in {
-        # main = server-template // {
-        #   serverProperties = server-template.serverProperties // {
-        #     # "§la §r§b§lnixos-based§r§r §lminecraft server§r"
-        #     motd =
-        #       "\\u00A7la \\u00A7r\\u00A7b\\u00A7lnixos-based\\u00A7r\\u00A7r \\u00A7lminecraft server\\u00A7r";
-        #     server-port = 25566;
-        #   };
-        # };
-
         bombas = server-template // {
           serverProperties = server-template.serverProperties // {
-            motd = "\\u00A748 let dambili\\u00A7r";
+            motd = "\\u00A7a\\u00A7l8 let dambili\\u00A7r\\u00A7r";
             server-port = 25567;
           };
+
+          files."server-icon.png" = ./bombas-server-icon.png;
         };
       };
     };

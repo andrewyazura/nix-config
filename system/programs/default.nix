@@ -21,6 +21,7 @@ in {
       age
       gemini-cli
       git-lfs
+      ncdu
       tree
     ];
   };
