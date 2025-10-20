@@ -31,10 +31,19 @@ in {
     };
 
     services.pcscd.enable = true;
-    programs.gnupg.agent = {
-      enable = true;
-      pinentryPackage = pkgs.pinentry-curses;
-      settings = { default-cache-ttl = 86400; };
+
+    programs = {
+      gnupg.agent = {
+        enable = true;
+        pinentryPackage = pkgs.pinentry-curses;
+        settings = { default-cache-ttl = 86400; };
+      };
+
+      ssh = {
+        startAgent = true;
+        enableAskPassword =
+          true; # installs ssh-askpass, which obsidian depends on
+      };
     };
   };
 }
