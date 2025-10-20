@@ -21,7 +21,6 @@ in {
 
           "sway/workspaces" = {
             disable-scroll = true;
-            all-outputs = true;
             format = "{name}";
           };
 
@@ -39,10 +38,13 @@ in {
           };
 
           "network" = {
-            format-wifi = "{essid} {downspeed:7} ";
-            format-ethernet = "{ifname} {downspeed:7} ";
+            interface = "wlp4s0";
+            format-wifi = "{icon} {essid} {bandwidthDownBytes}";
+            format-ethernet = "{ifname} {bandwidthDownBytes}";
             format-disconnected = "not connected";
-            tooltip-format = "{ifname} via {gwaddr} ";
+            tooltip-format = "{ipaddr}";
+
+            format-icons = [ "▁" "▂" "▃" "▅" "▇" "█" ];
           };
         };
       };
@@ -57,42 +59,36 @@ in {
         }
 
         window#waybar {
-          background: ${colors.base};
+          background: ${colors.crust};
           color: ${colors.text};
         }
 
         #workspaces button {
           padding: 0 5px;
           background: transparent;
-          color: ${colors.text};
         }
 
-        #workspaces button.active {
-          color: ${colors.mauve};
+        #workspaces button.active, #workspaces button.visible {
+          background: ${colors.mauve};
+          color: ${colors.base};
         }
 
-        #workspaces button:hover {
-          box-shadow: inherit;
-          text-shadow: inherit;
-        }
-
-        #workspaces button:hover {
-          background: ${colors.surface0};
-          border: none;
-          padding: 0 5px;
-          color: ${colors.mauve};
-        }
-
-        #mode {
-          background: ${colors.surface0};
-          border-bottom: 2px solid ${colors.crust};
-          color: ${colors.mauve};
-          padding: 0 5px;
+        #workspaces button.urgent {
+          background: ${colors.red};
+          color: ${colors.base};
         }
 
         #clock, #pulseaudio, #network, #cpu, #memory, #backlight, #tray {
-          padding: 0 10px;
-          color: ${colors.text};
+          margin-right: 10px;
+        }
+
+        #network {
+          color: ${colors.mauve};
+        }
+
+        #network.disconnected {
+          background: ${colors.red};
+          color: ${colors.base};
         }
       '';
     };
