@@ -13,6 +13,4 @@
     ./yazi
     ./zsh
   ];
-
-  programs.home-manager.enable = true;
 }

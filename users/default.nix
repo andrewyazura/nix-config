@@ -1,7 +1,10 @@
-{ lib, username, hostname, ... }: {
+{ lib, username, hostname, ... }:
+let
+  mkOptionalImport = path:
+    lib.optionals (builtins.pathExists path) [ path ];
+in {
   imports = [ ./${username}/system ]
-    ++ lib.optionals (builtins.pathExists ./${username}/system/${hostname})
-    [ ./${username}/system/${hostname} ];
+    ++ mkOptionalImport ./${username}/system/${hostname};
 
   users.users.${username} = {
     isNormalUser = true;
@@ -11,8 +14,7 @@
   home-manager = {
     users.${username} = {
       imports = [ ../home ./${username}/home ]
-        ++ lib.optionals (builtins.pathExists ./${username}/home/${hostname})
-        [ ./${username}/home/${hostname} ];
+        ++ mkOptionalImport ./${username}/home/${hostname};
 
       home = {
         inherit username;
