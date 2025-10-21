@@ -84,6 +84,18 @@ in {
             sha512 =
               "a377133467707b88834642660a3a42137acb8abfbf80dbca87508b701aa4aca3e9d1738ef3fc098627c760e6afdea32fcdf8a5835942d291ef0640f3ef3667c5";
           };
+          "lithium" = fetchurl {
+            url =
+              "https://cdn.modrinth.com/data/gvQqBUqZ/versions/oGKQMdyZ/lithium-fabric-0.20.0%2Bmc1.21.10.jar";
+            sha512 =
+              "755c0e0fc7f6f38ac4d936cc6023d1dce6ecfd8d6bdc2c544c2a3c3d6d04f0d85db53722a089fa8be72ae32fc127e87f5946793ba6e8b4f2c2962ed30d333ed2";
+          };
+          "very-many-players" = fetchurl {
+            url =
+              "https://cdn.modrinth.com/data/wnEe9KBa/versions/ppncuwIK/vmp-fabric-mc1.21.10-0.2.0%2Bbeta.7.215-all.jar";
+            sha512 =
+              "4c8026c7a2ee1cfd6b4113565543f87874e5da755640123561371f7ef0bf8d86e0ea4aadd5f96ee527b3903db5b3f01c00cb8052f72e802cee2dd4f32830df59";
+          };
         };
 
         server-template = {
