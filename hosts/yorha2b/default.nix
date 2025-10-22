@@ -7,7 +7,10 @@
     guitar.enable = true;
     networking.enable = true;
     nix.enable = true;
-    programs.enable = true;
+    programs = {
+      enable = true;
+      enableMinecraft = true;
+    };
     sway.enable = true;
     wooting.enable = true;
   };
