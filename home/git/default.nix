@@ -14,7 +14,7 @@ in {
         contents = {
           user = {
             name = "Andrew Yatsura";
-            email = "andrewyazura203@proton.me";
+            email = "andrewyazura203@gmail.com";
           };
         };
       }];
