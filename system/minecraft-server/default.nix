@@ -23,6 +23,8 @@ let
       "3daa0578-ab59-406e-9d8c-baf24cbe9bdc" 0 false)
     (mkPlayer "Fannera" "6507a34d-c795-3211-8a0c-61732ad90b96"
       "47803ac2-9f82-4c7c-bb6b-d5536eaca3e9" 0 false)
+    (mkPlayer "Raidzin" "1115c914-a480-35ae-829b-3d70a17aa436"
+      "336f30af-8c87-4447-809b-af5ea7d2abbc" 0 false)
     (mkPlayer "GameMax" "e249f570-bf3b-3ff3-aa8a-12a5909698ca"
       "c0f697f2-8300-4725-ab4e-9de702b5fc21" 0 false) # TODO: delete
   ];
