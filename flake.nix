@@ -16,6 +16,9 @@
     ghostty = { url = "github:ghostty-org/ghostty"; };
     nix-minecraft = { url = "github:Infinidoge/nix-minecraft"; };
     duty-reminder-app = { url = "github:andrewyazura/duty-reminder"; };
+
+    birthday-api-app = { url = "github:andrewyazura/birthday-api"; };
+    birthday-bot-app = { url = "github:andrewyazura/birthday-telegram-bot"; };
   };
 
   outputs = inputs@{ nixpkgs, ... }:
@@ -49,7 +52,11 @@
         bunker = mkHost {
           hostname = "bunker";
           username = "andrew";
-          modules = [ inputs.duty-reminder-app.nixosModules.default ];
+          modules = [
+            inputs.duty-reminder-app.nixosModules.default
+            inputs.birthday-api-app.nixosModules.default
+            inputs.birthday-bot-app.nixosModules.default
+          ];
         };
       };
     };

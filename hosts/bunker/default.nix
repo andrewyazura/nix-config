@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, lib, pkgs, ... }: {
   modules = {
     nix.enable = true;
     minecraft-server.enable = true;
@@ -22,7 +22,7 @@
   swapDevices = [{ device = "/dev/disk/by-label/swap"; }];
 
   documentation.nixos.enable = false;
-  time.timeZone = "Europe/London";
+  time.timeZone = lib.mkForce "Europe/London";
   console.keyMap = "us";
 
   boot = {
@@ -80,6 +80,16 @@
       };
     };
 
+    birthday-api = {
+      enable = true;
+      configFile = "/var/lib/birthday-api/config.ini";
+    };
+
+    birthday-bot = {
+      enable = true;
+      configFile = "/var/lib/birthday-bot/config.ini";
+    };
+
     duty-reminder = {
       enable = true;
       environment = { SERVER_PORT = "10000"; };
@@ -103,12 +113,18 @@
     postgresql = {
       enable = true;
       package = pkgs.postgresql_16;
-      ensureDatabases = [ "duty_reminder" ];
+      ensureDatabases = [ "birthday_api" "duty_reminder" ];
 
-      ensureUsers = [{
-        name = "duty_reminder";
-        ensureDBOwnership = true;
-      }];
+      ensureUsers = [
+        {
+          name = "birthday_api";
+          ensureDBOwnership = true;
+        }
+        {
+          name = "duty_reminder";
+          ensureDBOwnership = true;
+        }
+      ];
     };
   };
 
