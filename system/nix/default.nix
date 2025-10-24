@@ -35,7 +35,6 @@ in {
     programs = {
       gnupg.agent = {
         enable = true;
-        pinentryPackage = pkgs.pinentry-curses;
         settings = { default-cache-ttl = 86400; };
       };
 
