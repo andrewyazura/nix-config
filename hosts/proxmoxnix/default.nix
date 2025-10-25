@@ -2,8 +2,8 @@
   imports = [ ./hardware-configuration.nix ../../users/andrew/system ];
 
   modules = {
-    nix.enable = true;
     minecraft-server.enable = true;
+    nix.enable = true;
   };
 
   nix.settings = {
@@ -57,7 +57,6 @@
 
   networking = {
     hostName = "nixos";
-    useDHCP = true;
     networkmanager.enable = true;
     firewall.allowedTCPPorts = [ 22 443 8443 ];
   };
