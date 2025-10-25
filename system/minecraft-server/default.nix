@@ -125,6 +125,7 @@ in {
             server-port = 25567;
           };
 
+          jvmOpts = "-Xms6G -Xmx8G";
           files."server-icon.png" = ./bombas-server-icon.png;
         };
       };
