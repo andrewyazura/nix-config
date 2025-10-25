@@ -72,7 +72,7 @@ in {
 
         keybindings = {
           "${modifier}+Return" = "exec ${terminal}";
-          "${modifier}+Escape" = "exec waylock";
+          "${modifier}+Escape" = "exec swaylock -c 000000";
           "${modifier}+d" = "exec ${menu}";
           "${modifier}+q" = "kill";
 
@@ -140,15 +140,27 @@ in {
           "${modifier}+r" = "mode resize";
 
           "Print" = ''exec grim -g "$(slurp)" - | wl-copy'';
+
           "XF86AudioRaiseVolume" =
             "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+";
           "XF86AudioLowerVolume" =
             "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
           "XF86AudioMute" = "exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
 
+          "--locked XF86AudioRaiseVolume" =
+            "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+";
+          "--locked XF86AudioLowerVolume" =
+            "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
+          "--locked XF86AudioMute" =
+            "exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+
           "XF86AudioPlay" = "exec playerctl play-pause";
           "XF86AudioNext" = "exec playerctl next";
           "XF86AudioPrev" = "exec playerctl previous";
+
+          "--locked XF86AudioPlay" = "exec playerctl play-pause";
+          "--locked XF86AudioNext" = "exec playerctl next";
+          "--locked XF86AudioPrev" = "exec playerctl previous";
         };
 
         input = {
@@ -189,5 +201,7 @@ in {
           ""}
       '';
     };
+
+    programs.swaylock.enable = true;
   };
 }

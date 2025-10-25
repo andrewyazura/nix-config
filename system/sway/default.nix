@@ -16,7 +16,7 @@ in {
           mako
           playerctl
           slurp
-          waylock
+          swaylock
           wl-clipboard
         ];
       };
