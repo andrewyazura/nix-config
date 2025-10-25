@@ -8,15 +8,15 @@
         "uv2nix": "uv2nix"
       },
       "locked": {
-        "lastModified": 1761213784,
+        "lastModified": 1761335637,
         "narHash": "sha256-PLQiHE+qEmWNO8xR4TDluMczDH7MzxFPZsFj2l9E0SY=",
-        "owner": "andrewyazura",
+        "owner": "orehzzz",
         "repo": "birthday-api",
-        "rev": "af79f3565ed794571544157dfbe1475bed6eae1a",
+        "rev": "b1749dc23b04fc4100884613cf251d601874a721",
         "type": "github"
       },
       "original": {
-        "owner": "andrewyazura",
+        "owner": "orehzzz",
         "repo": "birthday-api",
         "type": "github"
       }
@@ -29,15 +29,15 @@
         "uv2nix": "uv2nix_2"
       },
       "locked": {
-        "lastModified": 1761214826,
+        "lastModified": 1761335568,
         "narHash": "sha256-U1zG0oHth5BT8PKRe0PoYKMLnIGOox1M8ZbnGSUOS/M=",
-        "owner": "andrewyazura",
+        "owner": "orehzzz",
         "repo": "birthday-telegram-bot",
-        "rev": "a699ce93e52937d3e53fe6ebf9366439662d159d",
+        "rev": "35870137eb20dd1b0a30248873ff0c044ad83169",
         "type": "github"
       },
       "original": {
-        "owner": "andrewyazura",
+        "owner": "orehzzz",
         "repo": "birthday-telegram-bot",
         "type": "github"
       }

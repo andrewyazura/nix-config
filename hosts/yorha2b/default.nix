@@ -1,5 +1,5 @@
 { username, ... }: {
-  imports = [ ./hardware-configuration.nix ];
+  imports = [ ./hardware-configuration.nix ../../users/andrew/system ];
 
   modules = {
     audio.enable = true;
@@ -15,23 +15,28 @@
     wooting.enable = true;
   };
 
-  home-manager.users.${username}.modules = {
-    waybar.enable = true;
-    sway = {
-      enable = true;
-      output = {
-        DP-3 = {
-          position = "0 0";
-          mode = "3840x2160@144Hz";
+  home-manager.users.andrew = {
+    imports =
+      [ ../../home ../../users/andrew/home ../../users/andrew/home/yorha2b ];
+
+    modules = {
+      waybar.enable = true;
+      sway = {
+        enable = true;
+        output = {
+          DP-3 = {
+            position = "0 0";
+            mode = "3840x2160@144Hz";
+          };
+
+          HDMI-A-1 = {
+            position = "3840 720";
+            mode = "2560x1440@144Hz";
+          };
         };
 
-        HDMI-A-1 = {
-          position = "3840 720";
-          mode = "2560x1440@144Hz";
-        };
+        focus-output = "HDMI-A-1";
       };
-
-      focus-output = "HDMI-A-1";
     };
   };
 

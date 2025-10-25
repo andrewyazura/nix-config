@@ -1,4 +1,11 @@
 {
+  home = {
+    username = "andrew";
+    homeDirectory = "/home/andrew";
+
+    stateVersion = "24.11";
+  };
+
   modules = {
     btop.enable = true;
     ghostty.enable = true;
