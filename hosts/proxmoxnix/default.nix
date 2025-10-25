@@ -6,6 +6,10 @@
     nix.enable = true;
   };
 
+  home-manager.users.andrew = {
+    imports = [ ../../home ../../users/andrew/home ];
+  };
+
   nix.settings = {
     auto-optimise-store = true;
     trusted-users = [ "@wheel" ];
@@ -41,6 +45,7 @@
   };
 
   security.sudo.wheelNeedsPassword = false;
+  programs.dconf.enable = true;
 
   services = {
     openssh = {
