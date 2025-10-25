@@ -37,3 +37,9 @@ sudo nixos-rebuild switch --flake .#yorha2b
 ```
 nixos-rebuild --flake .#bunker --target-host andrew@bunker switch --sudo
 ```
+
+### proxmoxnix
+
+```
+NIX_SSHOPTS="-i ~/.ssh/<key_name>" nixos-rebuild --flake .#proxmoxnix --target-host andrew@ip switch --sudo
+```
