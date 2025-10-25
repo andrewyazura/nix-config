@@ -1,25 +1,20 @@
 { lib, pkgs, ... }: {
+  imports = [ ./hardware-configuration.nix ../../users/andrew/system ];
+
+  modules = {
+    nix.enable = true;
+    minecraft-server.enable = true;
+  };
+
   nix.settings = {
-    experimental-features = "nix-command flakes";
     auto-optimise-store = true;
     trusted-users = [ "@wheel" ];
   };
 
   environment.systemPackages = with pkgs; [ vim git ];
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-label/nixos";
-    fsType = "ext4";
-  };
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-label/boot";
-    fsType = "ext4";
-  };
-  swapDevices = [{ device = "/dev/disk/by-label/swap"; }];
-
   documentation.nixos.enable = false;
   time.timeZone = lib.mkForce "Europe/London";
-  i18n.defaultLocale = "en_US.UTF-8";
   console.keyMap = "us";
 
   boot = {
@@ -31,8 +26,6 @@
     root.hashedPassword = "!";
 
     andrew = {
-      isNormalUser = true;
-      extraGroups = [ "wheel" "networkmanager" ];
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDL7Ic9fNr9wAcgDMa66pbQlzmf9io1Lw2k6IOtv8Axd andrew@yorha2b"
       ];
@@ -41,7 +34,9 @@
     yaroslav = {
       isNormalUser = true;
       extraGroups = [ "wheel" "networkmanager" ];
-      openssh.authorizedKeys.keys = [ "" ];
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFWEorstb+zss69piBaqSnRyzLboRrKocxS0Nql9aIvH Hetzner"
+      ];
     };
   };
 
@@ -56,10 +51,13 @@
         KbdInteractiveAuthentication = false;
       };
     };
+
+    qemuGuest.enable = true;
   };
 
   networking = {
-    hostName = "nixos-wm";
+    hostName = "nixos";
+    useDHCP = true;
     networkmanager.enable = true;
     firewall.allowedTCPPorts = [ 22 443 8443 ];
   };
