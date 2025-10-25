@@ -1,5 +1,5 @@
-{ username, ... }: {
-  imports = [ ./hardware-configuration.nix ];
+{
+  imports = [ ./hardware-configuration.nix ../../users/andrew/system ];
 
   modules = {
     audio.enable = true;
@@ -10,9 +10,14 @@
     programs.enable = true;
   };
 
-  home-manager.users.${username}.modules = {
-    i3.enable = true;
-    polybar.enable = true;
+  home-manager.users.andrew = {
+    imports =
+      [ ../../home ../../users/andrew/home ../../users/andrew/home/yorha9s ];
+
+    modules = {
+      i3.enable = true;
+      polybar.enable = true;
+    };
   };
 
   boot.loader = {

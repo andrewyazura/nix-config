@@ -1,4 +1,4 @@
-{ username, ... }: {
+{
   imports = [ ./hardware-configuration.nix ../../users/andrew/system ];
 
   modules = {

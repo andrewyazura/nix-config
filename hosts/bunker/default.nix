@@ -1,7 +1,13 @@
 { config, lib, pkgs, ... }: {
+  imports = [ ../../users/andrew/system ../../users/andrew/system/bunker ];
+
   modules = {
     nix.enable = true;
     minecraft-server.enable = true;
+  };
+
+  home-manager.users.andrew = {
+    imports = [ ../../home ../../users/andrew/home ];
   };
 
   nix.settings = {
