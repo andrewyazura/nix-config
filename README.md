@@ -35,5 +35,5 @@ sudo nixos-rebuild switch --flake .#yorha2b
 ### bunker
 
 ```
-nixos-rebuild --flake .#bunker --target-host andrew@bunker --use-remote-sudo switch
+nixos-rebuild --flake .#bunker --target-host andrew@bunker switch --sudo
 ```
