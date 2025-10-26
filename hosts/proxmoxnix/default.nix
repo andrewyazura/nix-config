@@ -46,7 +46,10 @@
   };
 
   security.sudo.wheelNeedsPassword = false;
-  programs.dconf.enable = true;
+  programs = {
+    dconf.enable = true;
+    htop.enable = true;
+  };
 
   services = {
     openssh = {
