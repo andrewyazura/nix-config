@@ -56,6 +56,18 @@ in {
 
   options.modules.minecraft-server = {
     enable = mkEnableOption "Enable Minecraft server configuration";
+    servers = mkOption {
+      type = types.attrsOf (types.submodule ({
+        options.jvmOpts = mkOption {
+          type = types.nullOr types.str;
+          default = null;
+          description = "JVM options for the server";
+        };
+      }));
+
+      default = { };
+      description = "Per-server configuration overrides.";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -104,7 +116,15 @@ in {
           enable = true;
           package = pkgs.fabricServers.fabric-1_21_10;
 
-          symlinks = { mods = pkgs.linkFarmFromDrvs "mods" (attrValues mods); };
+          symlinks.mods = pkgs.linkFarmFromDrvs "mods" (attrValues mods);
+          files = {
+            "world/datapacks/vanilla-tweaks.zip" = pkgs.fetchurl {
+              url =
+                "https://vanillatweaks.net/download/VanillaTweaks_c339670_MC1.21-1.21.10.zip";
+              sha512 =
+                "0hmbmy55bllkrs0sinfzfcdsm5n5fyyfv5449qxd8w78pyfby7dz4lh9j97m3bvwghrjhy6s4fg3w71amcqfwygzbhic3p7qbsrbi63";
+            };
+          };
 
           operators = toOperators offlinePlayers;
           whitelist = toWhitelist offlinePlayers;
@@ -125,9 +145,10 @@ in {
             server-port = 25567;
           };
 
-          jvmOpts = "-Xms6G -Xmx8G";
-          files."server-icon.png" = ./bombas-server-icon.png;
-        };
+          files = server-template.files // {
+            "server-icon.png" = ./bombas-server-icon.png;
+          };
+        } // (cfg.servers.bombas or { });
       };
     };
   };

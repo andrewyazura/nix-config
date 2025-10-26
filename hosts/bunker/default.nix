@@ -3,7 +3,10 @@
 
   modules = {
     nix.enable = true;
-    minecraft-server.enable = true;
+    minecraft-server = {
+      enable = true;
+      servers.bombas.jvmOpts = "-Xms3072M -Xmx3072M";
+    };
   };
 
   home-manager.users.andrew = {

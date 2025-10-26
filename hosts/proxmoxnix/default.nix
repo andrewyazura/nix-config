@@ -2,7 +2,10 @@
   imports = [ ./hardware-configuration.nix ../../users/andrew/system ];
 
   modules = {
-    minecraft-server.enable = true;
+    minecraft-server = {
+      enable = true;
+      servers.bombas.jvmOpts = "-Xms8192M -Xmx8192M";
+    };
     nix.enable = true;
   };
 
