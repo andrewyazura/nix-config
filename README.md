@@ -25,8 +25,8 @@ nix-shell -p git
 git clone git@github.com:andrewyazura/nix-config.git
 ```
 
-9. Copy new `hardware-config.nix` to `hosts/yorha2b/hardware-config.nix`
-10. Apply config
+4. Copy new `hardware-config.nix` to `hosts/yorha2b/hardware-config.nix`
+5. Apply config
 
 ```bash
 sudo nixos-rebuild switch --flake .#yorha2b

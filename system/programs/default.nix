@@ -18,6 +18,7 @@ in {
         firefox
         obsidian
         signal-desktop
+        slack
         spotify
 
         age
