@@ -5,7 +5,11 @@
     nix.enable = true;
     minecraft-server = {
       enable = true;
-      servers.bombas.jvmOpts = "-Xms3072M -Xmx3072M";
+      servers.bombas = {
+        jvmOpts = "-Xms3072M -Xmx3072M";
+
+        serverProperties = { server-port = 25567; };
+      };
     };
   };
 

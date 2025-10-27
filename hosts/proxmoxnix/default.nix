@@ -4,7 +4,11 @@
   modules = {
     minecraft-server = {
       enable = true;
-      servers.bombas.jvmOpts = "-Xms8192M -Xmx8192M";
+      servers.bombas = {
+        jvmOpts = "-Xms8192M -Xmx8192M";
+
+        serverPropertiees = { server-port = 25567; };
+      };
     };
     nix.enable = true;
   };
