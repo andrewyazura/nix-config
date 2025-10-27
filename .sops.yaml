@@ -2,14 +2,16 @@ keys:
   - &bunker age1h866gulvflkkyf67kafydjrue8pukv3epnml63n06gw39zgr0p4sjxjsl8
   - &yorha2b age145sk8uy9j6dakef3jksl6224segq367k75lv4n4jjjtwly73vpkq6jkxzt
   - &yorha9s age144td7u09ty9lzjhxqtuvaz9kndx56tgv6x359vhadygxm8auxfhqsk0s9u
+  - &proxmoxnix age1vr2qpu4smhkd6jfpc2rzdqsmj8vh6rffvmlmjlm238yyt424yexsrl7tl7
 
 creation_rules:
-  - path_regex: secrets/[^/]+\.env$
+  - path_regex: secrets/duty-reminder\.env
     key_groups:
     - age:
         - *bunker
+    format: dotenv
 
-  - path_regex: secrets/[^/]+\.(crt|key)$
+  - path_regex: secrets/andrewyazura\.(crt|key)
     key_groups:
     - age:
       - *bunker

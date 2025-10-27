@@ -7,7 +7,7 @@
       servers.bombas = {
         jvmOpts = "-Xms8192M -Xmx8192M";
 
-        serverPropertiees = { server-port = 25567; };
+        serverProperties = { server-port = 25567; };
       };
     };
     nix.enable = true;

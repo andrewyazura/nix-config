@@ -48,9 +48,6 @@
         bunker = mkHost {
           hostname = "bunker";
           modules = [
-            inputs.duty-reminder-app.nixosModules.default
-            inputs.birthday-api-app.nixosModules.default
-            inputs.birthday-bot-app.nixosModules.default
           ];
         };
 

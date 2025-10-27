@@ -1,5 +1,12 @@
-{ config, lib, pkgs, ... }: {
-  imports = [ ../../users/andrew/system ../../users/andrew/system/bunker ];
+{ config, lib, pkgs, inputs, ... }: {
+  imports = [
+    inputs.duty-reminder-app.nixosModules.default
+    inputs.birthday-api-app.nixosModules.default
+    inputs.birthday-bot-app.nixosModules.default
+
+    ../../users/andrew/system
+    ../../users/andrew/system/bunker
+  ];
 
   modules = {
     nix.enable = true;
