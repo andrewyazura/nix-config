@@ -119,6 +119,12 @@ in {
           plugin = conform-nvim;
           config = toLuaFile ./configs/conform.lua;
         }
+
+        {
+          plugin = avante-nvim;
+          config = toLuaFile ./configs/avante.lua;
+        }
+        nui-nvim
       ];
     };
   };

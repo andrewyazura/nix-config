@@ -1,9 +1,15 @@
 { config, ... }: {
   sops = {
     age.sshKeyPaths = [ "/home/andrew/.ssh/id_ed25519_yorha2b_nixconfig_1510" ];
-    secrets.ssh-config = {
-      sopsFile = ../../../../secrets/ssh-config;
-      format = "binary";
+    secrets = {
+      ssh-config = {
+        sopsFile = ../../../../secrets/ssh-config;
+        format = "binary";
+      };
+      anthropic-api-key = {
+        sopsFile = ../../../../secrets/anthropic-api-key;
+        format = "binary";
+      };
     };
   };
 
@@ -21,6 +27,12 @@
       };
     };
 
-    zsh.shellAliases = { copy = "wl-copy"; };
+    zsh = {
+      shellAliases = { copy = "wl-copy"; };
+      initContent = ''
+        secret_file="${config.sops.secrets.anthropic-api-key.path}"
+        export AVANTE_ANTHROPIC_API_KEY=$(cat "$secret_file")
+      '';
+    };
   };
 }

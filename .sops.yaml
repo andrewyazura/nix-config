@@ -23,3 +23,10 @@ creation_rules:
       - *yorha2b
       - *yorha9s
     format: binary
+
+  - path_regex: secrets/anthropic-api-key
+    key_groups:
+    - age:
+      - *yorha2b
+      - *yorha9s
+    format: binary

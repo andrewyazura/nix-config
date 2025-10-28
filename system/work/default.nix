@@ -7,12 +7,11 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ 
-      code-cursor
-      pritunl-client 
+    environment.systemPackages = with pkgs; [
+      claude-code
+      pritunl-client
       slack
       vscode
-      zed-editor
     ];
 
     systemd = {
