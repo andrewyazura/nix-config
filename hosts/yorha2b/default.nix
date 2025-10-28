@@ -13,6 +13,7 @@
     };
     sway.enable = true;
     wooting.enable = true;
+    work.enable = true;
   };
 
   home-manager.users.andrew = {
