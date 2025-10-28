@@ -35,7 +35,10 @@ in {
     programs = {
       gnupg.agent = {
         enable = true;
-        settings = { default-cache-ttl = 86400; };
+        settings = {
+          default-cache-ttl = 86400;
+          max-cache-ttl = 86400;
+        };
       };
 
       ssh = {
