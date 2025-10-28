@@ -25,6 +25,7 @@ in {
         gemini-cli
         git-lfs
         ncdu
+        sops
         tree
       ] ++ lib.optionals cfg.enableMinecraft [ pkgs.prismlauncher ];
   };
