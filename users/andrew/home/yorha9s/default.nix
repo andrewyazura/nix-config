@@ -15,6 +15,9 @@
         "github.com" = {
           identityFile = "~/.ssh/id_ed25519_yorha9s_github_2509";
         };
+        "proxmoxnix" = {
+          identityFile = "~/.ssh/id_ed25519_yorha9s_proxmoxnix_2510";
+        };
       };
     };
 
