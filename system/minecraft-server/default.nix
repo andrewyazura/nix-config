@@ -45,14 +45,6 @@ in {
           package = pkgs.fabricServers.fabric-1_21_10;
 
           symlinks.mods = pkgs.linkFarmFromDrvs "mods" (attrValues mods);
-          files = {
-            "world/datapacks/vanilla-tweaks.zip" = pkgs.fetchurl {
-              url =
-                "https://vanillatweaks.net/download/VanillaTweaks_c780427_MC1.21-1.21.10.zip";
-              sha512 =
-                "060g9c5v8mz2sd3rkg7srg42aw751hybmh6bzidh5sy8q1v9amw38hssywr83qim726jsrs1sswdl0zk5wx3cgnshba6zxxffjg9ddr";
-            };
-          };
 
           operators = players.toOperators players.offline;
           whitelist = players.toWhitelist players.offline;
