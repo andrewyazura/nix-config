@@ -2,7 +2,6 @@
   imports = [
     ./audio
     ./fonts
-    ./gnome
     ./guitar
     ./home-manager
     ./i3

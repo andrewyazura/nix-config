@@ -14,7 +14,7 @@ in {
       settings = {
         background-opacity = 0.9;
         font-family = "Adwaita Mono Nerd Font";
-        font-size = 10;
+        font-size = 9;
         shell-integration-features = [ "ssh-terminfo" "ssh-env" ];
         theme = "Catppuccin Mocha";
         window-decoration = "server";

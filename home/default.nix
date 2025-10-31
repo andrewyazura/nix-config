@@ -4,7 +4,6 @@
     ./firefox
     ./ghostty
     ./git
-    ./gnome
     ./i3
     ./neovim
     ./polybar
