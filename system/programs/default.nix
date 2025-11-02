@@ -16,6 +16,7 @@ in {
         chromium
         discord
         firefox
+        obs-studio
         obsidian
         signal-desktop
         spotify
@@ -23,6 +24,7 @@ in {
         age
         gemini-cli
         git-lfs
+        mpv
         ncdu
         sops
         tree
