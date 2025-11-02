@@ -32,14 +32,8 @@ git clone git@github.com:andrewyazura/nix-config.git
 sudo nixos-rebuild switch --flake .#yorha2b
 ```
 
-### bunker
+### remote machine
 
 ```
-nixos-rebuild --flake .#bunker --target-host andrew@bunker switch --sudo
-```
-
-### proxmoxnix
-
-```
-NIX_SSHOPTS="-i ~/.ssh/<key_name>" nixos-rebuild --flake .#proxmoxnix --target-host andrew@ip switch --sudo
+nixos-rebuild --flake .#<machine> --target-host andrew@<machine> switch --sudo
 ```
