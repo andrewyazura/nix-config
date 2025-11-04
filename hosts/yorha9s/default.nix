@@ -1,5 +1,10 @@
-{
-  imports = [ ./hardware-configuration.nix ../../users/andrew/system ];
+{ inputs, ... }: {
+  imports = [
+    ./hardware-configuration.nix
+    ../../users/andrew/system
+
+    inputs.private-config.nixosModules.default
+  ];
 
   modules = {
     audio.enable = true;
@@ -12,8 +17,13 @@
   };
 
   home-manager.users.andrew = {
-    imports =
-      [ ../../home ../../users/andrew/home ../../users/andrew/home/yorha9s ];
+    imports = [
+      ../../home
+      ../../users/andrew/home
+      ../../users/andrew/home/yorha9s
+
+      inputs.private-config.homeManagerModules.default
+    ];
 
     modules = {
       i3.enable = true;

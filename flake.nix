@@ -13,6 +13,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    private-config = {
+      url = "git+ssh://git@github.com/andrewyazura/private-nix-config.git";
+    };
+
     ghostty = { url = "github:ghostty-org/ghostty"; };
     nix-minecraft = { url = "github:Infinidoge/nix-minecraft"; };
     duty-reminder-app = { url = "github:andrewyazura/duty-reminder"; };
@@ -45,12 +49,7 @@
           modules = [ inputs.nixos-hardware.nixosModules.asus-zephyrus-ga401 ];
         };
 
-        bunker = mkHost {
-          hostname = "bunker";
-          modules = [
-          ];
-        };
-
+        bunker = mkHost { hostname = "bunker"; };
         proxmoxnix = mkHost { hostname = "proxmoxnix"; };
       };
     };

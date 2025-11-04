@@ -11,6 +11,5 @@
     ./programs
     ./sway
     ./wooting
-    ./work
   ];
 }
