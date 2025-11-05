@@ -29,8 +29,6 @@ in {
       extraLuaConfig = builtins.readFile ./configs/config.lua;
 
       extraPackages = with pkgs; [
-        wl-clipboard
-
         # treesitter
         nodejs_22
         tree-sitter

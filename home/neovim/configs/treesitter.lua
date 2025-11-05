@@ -24,9 +24,6 @@ require("nvim-treesitter.configs").setup({
 		},
 		navigation = {
 			enable = true,
-			keymaps = {
-				goto_definition = "<leader>gd",
-			},
 		},
 	},
 	textobjects = {
