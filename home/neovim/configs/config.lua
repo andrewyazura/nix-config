@@ -48,15 +48,3 @@ vim.lsp.config("pyright", {
 	capabilities = capabilities,
 	filetypes = { "python" },
 })
-
-vim.lsp.enable("ruff")
-vim.lsp.config("ruff", {
-	cmd = { "ruff", "server" },
-	capabilities = capabilities,
-	filetypes = { "python" },
-	init_options = {
-		settings = {
-			logLevel = "debug",
-		},
-	},
-})
