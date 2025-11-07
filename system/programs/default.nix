@@ -22,10 +22,10 @@ in {
         spotify
 
         age
-        gemini-cli
         git-lfs
         mpv
         ncdu
+        ntfs3g
         sops
         tree
       ] ++ lib.optionals cfg.enableMinecraft [ pkgs.prismlauncher ];
