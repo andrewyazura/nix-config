@@ -313,11 +313,11 @@
     },
     "nixpkgs_8": {
       "locked": {
-        "lastModified": 1762111121,
-        "narHash": "sha256-4vhDuZ7OZaZmKKrnDpxLZZpGIJvAeMtK6FKLJYUtAdw=",
+        "lastModified": 1762363567,
+        "narHash": "sha256-YRqMDEtSMbitIMj+JLpheSz0pwEr0Rmy5mC7myl17xs=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "b3d51a0365f6695e7dd5cdf3e180604530ed33b4",
+        "rev": "ae814fd3904b621d8ab97418f1d0f2eb0d3716f4",
         "type": "github"
       },
       "original": {
@@ -332,11 +332,11 @@
         "nixpkgs": "nixpkgs_8"
       },
       "locked": {
-        "lastModified": 1762326051,
-        "narHash": "sha256-yOvvNBRGIQT6Qjt6VOiIf6cbUtX1QfpmAymbj35xDt0=",
+        "lastModified": 1762624605,
+        "narHash": "sha256-Htn6tkiCVntTyTDkI6kWz0ZxaQYDUq5vlFica4I9u7c=",
         "ref": "refs/heads/main",
-        "rev": "4789d612f845f29594c84c10a84f0aa770f6b52c",
-        "revCount": 4,
+        "rev": "44a6b7a1be50656bb36f05f1a601a93320ab73e8",
+        "revCount": 6,
         "type": "git",
         "url": "ssh://git@github.com/andrewyazura/private-nix-config.git"
       },
