@@ -22,6 +22,8 @@ let
       "47803ac2-9f82-4c7c-bb6b-d5536eaca3e9" 0 false)
     (mkPlayer "Raidzin" "1115c914-a480-35ae-829b-3d70a17aa436"
       "336f30af-8c87-4447-809b-af5ea7d2abbc" 0 false)
+    (mkPlayer "yanachlene" "30274c65-a264-3bdd-9fea-70d9aaa476e9"
+      "b1ec34f2-d4a3-42df-88f6-22709bb87ad7" 0 false)
     (mkPlayer "GameMax" "e249f570-bf3b-3ff3-aa8a-12a5909698ca"
       "c0f697f2-8300-4725-ab4e-9de702b5fc21" 0 false) # TODO: delete
   ];
