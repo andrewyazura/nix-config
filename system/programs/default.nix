@@ -28,6 +28,8 @@ in {
         ntfs3g
         sops
         tree
+        unzip
+        zip
       ] ++ lib.optionals cfg.enableMinecraft [ pkgs.prismlauncher ];
   };
 }
