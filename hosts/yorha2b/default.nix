@@ -19,6 +19,11 @@
     sway.enable = true;
     wooting.enable = true;
     work.enable = true;
+
+    syncthing = {
+      enable = true;
+      username = "andrew";
+    };
   };
 
   home-manager.users.andrew = {

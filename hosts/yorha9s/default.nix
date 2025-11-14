@@ -14,6 +14,11 @@
     nix.enable = true;
     programs.enable = true;
     work.enable = true;
+
+    syncthing = {
+      enable = true;
+      username = "andrew";
+    };
   };
 
   home-manager.users.andrew = {
