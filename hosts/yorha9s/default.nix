@@ -12,8 +12,12 @@
     i3.enable = true;
     networking.enable = true;
     nix.enable = true;
-    programs.enable = true;
     work.enable = true;
+
+    programs = {
+      enable = true;
+      enableMinecraft = true;
+    };
 
     syncthing = {
       enable = true;

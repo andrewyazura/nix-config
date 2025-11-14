@@ -12,13 +12,14 @@
     guitar.enable = true;
     networking.enable = true;
     nix.enable = true;
+    sway.enable = true;
+    wooting.enable = true;
+    work.enable = true;
+
     programs = {
       enable = true;
       enableMinecraft = true;
     };
-    sway.enable = true;
-    wooting.enable = true;
-    work.enable = true;
 
     syncthing = {
       enable = true;
