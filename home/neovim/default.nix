@@ -78,10 +78,7 @@ in {
         cmp-nvim-lsp
         cmp-buffer
 
-        {
-          plugin = telescope-nvim;
-          config = toLuaFile ./configs/telescope.lua;
-        }
+        telescope-nvim
 
         {
           plugin = nvim-treesitter.withPlugins
@@ -123,6 +120,11 @@ in {
           config = toLuaFile ./configs/avante.lua;
         }
         nui-nvim
+
+        {
+          plugin = fzf-lua;
+          config = toLuaFile ./configs/fzf.lua;
+        }
       ];
     };
   };

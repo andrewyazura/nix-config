@@ -5,7 +5,6 @@ wk.add({
 	{ "<leader>F", desc = "format buffer" },
 	{ "<leader>R", desc = "smart rename" },
 	{ "<leader>f", group = "+find" },
-	{ "<leader>fl", group = "+find last" },
 	{ "<leader>g", group = "+go to" },
 	{ "<leader>gd", desc = "definition" },
 	{ "<leader>t", group = "+toolbar" },
