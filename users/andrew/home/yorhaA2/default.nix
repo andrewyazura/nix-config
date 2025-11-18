@@ -1,4 +1,6 @@
-{ config, ... }: {
+{ config, lib, ... }: {
+  home.homeDirectory = lib.mkForce "/Users/andrew";
+
   sops = {
     age.sshKeyPaths =
       [ "/Users/andrew/.ssh/id_ed25519_yorhaA2_nixconfig_1811" ];
