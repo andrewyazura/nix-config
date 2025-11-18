@@ -1,7 +1,50 @@
-{ inputs, ... }: {
-  home-manager.users.andrew = {
-    imports =
-      [ ../../home ../../users/andrew/home ../../users/andrew/home/yorhaA2 ];
+{ inputs, config, ... }: {
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    sharedModules = [ inputs.sops-nix.homeManagerModules.sops ];
+
+    users.andrew = {
+      home = {
+        username = "andrew";
+        homeDirectory = "/Users/andrew";
+        stateVersion = "25.05";
+      };
+
+      sops = {
+        age.sshKeyPaths =
+          [ "/Users/andrew/.ssh/id_ed25519_yorhaA2_nixconfig_1811" ];
+        secrets = {
+          ssh-config = {
+            sopsFile = ../../../../secrets/ssh-config;
+            format = "binary";
+          };
+          anthropic-api-key = {
+            sopsFile = ../../../../secrets/anthropic-api-key;
+            format = "binary";
+          };
+        };
+      };
+
+      programs = {
+        ssh = {
+          includes = [ config.sops.secrets.ssh-config.path ];
+          matchBlocks = {
+            "github.com" = {
+              identityFile = "~/.ssh/id_ed25519_yorhaA2_github_1811";
+            };
+          };
+        };
+
+        zsh = {
+          shellAliases = { copy = "pbcopy"; };
+          initContent = ''
+            secret_file="${config.sops.secrets.anthropic-api-key.path}"
+            export AVANTE_ANTHROPIC_API_KEY=$(cat "$secret_file")
+          '';
+        };
+      };
+    };
   };
 
   homebrew = {
@@ -21,13 +64,6 @@
         show-recents = false;
       };
     };
-  };
-
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
-    extraSpecialArgs = inputs;
-    sharedModules = [ inputs.sops-nix.homeManagerModules.sops ];
   };
 
   time.timeZone = "Europe/Kyiv";
