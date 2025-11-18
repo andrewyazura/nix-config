@@ -13,6 +13,7 @@
 
   system = {
     stateVersion = 6;
+    primaryUser = "andrew";
 
     defaults = {
       dock = {
