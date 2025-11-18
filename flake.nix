@@ -12,6 +12,10 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     private-config = {
       url = "git+ssh://git@github.com/andrewyazura/private-nix-config.git";
@@ -25,7 +29,7 @@
     birthday-bot-app = { url = "github:orehzzz/birthday-telegram-bot"; };
   };
 
-  outputs = inputs@{ nixpkgs, ... }:
+  outputs = inputs@{ nixpkgs, nix-darwin, ... }:
     let
       mkHost =
         { hostname, system ? "x86_64-linux", specialArgs ? { }, modules ? [ ] }:
@@ -51,6 +55,25 @@
 
         bunker = mkHost { hostname = "bunker"; };
         proxmoxnix = mkHost { hostname = "proxmoxnix"; };
+      };
+
+      darwinConfigurations = {
+        yorhaA2 = nix-darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+
+          specialArgs = {
+            inherit inputs;
+            hostname = "yorhaA2";
+          };
+
+          modules = [
+            ./system
+            ./hosts/yorhaA2
+
+            inputs.home-manager.darwinModules.home-manager
+            inputs.sops-nix.darwinModules.sops
+          ];
+        };
       };
     };
 }

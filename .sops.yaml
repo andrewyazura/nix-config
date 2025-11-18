@@ -2,7 +2,7 @@ keys:
   - &bunker age1h866gulvflkkyf67kafydjrue8pukv3epnml63n06gw39zgr0p4sjxjsl8
   - &yorha2b age145sk8uy9j6dakef3jksl6224segq367k75lv4n4jjjtwly73vpkq6jkxzt
   - &yorha9s age144td7u09ty9lzjhxqtuvaz9kndx56tgv6x359vhadygxm8auxfhqsk0s9u
-  - &proxmoxnix age1vr2qpu4smhkd6jfpc2rzdqsmj8vh6rffvmlmjlm238yyt424yexsrl7tl7
+  - &yorhaA2 age144td7u09ty9lzjhxqtuvaz9kndx56tgv6x359vhadygxm8auxfhqsk0s9u
 
 creation_rules:
   - path_regex: secrets/duty-reminder\.env
@@ -22,6 +22,7 @@ creation_rules:
     - age:
       - *yorha2b
       - *yorha9s
+      - *yorhaA2
     format: binary
 
   - path_regex: secrets/anthropic-api-key
@@ -29,4 +30,5 @@ creation_rules:
     - age:
       - *yorha2b
       - *yorha9s
+      - *yorhaA2
     format: binary
