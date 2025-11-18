@@ -2,7 +2,7 @@ keys:
   - &bunker age1h866gulvflkkyf67kafydjrue8pukv3epnml63n06gw39zgr0p4sjxjsl8
   - &yorha2b age145sk8uy9j6dakef3jksl6224segq367k75lv4n4jjjtwly73vpkq6jkxzt
   - &yorha9s age144td7u09ty9lzjhxqtuvaz9kndx56tgv6x359vhadygxm8auxfhqsk0s9u
-  - &yorhaA2 age144td7u09ty9lzjhxqtuvaz9kndx56tgv6x359vhadygxm8auxfhqsk0s9u
+  - &yorhaA2 age1ga85a8ekye0vrhkljcmgkfcva3gndll35njsql52as9rtjkuhdtsqvkqed
 
 creation_rules:
   - path_regex: secrets/duty-reminder\.env

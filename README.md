@@ -7,7 +7,7 @@
 
 ## Instructions
 
-### yorha2b - main pc
+### yorha2b or yorha9s
 
 1. Copy ssh keys to `~/.ssh`
 2. Apply correct permissions:
@@ -25,11 +25,36 @@ nix-shell -p git
 git clone git@github.com:andrewyazura/nix-config.git
 ```
 
-4. Copy new `hardware-config.nix` to `hosts/yorha2b/hardware-config.nix`
+4. Copy new `hardware-config.nix` to `hosts/yorhaXX/hardware-config.nix`
 5. Apply config
 
 ```bash
 sudo nixos-rebuild switch --flake .#yorha2b
+```
+
+#### sops
+
+##### Converting keys
+
+```
+ssh-to-age -i ~/.ssh/id_ed25519_yorhaXX_nixconfig_XXXX.pub
+```
+
+```
+ssh-to-age -i ~/.ssh/id_ed25519_yorhaXX_nixconfig_XXXX -private-key -o keys.txt
+```
+
+##### Updating secrets
+
+Make sure:
+
+- public key is in `.sops.yaml`
+- private key is in `~/.config/sops/age/keys.txt`
+
+then run
+
+```
+sops updatekeys secrets/<secret_name>
 ```
 
 ### remote machine
