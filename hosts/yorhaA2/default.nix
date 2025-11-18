@@ -1,4 +1,4 @@
-{ inputs, config, ... }: {
+{ inputs, config, pkgs, ... }: {
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
@@ -7,7 +7,6 @@
     users.andrew = {
       home = {
         username = "andrew";
-        homeDirectory = "/Users/andrew";
         stateVersion = "25.05";
       };
 
@@ -50,6 +49,14 @@
   homebrew = {
     enable = true;
     onActivation = { autoUpdate = false; };
+  };
+
+  programs.zsh.enable = true;
+
+  users.users.andrew = {
+    isNormalUser = true;
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    shell = pkgs.zsh;
   };
 
   security.pam.services.sudo_local.touchIdAuth = true;
