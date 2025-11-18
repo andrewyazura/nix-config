@@ -67,7 +67,6 @@
           };
 
           modules = [
-            ./system
             ./hosts/yorhaA2
 
             inputs.home-manager.darwinModules.home-manager

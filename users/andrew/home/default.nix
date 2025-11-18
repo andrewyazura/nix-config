@@ -1,7 +1,8 @@
 { pkgs, ... }: {
   home = {
     username = "andrew";
-    homeDirectory = if pkgs.stdenv.isDarwin then "/Users/andrew" else "/home/andrew";
+    homeDirectory =
+      if pkgs.stdenv.isDarwin then "/Users/andrew" else "/home/andrew";
 
     stateVersion = "24.11";
   };

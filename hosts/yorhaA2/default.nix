@@ -1,6 +1,4 @@
-{ inputs, ... }: {
-  modules = { fonts.enable = true; };
-
+{
   home-manager.users.andrew = {
     imports =
       [ ../../home ../../users/andrew/home ../../users/andrew/home/yorhaA2 ];
