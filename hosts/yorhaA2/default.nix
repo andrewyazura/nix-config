@@ -1,4 +1,4 @@
-{
+{ inputs, ... }: {
   home-manager.users.andrew = {
     imports =
       [ ../../home ../../users/andrew/home ../../users/andrew/home/yorhaA2 ];
@@ -20,6 +20,13 @@
         show-recents = false;
       };
     };
+  };
+
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    extraSpecialArgs = inputs;
+    sharedModules = [ inputs.sops-nix.homeManagerModules.sops ];
   };
 
   time.timeZone = "Europe/Kyiv";
