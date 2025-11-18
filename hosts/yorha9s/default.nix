@@ -46,8 +46,9 @@
   };
 
   services = {
+    asusd.enable = true;
     supergfxd.enable = true;
-    asusd = { enable = true; };
+    libinput.touchpad.naturalScrolling = true;
 
     xserver = {
       videoDrivers = [ "nvidia" ];
