@@ -7,7 +7,7 @@
 
 ## Instructions
 
-### yorha2b or yorha9s
+### `yorha2b` or `yorha9s`
 
 1. Copy ssh keys to `~/.ssh`
 2. Apply correct permissions:
@@ -57,7 +57,13 @@ then run
 sops updatekeys secrets/<secret_name>
 ```
 
-### remote machine
+### `yorhaA2`
+
+```
+sudo darwin-rebuild switch
+```
+
+### remote machines
 
 ```
 nixos-rebuild --flake .#<machine> --target-host andrew@<machine> switch --sudo
