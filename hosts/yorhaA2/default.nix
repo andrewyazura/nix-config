@@ -64,14 +64,22 @@ in {
     shell = pkgs.zsh;
   };
 
-  environment.systemPackages = with pkgs; [
-    colima
-    coreutils-prefixed
-    docker
-    docker-compose
-    git
-    gnupg
-  ];
+  environment = {
+    systemPackages = with pkgs; [
+      colima
+      coreutils-prefixed
+      docker
+      docker-compose
+      git
+      gnupg
+    ];
+
+    variables = {
+      DOCKER_HOST = "unix:///Users/${username}/.colima/default/docker.sock";
+      TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE = "/var/run/docker.sock";
+      TESTCONTAINERS_HOST_OVERRIDE = "localhost";
+    };
+  };
 
   system = {
     stateVersion = 6;
