@@ -2,20 +2,12 @@
 with lib;
 let cfg = config.modules.nix;
 in {
+  imports = [ ../../common/nix ];
+
   options.modules.nix = { enable = mkEnableOption "Enable nix configuration"; };
 
   config = mkIf cfg.enable {
-    nix = {
-      gc = {
-        automatic = true;
-        dates = "weekly";
-        options = "--delete-older-than 7d";
-      };
-
-      settings = { experimental-features = [ "nix-command" "flakes" ]; };
-    };
-
-    nixpkgs.config.allowUnfree = true;
+    nix.gc.dates = "weekly";
 
     i18n.defaultLocale = "en_US.UTF-8";
     i18n.extraLocaleSettings = {

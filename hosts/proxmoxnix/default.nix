@@ -15,6 +15,8 @@
 
   home-manager.users.andrew = {
     imports = [ ../../home ../../users/andrew/home ];
+
+    home.stateVersion = "24.11";
   };
 
   nix.settings = {

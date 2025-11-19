@@ -1,5 +1,6 @@
 { config, ... }: {
   modules = { work.enable = true; };
+  home.stateVersion = "24.11";
 
   sops = {
     age.sshKeyPaths = [ "/home/andrew/.ssh/id_ed25519_yorha2b_nixconfig_1510" ];
