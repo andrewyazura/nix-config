@@ -26,7 +26,7 @@ in {
 
       settings = {
         background-opacity = cfg.backgroundOpacity;
-        font-family = "Adwaita Mono Nerd Font";
+        font-family = "AdwaitaMono Nerd Font";
         font-size = cfg.fontSize;
         shell-integration-features = [ "ssh-terminfo" "ssh-env" ];
         theme = "Catppuccin Latte";
