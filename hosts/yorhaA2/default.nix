@@ -49,6 +49,7 @@ in {
         neovim.enable = true;
         ssh.enable = true;
         work.enable = true;
+        yazi.enable = true;
         zsh.enable = true;
       };
 
@@ -72,6 +73,7 @@ in {
       docker-compose
       git
       gnupg
+      yazi
     ];
 
     variables = {
