@@ -20,7 +20,6 @@ in {
       package = if pkgs.stdenv.isDarwin then mock else pkgs.ghostty;
 
       settings = {
-        background-opacity = 0.9;
         font-family = "Adwaita Mono Nerd Font";
         font-size = cfg.fontSize;
         shell-integration-features = [ "ssh-terminfo" "ssh-env" ];
