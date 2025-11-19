@@ -7,7 +7,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    fonts.packages = with pkgs;
-      [ adwaita-fonts ] ++ import ../../common/fonts { inherit pkgs; };
+    fonts.packages = import ../../common/fonts { inherit pkgs; };
   };
 }

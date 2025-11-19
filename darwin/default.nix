@@ -1,1 +1,1 @@
-{ imports = [ ./aerospace ./homebrew ./nix ./system-defaults ]; }
+{ imports = [ ./aerospace ./fonts ./homebrew ./nix ./system-defaults ]; }

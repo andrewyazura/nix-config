@@ -7,16 +7,14 @@ in {
 
   modules = {
     aerospace.enable = true;
+    fonts.enable = true;
     homebrew = {
       enable = true;
       extraCasks =
         [ "bitwarden" "firefox" "ghostty" "obsidian" "slack" "sol" "spotify" ];
     };
     nix.enable = true;
-    system-defaults = {
-      enable = true;
-      keyboard.swapLeftCtrlAndFn = true;
-    };
+    system-defaults.enable = true;
     work.enable = true;
   };
 
@@ -37,6 +35,7 @@ in {
         ghostty = {
           enable = true;
           fontSize = 12;
+          backgroundOpacity = 0.95;
         };
         git.enable = true;
         neovim.enable = true;

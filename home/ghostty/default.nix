@@ -9,7 +9,12 @@ in {
     fontSize = mkOption {
       type = lib.types.int;
       default = 9;
-      description = "Terminal font size";
+      description = "Ghostty font size";
+    };
+    backgroundOpacity = mkOption {
+      type = lib.types.float;
+      default = 1;
+      description = "Ghostty background opacity";
     };
   };
 
@@ -20,6 +25,7 @@ in {
       package = if pkgs.stdenv.isDarwin then mock else pkgs.ghostty;
 
       settings = {
+        background-opacity = cfg.backgroundOpacity;
         font-family = "Adwaita Mono Nerd Font";
         font-size = cfg.fontSize;
         shell-integration-features = [ "ssh-terminfo" "ssh-env" ];
