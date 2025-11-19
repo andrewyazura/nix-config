@@ -10,8 +10,16 @@ in {
     fonts.enable = true;
     homebrew = {
       enable = true;
-      extraCasks =
-        [ "bitwarden" "firefox" "ghostty" "obsidian" "slack" "sol" "spotify" ];
+      extraCasks = [
+        "bitwarden"
+        "firefox"
+        "ghostty"
+        "obsidian"
+        "signal"
+        "slack"
+        "sol"
+        "spotify"
+      ];
     };
     nix.enable = true;
     system-defaults.enable = true;
@@ -56,12 +64,27 @@ in {
     shell = pkgs.zsh;
   };
 
-  environment.systemPackages = with pkgs; [ coreutils-prefixed git gnupg ];
+  environment.systemPackages = with pkgs; [
+    colima
+    coreutils-prefixed
+    docker
+    docker-compose
+    git
+    gnupg
+  ];
 
   system = {
     stateVersion = 6;
     primaryUser = username;
     defaults.smb.NetBIOSName = hostname;
+
+    activationScripts.postActivation.text = ''
+      sudo -u ${username} hidutil property --matching '{"VendorID": 12771}' --set '{"UserKeyMapping":[
+        {"HIDKeyboardModifierMappingSrc":0x7000000E2,"HIDKeyboardModifierMappingDst":0x7000000E3},
+        {"HIDKeyboardModifierMappingSrc":0x7000000E3,"HIDKeyboardModifierMappingDst":0x7000000E2},
+        {"HIDKeyboardModifierMappingSrc":0x7000000E0,"HIDKeyboardModifierMappingDst":0x7000000E0}
+      ]}'
+    '';
   };
 
   time.timeZone = "Europe/Kyiv";

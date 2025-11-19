@@ -18,6 +18,7 @@ in {
 
     system.keyboard = {
       enableKeyMapping = true;
+      swapLeftCtrlAndFn = true;
       remapCapsLockToEscape = true;
     };
   };
