@@ -10,7 +10,6 @@ in {
       lfs.enable = true;
 
       includes = [{
-        condition = "gitdir:~/Documents/";
         contents = {
           user = {
             name = "Andrew Yatsura";
