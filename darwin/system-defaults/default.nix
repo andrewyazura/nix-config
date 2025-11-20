@@ -11,6 +11,8 @@ in {
 
     system = {
       defaults = {
+        ".GlobalPreferences"."com.apple.sound.beep.sound" =
+          /System/Library/Sounds/Blow.aiff;
         NSGlobalDomain.AppleInterfaceStyle = "Dark";
 
         dock = {
