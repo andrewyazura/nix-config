@@ -9,17 +9,21 @@ in {
   config = mkIf cfg.enable {
     security.pam.services.sudo_local.touchIdAuth = true;
 
-    system.defaults = {
-      dock = {
-        autohide = true;
-        show-recents = false;
-      };
-    };
+    system = {
+      defaults = {
+        NSGlobalDomain.AppleInterfaceStyle = "Dark";
 
-    system.keyboard = {
-      enableKeyMapping = true;
-      swapLeftCtrlAndFn = true;
-      remapCapsLockToEscape = true;
+        dock = {
+          autohide = true;
+          show-recents = false;
+        };
+      };
+
+      keyboard = {
+        enableKeyMapping = true;
+        swapLeftCtrlAndFn = true;
+        remapCapsLockToEscape = true;
+      };
     };
   };
 }

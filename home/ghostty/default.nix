@@ -29,7 +29,7 @@ in {
         font-family = "AdwaitaMono Nerd Font";
         font-size = cfg.fontSize;
         shell-integration-features = [ "ssh-terminfo" "ssh-env" ];
-        theme = "Catppuccin Latte";
+        theme = "Catppuccin Mocha";
         window-decoration = "server";
         window-inherit-working-directory = false;
         window-theme = "ghostty";
