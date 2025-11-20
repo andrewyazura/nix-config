@@ -50,18 +50,10 @@ in {
         [ ../../home ../../users/andrew/home ../../users/andrew/home/yorhaA2 ];
 
       modules = {
-        btop.enable = true;
         ghostty = {
-          enable = true;
-          fontSize = 12;
-          backgroundOpacity = 0.95;
+          fontSize = 11;
+          backgroundOpacity = 0.94;
         };
-        git.enable = true;
-        neovim.enable = true;
-        ssh.enable = true;
-        work.enable = true;
-        yazi.enable = true;
-        zsh.enable = true;
       };
 
       home.homeDirectory = lib.mkForce "/Users/${username}";
@@ -77,8 +69,16 @@ in {
   };
 
   environment = {
-    systemPackages = with pkgs;
-      [ colima coreutils-prefixed docker docker-compose git gnupg yazi wootingRemap];
+    systemPackages = with pkgs; [
+      colima
+      coreutils-prefixed
+      docker
+      docker-compose
+      git
+      gnupg
+      wootingRemap
+      yazi
+    ];
 
     variables = {
       DOCKER_HOST = "unix:///Users/${username}/.colima/default/docker.sock";
