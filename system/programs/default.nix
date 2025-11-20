@@ -14,6 +14,7 @@ in {
         chromium
         discord
         firefox
+        gemini-cli
         obs-studio
         obsidian
         signal-desktop
