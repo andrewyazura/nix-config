@@ -10,6 +10,8 @@ in {
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs;
       [
+        inputs.ghostty.packages.x86_64-linux.default
+
         bitwarden-desktop
         chromium
         discord
@@ -30,8 +32,6 @@ in {
         tree
         unzip
         zip
-      ] ++ lib.optionals cfg.enableMinecraft [ pkgs.prismlauncher ]
-      ++ lib.optionals (pkgs.system == "x86_64-linux")
-      [ inputs.ghostty.packages.x86_64-linux.default ];
+      ] ++ lib.optionals cfg.enableMinecraft [ pkgs.prismlauncher ];
   };
 }
