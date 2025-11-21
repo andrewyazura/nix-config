@@ -18,6 +18,8 @@ in {
         dock = {
           autohide = true;
           show-recents = false;
+          persistent-apps =
+            [ "/Applications/Firefox.app" "/Applications/Ghostty.app" ];
         };
       };
 

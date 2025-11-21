@@ -23,6 +23,7 @@ in {
       enable = true;
       extraCasks = [
         "bitwarden"
+        "discord"
         "firefox"
         "ghostty"
         "obsidian"
