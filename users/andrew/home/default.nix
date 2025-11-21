@@ -6,6 +6,7 @@
 
   modules = {
     btop.enable = true;
+    direnv.enable = true;
     ghostty.enable = true;
     git.enable = true;
     neovim.enable = true;
