@@ -16,15 +16,14 @@
       url = "github:nix-darwin/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    ghostty = { url = "github:ghostty-org/ghostty"; };
+    nix-minecraft = { url = "github:Infinidoge/nix-minecraft"; };
 
     private-config = {
       url = "git+ssh://git@github.com/andrewyazura/private-nix-config.git";
     };
 
-    ghostty = { url = "github:ghostty-org/ghostty"; };
-    nix-minecraft = { url = "github:Infinidoge/nix-minecraft"; };
     duty-reminder-app = { url = "github:andrewyazura/duty-reminder"; };
-
     birthday-api-app = { url = "github:orehzzz/birthday-api"; };
     birthday-bot-app = { url = "github:orehzzz/birthday-telegram-bot"; };
   };

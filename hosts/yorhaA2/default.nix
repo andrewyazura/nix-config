@@ -77,6 +77,7 @@ in {
       docker-compose
       git
       gnupg
+      prismlauncher
       wootingRemap
       yazi
     ];
