@@ -55,9 +55,7 @@
   };
 
   users.users.root.hashedPassword = "!";
-
   security.sudo.wheelNeedsPassword = false;
-  programs.dconf.enable = true;
 
   sops = {
     age.keyFile = "/var/lib/sops-nix/key.txt";
