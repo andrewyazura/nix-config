@@ -19,21 +19,15 @@
   };
 
   programs = {
-    git = {
-      includes = [{
-        condition = "gitdir:/";
-        contents = {
-          commit.gpgsign = true;
-          user.signingkey = "970E41F6C58CCA2A";
-        };
-      }];
-    };
-
     ssh = {
       includes = [ config.sops.secrets.ssh-config.path ];
       matchBlocks = {
+        "bunker" = { identityFile = "~/.ssh/id_ed25519_yorhaA2_bunker_2211"; };
         "github.com" = {
           identityFile = "~/.ssh/id_ed25519_yorhaA2_github_1811";
+        };
+        "proxmoxnix" = {
+          identityFile = "~/.ssh/id_ed25519_yorhaA2_proxmoxnix_2211";
         };
       };
     };
