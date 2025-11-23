@@ -3,15 +3,11 @@ let
   username = "andrew";
   hostname = "yorhaA2";
   wootingRemap = pkgs.writeShellScriptBin "wooting-remap" ''
-    echo "[$(date)] Detected Wooting connection. Applying remap..."
-
     /usr/bin/hidutil property --matching '{"VendorID": 12771}' --set '{"UserKeyMapping":[
       {"HIDKeyboardModifierMappingSrc":0x7000000E2,"HIDKeyboardModifierMappingDst":0x7000000E3},
       {"HIDKeyboardModifierMappingSrc":0x7000000E3,"HIDKeyboardModifierMappingDst":0x7000000E2},
       {"HIDKeyboardModifierMappingSrc":0x7000000E0,"HIDKeyboardModifierMappingDst":0x7000000E0}
     ]}'
-
-    echo "[$(date)] Remap applied successfully."
   '';
 in {
   imports = [ ../../darwin inputs.private-config.darwinModules.default ];

@@ -2,132 +2,123 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Overview
+## Repository Overview
 
-This is a NixOS/nix-darwin flake-based configuration managing multiple machines:
-- **NixOS hosts**: yorha2b (desktop), yorha9s (laptop), bunker, proxmoxnix
-- **macOS host**: yorhaA2 (using nix-darwin)
+This is a NixOS/nix-darwin configuration repository managing multiple machines using Nix flakes. It supports both Linux (NixOS) and macOS (nix-darwin) systems with a modular architecture.
 
-The configuration uses flakes, home-manager for user environment management, and sops-nix for secrets management.
+### Managed Systems
 
-## Build and Deployment Commands
+**NixOS hosts:**
+- `yorha2b` - Desktop workstation (x86_64-linux)
+- `yorha9s` - ASUS Zephyrus laptop (x86_64-linux, uses nixos-hardware profile)
+- `bunker` - Server (x86_64-linux)
+- `proxmoxnix` - VM (x86_64-linux)
 
-### Apply configuration on NixOS hosts
+**Darwin host:**
+- `yorhaA2` - macOS laptop (aarch64-darwin)
+
+## Build Commands
+
+### NixOS Systems
+
+Apply configuration on local machine:
 ```bash
 sudo nixos-rebuild switch --flake .#yorha2b
-sudo nixos-rebuild switch --flake .#yorha9s
-sudo nixos-rebuild switch --flake .#bunker
-sudo nixos-rebuild switch --flake .#proxmoxnix
+# or for other hosts: yorha9s, bunker, proxmoxnix
 ```
 
-### Apply configuration on macOS (yorhaA2)
+Apply configuration to remote machine:
+```bash
+nixos-rebuild --flake .#<hostname> --target-host andrew@<hostname> switch --sudo
+```
+
+### macOS (Darwin)
+
+Apply configuration:
 ```bash
 sudo darwin-rebuild switch
 ```
 
-### Deploy to remote machines
-```bash
-nixos-rebuild --flake .#<machine> --target-host andrew@<machine> switch --sudo
-```
+### Testing Configurations
 
-### Garbage collection (run manually if needed)
+Build without activating:
 ```bash
 # NixOS
-nix-collect-garbage --delete-older-than 7d
+nixos-rebuild build --flake .#yorha2b
 
-# Check what will be deleted
-nix-store --gc --print-dead
+# Darwin
+darwin-rebuild build --flake .
 ```
 
 ## Architecture
 
-### Flake Structure (flake.nix)
+### Module System
 
-The flake uses a `mkHost` helper function that:
-1. Takes hostname, system architecture, specialArgs, and modules
-2. Creates nixosSystem with home-manager and sops-nix integration
-3. Passes `inputs` and `hostname` to all modules via specialArgs
+The repository uses a custom module system with `modules.<name>.enable` options. Most modules are opt-in and must be explicitly enabled in host configurations.
 
-**NixOS configurations**: Built with `nixpkgs.lib.nixosSystem`
-**Darwin configurations**: Built with `nix-darwin.lib.darwinSystem`
+**Structure:**
+- `flake.nix` - Main entry point, defines all system configurations
+- `hosts/<hostname>/` - Per-host configuration and hardware-configuration.nix
+- `system/` - NixOS system-level modules (audio, networking, programs, etc.)
+- `darwin/` - macOS system-level modules (aerospace, homebrew, system-defaults, etc.)
+- `home/` - Home-manager modules (application configs for btop, firefox, ghostty, git, neovim, sway, waybar, zsh, etc.)
+- `common/` - Shared configuration (colors.nix, fonts, nix settings, wallpapers)
+- `users/andrew/` - User-specific configuration
+- `secrets/` - sops-nix encrypted secrets
 
-### Directory Layout
+### Configuration Pattern
 
-```
-├── flake.nix              # Main flake defining all host configurations
-├── system/                # System-level NixOS modules (shared across hosts)
-│   ├── audio/
-│   ├── fonts/
-│   ├── i3/
-│   ├── sway/
-│   ├── home-manager/      # Home-manager integration setup
-│   ├── nix/               # Nix daemon and flakes configuration
-│   └── programs/          # System-wide programs
-├── darwin/                # macOS-specific system modules
-│   └── aerospace/
-├── home/                  # Home-manager modules (user environment)
-│   ├── btop/
-│   ├── ghostty/
-│   ├── git/
-│   ├── neovim/
-│   ├── sway/
-│   ├── waybar/
-│   ├── zsh/
-│   └── ...
-├── hosts/                 # Per-host configurations
-│   ├── yorha2b/
-│   ├── yorha9s/
-│   ├── yorhaA2/           # macOS host
-│   ├── bunker/
-│   └── proxmoxnix/
-├── users/andrew/          # User-specific configurations
-│   ├── system/            # System-level user settings
-│   └── home/              # Home-manager user settings
-└── secrets/               # sops-encrypted secrets
-```
-
-### Module System Pattern
-
-All modules follow NixOS's module pattern using `lib.mkEnableOption` and `lib.mkIf`:
+Host configurations (`hosts/<hostname>/default.nix`) follow this pattern:
 
 ```nix
-{ lib, config, ... }:
-with lib;
-let cfg = config.modules.modulename;
-in {
-  options.modules.modulename = { enable = mkEnableOption "description"; };
-  config = mkIf cfg.enable { /* configuration */ };
+{
+  imports = [
+    ./hardware-configuration.nix
+    ../../users/andrew/system
+    inputs.private-config.nixosModules.default  # or darwinModules for macOS
+  ];
+
+  modules = {
+    # System modules
+    audio.enable = true;
+    fonts.enable = true;
+    # ...
+  };
+
+  home-manager.users.andrew = {
+    imports = [
+      ../../home
+      ../../users/andrew/home
+      ../../users/andrew/home/<hostname>
+      inputs.private-config.homeManagerModules.default
+    ];
+
+    modules = {
+      # Home-manager modules
+      ghostty.enable = true;
+      git.enable = true;
+      # ...
+    };
+  };
 }
 ```
 
-Modules are enabled per-host in `hosts/<hostname>/default.nix`:
-```nix
-modules = {
-  audio.enable = true;
-  sway.enable = true;
-  # ...
-};
-```
+### Flake Inputs
 
-### Import Chain
+Key dependencies:
+- `nixpkgs` - nixos-unstable channel
+- `home-manager` - User environment management
+- `sops-nix` - Secrets management
+- `nix-darwin` - macOS system configuration
+- `nixos-hardware` - Hardware-specific presets (used by yorha9s)
+- `ghostty` - Terminal emulator
+- `private-config` - Private configuration in separate repository
 
-**NixOS hosts**:
-1. `flake.nix` → `mkHost` function
-2. → `./system` (system-level modules)
-3. → `./hosts/${hostname}` (host-specific config + hardware-configuration.nix)
-4. → home-manager imports `./home` and user-specific configs from `./users/andrew/`
+## Secrets Management (sops-nix)
 
-**macOS host (yorhaA2)**:
-1. `flake.nix` → `nix-darwin.lib.darwinSystem`
-2. → `./hosts/yorhaA2` (host config)
-3. → `./darwin` (macOS system modules)
-4. → home-manager imports `./home`
+Configuration is in `.sops.yaml` with age keys for each host.
 
-### Secrets Management (sops-nix)
-
-Secrets are encrypted with age keys derived from SSH keys.
-
-**Converting SSH keys to age**:
+### Converting SSH keys to age format:
 ```bash
 # Public key
 ssh-to-age -i ~/.ssh/id_ed25519_yorhaXX_nixconfig_XXXX.pub
@@ -136,48 +127,56 @@ ssh-to-age -i ~/.ssh/id_ed25519_yorhaXX_nixconfig_XXXX.pub
 ssh-to-age -i ~/.ssh/id_ed25519_yorhaXX_nixconfig_XXXX -private-key -o keys.txt
 ```
 
-**Updating secrets after adding new hosts**:
-1. Add public age key to `.sops.yaml`
-2. Place private key in `~/.config/sops/age/keys.txt` on the target machine
-3. Run: `sops updatekeys secrets/<secret_name>`
+### Updating secrets:
 
-**Accessing secrets in modules**:
-```nix
-sops.secrets.secret-name = {
-  sopsFile = ./secrets/secret-name;
-  format = "binary";  # or "yaml", "json"
-};
+Ensure:
+1. Public key is in `.sops.yaml`
+2. Private key is in `~/.config/sops/age/keys.txt`
 
-# Reference in config
-config.sops.secrets.secret-name.path
+Then:
+```bash
+sops updatekeys secrets/<secret_name>
 ```
 
-### External Dependencies
+### Editing secrets:
+```bash
+sops secrets/<secret_name>
+```
 
-- `inputs.private-config`: Private configuration repository (separate flake)
-- `inputs.nixos-hardware`: Hardware-specific NixOS presets
-- `inputs.ghostty`: Ghostty terminal emulator
-- `inputs.nix-minecraft`: Minecraft server modules
+## Initial Setup Notes
 
-## Common Workflows
+For new NixOS installations (yorha2b, yorha9s):
 
-### Adding a New Host
+1. Copy SSH keys to `~/.ssh` with correct permissions:
+```bash
+chmod -R 700 ~/.ssh/
+chmod 600 ~/.ssh/*
+chmod 644 ~/.ssh/*.pub
+```
 
-1. Create `hosts/<hostname>/default.nix` with configuration
-2. Generate hardware config: `nixos-generate-config --show-hardware-config > hosts/<hostname>/hardware-configuration.nix`
-3. Add to `flake.nix` outputs:
-   ```nix
-   nixosConfigurations.<hostname> = mkHost { hostname = "<hostname>"; };
-   ```
-4. Deploy: `sudo nixos-rebuild switch --flake .#<hostname>`
+2. Clone repository:
+```bash
+nix-shell -p git
+git clone git@github.com:andrewyazura/nix-config.git
+```
 
-### Adding a New Module
+3. Copy hardware-configuration.nix from new system:
+```bash
+# Generated hardware config is at /etc/nixos/hardware-configuration.nix
+# Copy to hosts/<hostname>/hardware-configuration.nix
+```
 
-1. Create module directory under `system/`, `darwin/`, or `home/`
-2. Create `default.nix` with the module pattern (see above)
-3. Add import to parent `default.nix`
-4. Enable in host configs: `modules.<modulename>.enable = true;`
+## File Path Conventions
 
-### Modifying Existing Configuration
+- When referencing imports: Use relative paths from the importing file
+- Module imports in `default.nix` files use directory names (e.g., `./audio` imports `./audio/default.nix`)
+- System modules: `system/<module>/default.nix`
+- Home modules: `home/<module>/default.nix`
+- Darwin modules: `darwin/<module>/default.nix`
 
-When editing Nix files, note that changes to `system/` affect system-level config, while `home/` affects user environment. After editing, rebuild with appropriate command for the target host.
+## Development Notes
+
+- Nix flakes and experimental features are enabled globally
+- AllowUnfree packages are enabled
+- Garbage collection runs automatically (weekly on NixOS, see common/nix/default.nix)
+- Configuration uses nixos-unstable for latest packages
