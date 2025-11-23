@@ -27,6 +27,7 @@ in {
         "slack"
         "sol"
         "spotify"
+        "steam"
       ];
     };
     nix.enable = true;
