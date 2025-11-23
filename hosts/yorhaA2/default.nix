@@ -22,12 +22,14 @@ in {
         "discord"
         "firefox"
         "ghostty"
+        "google-chrome"
         "obsidian"
         "signal"
         "slack"
         "sol"
         "spotify"
         "steam"
+        "wootility"
       ];
     };
     nix.enable = true;
