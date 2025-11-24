@@ -112,12 +112,6 @@ in {
         }
 
         {
-          plugin = avante-nvim;
-          config = toLuaFile ./configs/avante.lua;
-        }
-        nui-nvim
-
-        {
           plugin = fzf-lua;
           config = toLuaFile ./configs/fzf.lua;
         }
