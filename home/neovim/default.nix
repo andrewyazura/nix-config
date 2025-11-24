@@ -29,25 +29,21 @@ in {
       extraLuaConfig = builtins.readFile ./configs/config.lua;
 
       extraPackages = with pkgs; [
-        # treesitter
-        nodejs_22
-        tree-sitter
+        nodejs_22 # Required by Avante / Copilot
+        ripgrep # Required by Fzf-lua / Telescope
+        fd # Required by Fzf-lua / Telescope
 
-        # telescope
-        ripgrep
-        fd
-
-        # conform
+        # -- Formatters (Used by Conform) --
         black
         isort
         nixfmt-classic
         stylua
 
-        # lsp
+        # -- LSP Servers --
         go
         gopls
         lua-language-server
-        nil
+        nil # Nix LSP
         pyright
         ruff
       ];
