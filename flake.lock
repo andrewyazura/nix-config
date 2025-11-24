@@ -353,11 +353,11 @@
         "nixpkgs": "nixpkgs_8"
       },
       "locked": {
-        "lastModified": 1763660210,
-        "narHash": "sha256-pvpJsynGLRoZXE/hqYpitfhmzX86kEul5QHclJRBsGM=",
+        "lastModified": 1763950861,
+        "narHash": "sha256-RWDQHdfUxr9ARZifQ8u0E4k441aF76Gb+joMry5ka8E=",
         "ref": "refs/heads/main",
-        "rev": "a9b26a627751d9ac377b5f2dcb01dab2dbf599f7",
-        "revCount": 19,
+        "rev": "76510566b19f41e39b8b48f7407f339922e45018",
+        "revCount": 20,
         "type": "git",
         "url": "ssh://git@github.com/andrewyazura/private-nix-config.git"
       },
