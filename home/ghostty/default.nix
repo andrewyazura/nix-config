@@ -6,11 +6,13 @@ let
 in {
   options.modules.ghostty = {
     enable = mkEnableOption "Enable ghostty configuration";
+
     fontSize = mkOption {
       type = lib.types.int;
       default = 9;
       description = "Ghostty font size";
     };
+
     backgroundOpacity = mkOption {
       type = lib.types.float;
       default = 1.0;

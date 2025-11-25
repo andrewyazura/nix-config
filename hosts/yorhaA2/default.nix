@@ -26,6 +26,13 @@ in {
       imports =
         [ ../../home ../../users/andrew/home ../../users/andrew/home/yorhaA2 ];
 
+      modules = {
+        ghostty = {
+          fontSize = 10;
+          backgroundOpacity = 0.95;
+        };
+      };
+
       home.homeDirectory = lib.mkForce "/Users/${username}";
     };
   };

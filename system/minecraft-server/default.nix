@@ -6,6 +6,7 @@ in {
 
   options.modules.minecraft-server = {
     enable = mkEnableOption "Enable Minecraft server configuration";
+
     servers = mkOption {
       type = types.attrsOf (types.submodule ({
         options = {

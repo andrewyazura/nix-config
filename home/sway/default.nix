@@ -4,6 +4,7 @@ let cfg = config.modules.sway;
 in {
   options.modules.sway = {
     enable = mkEnableOption "Enable sway configuration";
+
     output = mkOption {
       type = types.attrsOf (types.attrsOf types.str);
       default = { };
@@ -11,6 +12,7 @@ in {
         Forward params to wayland.windowManager.sway.config.output
       '';
     };
+
     focus-output = mkOption {
       type = types.nullOr types.str;
       default = "";
