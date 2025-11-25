@@ -2,36 +2,13 @@
 let
   username = "andrew";
   hostname = "yorhaA2";
-  wootingRemap = pkgs.writeShellScriptBin "wooting-remap" ''
-    /usr/bin/hidutil property --matching '{"VendorID": 12771}' --set '{"UserKeyMapping":[
-      {"HIDKeyboardModifierMappingSrc":0x7000000E2,"HIDKeyboardModifierMappingDst":0x7000000E3},
-      {"HIDKeyboardModifierMappingSrc":0x7000000E3,"HIDKeyboardModifierMappingDst":0x7000000E2},
-      {"HIDKeyboardModifierMappingSrc":0x7000000E0,"HIDKeyboardModifierMappingDst":0x7000000E0}
-    ]}'
-  '';
 in {
   imports = [ ../../darwin inputs.private-config.darwinModules.default ];
 
   modules = {
     aerospace.enable = true;
     fonts.enable = true;
-    homebrew = {
-      enable = true;
-      extraCasks = [
-        "bitwarden"
-        "discord"
-        "firefox"
-        "ghostty"
-        "google-chrome"
-        "obsidian"
-        "signal"
-        "slack"
-        "sol"
-        "spotify"
-        "steam"
-        "wootility"
-      ];
-    };
+    homebrew.enable = true;
     nix.enable = true;
     system-defaults.enable = true;
     work.enable = true;
@@ -48,13 +25,6 @@ in {
     users.${username} = {
       imports =
         [ ../../home ../../users/andrew/home ../../users/andrew/home/yorhaA2 ];
-
-      modules = {
-        ghostty = {
-          fontSize = 11;
-          backgroundOpacity = 0.94;
-        };
-      };
 
       home.homeDirectory = lib.mkForce "/Users/${username}";
     };
@@ -77,7 +47,6 @@ in {
       git
       gnupg
       prismlauncher
-      wootingRemap
       yazi
     ];
 

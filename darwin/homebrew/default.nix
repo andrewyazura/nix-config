@@ -4,12 +4,6 @@ let cfg = config.modules.homebrew;
 in {
   options.modules.homebrew = {
     enable = mkEnableOption "Enable homebrew configuration";
-
-    extraCasks = mkOption {
-      type = types.listOf types.str;
-      default = [ ];
-      description = "Additional casks to install";
-    };
   };
 
   config = mkIf cfg.enable {
@@ -19,7 +13,20 @@ in {
         autoUpdate = false;
         cleanup = "zap";
       };
-      casks = cfg.extraCasks;
+
+      casks = [
+        "bitwarden"
+        "discord"
+        "firefox"
+        "ghostty"
+        "google-chrome"
+        "obsidian"
+        "signal"
+        "slack"
+        "sol"
+        "spotify"
+        "wootility"
+      ];
     };
   };
 }
