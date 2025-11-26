@@ -25,6 +25,7 @@ in {
         "slack"
         "sol"
         "spotify"
+        "steam"
         "wootility"
       ];
     };
