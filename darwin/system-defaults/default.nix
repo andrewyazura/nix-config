@@ -36,6 +36,13 @@ in {
         serviceConfig = {
           Label = "com.local.KeyMappingsBuiltin";
           RunAtLoad = true;
+          LaunchEvents = {
+            "com.apple.notifyd.matching" = {
+              "com.local.KeyMappingsBuiltin.wake" = {
+                Notification = "com.apple.screenIsUnlocked";
+              };
+            };
+          };
 
           ProgramArguments = [
             "/usr/bin/hidutil"
