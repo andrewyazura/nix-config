@@ -31,6 +31,11 @@ in {
             "${modifier}-shift-k" = "move up";
             "${modifier}-shift-l" = "move right";
 
+            "${modifier}-ctrl-h" = "move-workspace-to-monitor left";
+            "${modifier}-ctrl-j" = "move-workspace-to-monitor down";
+            "${modifier}-ctrl-k" = "move-workspace-to-monitor up";
+            "${modifier}-ctrl-l" = "move-workspace-to-monitor right";
+
             "${modifier}-b" = "split horizontal";
             "${modifier}-v" = "split vertical";
             "${modifier}-f" = "fullscreen";
@@ -64,7 +69,6 @@ in {
             "${modifier}-shift-0" = "move-node-to-workspace 10";
 
             "${modifier}-shift-c" = "reload-config";
-
             "${modifier}-r" = "mode resize";
           };
 
