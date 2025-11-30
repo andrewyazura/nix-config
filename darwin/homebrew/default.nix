@@ -17,15 +17,11 @@ in {
       casks = [
         "bitwarden"
         "discord"
-        "firefox"
         "ghostty"
-        "google-chrome"
         "obsidian"
         "signal"
         "slack"
-        "sol"
         "spotify"
-        "steam"
         "wootility"
       ];
     };

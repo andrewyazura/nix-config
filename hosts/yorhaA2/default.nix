@@ -47,13 +47,14 @@ in {
 
   environment = {
     systemPackages = with pkgs; [
+      age
       colima
       coreutils-prefixed
       docker
       docker-compose
       git
       gnupg
-      prismlauncher
+      neovim
       yazi
     ];
 

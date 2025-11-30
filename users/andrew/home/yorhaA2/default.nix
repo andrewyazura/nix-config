@@ -4,7 +4,7 @@
 
   sops = {
     age.sshKeyPaths =
-      [ "/Users/andrew/.ssh/id_ed25519_yorhaA2_nixconfig_1811" ];
+      [ "/Users/andrew/.ssh/id_ed25519_yorhaA2_nixconfig_3011" ];
 
     secrets = {
       ssh-config = {
@@ -24,7 +24,7 @@
       matchBlocks = {
         "bunker" = { identityFile = "~/.ssh/id_ed25519_yorhaA2_bunker_2211"; };
         "github.com" = {
-          identityFile = "~/.ssh/id_ed25519_yorhaA2_github_1811";
+          identityFile = "~/.ssh/id_ed25519_yorhaA2_github_3011";
         };
         "proxmoxnix" = {
           identityFile = "~/.ssh/id_ed25519_yorhaA2_proxmoxnix_2211";

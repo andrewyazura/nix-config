@@ -13,14 +13,9 @@ in {
       defaults = {
         ".GlobalPreferences"."com.apple.sound.beep.sound" =
           /System/Library/Sounds/Blow.aiff;
-        NSGlobalDomain.AppleInterfaceStyle = "Dark";
 
         dock = {
           autohide = true;
-          show-recents = false;
-
-          persistent-apps = [ ];
-          persistent-others = [ ];
         };
       };
     };
