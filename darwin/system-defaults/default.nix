@@ -18,7 +18,9 @@ in {
         dock = {
           autohide = true;
           show-recents = false;
+
           persistent-apps = [ ];
+          persistent-others = [ ];
         };
       };
     };

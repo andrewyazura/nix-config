@@ -19,7 +19,6 @@ in {
           mode.main.binding = {
             "${modifier}-enter" =
               "exec-and-forget /Applications/Ghostty.app/Contents/MacOS/ghostty";
-            "${modifier}-d" = "exec-and-forget open -a Sol";
 
             "${modifier}-h" = "focus left";
             "${modifier}-j" = "focus down";
