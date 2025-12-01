@@ -7,10 +7,22 @@ in {
   options.modules.ghostty = {
     enable = mkEnableOption "Enable ghostty configuration";
 
+    fontFamily = mkOption {
+      type = lib.types.str;
+      default = "AdwaitaMono Nerd Font";
+      description = "Ghostty font family";
+    };
+
     fontSize = mkOption {
       type = lib.types.int;
       default = 9;
       description = "Ghostty font size";
+    };
+
+    fontStyle = mkOption {
+      type = lib.types.str;
+      default = "Regular";
+      description = "Ghostty font style";
     };
 
     backgroundOpacity = mkOption {
@@ -28,8 +40,9 @@ in {
 
       settings = {
         background-opacity = cfg.backgroundOpacity;
-        font-family = "AdwaitaMono Nerd Font";
+        font-family = cfg.fontFamily;
         font-size = cfg.fontSize;
+        font-style = cfg.fontStyle;
         shell-integration-features = [ "ssh-terminfo" "ssh-env" ];
         theme = "Catppuccin Mocha";
         window-decoration = "server";

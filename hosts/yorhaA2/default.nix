@@ -28,8 +28,10 @@ in {
 
       modules = {
         ghostty = {
-          fontSize = 10;
-          backgroundOpacity = 0.95;
+          backgroundOpacity = 0.94;
+          fontFamily = "SF Mono";
+          fontSize = 12;
+          fontStyle = "SemiBold";
         };
       };
 

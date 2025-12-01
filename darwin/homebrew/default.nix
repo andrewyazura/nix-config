@@ -17,6 +17,7 @@ in {
       casks = [
         "bitwarden"
         "discord"
+        "firefox"
         "ghostty"
         "obsidian"
         "signal"

@@ -22,12 +22,12 @@
     ssh = {
       includes = [ config.sops.secrets.ssh-config.path ];
       matchBlocks = {
-        "bunker" = { identityFile = "~/.ssh/id_ed25519_yorhaA2_bunker_2211"; };
+        "bunker" = { identityFile = "~/.ssh/id_ed25519_yorhaA2_bunker_0112"; };
         "github.com" = {
           identityFile = "~/.ssh/id_ed25519_yorhaA2_github_3011";
         };
         "proxmoxnix" = {
-          identityFile = "~/.ssh/id_ed25519_yorhaA2_proxmoxnix_2211";
+          identityFile = "~/.ssh/id_ed25519_yorhaA2_proxmoxnix_0112";
         };
       };
     };
