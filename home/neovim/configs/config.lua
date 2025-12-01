@@ -52,7 +52,7 @@ vim.lsp.config("pyright", {
 		python = {
 			analysis = {
 				diagnosticMode = "workspace",
-				typeCheckingMode = "basic",
+				typeCheckingMode = "standard",
 			},
 		},
 	},

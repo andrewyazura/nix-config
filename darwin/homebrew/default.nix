@@ -19,10 +19,12 @@ in {
         "discord"
         "firefox"
         "ghostty"
+        "google-chrome"
         "obsidian"
         "signal"
         "slack"
         "spotify"
+        "steam"
         "wootility"
       ];
     };

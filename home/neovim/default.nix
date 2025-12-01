@@ -40,12 +40,10 @@ in {
         stylua
 
         # -- LSP Servers --
-        go
         gopls
         lua-language-server
         nil # Nix LSP
         pyright
-        ruff
       ];
 
       plugins = with pkgs.vimPlugins; [
