@@ -5,24 +5,6 @@ vim.lsp.config("*", {
 	root_markers = { ".git" },
 })
 
-vim.lsp.enable("gopls")
-vim.lsp.config("gopls", {
-	cmd = { "gopls" },
-	filetypes = { "go", "gomod", "gowork", "gotmpl" },
-	settings = {
-		gopls = {
-			experimentalPostfixCompletions = true,
-			analyses = {
-				unusedparams = true,
-				shadow = true,
-			},
-			staticcheck = true,
-			usePlaceholders = false,
-			completeFunctionCalls = false,
-		},
-	},
-})
-
 vim.lsp.enable("lua_ls")
 vim.lsp.config("lua_ls", {
 	cmd = { "lua-language-server" },

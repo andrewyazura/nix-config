@@ -2,7 +2,6 @@ local conform = require("conform")
 
 conform.setup({
 	formatters_by_ft = {
-		go = { "goimports", "gofmt" },
 		lua = { "stylua" },
 		nix = { "nixfmt" },
 		python = { "black", "isort", "ruff_format" },

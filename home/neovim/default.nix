@@ -40,7 +40,6 @@ in {
         stylua
 
         # -- LSP Servers --
-        gopls
         lua-language-server
         nil # Nix LSP
         pyright
@@ -55,8 +54,6 @@ in {
 
         diffview-nvim
         nvim-web-devicons
-        mini-icons
-        plenary-nvim
 
         {
           plugin = gitsigns-nvim;
@@ -72,11 +69,9 @@ in {
         cmp-nvim-lsp
         cmp-buffer
 
-        telescope-nvim
-
         {
-          plugin = nvim-treesitter.withPlugins
-            (p: [ p.nix p.go p.python p.lua p.vimdoc ]);
+          plugin =
+            nvim-treesitter.withPlugins (p: [ p.nix p.python p.lua p.vimdoc ]);
           config = toLuaFile ./configs/treesitter.lua;
         }
         nvim-treesitter-context
