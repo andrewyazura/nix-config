@@ -26,22 +26,16 @@ in {
       vimAlias = true;
       vimdiffAlias = true;
 
-      extraLuaConfig = builtins.readFile ./configs/config.lua;
-
       extraPackages = with pkgs; [
-        nodejs_22 # Required by Avante / Copilot
-        ripgrep # Required by Fzf-lua / Telescope
-        fd # Required by Fzf-lua / Telescope
+        ripgrep
+        fd
 
-        # -- Formatters (Used by Conform) --
-        black
-        isort
+        ruff
         nixfmt-classic
         stylua
 
-        # -- LSP Servers --
         lua-language-server
-        nil # Nix LSP
+        nil
         pyright
       ];
 

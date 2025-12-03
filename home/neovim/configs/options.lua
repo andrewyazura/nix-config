@@ -24,7 +24,45 @@ require("catppuccin").setup({
 
 vim.cmd([[colorscheme catppuccin]])
 
-vim.keymap.set("", "<up>", "<nop>", { noremap = true })
-vim.keymap.set("", "<down>", "<nop>", { noremap = true })
-vim.keymap.set("i", "<up>", "<nop>", { noremap = true })
-vim.keymap.set("i", "<down>", "<nop>", { noremap = true })
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+vim.lsp.config("*", {
+	capabilities = capabilities,
+	root_markers = { ".git" },
+})
+
+vim.lsp.enable("lua_ls")
+vim.lsp.config("lua_ls", {
+	cmd = { "lua-language-server" },
+	filetypes = { "lua" },
+	settings = {
+		Lua = {
+			diagnostics = {
+				globals = {
+					"vim",
+				},
+			},
+		},
+	},
+})
+
+vim.lsp.enable("nil_ls")
+vim.lsp.config("nil_ls", {
+	cmd = { "nil" },
+	filetypes = { "nix" },
+})
+
+vim.lsp.enable("pyright")
+vim.lsp.config("pyright", {
+	cmd = { "pyright-langserver", "--stdio" },
+	filetypes = { "python" },
+	settings = {
+		python = {
+			analysis = {
+				diagnosticMode = "workspace",
+				typeCheckingMode = "standard",
+				useLibraryCodeForTypes = true,
+			},
+		},
+	},
+})

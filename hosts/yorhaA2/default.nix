@@ -57,6 +57,7 @@ in {
       git
       gnupg
       neovim
+      prismlauncher
       yazi
     ];
 
