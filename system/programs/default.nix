@@ -13,7 +13,7 @@ in {
         inputs.ghostty.packages.x86_64-linux.default
 
         bitwarden-desktop
-        chromium
+        ungoogled-chromium
         discord
         firefox
         gemini-cli
