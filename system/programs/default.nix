@@ -13,7 +13,7 @@ in {
         inputs.ghostty.packages.x86_64-linux.default
 
         bitwarden-desktop
-        ungoogled-chromium
+        chromium
         discord
         firefox
         gemini-cli
@@ -21,6 +21,7 @@ in {
         obsidian
         signal-desktop
         spotify
+        vesktop
 
         age
         fastfetch
