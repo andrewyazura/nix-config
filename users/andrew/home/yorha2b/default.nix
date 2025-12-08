@@ -1,5 +1,8 @@
 { config, ... }: {
-  modules = { work.enable = true; };
+  modules = {
+    syncthing.enable = true;
+    work.enable = true;
+  };
   home.stateVersion = "24.11";
 
   sops = {

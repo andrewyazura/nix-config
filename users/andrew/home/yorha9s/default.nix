@@ -1,6 +1,7 @@
 { config, ... }: {
   modules = {
     stuff.enable = true;
+    syncthing.enable = true;
     work.enable = true;
   };
   home.stateVersion = "24.11";

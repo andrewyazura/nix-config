@@ -20,11 +20,6 @@
       enable = true;
       enableMinecraft = true;
     };
-
-    syncthing = {
-      enable = true;
-      username = "andrew";
-    };
   };
 
   home-manager.users.andrew = {
