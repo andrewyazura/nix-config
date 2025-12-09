@@ -13,8 +13,9 @@ cmp.setup({
 		["<C-c>"] = cmp.mapping.abort(),
 	}),
 	sources = cmp.config.sources({
-		{ name = "nvim_lsp" },
 		{ name = "nvim_lsp_signature_help" },
+	}, {
+		{ name = "nvim_lsp" },
 	}, {
 		{ name = "buffer" },
 	}),
@@ -22,10 +23,11 @@ cmp.setup({
 
 cmp.setup.cmdline({ "/", "?" }, {
 	mapping = cmp.mapping.preset.cmdline(),
-	sources = {
+	sources = cmp.config.sources({
 		{ name = "nvim_lsp_document_symbol" },
+	}, {
 		{ name = "buffer" },
-	},
+	}),
 })
 
 cmp.setup.cmdline(":", {

@@ -27,6 +27,8 @@ in {
       vimdiffAlias = true;
 
       extraPackages = with pkgs; [
+        tree-sitter
+
         ripgrep
         fd
 
@@ -47,7 +49,7 @@ in {
         }
 
         diffview-nvim
-        nvim-web-devicons
+        nvim-web-devicons # for diffview-nvim
 
         {
           plugin = gitsigns-nvim;
@@ -58,19 +60,21 @@ in {
           plugin = nvim-cmp;
           config = toLuaFile ./configs/cmp.lua;
         }
-        cmp-cmdline
-        cmp-path
-        cmp-nvim-lsp
-        cmp-buffer
+        cmp-buffer # for nvim-cmp
+        cmp-cmdline # for nvim-cmp
+        cmp-nvim-lsp # for nvim-cmp
+        cmp-nvim-lsp-document-symbol # for nvim-cmp
+        cmp-nvim-lsp-signature-help # for nvim-cmp
+        cmp-path # for nvim-cmp
 
         {
           plugin =
             nvim-treesitter.withPlugins (p: [ p.nix p.python p.lua p.vimdoc ]);
           config = toLuaFile ./configs/treesitter.lua;
         }
-        nvim-treesitter-context
-        nvim-treesitter-refactor
-        nvim-treesitter-textobjects
+        nvim-treesitter-context # for nvim-treesitter
+        nvim-treesitter-refactor # for nvim-treesitter
+        nvim-treesitter-textobjects # for nvim-treesitter
 
         {
           plugin = which-key-nvim;
