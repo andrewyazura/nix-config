@@ -27,8 +27,6 @@ in {
       vimdiffAlias = true;
 
       extraPackages = with pkgs; [
-        tree-sitter
-
         ripgrep
         fd
 
@@ -106,6 +104,17 @@ in {
           plugin = fzf-lua;
           config = toLuaFile ./configs/fzf.lua;
         }
+
+        hardtime-nvim
+        flash-nvim
+
+        {
+          plugin = nvim-dap;
+          config = toLuaFile ./configs/dap.lua;
+        }
+        nvim-dap-virtual-text
+        nvim-dap-ui
+        nvim-nio # for nvim-dap-ui
       ];
     };
   };
