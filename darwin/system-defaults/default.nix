@@ -11,11 +11,61 @@ in {
 
     system = {
       defaults = {
-        ".GlobalPreferences"."com.apple.sound.beep.sound" =
-          /System/Library/Sounds/Blow.aiff;
+        ".GlobalPreferences" = {
+          "com.apple.sound.beep.sound" = "/System/Library/Sounds/Blow.aiff";
+        };
+
+        NSGlobalDomain = {
+          "com.apple.springing.enabled" = true;
+          "com.apple.swipescrolldirection" = true;
+          "com.apple.trackpad.forceClick" = true;
+          NSAutomaticCapitalizationEnabled = false;
+          NSAutomaticPeriodSubstitutionEnabled = false;
+        };
 
         dock = {
           autohide = true;
+          orientation = "bottom";
+          show-recents = true;
+          wvous-bl-corner = 1;
+          wvous-br-corner = 1;
+        };
+
+        finder = {
+          AppleShowAllExtensions = true;
+          AppleShowAllFiles = true;
+          FXPreferredViewStyle = "Nlsv"; # list view
+        };
+
+        menuExtraClock = {
+          FlashDateSeparators = false;
+          IsAnalog = false;
+          Show24Hour = true;
+          ShowDate = 1;
+          ShowDayOfMonth = true;
+          ShowDayOfWeek = true;
+          ShowSeconds = true;
+        };
+
+        CustomUserPreferences = {
+          "com.apple.symbolichotkeys" = {
+            AppleSymbolicHotKeys = {
+              "60" = {
+                enabled = false;
+                value = {
+                  parameters = [ 32 49 262144 ];
+                  type = "standard";
+                };
+              };
+              "61" = {
+                enabled = false;
+                value = {
+                  parameters = [ 32 49 786432 ];
+                  type = "standard";
+                };
+              };
+            };
+          };
         };
       };
     };
