@@ -18,6 +18,7 @@ in {
         "bitwarden"
         "discord"
         "firefox"
+        "focusrite-control-2"
         "ghostty"
         "google-chrome"
         "obsidian"
