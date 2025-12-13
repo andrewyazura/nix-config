@@ -66,8 +66,21 @@ in {
         cmp-path # for nvim-cmp
 
         {
-          plugin =
-            nvim-treesitter.withPlugins (p: [ p.nix p.python p.lua p.vimdoc ]);
+          plugin = nvim-treesitter.withPlugins (p: [
+            p.css
+            p.go
+            p.html
+            p.javascript
+            p.json
+            p.kotlin
+            p.lua
+            p.nix
+            p.python
+            p.rust
+            p.toml
+            p.vimdoc
+            p.yaml
+          ]);
           config = toLuaFile ./configs/treesitter.lua;
         }
         nvim-treesitter-context # for nvim-treesitter
