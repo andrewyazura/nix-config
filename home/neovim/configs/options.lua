@@ -66,3 +66,9 @@ vim.lsp.config("pyright", {
 		},
 	},
 })
+
+vim.lsp.enable("typescript")
+vim.lsp.config("typescript", {
+	cmd = { "typescript-language-server", "--stdio" },
+	filetypes = { "typescript" },
+})

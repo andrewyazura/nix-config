@@ -37,6 +37,7 @@ in {
         lua-language-server
         nil
         pyright
+        typescript-language-server
       ];
 
       plugins = with pkgs.vimPlugins; [
@@ -78,6 +79,7 @@ in {
             p.python
             p.rust
             p.toml
+            p.typescript
             p.vimdoc
             p.yaml
           ]);
