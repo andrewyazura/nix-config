@@ -2,7 +2,7 @@
   imports = [
     ./audio
     ./fonts
-    ./guitar
+    ./gnome
     ./home-manager
     ./i3
     ./minecraft-server

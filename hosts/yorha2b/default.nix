@@ -9,10 +9,10 @@
   modules = {
     audio.enable = true;
     fonts.enable = true;
-    guitar.enable = true;
+    gnome.enable = true;
     networking.enable = true;
     nix.enable = true;
-    sway.enable = true;
+    sway.enable = false;
     wooting.enable = true;
     work.enable = true;
 
@@ -32,9 +32,10 @@
     ];
 
     modules = {
-      waybar.enable = true;
+      gnome.enable = true;
+
       sway = {
-        enable = true;
+        enable = false;
         output = {
           DP-3 = {
             position = "0 0";
@@ -48,7 +49,7 @@
           };
         };
 
-        focus-output = "HDMI-A-1";
+        focus-output = "DP-3";
       };
     };
   };
