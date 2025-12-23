@@ -37,6 +37,7 @@ in {
         lua-language-server
         nil
         pyright
+        ty
         typescript-language-server
       ];
 

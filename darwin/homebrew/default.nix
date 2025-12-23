@@ -21,6 +21,7 @@ in {
         "focusrite-control-2"
         "ghostty"
         "google-chrome"
+        "obsidian"
         "signal"
         "slack"
         "spotify"

@@ -5,6 +5,7 @@ conform.setup({
 		lua = { "stylua" },
 		nix = { "nixfmt" },
 		python = { "ruff_organize_imports", "ruff_format" },
+		json = { "jq" },
 	},
 })
 
