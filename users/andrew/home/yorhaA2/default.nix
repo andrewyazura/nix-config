@@ -42,6 +42,8 @@
 
         secret_file="${config.sops.secrets.anthropic-api-key.path}"
         export AVANTE_ANTHROPIC_API_KEY=$(cat "$secret_file")
+
+        eval "$(/opt/homebrew/bin/brew shellenv)"
       '';
     };
   };

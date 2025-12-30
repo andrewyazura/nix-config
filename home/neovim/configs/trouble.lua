@@ -1,7 +1,15 @@
 local trouble = require("trouble")
 
 trouble.setup({
-	win = { position = "right", size = 0.4 },
+	win = { position = "bottom", size = 0.4 },
+	modes = {
+		lsp_references = {
+			follow = false,
+			params = {
+				refresh = true,
+			},
+		},
+	},
 })
 
 vim.keymap.set("n", "<leader>trd", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>", { desc = "buffer diagnostics" })

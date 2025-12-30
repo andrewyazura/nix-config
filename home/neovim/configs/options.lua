@@ -52,7 +52,7 @@ vim.lsp.config("nil_ls", {
 	filetypes = { "nix" },
 })
 
--- vim.lsp.enable("pyright")
+vim.lsp.enable("pyright")
 vim.lsp.config("pyright", {
 	cmd = { "pyright-langserver", "--stdio" },
 	filetypes = { "python" },
@@ -68,12 +68,12 @@ vim.lsp.config("pyright", {
 })
 
 vim.lsp.enable("ty")
-vim.lsp.config("ty", {
-	filetypes = { "python" },
-	settings = {
-		ty = {},
-	},
-})
+-- vim.lsp.config("ty", {
+-- 	filetypes = { "python" },
+-- 	settings = {
+-- 		ty = {},
+-- 	},
+-- })
 
 vim.lsp.enable("typescript_ls")
 vim.lsp.config("typescript_ls", {
