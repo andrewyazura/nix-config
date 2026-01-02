@@ -22,11 +22,13 @@ in {
         "ghostty"
         "google-chrome"
         "obsidian"
+        "proxyman"
         "signal"
         "slack"
         "spotify"
         "steam"
         "wootility"
+        "zen"
       ];
     };
   };
