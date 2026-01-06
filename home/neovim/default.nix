@@ -34,9 +34,9 @@ in {
         nixfmt-classic
         stylua
 
+        basedpyright
         lua-language-server
         nil
-        pyright
         ty
         typescript-language-server
       ];
