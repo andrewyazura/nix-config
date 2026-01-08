@@ -16,9 +16,6 @@ in {
         };
 
         NSGlobalDomain = {
-          "com.apple.springing.enabled" = true;
-          "com.apple.swipescrolldirection" = true;
-          "com.apple.trackpad.forceClick" = true;
           NSAutomaticCapitalizationEnabled = false;
           NSAutomaticPeriodSubstitutionEnabled = false;
         };
@@ -34,7 +31,6 @@ in {
         finder = {
           AppleShowAllExtensions = true;
           AppleShowAllFiles = true;
-          FXPreferredViewStyle = "Nlsv"; # list view
         };
 
         menuExtraClock = {

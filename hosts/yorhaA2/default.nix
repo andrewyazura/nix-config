@@ -30,7 +30,7 @@ in {
         ghostty = {
           backgroundOpacity = 0.94;
           fontFamily = "SF Mono";
-          fontSize = 10;
+          fontSize = 12;
           fontStyle = "SemiBold";
         };
       };

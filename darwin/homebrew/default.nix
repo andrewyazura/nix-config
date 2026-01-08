@@ -21,6 +21,7 @@ in {
         "focusrite-control-2"
         "ghostty"
         "google-chrome"
+        "mos"
         "obsidian"
         "proxyman"
         "signal"
