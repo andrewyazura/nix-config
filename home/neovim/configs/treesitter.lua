@@ -7,25 +7,6 @@ require("nvim-treesitter.configs").setup({
 	indent = {
 		enable = true,
 	},
-	refactor = {
-		highlight_definitions = {
-			enable = true,
-			clear_on_cursor_move = true,
-		},
-		highlight_current_scope = {
-			-- only highlights functions
-			enable = false,
-		},
-		smart_rename = {
-			enable = true,
-			keymaps = {
-				smart_rename = "<leader>R",
-			},
-		},
-		navigation = {
-			enable = true,
-		},
-	},
 	textobjects = {
 		select = {
 			enable = true,
@@ -34,9 +15,6 @@ require("nvim-treesitter.configs").setup({
 				["if"] = "@function.inner",
 			},
 		},
-	},
-	playground = {
-		enable = true,
 	},
 })
 
