@@ -21,15 +21,12 @@ in {
         "focusrite-control-2"
         "ghostty"
         "google-chrome"
-        "mos"
+        "mos" # xattr -d com.apple.quarantine /Applications/Mos.app
         "obsidian"
-        "proxyman"
         "signal"
         "slack"
         "spotify"
         "steam"
-        "wootility"
-        "zen"
       ];
     };
   };

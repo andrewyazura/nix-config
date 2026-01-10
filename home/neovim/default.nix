@@ -31,7 +31,7 @@ in {
         fd
 
         ruff
-        nixfmt-classic
+        nixfmt
         stylua
 
         basedpyright
