@@ -87,7 +87,6 @@ in {
           config = toLuaFile ./configs/treesitter.lua;
         }
         nvim-treesitter-context # for nvim-treesitter
-        nvim-treesitter-refactor # for nvim-treesitter
         nvim-treesitter-textobjects # for nvim-treesitter
 
         {
