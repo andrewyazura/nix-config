@@ -43,7 +43,7 @@ in {
 
         serverTemplate = {
           enable = true;
-          package = pkgs.fabricServers.fabric-1_21_10;
+          package = pkgs.fabricServers.fabric-1_21_11;
 
           symlinks.mods = pkgs.linkFarmFromDrvs "mods" (attrValues mods);
 
