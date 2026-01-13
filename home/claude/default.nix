@@ -7,8 +7,6 @@ with lib;
 let
   cfg = config.modules.claude;
 
-  bashCmds = cmds: map (cmd: "Bash(${cmd})") cmds;
-  webDomains = domains: map (domain: "WebFetch(domain:${domain})") domains;
 in
 {
   options.modules.claude = {
@@ -18,95 +16,74 @@ in
   config = mkIf cfg.enable {
     programs.claude-code = {
       enable = true;
+      memory.source = ./memory.md;
 
-      memory.text = ''
-        # Global Preferences
-
-        ## Communication
-        - When coding: be concise and informative
-        - When planning/brainstorming: ultrathink deeply, present ALL viable options with trade-offs so I can make informed decisions
-
-        ## Workflow
-        Follow this sequence for implementation tasks:
-
-        1. **Explore & Plan**: Research the codebase thoroughly. Present options. Do NOT write code yet.
-        2. **Design**: Write function signatures, type definitions, data structures. Validate they compose correctly.
-        3. **Test**: Write tests that verify the signatures/types work as intended.
-        4. **Implement**: Write the implementation. Run tests. Iterate until green.
-
-        If signatures don't compose well → return to planning.
-        If tests reveal design flaws → return to signatures.
-
-        ## Code Philosophy
-        - Functional programming: pure functions, composition, declarative style
-        - Immutability by default
-        - Error handling via Result/Either monads - no exceptions for control flow
-        - Make illegal states unrepresentable through types
-        - Explicit over implicit
-        - Delete dead code, don't comment it out
-
-        ## Safety
-        - Never skip tests or verification steps
-        - Never commit secrets, credentials, or API keys
-        - Warn before destructive operations
-        - Check for existing patterns before introducing new ones
-
-        ## Environment
-        - Shell: zsh
-        - Editor: neovim
-        - Search: fd, rg (ripgrep)
-        - JSON: jq
-      '';
+      commandsDir = ./commands;
+      skillsDir = ./skills;
 
       settings = {
         alwaysThinkingEnabled = true;
         cleanupPeriodDays = 30;
         model = "opusplan";
         outputStyle = "Explanatory";
+        planningMode = "auto";
         respectGitignore = true;
 
-        permissions = {
-          allow = [
-            "Edit"
-            "Skill"
-            "WebSearch"
-            "Write"
-          ]
-          ++ bashCmds [
-            "tree *"
-            "wc *"
-            "diff *"
-            "jq *"
-          ]
-          ++ webDomains [
-            "*.github.com"
-            "*.githubusercontent.com"
-          ];
+        permissions =
+          let
+            bashCmds = cmds: map (cmd: "Bash(${cmd})") cmds;
+          in
+          {
+            allow = [
+              "Edit"
+              "Skill"
+              "WebFetch"
+              "WebSearch"
+              "Write"
+            ]
+            ++ bashCmds [
+              "ls *"
+              "tree *"
 
-          deny = [
-            "Read(.env)"
-            "Read(.env.*)"
-            "Read(**/.env)"
-            "Read(**/.env.*)"
+              "head *"
+              "tail *"
 
-            "Read(~/.ssh/*)"
-            "Read(~/.aws/*)"
-            "Read(~/.config/sops/*)"
-            "Read(**/secrets/**)"
-            "Read(**/*credentials*)"
-            "Read(**/*.pem)"
-            "Read(**/*.key)"
-          ];
-        };
+              "wc *"
+              "diff *"
+              "jq *"
+              "rg *"
+              "fd *"
+
+              "git log *"
+              "git diff *"
+              "git show *"
+              "git blame *"
+            ];
+
+            deny = [
+              "Read(.env)"
+              "Read(.env.*)"
+              "Read(**/.env)"
+              "Read(**/.env.*)"
+
+              "Read(~/.ssh/*)"
+              "Read(~/.aws/*)"
+              "Read(~/.config/sops/*)"
+              "Read(**/secrets/**)"
+              "Read(**/*credentials*)"
+              "Read(**/*.pem)"
+              "Read(**/*.key)"
+            ];
+          };
 
         hooks = { };
 
         env = {
           CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR = 1;
-          CLAUDE_CODE_SHELL = "zsh";
           CLAUDE_CODE_DISABLE_TERMINAL_TITLE = 0;
-          DISABLE_TELEMETRY = 1;
+          CLAUDE_CODE_SHELL = "zsh";
           DISABLE_NON_ESSENTIAL_MODEL_CALLS = 1;
+          DISABLE_TELEMETRY = 1;
         };
       };
     };
