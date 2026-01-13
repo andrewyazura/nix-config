@@ -72,29 +72,16 @@ vim.lsp.config("basedpyright", {
 	},
 })
 
--- vim.lsp.enable("pyright")
--- vim.lsp.config("pyright", {
--- 	cmd = { "pyright-langserver", "--stdio" },
--- 	filetypes = { "python" },
--- 	settings = {
--- 		python = {
--- 			analysis = {
--- 				diagnosticMode = "openFilesOnly",
--- 				typeCheckingMode = "standard",
--- 				useLibraryCodeForTypes = true,
--- 				autoSearchPaths = true,
--- 			},
--- 		},
--- 	},
--- })
-
 vim.lsp.enable("ty")
--- vim.lsp.config("ty", {
--- 	filetypes = { "python" },
--- 	settings = {
--- 		ty = {},
--- 	},
--- })
+vim.lsp.config("ty", {
+	cmd = { "ty", "server" },
+	filetypes = { "python" },
+	settings = {
+		ty = {
+			diagnosticMode = "openFilesOnly",
+		},
+	},
+})
 
 vim.lsp.enable("typescript_ls")
 vim.lsp.config("typescript_ls", {
