@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  pkgs,
   ...
 }:
 with lib;
@@ -14,6 +15,10 @@ in
   };
 
   config = mkIf cfg.enable {
+    home.packages = with pkgs; [
+      nodejs_24 # provides npx for mcp
+    ];
+
     programs.claude-code = {
       enable = true;
       memory.source = ./memory.md;
@@ -84,6 +89,32 @@ in
           CLAUDE_CODE_SHELL = "zsh";
           DISABLE_NON_ESSENTIAL_MODEL_CALLS = 1;
           DISABLE_TELEMETRY = 1;
+        };
+      };
+
+      mcpServers = {
+        context7 = {
+          command = "npx";
+          args = [
+            "-y"
+            "@upstash/context7-mcp"
+          ];
+        };
+
+        memory = {
+          command = "npx";
+          args = [
+            "-y"
+            "@modelcontextprotocol/server-memory"
+          ];
+        };
+
+        filesystem = {
+          command = "npx";
+          args = [
+            "-y"
+            "@modelcontextprotocol/server-filesystem"
+          ];
         };
       };
     };
