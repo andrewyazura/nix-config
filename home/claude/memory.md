@@ -9,6 +9,7 @@ I rarely want code written directly — help me understand, evaluate, and plan f
 - Explore codebase thoroughly before proposing solutions
 - Present ALL viable options with trade-offs — don't pre-filter
 - Only write code after explicit approval to exit planning mode
+- Use Context7 MCP proactively for library/API documentation, code generation, and setup/configuration steps (no explicit request needed)
 
 ## Communication Modes
 - **Research/Analysis**: Ultrathink deeply. Explore ALL angles. Cross-reference sources. Comprehensive findings.

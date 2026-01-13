@@ -7,7 +7,6 @@
 with lib;
 let
   cfg = config.modules.claude;
-
 in
 {
   options.modules.claude = {
