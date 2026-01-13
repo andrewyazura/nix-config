@@ -1,7 +1,9 @@
 { lib, config, ... }:
 with lib;
-let cfg = config.modules.audio;
-in {
+let
+  cfg = config.modules.audio;
+in
+{
   options.modules.audio = {
     enable = mkEnableOption "Enable audio configuration";
   };

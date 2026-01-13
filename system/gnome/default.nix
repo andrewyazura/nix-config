@@ -1,7 +1,14 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 with lib;
-let cfg = config.modules.gnome;
-in {
+let
+  cfg = config.modules.gnome;
+in
+{
   options.modules.gnome = {
     enable = mkEnableOption "Enable gnome configuration";
   };
@@ -17,7 +24,10 @@ in {
     };
 
     environment = {
-      systemPackages = with pkgs; [ dconf gnomeExtensions.pop-shell ];
+      systemPackages = with pkgs; [
+        dconf
+        gnomeExtensions.pop-shell
+      ];
     };
   };
 }

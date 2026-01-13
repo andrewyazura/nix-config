@@ -1,5 +1,9 @@
-{ lib, pkgs, ... }: {
-  imports = [ ./hardware-configuration.nix ../../users/andrew/system ];
+{ lib, pkgs, ... }:
+{
+  imports = [
+    ./hardware-configuration.nix
+    ../../users/andrew/system
+  ];
 
   modules = {
     minecraft-server = {
@@ -7,14 +11,19 @@
       servers.bombas = {
         jvmOpts = "-Xms8192M -Xmx8192M";
 
-        serverProperties = { server-port = 25567; };
+        serverProperties = {
+          server-port = 25567;
+        };
       };
     };
     nix.enable = true;
   };
 
   home-manager.users.andrew = {
-    imports = [ ../../home ../../users/andrew/home ];
+    imports = [
+      ../../home
+      ../../users/andrew/home
+    ];
 
     home.stateVersion = "24.11";
   };
@@ -24,7 +33,10 @@
     trusted-users = [ "@wheel" ];
   };
 
-  environment.systemPackages = with pkgs; [ vim git ];
+  environment.systemPackages = with pkgs; [
+    vim
+    git
+  ];
 
   documentation.nixos.enable = false;
   time.timeZone = lib.mkForce "Europe/London";
@@ -48,7 +60,10 @@
 
     yaroslav = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "networkmanager" ];
+      extraGroups = [
+        "wheel"
+        "networkmanager"
+      ];
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFWEorstb+zss69piBaqSnRyzLboRrKocxS0Nql9aIvH Hetzner"
       ];
@@ -77,7 +92,11 @@
   networking = {
     hostName = "nixos";
     networkmanager.enable = true;
-    firewall.allowedTCPPorts = [ 22 443 8443 ];
+    firewall.allowedTCPPorts = [
+      22
+      443
+      8443
+    ];
   };
 
   system.stateVersion = "25.05";

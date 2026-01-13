@@ -1,10 +1,18 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 with lib;
 let
   cfg = config.modules.waybar;
   colors = import ../../common/colors.nix;
-in {
-  options.modules.waybar = { enable = mkEnableOption "Enable waybar"; };
+in
+{
+  options.modules.waybar = {
+    enable = mkEnableOption "Enable waybar";
+  };
 
   config = mkIf cfg.enable {
     programs.waybar = {
@@ -17,7 +25,12 @@ in {
           height = 24;
           modules-left = [ "sway/workspaces" ];
           modules-center = [ ];
-          modules-right = [ "network" "pulseaudio" "clock" "battery" ];
+          modules-right = [
+            "network"
+            "pulseaudio"
+            "clock"
+            "battery"
+          ];
 
           "sway/workspaces" = {
             disable-scroll = true;
@@ -44,7 +57,14 @@ in {
             format-disconnected = "not connected";
             tooltip-format = "{ipaddr}";
 
-            format-icons = [ "▁" "▂" "▃" "▅" "▇" "█" ];
+            format-icons = [
+              "▁"
+              "▂"
+              "▃"
+              "▅"
+              "▇"
+              "█"
+            ];
           };
         };
       };

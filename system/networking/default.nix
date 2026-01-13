@@ -1,7 +1,14 @@
-{ lib, config, hostname, ... }:
+{
+  lib,
+  config,
+  hostname,
+  ...
+}:
 with lib;
-let cfg = config.modules.networking;
-in {
+let
+  cfg = config.modules.networking;
+in
+{
   options.modules.networking = {
     enable = mkEnableOption "Enable networking configuration";
   };

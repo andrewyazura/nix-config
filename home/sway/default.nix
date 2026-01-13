@@ -1,7 +1,14 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 with lib;
-let cfg = config.modules.sway;
-in {
+let
+  cfg = config.modules.sway;
+in
+{
   options.modules.sway = {
     enable = mkEnableOption "Enable sway configuration";
 
@@ -39,38 +46,42 @@ in {
           border = 2;
         };
 
-        colors = let colors = import ../../common/colors.nix;
-        in {
-          focused = {
-            border = colors.mauve;
-            background = colors.mauve;
-            text = colors.base;
-            indicator = colors.mauve;
-            childBorder = colors.mauve;
+        colors =
+          let
+            colors = import ../../common/colors.nix;
+          in
+          {
+            focused = {
+              border = colors.mauve;
+              background = colors.mauve;
+              text = colors.base;
+              indicator = colors.mauve;
+              childBorder = colors.mauve;
+            };
+            unfocused = {
+              border = colors.base;
+              background = colors.base;
+              text = colors.text;
+              indicator = colors.base;
+              childBorder = colors.base;
+            };
+            urgent = {
+              border = colors.red;
+              background = colors.red;
+              text = colors.base;
+              indicator = colors.red;
+              childBorder = colors.red;
+            };
           };
-          unfocused = {
-            border = colors.base;
-            background = colors.base;
-            text = colors.text;
-            indicator = colors.base;
-            childBorder = colors.base;
-          };
-          urgent = {
-            border = colors.red;
-            background = colors.red;
-            text = colors.base;
-            indicator = colors.red;
-            childBorder = colors.red;
-          };
-        };
 
         modifier = "Mod4";
         terminal = "ghostty";
-        menu = let
-          colors = import ../../common/colors.nix;
-          args =
-            "-fn 'AdwaitaMono-12' -nb '${colors.crust}' -nf '${colors.text}' -sb '${colors.mauve}' -sf '${colors.base}'";
-        in "${pkgs.dmenu}/bin/dmenu_path | ${pkgs.dmenu}/bin/dmenu ${args} | ${pkgs.findutils}/bin/xargs swaymsg exec --";
+        menu =
+          let
+            colors = import ../../common/colors.nix;
+            args = "-fn 'AdwaitaMono-12' -nb '${colors.crust}' -nf '${colors.text}' -sb '${colors.mauve}' -sf '${colors.base}'";
+          in
+          "${pkgs.dmenu}/bin/dmenu_path | ${pkgs.dmenu}/bin/dmenu ${args} | ${pkgs.findutils}/bin/xargs swaymsg exec --";
 
         keybindings = {
           "${modifier}+Return" = "exec ${terminal}";
@@ -143,18 +154,13 @@ in {
 
           "Print" = ''exec grim -g "$(slurp)" - | wl-copy'';
 
-          "XF86AudioRaiseVolume" =
-            "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+";
-          "XF86AudioLowerVolume" =
-            "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
+          "XF86AudioRaiseVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+";
+          "XF86AudioLowerVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
           "XF86AudioMute" = "exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
 
-          "--locked XF86AudioRaiseVolume" =
-            "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+";
-          "--locked XF86AudioLowerVolume" =
-            "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
-          "--locked XF86AudioMute" =
-            "exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+          "--locked XF86AudioRaiseVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+";
+          "--locked XF86AudioLowerVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
+          "--locked XF86AudioMute" = "exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
 
           "XF86AudioPlay" = "exec playerctl play-pause";
           "XF86AudioNext" = "exec playerctl next";
@@ -193,14 +199,13 @@ in {
 
         output = cfg.output;
 
-        focus = { followMouse = false; };
+        focus = {
+          followMouse = false;
+        };
       };
 
       extraConfig = ''
-        ${if cfg.focus-output != null then
-          "focus output ${cfg.focus-output}"
-        else
-          ""}
+        ${if cfg.focus-output != null then "focus output ${cfg.focus-output}" else ""}
       '';
     };
 

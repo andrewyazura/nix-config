@@ -1,7 +1,14 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 with lib;
-let cfg = config.modules.sway;
-in {
+let
+  cfg = config.modules.sway;
+in
+{
   options.modules.sway = {
     enable = mkEnableOption "Enable sway configuration";
   };

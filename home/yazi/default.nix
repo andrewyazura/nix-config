@@ -1,7 +1,9 @@
 { lib, config, ... }:
 with lib;
-let cfg = config.modules.yazi;
-in {
+let
+  cfg = config.modules.yazi;
+in
+{
   options.modules.yazi = {
     enable = mkEnableOption "Enable yazi configuration";
   };
@@ -10,7 +12,11 @@ in {
     programs.yazi = {
       enable = true;
       enableZshIntegration = true;
-      settings = { mgr = { show_hidden = true; }; };
+      settings = {
+        mgr = {
+          show_hidden = true;
+        };
+      };
     };
   };
 }

@@ -1,7 +1,9 @@
 { lib, config, ... }:
 with lib;
-let cfg = config.modules.firefox;
-in {
+let
+  cfg = config.modules.firefox;
+in
+{
   options.modules.firefox = {
     enable = mkEnableOption "Enable firefox configuration";
   };

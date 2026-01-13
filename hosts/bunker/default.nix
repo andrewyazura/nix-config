@@ -1,4 +1,11 @@
-{ config, lib, pkgs, inputs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
+{
   imports = [
     inputs.duty-reminder-app.nixosModules.default
     inputs.birthday-api-app.nixosModules.default
@@ -15,13 +22,18 @@
       servers.bombas = {
         jvmOpts = "-Xms3072M -Xmx3072M";
 
-        serverProperties = { server-port = 25567; };
+        serverProperties = {
+          server-port = 25567;
+        };
       };
     };
   };
 
   home-manager.users.andrew = {
-    imports = [ ../../home ../../users/andrew/home ];
+    imports = [
+      ../../home
+      ../../users/andrew/home
+    ];
 
     home.stateVersion = "24.11";
   };
@@ -31,7 +43,10 @@
     trusted-users = [ "@wheel" ];
   };
 
-  environment.systemPackages = with pkgs; [ vim git ];
+  environment.systemPackages = with pkgs; [
+    vim
+    git
+  ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-label/nixos";
@@ -41,7 +56,7 @@
     device = "/dev/disk/by-label/boot";
     fsType = "ext4";
   };
-  swapDevices = [{ device = "/dev/disk/by-label/swap"; }];
+  swapDevices = [ { device = "/dev/disk/by-label/swap"; } ];
 
   documentation.nixos.enable = false;
   time.timeZone = lib.mkForce "Europe/London";
@@ -50,8 +65,15 @@
   boot = {
     loader.grub.enable = true;
     loader.grub.device = "/dev/sda";
-    initrd.availableKernelModules =
-      [ "ahci" "xhci_pci" "virtio_pci" "virtio_scsi" "sd_mod" "sr_mod" "ext4" ];
+    initrd.availableKernelModules = [
+      "ahci"
+      "xhci_pci"
+      "virtio_pci"
+      "virtio_scsi"
+      "sd_mod"
+      "sr_mod"
+      "ext4"
+    ];
   };
 
   users.users.root.hashedPassword = "!";
@@ -112,7 +134,9 @@
 
     duty-reminder = {
       enable = true;
-      environment = { SERVER_PORT = "10000"; };
+      environment = {
+        SERVER_PORT = "10000";
+      };
       environmentFile = config.sops.secrets."duty-reminder.env".path;
     };
 
@@ -126,14 +150,19 @@
         sslCertificate = config.sops.secrets."andrewyazura.crt".path;
         sslCertificateKey = config.sops.secrets."andrewyazura.key".path;
 
-        locations."/" = { proxyPass = "http://127.0.0.1:10000"; };
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:10000";
+        };
       };
     };
 
     postgresql = {
       enable = true;
       package = pkgs.postgresql_16;
-      ensureDatabases = [ "birthday_api" "duty_reminder" ];
+      ensureDatabases = [
+        "birthday_api"
+        "duty_reminder"
+      ];
 
       ensureUsers = [
         {
@@ -148,7 +177,11 @@
     };
   };
 
-  networking.firewall.allowedTCPPorts = [ 22 443 8443 ];
+  networking.firewall.allowedTCPPorts = [
+    22
+    443
+    8443
+  ];
 
   system.stateVersion = "24.11";
 }

@@ -1,8 +1,12 @@
 { lib, config, ... }:
 with lib;
-let cfg = config.modules.zsh;
-in {
-  options.modules.zsh = { enable = mkEnableOption "Enable zsh configuration"; };
+let
+  cfg = config.modules.zsh;
+in
+{
+  options.modules.zsh = {
+    enable = mkEnableOption "Enable zsh configuration";
+  };
 
   config = mkIf cfg.enable {
     programs.zsh = {
@@ -14,7 +18,10 @@ in {
       oh-my-zsh = {
         enable = true;
         theme = "robbyrussell";
-        plugins = [ "git" "vi-mode" ];
+        plugins = [
+          "git"
+          "vi-mode"
+        ];
       };
 
       shellAliases = {

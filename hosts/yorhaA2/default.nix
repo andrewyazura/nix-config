@@ -1,9 +1,18 @@
-{ lib, pkgs, inputs, ... }:
+{
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
 let
   username = "andrew";
   hostname = "yorhaA2";
-in {
-  imports = [ ../../darwin inputs.private-config.darwinModules.default ];
+in
+{
+  imports = [
+    ../../darwin
+    inputs.private-config.darwinModules.default
+  ];
 
   modules = {
     aerospace.enable = true;
@@ -23,8 +32,11 @@ in {
     ];
 
     users.${username} = {
-      imports =
-        [ ../../home ../../users/andrew/home ../../users/andrew/home/yorhaA2 ];
+      imports = [
+        ../../home
+        ../../users/andrew/home
+        ../../users/andrew/home/yorhaA2
+      ];
 
       modules = {
         ghostty = {

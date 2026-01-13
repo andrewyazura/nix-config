@@ -1,7 +1,9 @@
 { lib, config, ... }:
 with lib;
-let cfg = config.modules.btop;
-in {
+let
+  cfg = config.modules.btop;
+in
+{
   options.modules.btop = {
     enable = mkEnableOption "Enable btop configuration";
   };
@@ -17,4 +19,3 @@ in {
     };
   };
 }
-

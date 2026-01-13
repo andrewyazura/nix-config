@@ -1,14 +1,23 @@
-{ lib, config, pkgs, inputs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 with lib;
-let cfg = config.modules.programs;
-in {
+let
+  cfg = config.modules.programs;
+in
+{
   options.modules.programs = {
     enable = mkEnableOption "Enable programs configuration";
     enableMinecraft = mkEnableOption "Enable minecraft launcher";
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs;
+    environment.systemPackages =
+      with pkgs;
       [
         inputs.ghostty.packages.x86_64-linux.default
 
@@ -33,6 +42,7 @@ in {
         tree
         unzip
         zip
-      ] ++ lib.optionals cfg.enableMinecraft [ pkgs.prismlauncher ];
+      ]
+      ++ lib.optionals cfg.enableMinecraft [ pkgs.prismlauncher ];
   };
 }

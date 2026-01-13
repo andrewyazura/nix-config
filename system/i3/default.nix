@@ -1,8 +1,17 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 with lib;
-let cfg = config.modules.i3;
-in {
-  options.modules.i3 = { enable = mkEnableOption "Enable i3 configuration"; };
+let
+  cfg = config.modules.i3;
+in
+{
+  options.modules.i3 = {
+    enable = mkEnableOption "Enable i3 configuration";
+  };
 
   config = mkIf cfg.enable {
     services = {
@@ -10,14 +19,26 @@ in {
         enable = true;
         windowManager.i3 = {
           enable = true;
-          extraPackages = with pkgs; [ dmenu feh xsecurelock playerctl ];
+          extraPackages = with pkgs; [
+            dmenu
+            feh
+            xsecurelock
+            playerctl
+          ];
         };
       };
 
-      displayManager = { defaultSession = "none+i3"; };
+      displayManager = {
+        defaultSession = "none+i3";
+      };
       playerctld.enable = true;
     };
 
-    environment = { systemPackages = with pkgs; [ dconf xclip ]; };
+    environment = {
+      systemPackages = with pkgs; [
+        dconf
+        xclip
+      ];
+    };
   };
 }

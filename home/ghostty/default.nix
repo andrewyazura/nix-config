@@ -1,9 +1,19 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 with lib;
 let
   cfg = config.modules.ghostty;
-  mock = pkgs.emptyDirectory // { meta = { mainProgram = "ghostty"; }; };
-in {
+  mock = pkgs.emptyDirectory // {
+    meta = {
+      mainProgram = "ghostty";
+    };
+  };
+in
+{
   options.modules.ghostty = {
     enable = mkEnableOption "Enable ghostty configuration";
 
@@ -43,7 +53,10 @@ in {
         font-family = cfg.fontFamily;
         font-size = cfg.fontSize;
         font-style = cfg.fontStyle;
-        shell-integration-features = [ "ssh-terminfo" "ssh-env" ];
+        shell-integration-features = [
+          "ssh-terminfo"
+          "ssh-env"
+        ];
         theme = "Catppuccin Mocha";
         window-decoration = "server";
         window-inherit-working-directory = false;

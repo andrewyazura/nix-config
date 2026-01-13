@@ -1,5 +1,6 @@
 { pkgs }:
-with pkgs; [
+with pkgs;
+[
   fira-code
 
   nerd-fonts.adwaita-mono

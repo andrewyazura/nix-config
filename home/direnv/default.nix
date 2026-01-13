@@ -1,7 +1,9 @@
 { lib, config, ... }:
 with lib;
-let cfg = config.modules.direnv;
-in {
+let
+  cfg = config.modules.direnv;
+in
+{
   options.modules.direnv = {
     enable = mkEnableOption "Enable direnv configuration";
   };
@@ -11,7 +13,7 @@ in {
       enable = true;
       enableZshIntegration = true;
 
-      nix-direnv.enable=true;
+      nix-direnv.enable = true;
     };
   };
 }

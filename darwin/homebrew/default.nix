@@ -1,7 +1,9 @@
 { lib, config, ... }:
 with lib;
-let cfg = config.modules.homebrew;
-in {
+let
+  cfg = config.modules.homebrew;
+in
+{
   options.modules.homebrew = {
     enable = mkEnableOption "Enable homebrew configuration";
   };

@@ -1,4 +1,5 @@
-{ inputs, ... }: {
+{ inputs, ... }:
+{
   imports = [
     ./hardware-configuration.nix
     ../../users/andrew/system
@@ -48,27 +49,30 @@
     xserver = {
       videoDrivers = [ "nvidia" ];
 
-      inputClassSections = let layouts = "us,ua";
-      in [
-        ''
-          Identifier "general keyboard settings"
-          MatchIsKeyboard "on"
-          Option "XkbLayout" "${layouts}"
-          Option "XkbOptions" "grp:win_space_toggle,caps:swapescape"
-        ''
-        ''
-          Identifier "disable swapescape for wooting 60he+"
-          MatchProduct "Wooting Wooting 60HE+"
-          Option "XkbLayout" "${layouts}"
-          Option "XkbOptions" "grp:win_space_toggle"
-        ''
-        ''
-          Identifier "disable swapescape for glorious gmmk compact"
-          MatchProduct "SONIX USB DEVICE"
-          Option "XkbLayout" "${layouts}"
-          Option "XkbOptions" "grp:win_space_toggle"
-        ''
-      ];
+      inputClassSections =
+        let
+          layouts = "us,ua";
+        in
+        [
+          ''
+            Identifier "general keyboard settings"
+            MatchIsKeyboard "on"
+            Option "XkbLayout" "${layouts}"
+            Option "XkbOptions" "grp:win_space_toggle,caps:swapescape"
+          ''
+          ''
+            Identifier "disable swapescape for wooting 60he+"
+            MatchProduct "Wooting Wooting 60HE+"
+            Option "XkbLayout" "${layouts}"
+            Option "XkbOptions" "grp:win_space_toggle"
+          ''
+          ''
+            Identifier "disable swapescape for glorious gmmk compact"
+            MatchProduct "SONIX USB DEVICE"
+            Option "XkbLayout" "${layouts}"
+            Option "XkbOptions" "grp:win_space_toggle"
+          ''
+        ];
     };
   };
 

@@ -1,12 +1,20 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 with lib;
-let cfg = config.modules.i3;
-in {
-  options.modules.i3 = { enable = mkEnableOption "Enable i3 configuration"; };
+let
+  cfg = config.modules.i3;
+in
+{
+  options.modules.i3 = {
+    enable = mkEnableOption "Enable i3 configuration";
+  };
 
   config = mkIf cfg.enable {
-    home.file."Pictures/wallpapers/current.png".source =
-      ../../common/wallpapers/nix-black-4k.png;
+    home.file."Pictures/wallpapers/current.png".source = ../../common/wallpapers/nix-black-4k.png;
 
     xsession.windowManager.i3 = {
       enable = true;
@@ -20,46 +28,52 @@ in {
           border = 2;
         };
 
-        colors = let colors = import ../../common/colors.nix;
-        in {
-          focused = {
-            border = colors.mauve;
-            background = colors.mauve;
-            text = colors.base;
-            indicator = colors.mauve;
-            childBorder = colors.mauve;
+        colors =
+          let
+            colors = import ../../common/colors.nix;
+          in
+          {
+            focused = {
+              border = colors.mauve;
+              background = colors.mauve;
+              text = colors.base;
+              indicator = colors.mauve;
+              childBorder = colors.mauve;
+            };
+            unfocused = {
+              border = colors.base;
+              background = colors.base;
+              text = colors.text;
+              indicator = colors.base;
+              childBorder = colors.base;
+            };
+            urgent = {
+              border = colors.red;
+              background = colors.red;
+              text = colors.base;
+              indicator = colors.red;
+              childBorder = colors.red;
+            };
           };
-          unfocused = {
-            border = colors.base;
-            background = colors.base;
-            text = colors.text;
-            indicator = colors.base;
-            childBorder = colors.base;
-          };
-          urgent = {
-            border = colors.red;
-            background = colors.red;
-            text = colors.base;
-            indicator = colors.red;
-            childBorder = colors.red;
-          };
-        };
 
-        startup = [{
-          command = "feh --bg-scale ~/Pictures/wallpapers/current.png";
-          always = true;
-        }];
+        startup = [
+          {
+            command = "feh --bg-scale ~/Pictures/wallpapers/current.png";
+            always = true;
+          }
+        ];
 
         keybindings = {
           "${modifier}+Return" = "exec ${terminal}";
           "${modifier}+Escape" = "exec xsecurelock";
           "${modifier}+q" = "kill";
 
-          "${modifier}+d" = let
-            colors = import ../../common/colors.nix;
-            args =
-              "-fn 'AdwaitaMono-8' -nb '${colors.crust}' -nf '${colors.text}' -sb '${colors.mauve}' -sf '${colors.base}'";
-          in "exec dmenu_run ${args}";
+          "${modifier}+d" =
+            let
+              colors = import ../../common/colors.nix;
+              args = "-fn 'AdwaitaMono-8' -nb '${colors.crust}' -nf '${colors.text}' -sb '${colors.mauve}' -sf '${colors.base}'";
+            in
+            "exec dmenu_run ${args}";
 
           "${modifier}+h" = "focus left";
           "${modifier}+j" = "focus down";
@@ -116,10 +130,8 @@ in {
 
           "${modifier}+r" = "mode resize";
 
-          "XF86AudioRaiseVolume" =
-            "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+";
-          "XF86AudioLowerVolume" =
-            "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
+          "XF86AudioRaiseVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+";
+          "XF86AudioLowerVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
           "XF86AudioMute" = "exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
 
           "XF86AudioPlay" = "exec playerctl play-pause";

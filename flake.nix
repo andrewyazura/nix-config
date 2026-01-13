@@ -2,8 +2,12 @@
   description = "nix configuration";
 
   inputs = {
-    nixpkgs = { url = "github:nixos/nixpkgs/nixos-unstable"; };
-    nixos-hardware = { url = "github:NixOS/nixos-hardware/master"; };
+    nixpkgs = {
+      url = "github:nixos/nixpkgs/nixos-unstable";
+    };
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware/master";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -16,34 +20,55 @@
       url = "github:nix-darwin/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    ghostty = { url = "github:ghostty-org/ghostty"; };
-    nix-minecraft = { url = "github:Infinidoge/nix-minecraft"; };
+    ghostty = {
+      url = "github:ghostty-org/ghostty";
+    };
+    nix-minecraft = {
+      url = "github:Infinidoge/nix-minecraft";
+    };
 
     private-config = {
       url = "git+ssh://git@github.com/andrewyazura/private-nix-config.git";
     };
 
-    duty-reminder-app = { url = "github:andrewyazura/duty-reminder"; };
-    birthday-api-app = { url = "github:orehzzz/birthday-api"; };
-    birthday-bot-app = { url = "github:orehzzz/birthday-telegram-bot"; };
+    duty-reminder-app = {
+      url = "github:andrewyazura/duty-reminder";
+    };
+    birthday-api-app = {
+      url = "github:orehzzz/birthday-api";
+    };
+    birthday-bot-app = {
+      url = "github:orehzzz/birthday-telegram-bot";
+    };
   };
 
-  outputs = inputs@{ nixpkgs, nix-darwin, ... }:
+  outputs =
+    inputs@{ nixpkgs, nix-darwin, ... }:
     let
       mkHost =
-        { hostname, system ? "x86_64-linux", specialArgs ? { }, modules ? [ ] }:
+        {
+          hostname,
+          system ? "x86_64-linux",
+          specialArgs ? { },
+          modules ? [ ],
+        }:
         nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs hostname; } // specialArgs;
+          specialArgs = {
+            inherit inputs hostname;
+          }
+          // specialArgs;
           modules = [
             ./system
             ./hosts/${hostname}
 
             inputs.home-manager.nixosModules.home-manager
             inputs.sops-nix.nixosModules.sops
-          ] ++ modules;
+          ]
+          ++ modules;
         };
-    in {
+    in
+    {
       nixosConfigurations = {
         yorha2b = mkHost { hostname = "yorha2b"; };
 
@@ -73,5 +98,9 @@
           ];
         };
       };
+
+      formatter = nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-darwin" ] (
+        system: nixpkgs.legacyPackages.${system}.nixfmt
+      );
     };
 }

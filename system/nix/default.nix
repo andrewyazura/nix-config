@@ -1,10 +1,19 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 with lib;
-let cfg = config.modules.nix;
-in {
+let
+  cfg = config.modules.nix;
+in
+{
   imports = [ ../../common/nix ];
 
-  options.modules.nix = { enable = mkEnableOption "Enable nix configuration"; };
+  options.modules.nix = {
+    enable = mkEnableOption "Enable nix configuration";
+  };
 
   config = mkIf cfg.enable {
     nix.gc.dates = "weekly";
@@ -35,8 +44,7 @@ in {
 
       ssh = {
         startAgent = true;
-        enableAskPassword =
-          true; # installs ssh-askpass, which obsidian depends on
+        enableAskPassword = true; # installs ssh-askpass, which obsidian depends on
       };
     };
   };
