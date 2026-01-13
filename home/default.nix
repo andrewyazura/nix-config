@@ -1,6 +1,7 @@
 {
   imports = [
     ./btop
+    ./claude
     ./direnv
     ./firefox
     ./ghostty
