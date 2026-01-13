@@ -1,5 +1,8 @@
-{ config, ... }: {
-  modules = { work.enable = true; };
+{ config, ... }:
+{
+  modules = {
+    work.enable = true;
+  };
   home.stateVersion = "24.11";
 
   sops = {
@@ -9,10 +12,6 @@
         sopsFile = ../../../../secrets/ssh-config;
         format = "binary";
       };
-      anthropic-api-key = {
-        sopsFile = ../../../../secrets/anthropic-api-key;
-        format = "binary";
-      };
     };
   };
 
@@ -20,7 +19,9 @@
     ssh = {
       includes = [ config.sops.secrets.ssh-config.path ];
       matchBlocks = {
-        "bunker" = { identityFile = "~/.ssh/id_ed25519_yorha2b_bunker_1110"; };
+        "bunker" = {
+          identityFile = "~/.ssh/id_ed25519_yorha2b_bunker_1110";
+        };
         "github.com" = {
           identityFile = "~/.ssh/id_ed25519_yorha2b_github_1110";
         };
@@ -31,11 +32,9 @@
     };
 
     zsh = {
-      shellAliases = { copy = "wl-copy"; };
-      initContent = ''
-        secret_file="${config.sops.secrets.anthropic-api-key.path}"
-        export AVANTE_ANTHROPIC_API_KEY=$(cat "$secret_file")
-      '';
+      shellAliases = {
+        copy = "wl-copy";
+      };
     };
   };
 }
