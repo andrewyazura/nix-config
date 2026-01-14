@@ -4,6 +4,7 @@
     ./claude
     ./direnv
     ./firefox
+    ./gemini
     ./ghostty
     ./git
     ./gnome
@@ -12,6 +13,7 @@
     ./polybar
     ./ssh
     ./sway
+    ./tmux
     ./waybar
     ./yazi
     ./zsh
