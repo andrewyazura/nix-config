@@ -9,7 +9,11 @@ in
   };
 
   config = mkIf cfg.enable {
-    security.pam.services.sudo_local.touchIdAuth = true;
+    security.pam.services.sudo_local = {
+      enable = true;
+      reattach = true;
+      touchIdAuth = true;
+    };
 
     system = {
       defaults = {
@@ -43,35 +47,6 @@ in
           ShowDayOfMonth = true;
           ShowDayOfWeek = true;
           ShowSeconds = true;
-        };
-
-        CustomUserPreferences = {
-          "com.apple.symbolichotkeys" = {
-            AppleSymbolicHotKeys = {
-              "60" = {
-                enabled = false;
-                value = {
-                  parameters = [
-                    32
-                    49
-                    262144
-                  ];
-                  type = "standard";
-                };
-              };
-              "61" = {
-                enabled = false;
-                value = {
-                  parameters = [
-                    32
-                    49
-                    786432
-                  ];
-                  type = "standard";
-                };
-              };
-            };
-          };
         };
       };
     };
