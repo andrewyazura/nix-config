@@ -40,6 +40,7 @@ in
           {
             allow = [
               "Edit"
+              "Explore"
               "Skill"
               "WebFetch"
               "WebSearch"
