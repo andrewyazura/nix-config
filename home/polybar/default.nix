@@ -14,12 +14,14 @@ in
   };
 
   config = mkIf cfg.enable {
-    xsession.windowManager.i3.config.startup = [
-      {
-        command = "systemctl --user restart polybar.service";
-        always = true;
-      }
-    ];
+    xsession.windowManager.i3 = mkIf (config.xsession.windowManager.i3.enable or false) {
+      config.startup = [
+        {
+          command = "systemctl --user restart polybar.service";
+          always = true;
+        }
+      ];
+    };
 
     services.polybar = {
       enable = true;
