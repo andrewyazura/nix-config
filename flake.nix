@@ -67,6 +67,28 @@
           ]
           ++ modules;
         };
+
+      mkDarwinHost =
+        {
+          hostname,
+          system ? "aarch64-darwin",
+          specialArgs ? { },
+          modules ? [ ],
+        }:
+        nix-darwin.lib.darwinSystem {
+          inherit system;
+          specialArgs = {
+            inherit inputs hostname;
+          }
+          // specialArgs;
+          modules = [
+            ./hosts/${hostname}
+
+            inputs.home-manager.darwinModules.home-manager
+            inputs.sops-nix.darwinModules.sops
+          ]
+          ++ modules;
+        };
     in
     {
       nixosConfigurations = {
@@ -82,21 +104,7 @@
       };
 
       darwinConfigurations = {
-        yorhaA2 = nix-darwin.lib.darwinSystem {
-          system = "aarch64-darwin";
-
-          specialArgs = {
-            inherit inputs;
-            hostname = "yorhaA2";
-          };
-
-          modules = [
-            ./hosts/yorhaA2
-
-            inputs.home-manager.darwinModules.home-manager
-            inputs.sops-nix.darwinModules.sops
-          ];
-        };
+        yorhaA2 = mkDarwinHost { hostname = "yorhaA2"; };
       };
 
       formatter = nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-darwin" ] (
