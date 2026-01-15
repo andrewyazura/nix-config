@@ -36,6 +36,7 @@ in
         permissions =
           let
             bashCmds = cmds: map (cmd: "Bash(${cmd})") cmds;
+            mcpTools = tools: map (tool: "mcp__${tool}") tools;
           in
           {
             allow = [
@@ -46,10 +47,44 @@ in
               "WebSearch"
               "Write"
             ]
+            # MCP Server Tools
+            ++ mcpTools [
+              # Full access (all tools)
+              "context7__*"
+              "memory__*"
+
+              # MongoDB - READ ONLY
+              "mongodb__connect"
+              "mongodb__list-databases"
+              "mongodb__list-collections"
+              "mongodb__find"
+              "mongodb__count"
+              "mongodb__aggregate"
+              "mongodb__collection-schema"
+              "mongodb__collection-indexes"
+              "mongodb__collection-storage-size"
+              "mongodb__db-stats"
+              "mongodb__explain"
+              "mongodb__atlas-list-projects"
+              "mongodb__atlas-list-clusters"
+              "mongodb__atlas-inspect-cluster"
+              "mongodb__atlas-inspect-access-list"
+              "mongodb__atlas-list-db-users"
+
+              # Filesystem - READ ONLY
+              "filesystem__list_directory"
+              "filesystem__read_text_file"
+              "filesystem__read_multiple_files"
+              "filesystem__get_file_info"
+              "filesystem__search_files"
+            ]
+            # Shell utilities
             ++ bashCmds [
               "cat *"
+              "cp *"
               "ls *"
               "mkdir *"
+              "mv *"
               "tree *"
 
               "head *"
@@ -65,8 +100,25 @@ in
 
               "git *"
 
+              # Nix
               "nix search *"
               "nix fmt *"
+
+              # Python
+              "python *"
+              "python3 *"
+              "pytest *"
+              "mypy *"
+              "uv *"
+              "uvx *"
+              "pre-commit run *"
+              "pip *"
+
+              # Node.js
+              "npm *"
+              "npx *"
+              "node *"
+              "nvm *"
             ];
 
             deny = [
@@ -118,6 +170,16 @@ in
           args = [
             "-y"
             "@mongodb-js/mongodb-mcp-server"
+          ];
+        };
+
+        filesystem = {
+          command = "npx";
+          args = [
+            "-y"
+            "@modelcontextprotocol/server-filesystem"
+            "/Users/andrew/Documents"
+            "/Users/andrew/Projects"
           ];
         };
       };
