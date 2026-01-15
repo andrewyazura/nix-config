@@ -10,6 +10,7 @@
     ./gnome
     ./i3
     ./neovim
+    ./packages
     ./polybar
     ./ssh
     ./sway

@@ -36,6 +36,7 @@ in
         vimdiffAlias = true;
 
         extraPackages = with pkgs; [
+          tree-sitter
           ripgrep
           fd
 
