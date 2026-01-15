@@ -15,21 +15,6 @@ in
         autoUpdate = true;
         cleanup = "zap";
       };
-
-      casks = [
-        "bitwarden"
-        "discord"
-        "firefox"
-        "focusrite-control-2"
-        "ghostty"
-        "google-chrome"
-        "mos" # xattr -d com.apple.quarantine /Applications/Mos.app
-        "obsidian"
-        "signal"
-        "slack"
-        "spotify"
-        "steam"
-      ];
     };
   };
 }
