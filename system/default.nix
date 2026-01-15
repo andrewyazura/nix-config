@@ -3,6 +3,7 @@
     ./audio
     ./fonts
     ./gnome
+    ./gui-apps
     ./home-manager
     ./i3
     ./minecraft-server
