@@ -47,22 +47,26 @@ in
               "Write"
             ]
             ++ bashCmds [
+              "cat *"
               "ls *"
+              "mkdir *"
               "tree *"
 
               "head *"
               "tail *"
 
-              "wc *"
               "diff *"
+              "fd *"
+              "find *"
+              "grep *"
               "jq *"
               "rg *"
-              "fd *"
+              "wc *"
 
-              "git log *"
-              "git diff *"
-              "git show *"
-              "git blame *"
+              "git *"
+
+              "nix search *"
+              "nix fmt *"
             ];
 
             deny = [
@@ -106,14 +110,6 @@ in
           args = [
             "-y"
             "@modelcontextprotocol/server-memory"
-          ];
-        };
-
-        filesystem = {
-          command = "npx";
-          args = [
-            "-y"
-            "@modelcontextprotocol/server-filesystem"
           ];
         };
       };
