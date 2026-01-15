@@ -1,15 +1,13 @@
 {
-  config,
   lib,
   pkgs,
-  inputs,
   ...
 }:
 {
   imports = [
-    inputs.duty-reminder-app.nixosModules.default
-    inputs.birthday-api-app.nixosModules.default
-    inputs.birthday-bot-app.nixosModules.default
+    ./apps/duty-reminder.nix
+    ./apps/birthday-api.nix
+    ./apps/birthday-bot.nix
 
     ../../users/andrew/system
     ../../users/andrew/system/bunker
@@ -42,11 +40,6 @@
     auto-optimise-store = true;
     trusted-users = [ "@wheel" ];
   };
-
-  environment.systemPackages = with pkgs; [
-    vim
-    git
-  ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-label/nixos";
@@ -122,58 +115,15 @@
       };
     };
 
-    birthday-api = {
-      enable = true;
-      configFile = "/var/lib/birthday-api/config.ini";
-    };
-
-    birthday-bot = {
-      enable = true;
-      configFile = "/var/lib/birthday-bot/config.ini";
-    };
-
-    duty-reminder = {
-      enable = true;
-      environment = {
-        SERVER_PORT = "10000";
-      };
-      environmentFile = config.sops.secrets."duty-reminder.env".path;
-    };
-
     nginx = {
       enable = true;
       recommendedProxySettings = true;
       recommendedTlsSettings = true;
-
-      virtualHosts."duty-reminder.andrewyazura.com" = {
-        forceSSL = true;
-        sslCertificate = config.sops.secrets."andrewyazura.crt".path;
-        sslCertificateKey = config.sops.secrets."andrewyazura.key".path;
-
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:10000";
-        };
-      };
     };
 
     postgresql = {
       enable = true;
       package = pkgs.postgresql_16;
-      ensureDatabases = [
-        "birthday_api"
-        "duty_reminder"
-      ];
-
-      ensureUsers = [
-        {
-          name = "birthday_api";
-          ensureDBOwnership = true;
-        }
-        {
-          name = "duty_reminder";
-          ensureDBOwnership = true;
-        }
-      ];
     };
   };
 
