@@ -15,6 +15,16 @@
     nix.enable = true;
     work.enable = true;
 
+    # GUI Applications
+    gui-apps = {
+      base.enable = true;
+      communication.enable = true;
+      media.enable = true;
+      productivity.enable = true;
+      gaming.enable = true;
+    };
+
+    # Keep old programs module temporarily for compatibility
     programs = {
       enable = true;
       enableMinecraft = true;

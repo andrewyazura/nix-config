@@ -21,6 +21,22 @@ in
     nix.enable = true;
     system-defaults.enable = true;
     work.enable = true;
+
+    # GUI Applications (Homebrew casks)
+    gui-apps = {
+      base.enable = true;
+      communication.enable = true;
+      gaming.enable = true;
+      media.enable = true;
+      productivity.enable = true;
+      system-tools.enable = true;
+    };
+
+    # macOS-specific system packages
+    darwin-packages = {
+      docker.enable = true;
+      gnuTools.enable = true;
+    };
   };
 
   home-manager = {
@@ -61,23 +77,9 @@ in
 
   environment = {
     systemPackages = with pkgs; [
-      age
-      colima
-      coreutils-prefixed
-      docker
-      docker-compose
-      git
+      # GPG for encryption
       gnupg
-      neovim
-      prismlauncher
-      yazi
     ];
-
-    variables = {
-      DOCKER_HOST = "unix:///Users/${username}/.colima/default/docker.sock";
-      TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE = "/var/run/docker.sock";
-      TESTCONTAINERS_HOST_OVERRIDE = "localhost";
-    };
   };
 
   system = {
