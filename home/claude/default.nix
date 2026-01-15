@@ -120,11 +120,6 @@ in
             "@mongodb-js/mongodb-mcp-server"
           ];
         };
-
-        datadog = {
-          transport = "http";
-          url = "https://mcp.datadoghq.eu/api/unstable/mcp-server/mcp";
-        };
       };
     };
   };
