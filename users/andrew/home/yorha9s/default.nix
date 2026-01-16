@@ -1,14 +1,8 @@
 { config, ... }:
 {
   modules = {
-    stuff.enable = true;
-    work.enable = true;
-
-    # Desktop-specific packages
     packages = {
-      shell.enable = true;
       media.enable = true;
-      ai.enable = true;
     };
   };
   home.stateVersion = "24.11";

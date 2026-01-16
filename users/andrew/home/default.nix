@@ -15,7 +15,6 @@
     yazi.enable = true;
     zsh.enable = true;
 
-    # CLI Package Groups (universal - all machines)
     packages = {
       base.enable = true;
       development.enable = true;
