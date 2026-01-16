@@ -17,4 +17,8 @@ with pkgs;
     url = "https://cdn.modrinth.com/data/gvQqBUqZ/versions/gl30uZvp/lithium-fabric-0.21.2+mc1.21.11.jar";
     sha512 = "2v3nv6wl4jmnjw924zk1jf1ppgq78asgb14sv2p1xk6ad3vs2a6s12z45c8d1jzrnqaa6zr41igycn9cfjdidp2qbqsl39y0485aqll";
   };
+  "vanish" = fetchurl {
+    url = "https://cdn.modrinth.com/data/UL4bJFDY/versions/NpTm6CT2/vanish-1.6.6+1.21.11.jar";
+    sha512 = "29369705ldwn50j3wh763v00grxsaafk2gnxxrsxr2l6xmh12vnwnn7ln7qcc8z71bf7z6c79g7ikq0851r378bp7c99xlmyiwxfjs1";
+  };
 }
