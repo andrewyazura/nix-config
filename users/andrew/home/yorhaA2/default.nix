@@ -5,11 +5,8 @@
     gemini.enable = true;
     work.enable = true;
 
-    # Desktop-specific packages
     packages = {
-      shell.enable = true;
       media.enable = true;
-      ai.enable = true;
     };
   };
   home.stateVersion = "25.05";
@@ -44,7 +41,7 @@
     zsh = {
       shellAliases = {
         copy = "pbcopy";
-        ls = "gls --color=auto";
+        ls = "ls --color=auto";
       };
       initContent = ''
         export LANGUAGE=en_US.UTF-8

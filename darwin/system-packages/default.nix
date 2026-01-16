@@ -1,4 +1,9 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 with lib;
 let
   cfg = config.modules.darwin-packages;
@@ -35,7 +40,7 @@ in
 
     (mkIf cfg.gnuTools.enable {
       environment.systemPackages = with pkgs; [
-        coreutils-prefixed
+        coreutils
       ];
     })
   ];
