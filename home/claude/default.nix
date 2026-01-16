@@ -42,6 +42,8 @@ in
             allow = [
               "Edit"
               "Explore"
+              "Read"
+              "Search"
               "Skill"
               "WebFetch"
               "WebSearch"
