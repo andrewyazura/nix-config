@@ -5,12 +5,6 @@ keys:
   - &yorhaA2 age1g0tsyuhutxpt8rfcu07t3t6fhrce4rq2a63l7yryly7hyp0a4fvspwyv8p
 
 creation_rules:
-  - path_regex: secrets/duty-reminder\.env
-    key_groups:
-    - age:
-        - *bunker
-    format: dotenv
-
   - path_regex: secrets/andrewyazura\.(crt|key)
     key_groups:
     - age:

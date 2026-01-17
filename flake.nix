@@ -31,9 +31,6 @@
       url = "git+ssh://git@github.com/andrewyazura/private-nix-config.git";
     };
 
-    duty-reminder-app = {
-      url = "github:andrewyazura/duty-reminder";
-    };
     birthday-api-app = {
       url = "github:orehzzz/birthday-api";
     };

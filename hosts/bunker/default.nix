@@ -5,7 +5,6 @@
 }:
 {
   imports = [
-    ./apps/duty-reminder.nix
     ./apps/birthday-api.nix
     ./apps/birthday-bot.nix
 
@@ -75,16 +74,6 @@
   sops = {
     age.keyFile = "/var/lib/sops-nix/key.txt";
     secrets = {
-      "duty-reminder.env" = {
-        sopsFile = ../../secrets/duty-reminder.env;
-        format = "dotenv";
-
-        owner = "duty-reminder";
-        group = "duty-reminder";
-        mode = "0400";
-        restartUnits = [ "duty-reminder.service" ];
-      };
-
       "andrewyazura.crt" = {
         sopsFile = ../../secrets/andrewyazura.crt;
         format = "binary";
