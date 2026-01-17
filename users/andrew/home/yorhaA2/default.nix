@@ -27,6 +27,9 @@
       includes = [ config.sops.secrets.ssh-config.path ];
       matchBlocks = {
         "bunker" = {
+          identityFile = "~/.ssh/id_ed25519_yorhaA2_bunker_1701";
+        };
+        "bunker-old" = {
           identityFile = "~/.ssh/id_ed25519_yorhaA2_bunker_0112";
         };
         "github.com" = {

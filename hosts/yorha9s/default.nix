@@ -4,6 +4,7 @@
     ./hardware-configuration.nix
     ../../users/andrew/system
 
+    inputs.nixos-hardware.nixosModules.asus-zephyrus-ga401
     inputs.private-config.nixosModules.default
   ];
 

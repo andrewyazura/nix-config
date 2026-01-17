@@ -5,24 +5,40 @@
     nixpkgs = {
       url = "github:nixos/nixpkgs/nixos-unstable";
     };
+
     nixos-hardware = {
       url = "github:NixOS/nixos-hardware/master";
     };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     nix-darwin = {
       url = "github:nix-darwin/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    deploy-rs = {
+      url = "github:serokell/deploy-rs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     ghostty = {
       url = "github:ghostty-org/ghostty";
     };
+
     nix-minecraft = {
       url = "github:Infinidoge/nix-minecraft";
     };
@@ -34,20 +50,26 @@
     birthday-api-app = {
       url = "github:orehzzz/birthday-api";
     };
+
     birthday-bot-app = {
       url = "github:orehzzz/birthday-telegram-bot";
     };
   };
 
   outputs =
-    inputs@{ nixpkgs, nix-darwin, ... }:
+    inputs@{
+      self,
+      nixpkgs,
+      nix-darwin,
+      deploy-rs,
+      ...
+    }:
     let
       mkHost =
         {
           hostname,
           system ? "x86_64-linux",
           specialArgs ? { },
-          modules ? [ ],
         }:
         nixpkgs.lib.nixosSystem {
           inherit system;
@@ -61,8 +83,7 @@
 
             inputs.home-manager.nixosModules.home-manager
             inputs.sops-nix.nixosModules.sops
-          ]
-          ++ modules;
+          ];
         };
 
       mkDarwinHost =
@@ -70,7 +91,6 @@
           hostname,
           system ? "aarch64-darwin",
           specialArgs ? { },
-          modules ? [ ],
         }:
         nix-darwin.lib.darwinSystem {
           inherit system;
@@ -83,25 +103,30 @@
 
             inputs.home-manager.darwinModules.home-manager
             inputs.sops-nix.darwinModules.sops
-          ]
-          ++ modules;
+          ];
         };
     in
     {
       nixosConfigurations = {
         yorha2b = mkHost { hostname = "yorha2b"; };
-
-        yorha9s = mkHost {
-          hostname = "yorha9s";
-          modules = [ inputs.nixos-hardware.nixosModules.asus-zephyrus-ga401 ];
-        };
+        yorha9s = mkHost { hostname = "yorha9s"; };
 
         bunker = mkHost { hostname = "bunker"; };
+        bunker-old = mkHost { hostname = "bunker-old"; };
         proxmoxnix = mkHost { hostname = "proxmoxnix"; };
       };
 
       darwinConfigurations = {
         yorhaA2 = mkDarwinHost { hostname = "yorhaA2"; };
+      };
+
+      deploy.nodes.bunker = {
+        hostname = "bunker";
+
+        profiles.system = {
+          user = "root";
+          path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.bunker;
+        };
       };
 
       formatter = nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-darwin" ] (
