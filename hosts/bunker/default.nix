@@ -66,28 +66,28 @@
   users.users.root.hashedPassword = "!";
   security.sudo.wheelNeedsPassword = false;
 
-  # sops = {
-  #   age.keyFile = "/var/lib/sops-nix/key.txt";
-  #   secrets = {
-  #     "andrewyazura.crt" = {
-  #       sopsFile = ../../secrets/andrewyazura.crt;
-  #       format = "binary";
-  #
-  #       owner = "nginx";
-  #       group = "nginx";
-  #       mode = "0400";
-  #     };
-  #
-  #     "andrewyazura.key" = {
-  #       sopsFile = ../../secrets/andrewyazura.key;
-  #       format = "binary";
-  #
-  #       owner = "nginx";
-  #       group = "nginx";
-  #       mode = "0400";
-  #     };
-  #   };
-  # };
+  sops = {
+    age.keyFile = "/var/lib/sops-nix/key.txt";
+    secrets = {
+      "andrewyazura.crt" = {
+        sopsFile = ../../secrets/andrewyazura.crt;
+        format = "binary";
+
+        owner = "nginx";
+        group = "nginx";
+        mode = "0400";
+      };
+
+      "andrewyazura.key" = {
+        sopsFile = ../../secrets/andrewyazura.key;
+        format = "binary";
+
+        owner = "nginx";
+        group = "nginx";
+        mode = "0400";
+      };
+    };
+  };
 
   services = {
     openssh = {
