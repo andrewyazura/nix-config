@@ -19,11 +19,4 @@
       }
     ];
   };
-
-  systemd.services.birthday-api = {
-    serviceConfig = {
-      Restart = "on-failure";
-      RestartSec = "30s";
-    };
-  };
 }

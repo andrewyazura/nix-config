@@ -54,6 +54,10 @@
     birthday-bot-app = {
       url = "github:orehzzz/birthday-telegram-bot";
     };
+
+    stresses-bot-app = {
+      url = "git+ssh://git@github.com/yaroslavpashynskyi/stresses_bot_aiogram.git";
+    };
   };
 
   outputs =

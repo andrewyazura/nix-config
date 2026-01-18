@@ -14,6 +14,7 @@
 
     ./apps/birthday-api.nix
     ./apps/birthday-bot.nix
+    ./apps/stresses-bot.nix
   ];
 
   modules = {
