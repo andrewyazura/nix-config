@@ -112,7 +112,6 @@
         yorha9s = mkHost { hostname = "yorha9s"; };
 
         bunker = mkHost { hostname = "bunker"; };
-        bunker-old = mkHost { hostname = "bunker-old"; };
         proxmoxnix = mkHost { hostname = "proxmoxnix"; };
       };
 
