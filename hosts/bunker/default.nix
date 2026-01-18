@@ -24,7 +24,7 @@
       enable = true;
 
       servers.bombas = {
-        jvmOpts = "-Xms3072M -Xmx3072M";
+        jvmOpts = "-Xms8192M -Xmx8192M";
 
         serverProperties = {
           server-port = 25565;

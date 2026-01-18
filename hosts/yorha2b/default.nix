@@ -1,5 +1,4 @@
-{ inputs, ... }:
-{
+{ inputs, ... }: {
   imports = [
     ./hardware-configuration.nix
     ../../users/andrew/system
@@ -13,7 +12,7 @@
     gnome.enable = true;
     networking.enable = true;
     nix.enable = true;
-    sway.enable = false;
+    sway.enable = true;
     wooting.enable = true;
     work.enable = true;
 
@@ -46,7 +45,7 @@
       gnome.enable = true;
 
       sway = {
-        enable = false;
+        enable = true;
         output = {
           DP-3 = {
             position = "0 0";
@@ -56,7 +55,6 @@
           HDMI-A-1 = {
             position = "3840 0";
             mode = "2560x1440@144Hz";
-            transform = "90";
           };
         };
 
