@@ -21,4 +21,12 @@ with pkgs;
     url = "https://cdn.modrinth.com/data/UL4bJFDY/versions/NpTm6CT2/vanish-1.6.6+1.21.11.jar";
     sha512 = "29369705ldwn50j3wh763v00grxsaafk2gnxxrsxr2l6xmh12vnwnn7ln7qcc8z71bf7z6c79g7ikq0851r378bp7c99xlmyiwxfjs1";
   };
+  "proxy-protocol-support" = fetchurl {
+    url = "https://cdn.modrinth.com/data/mfONdVnp/versions/pvePrqOz/proxy-protocol-support-1.1.0-fabric.jar";
+    sha512 = "343lzllrcqa2d7nz4y1jdzbh2jm3x9jrfmkmm4aiacmb6rwbab1awlw5jzlx4gq1qxz1fjmr5vkfwdp58rfv76r1iplx4jrvksngl37";
+  };
+  "easy-auth" = fetchurl {
+    url = "https://cdn.modrinth.com/data/aZj58GfX/versions/LPQE6Dfu/easyauth-mc1.21.11-3.4.1.jar";
+    sha512 = "3n1wngbrvlg1k9wlvwp7ca226080cj9n57d15a0cj2iizahzfvc6wpnjgyh9kcf78s8c7f5qczlhps785zc4vrx1px6ql90l8br89x8";
+  };
 }

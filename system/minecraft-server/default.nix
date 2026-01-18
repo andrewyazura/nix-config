@@ -51,7 +51,7 @@ in
     services.minecraft-servers = {
       enable = true;
       eula = true;
-      openFirewall = true;
+      openFirewall = false;
 
       servers =
         let
@@ -64,13 +64,14 @@ in
 
             symlinks.mods = pkgs.linkFarmFromDrvs "mods" (attrValues mods);
 
-            operators = players.toOperators players.online;
-            whitelist = players.toWhitelist players.online;
+            operators = players.toOperators players.offline;
+            whitelist = players.toWhitelist players.offline;
 
             serverProperties = {
+              enforce-secure-profile = false;
               gamemode = "survival";
               max-players = length players.list;
-              online-mode = true;
+              online-mode = false;
               spawn-protection = 0;
               white-list = true;
             };
@@ -93,5 +94,44 @@ in
           name: value: recursiveUpdate (recursiveUpdate serverTemplate value) (cfg.servers.${name} or { })
         ) customServers;
     };
+
+    networking.firewall =
+      let
+        tcpShieldIps = [
+          # neoprotect
+          "51.195.127.71/32"
+          "51.195.127.72/32"
+          "51.195.127.90/32"
+          "51.195.127.91/32"
+          "15.204.187.208/32"
+          "15.204.187.209/32"
+          "15.204.130.224/32"
+          "15.204.131.21/32"
+          "54.36.238.155/32"
+          "54.36.238.165/32"
+          "54.36.238.136/32"
+          "54.36.238.139/32"
+          "54.36.238.170/32"
+          "54.36.238.180/32"
+        ];
+
+        allPorts = mapAttrsToList (
+          name: server: toString (server.serverProperties.server-port or 25565)
+        ) cfg.servers;
+
+        uniquePorts = unique allPorts;
+      in
+      {
+        extraCommands = concatMapStrings (
+          port:
+          concatMapStrings (ip: ''
+            iptables -A INPUT -p tcp -s ${ip} --dport ${port} -j ACCEPT
+          '') tcpShieldIps
+        ) uniquePorts;
+
+        extraStopCommands = concatMapStrings (port: ''
+          iptables -D INPUT -p tcp --dport ${port} -j ACCEPT || true
+        '') uniquePorts;
+      };
   };
 }
