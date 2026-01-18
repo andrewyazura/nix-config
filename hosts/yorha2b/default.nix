@@ -43,6 +43,7 @@
 
     modules = {
       gnome.enable = true;
+      waybar.enable = true;
 
       sway = {
         enable = true;

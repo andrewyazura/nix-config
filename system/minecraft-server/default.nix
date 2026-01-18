@@ -64,14 +64,13 @@ in
 
             symlinks.mods = pkgs.linkFarmFromDrvs "mods" (attrValues mods);
 
-            operators = players.toOperators players.offline;
-            whitelist = players.toWhitelist players.offline;
+            operators = players.toOperators players.online;
+            whitelist = players.toWhitelist players.online;
 
             serverProperties = {
-              difficulty = "normal";
               gamemode = "survival";
               max-players = length players.list;
-              online-mode = false;
+              online-mode = true;
               spawn-protection = 0;
               white-list = true;
             };
