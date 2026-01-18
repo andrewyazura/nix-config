@@ -68,3 +68,7 @@ sudo darwin-rebuild switch
 ```
 nixos-rebuild --flake .#<machine> --target-host andrew@<machine> switch --sudo
 ```
+
+```
+nix run github:serokell/deploy-rs -- .#<machine> --remote-build
+```
