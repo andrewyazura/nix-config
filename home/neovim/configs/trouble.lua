@@ -5,9 +5,7 @@ trouble.setup({
 	modes = {
 		lsp_references = {
 			follow = false,
-			params = {
-				refresh = true,
-			},
+			pinned = true,
 		},
 	},
 })
