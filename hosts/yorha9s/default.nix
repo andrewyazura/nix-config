@@ -92,7 +92,7 @@
     nvidia.dynamicBoost.enable = false;
   };
 
-  time.timeZone = "Europe/Kyiv";
+  time.timeZone = "Europe/Warsaw";
 
   system.stateVersion = "24.11";
 }
