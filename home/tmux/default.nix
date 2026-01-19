@@ -16,6 +16,8 @@ in
   config = mkIf cfg.enable {
     programs.tmux = {
       enable = true;
+      mouse = true;
+      escapeTime = 0;
 
       extraConfig = ''
         set -g default-command "${pkgs.zsh}/bin/zsh --login"
@@ -23,8 +25,6 @@ in
 
         set -g default-terminal "tmux-256color"
         set -ag terminal-overrides ",xterm-256color:RGB"
-
-        set -g mouse on
 
         unbind C-b
         set -g prefix C-Space
