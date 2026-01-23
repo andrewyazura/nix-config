@@ -56,20 +56,10 @@ vim.lsp.config("nil_ls", {
 	filetypes = { "nix" },
 })
 
-vim.lsp.enable("basedpyright")
-vim.lsp.config("basedpyright", {
-	cmd = { "basedpyright-langserver", "--stdio" },
+vim.lsp.enable("ruff")
+vim.lsp.config("ruff", {
+	cmd = { "ruff", "server" },
 	filetypes = { "python" },
-	settings = {
-		python = {
-			analysis = {
-				diagnosticMode = "openFilesOnly",
-				typeCheckingMode = "standard",
-				useLibraryCodeForTypes = true,
-				autoSearchPaths = true,
-			},
-		},
-	},
 })
 
 vim.lsp.enable("ty")

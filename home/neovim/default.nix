@@ -44,7 +44,6 @@ in
           nixfmt
           stylua
 
-          basedpyright
           lua-language-server
           nil
           ty
@@ -131,6 +130,7 @@ in
 
           hardtime-nvim
           flash-nvim
+          mini-icons
 
           {
             plugin = nvim-dap;
