@@ -17,9 +17,10 @@ in
     programs.tmux = {
       enable = true;
       clock24 = true;
-      escapeTime = 0;
-      keyMode = "vi";
       customPaneNavigationAndResize = true;
+      escapeTime = 0;
+      focusEvents = true;
+      keyMode = "vi";
       mouse = true;
 
       extraConfig = ''
