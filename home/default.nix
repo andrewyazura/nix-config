@@ -12,6 +12,7 @@
     ./neovim
     ./packages
     ./polybar
+    ./spotify
     ./ssh
     ./sway
     ./tmux

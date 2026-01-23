@@ -10,6 +10,7 @@
     ghostty.enable = true;
     git.enable = true;
     neovim.enable = true;
+    spotify.enable = true;
     ssh.enable = true;
     tmux.enable = true;
     yazi.enable = true;
