@@ -50,6 +50,11 @@ let
       0
       false
     )
+    (mkPlayer "Be4Frosty2000" "531aaad4-1963-36a2-bf83-0e30035fef16"
+      "fe672f07-8fd4-400d-850c-09ce54b010d4"
+      0
+      false
+    )
     (mkPlayer "GameMax" "e249f570-bf3b-3ff3-aa8a-12a5909698ca" "c0f697f2-8300-4725-ab4e-9de702b5fc21" 0
       false
     ) # TODO: delete
