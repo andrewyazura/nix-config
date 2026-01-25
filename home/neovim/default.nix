@@ -96,7 +96,6 @@ in
             config = toLuaFile ./configs/treesitter.lua;
           }
           nvim-treesitter-context # for nvim-treesitter
-          nvim-treesitter-textobjects # for nvim-treesitter
 
           {
             plugin = which-key-nvim;
@@ -111,6 +110,11 @@ in
           {
             plugin = todo-comments-nvim;
             config = toLuaFile ./configs/todo-comments.lua;
+          }
+
+          {
+            plugin = flash-nvim;
+            config = toLuaFile ./configs/flash.lua;
           }
 
           {
@@ -129,7 +133,6 @@ in
           }
 
           hardtime-nvim
-          flash-nvim
           mini-icons
 
           {
