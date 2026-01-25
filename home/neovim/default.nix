@@ -118,6 +118,11 @@ in
           }
 
           {
+            plugin = persistence-nvim;
+            config = toLuaFile ./configs/persistence.lua;
+          }
+
+          {
             plugin = oil-nvim;
             config = toLua "require('oil').setup({ view_options = { show_hidden = true } })";
           }
