@@ -9,6 +9,7 @@
     ./git
     ./gnome
     ./i3
+    ./ideavim
     ./neovim
     ./packages
     ./polybar

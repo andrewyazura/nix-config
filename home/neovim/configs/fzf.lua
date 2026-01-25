@@ -10,8 +10,8 @@ end, { desc = "file" })
 
 vim.keymap.set("n", "<leader>fls", function()
 	fzf.resume()
-end, { desc = "resume last search" })
+end, { desc = "last search" })
 
 vim.keymap.set("n", "<leader><S-g>", function()
 	fzf.live_grep({ search = "" })
-end, { desc = "grep files" })
+end, { desc = "with grep" })

@@ -3,6 +3,7 @@
   modules = {
     claude.enable = true;
     gemini.enable = true;
+    ideavim.enable = true;
     work.enable = true;
 
     packages = {
