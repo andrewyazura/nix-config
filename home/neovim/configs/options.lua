@@ -16,8 +16,6 @@ vim.opt.timeoutlen = 300
 vim.opt.conceallevel = 0
 vim.opt.termguicolors = true
 
-vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "go to definition" })
-
 require("catppuccin").setup({
 	transparent_background = true,
 	background = {
@@ -78,3 +76,6 @@ vim.lsp.config("typescript_ls", {
 	cmd = { "typescript-language-server", "--stdio" },
 	filetypes = { "typescript" },
 })
+
+vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "go to definition" })
+vim.keymap.set("n", "gD", vim.lsp.buf.type_definition, { desc = "type definition" })
