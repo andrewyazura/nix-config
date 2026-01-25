@@ -139,6 +139,12 @@ in
           nvim-dap-virtual-text
           nvim-dap-ui
           nvim-nio # for nvim-dap-ui
+
+          {
+            plugin = neotest;
+            config = toLuaFile ./configs/neotest.lua;
+          }
+          neotest-python
         ];
       };
   };
