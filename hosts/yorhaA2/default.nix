@@ -22,17 +22,16 @@ in
     system-defaults.enable = true;
     work.enable = true;
 
-    # GUI Applications (Homebrew casks)
     gui-apps = {
       base.enable = true;
       communication.enable = true;
+      development.enable = true;
       gaming.enable = true;
       media.enable = true;
       productivity.enable = true;
       system-tools.enable = true;
     };
 
-    # macOS-specific system packages
     darwin-packages = {
       docker.enable = true;
       gnuTools.enable = true;
