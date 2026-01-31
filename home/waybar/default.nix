@@ -1,7 +1,6 @@
 {
   lib,
   config,
-  pkgs,
   ...
 }:
 with lib;
@@ -17,6 +16,10 @@ in
   config = mkIf cfg.enable {
     programs.waybar = {
       enable = true;
+      systemd = {
+        enable = true;
+        target = "sway-session.target";
+      };
 
       settings = {
         mainBar = {
