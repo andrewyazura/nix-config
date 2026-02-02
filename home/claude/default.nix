@@ -72,13 +72,6 @@ in
               "mongodb__atlas-inspect-cluster"
               "mongodb__atlas-inspect-access-list"
               "mongodb__atlas-list-db-users"
-
-              # Filesystem - READ ONLY
-              "filesystem__list_directory"
-              "filesystem__read_text_file"
-              "filesystem__read_multiple_files"
-              "filesystem__get_file_info"
-              "filesystem__search_files"
             ]
             # Shell utilities
             ++ bashCmds [
@@ -124,18 +117,33 @@ in
             ];
 
             deny = [
+              # Environment files
               "Read(.env)"
               "Read(.env.*)"
               "Read(**/.env)"
               "Read(**/.env.*)"
 
+              # Sensitive directories
               "Read(~/.ssh/*)"
               "Read(~/.aws/*)"
               "Read(~/.config/sops/*)"
               "Read(**/secrets/**)"
+
+              # Credentials and keys
               "Read(**/*credentials*)"
+              "Read(**/*secret*)"
               "Read(**/*.pem)"
               "Read(**/*.key)"
+
+              # Token files
+              "Read(**/token*)"
+
+              # Local databases
+              "Read(**/*.sqlite)"
+              "Read(**/*.db)"
+
+              # Git config (may contain tokens)
+              "Read(**/.git/config)"
             ];
           };
 
@@ -172,16 +180,6 @@ in
           args = [
             "-y"
             "@mongodb-js/mongodb-mcp-server"
-          ];
-        };
-
-        filesystem = {
-          command = "npx";
-          args = [
-            "-y"
-            "@modelcontextprotocol/server-filesystem"
-            "/Users/andrew/Documents"
-            "/Users/andrew/Projects"
           ];
         };
       };

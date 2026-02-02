@@ -5,222 +5,96 @@ description: World-class data engineering skill for building scalable data pipel
 
 # Senior Data Engineer
 
-World-class senior data engineer skill for production-grade AI/ML/Data systems.
+Expert guidance for data infrastructure, ETL/ELT pipelines, data modeling, and DataOps best practices.
 
-## Quick Start
+## When to Use This Skill
 
-### Main Capabilities
+Invoke this skill when you need help with:
 
-```bash
-# Core Tool 1
-python scripts/pipeline_orchestrator.py --input data/ --output results/
+- **Data Pipeline Design**: Building ETL/ELT pipelines, orchestration, scheduling, error handling
+- **Data Architecture**: Designing data warehouses, data lakes, lakehouse architecture
+- **Data Modeling**: Dimensional modeling, normalization, denormalization strategies
+- **Pipeline Orchestration**: Airflow DAGs, workflow management, dependency handling
+- **Data Quality**: Validation, testing, monitoring data quality metrics
+- **Performance Optimization**: Query tuning, partitioning, indexing, caching strategies
+- **DataOps**: CI/CD for data pipelines, testing, monitoring, incident response
+- **Stream Processing**: Real-time data processing with Kafka, Flink, Spark Streaming
 
-# Core Tool 2  
-python scripts/data_quality_validator.py --target project/ --analyze
+## Core Competencies
 
-# Core Tool 3
-python scripts/etl_performance_optimizer.py --config config.yaml --deploy
-```
+### Data Pipeline Development
+- ETL vs. ELT architectures
+- Incremental vs. full refresh strategies
+- Change data capture (CDC)
+- Error handling and retry logic
+- Backfilling historical data
+- Pipeline monitoring and alerting
 
-## Core Expertise
+### Data Modeling & Warehousing
+- Star schema and snowflake schema
+- Slowly changing dimensions (SCD)
+- Fact and dimension tables
+- Data vault methodology
+- Kimball vs. Inmon approaches
+- Data lake vs. data warehouse
 
-This skill covers world-class capabilities in:
+### Orchestration & Workflow
+- Apache Airflow DAG design
+- Task dependencies and scheduling
+- Dynamic DAG generation
+- Sensor and trigger patterns
+- Workflow testing strategies
+- Backfill and reprocessing
 
-- Advanced production patterns and architectures
-- Scalable system design and implementation
-- Performance optimization at scale
-- MLOps and DataOps best practices
-- Real-time processing and inference
-- Distributed computing frameworks
-- Model deployment and monitoring
-- Security and compliance
+### Data Quality & Testing
+- Data validation rules
+- Schema enforcement
+- Data profiling
+- Anomaly detection
+- Data lineage tracking
+- Testing frameworks (Great Expectations)
+
+### Performance Optimization
+- Partitioning strategies
+- Columnar storage formats (Parquet, ORC)
+- Compression techniques
+- Query optimization
+- Materialized views
+- Incremental processing
+
+### DataOps & Observability
+- CI/CD for data pipelines
+- Data pipeline testing
+- Monitoring and alerting
+- SLA tracking
+- Incident response
 - Cost optimization
-- Team leadership and mentoring
 
 ## Tech Stack
 
-**Languages:** Python, SQL, R, Scala, Go
-**ML Frameworks:** PyTorch, TensorFlow, Scikit-learn, XGBoost
-**Data Tools:** Spark, Airflow, dbt, Kafka, Databricks
-**LLM Frameworks:** LangChain, LlamaIndex, DSPy
-**Deployment:** Docker, Kubernetes, AWS/GCP/Azure
-**Monitoring:** MLflow, Weights & Biases, Prometheus
-**Databases:** PostgreSQL, BigQuery, Snowflake, Pinecone
+**Languages:** Python, SQL, Scala
 
-## Reference Documentation
+**Orchestration:** Apache Airflow, Prefect, Dagster
 
-### 1. Data Pipeline Architecture
+**Processing:** Apache Spark, dbt, Pandas
 
-Comprehensive guide available in `references/data_pipeline_architecture.md` covering:
+**Streaming:** Apache Kafka, Flink, Spark Streaming
 
-- Advanced patterns and best practices
-- Production implementation strategies
-- Performance optimization techniques
-- Scalability considerations
-- Security and compliance
-- Real-world case studies
+**Warehouses:** Snowflake, BigQuery, Redshift, Databricks
 
-### 2. Data Modeling Patterns
+**Storage:** S3, GCS, Azure Blob Storage
 
-Complete workflow documentation in `references/data_modeling_patterns.md` including:
+**Formats:** Parquet, Avro, ORC, Delta Lake
 
-- Step-by-step processes
-- Architecture design patterns
-- Tool integration guides
-- Performance tuning strategies
-- Troubleshooting procedures
+**Quality:** Great Expectations, dbt tests, soda-core
 
-### 3. Dataops Best Practices
+**Monitoring:** Datadog, Prometheus, Grafana
 
-Technical reference guide in `references/dataops_best_practices.md` with:
+## Approach
 
-- System design principles
-- Implementation examples
-- Configuration best practices
-- Deployment strategies
-- Monitoring and observability
-
-## Production Patterns
-
-### Pattern 1: Scalable Data Processing
-
-Enterprise-scale data processing with distributed computing:
-
-- Horizontal scaling architecture
-- Fault-tolerant design
-- Real-time and batch processing
-- Data quality validation
-- Performance monitoring
-
-### Pattern 2: ML Model Deployment
-
-Production ML system with high availability:
-
-- Model serving with low latency
-- A/B testing infrastructure
-- Feature store integration
-- Model monitoring and drift detection
-- Automated retraining pipelines
-
-### Pattern 3: Real-Time Inference
-
-High-throughput inference system:
-
-- Batching and caching strategies
-- Load balancing
-- Auto-scaling
-- Latency optimization
-- Cost optimization
-
-## Best Practices
-
-### Development
-
-- Test-driven development
-- Code reviews and pair programming
-- Documentation as code
-- Version control everything
-- Continuous integration
-
-### Production
-
-- Monitor everything critical
-- Automate deployments
-- Feature flags for releases
-- Canary deployments
-- Comprehensive logging
-
-### Team Leadership
-
-- Mentor junior engineers
-- Drive technical decisions
-- Establish coding standards
-- Foster learning culture
-- Cross-functional collaboration
-
-## Performance Targets
-
-**Latency:**
-- P50: < 50ms
-- P95: < 100ms
-- P99: < 200ms
-
-**Throughput:**
-- Requests/second: > 1000
-- Concurrent users: > 10,000
-
-**Availability:**
-- Uptime: 99.9%
-- Error rate: < 0.1%
-
-## Security & Compliance
-
-- Authentication & authorization
-- Data encryption (at rest & in transit)
-- PII handling and anonymization
-- GDPR/CCPA compliance
-- Regular security audits
-- Vulnerability management
-
-## Common Commands
-
-```bash
-# Development
-python -m pytest tests/ -v --cov
-python -m black src/
-python -m pylint src/
-
-# Training
-python scripts/train.py --config prod.yaml
-python scripts/evaluate.py --model best.pth
-
-# Deployment
-docker build -t service:v1 .
-kubectl apply -f k8s/
-helm upgrade service ./charts/
-
-# Monitoring
-kubectl logs -f deployment/service
-python scripts/health_check.py
-```
-
-## Resources
-
-- Advanced Patterns: `references/data_pipeline_architecture.md`
-- Implementation Guide: `references/data_modeling_patterns.md`
-- Technical Reference: `references/dataops_best_practices.md`
-- Automation Scripts: `scripts/` directory
-
-## Senior-Level Responsibilities
-
-As a world-class senior professional:
-
-1. **Technical Leadership**
-   - Drive architectural decisions
-   - Mentor team members
-   - Establish best practices
-   - Ensure code quality
-
-2. **Strategic Thinking**
-   - Align with business goals
-   - Evaluate trade-offs
-   - Plan for scale
-   - Manage technical debt
-
-3. **Collaboration**
-   - Work across teams
-   - Communicate effectively
-   - Build consensus
-   - Share knowledge
-
-4. **Innovation**
-   - Stay current with research
-   - Experiment with new approaches
-   - Contribute to community
-   - Drive continuous improvement
-
-5. **Production Excellence**
-   - Ensure high availability
-   - Monitor proactively
-   - Optimize performance
-   - Respond to incidents
+This skill follows the user's stated preferences:
+1. **Analysis first**: Profile data and understand requirements before building pipelines
+2. **Present options**: Show multiple approaches (batch vs. streaming, push vs. pull, etc.)
+3. **Strategic guidance**: Focus on architecture and design patterns, not just code
+4. **Data quality**: Emphasize testing, validation, and monitoring from the start
+5. **Cost awareness**: Consider compute costs, storage costs, and optimization opportunities

@@ -3,207 +3,79 @@ name: senior-backend
 description: Comprehensive backend development skill for building scalable backend systems using NodeJS, Express, Go, Python, Postgres, GraphQL, REST APIs. Includes API scaffolding, database optimization, security implementation, and performance tuning. Use when designing APIs, optimizing database queries, implementing business logic, handling authentication/authorization, or reviewing backend code.
 ---
 
-# Senior Backend
+# Senior Backend Developer
 
-Complete toolkit for senior backend with modern tools and best practices.
+Expert guidance for backend system development, API design, database optimization, and security implementation.
 
-## Quick Start
+## When to Use This Skill
 
-### Main Capabilities
+Invoke this skill when you need help with:
 
-This skill provides three core capabilities through automated scripts:
+- **API Design & Implementation**: RESTful APIs, GraphQL schemas, API versioning, documentation
+- **Database Optimization**: Query optimization, indexing strategies, schema design, migrations
+- **Business Logic**: Implementing complex business rules, data validation, transaction management
+- **Authentication & Authorization**: JWT, OAuth, session management, RBAC, permissions
+- **Performance Tuning**: Caching strategies, query optimization, horizontal scaling, load balancing
+- **Backend Code Review**: Security vulnerabilities, performance issues, code quality, best practices
+- **Security Implementation**: Input validation, SQL injection prevention, XSS protection, rate limiting
 
-```bash
-# Script 1: Api Scaffolder
-python scripts/api_scaffolder.py [options]
+## Core Competencies
 
-# Script 2: Database Migration Tool
-python scripts/database_migration_tool.py [options]
+### API Development
+- RESTful API design principles
+- GraphQL schema design and resolvers
+- API versioning strategies
+- Request validation and error handling
+- API documentation (OpenAPI/Swagger)
+- Rate limiting and throttling
 
-# Script 3: Api Load Tester
-python scripts/api_load_tester.py [options]
-```
+### Database Expertise
+- SQL query optimization
+- Index design and maintenance
+- Schema design patterns
+- Migration strategies
+- Connection pooling
+- Read replicas and sharding
+- N+1 query prevention
 
-## Core Capabilities
+### Security Best Practices
+- OWASP Top 10 mitigation
+- Input validation and sanitization
+- SQL injection prevention (parameterized queries)
+- XSS and CSRF protection
+- Secure authentication flows
+- Secret management
+- Security headers
 
-### 1. Api Scaffolder
-
-Automated tool for api scaffolder tasks.
-
-**Features:**
-- Automated scaffolding
-- Best practices built-in
-- Configurable templates
-- Quality checks
-
-**Usage:**
-```bash
-python scripts/api_scaffolder.py <project-path> [options]
-```
-
-### 2. Database Migration Tool
-
-Comprehensive analysis and optimization tool.
-
-**Features:**
-- Deep analysis
-- Performance metrics
-- Recommendations
-- Automated fixes
-
-**Usage:**
-```bash
-python scripts/database_migration_tool.py <target-path> [--verbose]
-```
-
-### 3. Api Load Tester
-
-Advanced tooling for specialized tasks.
-
-**Features:**
-- Expert-level automation
-- Custom configurations
-- Integration ready
-- Production-grade output
-
-**Usage:**
-```bash
-python scripts/api_load_tester.py [arguments] [options]
-```
-
-## Reference Documentation
-
-### Api Design Patterns
-
-Comprehensive guide available in `references/api_design_patterns.md`:
-
-- Detailed patterns and practices
-- Code examples
-- Best practices
-- Anti-patterns to avoid
-- Real-world scenarios
-
-### Database Optimization Guide
-
-Complete workflow documentation in `references/database_optimization_guide.md`:
-
-- Step-by-step processes
-- Optimization strategies
-- Tool integrations
-- Performance tuning
-- Troubleshooting guide
-
-### Backend Security Practices
-
-Technical reference guide in `references/backend_security_practices.md`:
-
-- Technology stack details
-- Configuration examples
-- Integration patterns
-- Security considerations
-- Scalability guidelines
+### Performance Optimization
+- Caching strategies (Redis, in-memory)
+- Query optimization
+- Connection pooling
+- Async/await patterns
+- Background job processing
+- Load balancing
 
 ## Tech Stack
 
-**Languages:** TypeScript, JavaScript, Python, Go, Swift, Kotlin
-**Frontend:** React, Next.js, React Native, Flutter
-**Backend:** Node.js, Express, GraphQL, REST APIs
-**Database:** PostgreSQL, Prisma, NeonDB, Supabase
-**DevOps:** Docker, Kubernetes, Terraform, GitHub Actions, CircleCI
-**Cloud:** AWS, GCP, Azure
+**Languages:** Node.js, TypeScript, Go, Python
 
-## Development Workflow
+**Frameworks:** Express, Fastify, NestJS, Django, FastAPI, Gin
 
-### 1. Setup and Configuration
+**Databases:** PostgreSQL, Prisma, Supabase, MongoDB
 
-```bash
-# Install dependencies
-npm install
-# or
-pip install -r requirements.txt
+**APIs:** REST, GraphQL, gRPC
 
-# Configure environment
-cp .env.example .env
-```
+**Authentication:** JWT, OAuth 2.0, Passport.js
 
-### 2. Run Quality Checks
+**Caching:** Redis, Memcached
 
-```bash
-# Use the analyzer script
-python scripts/database_migration_tool.py .
+**Message Queues:** RabbitMQ, Kafka, Redis Pub/Sub
 
-# Review recommendations
-# Apply fixes
-```
+## Approach
 
-### 3. Implement Best Practices
-
-Follow the patterns and practices documented in:
-- `references/api_design_patterns.md`
-- `references/database_optimization_guide.md`
-- `references/backend_security_practices.md`
-
-## Best Practices Summary
-
-### Code Quality
-- Follow established patterns
-- Write comprehensive tests
-- Document decisions
-- Review regularly
-
-### Performance
-- Measure before optimizing
-- Use appropriate caching
-- Optimize critical paths
-- Monitor in production
-
-### Security
-- Validate all inputs
-- Use parameterized queries
-- Implement proper authentication
-- Keep dependencies updated
-
-### Maintainability
-- Write clear code
-- Use consistent naming
-- Add helpful comments
-- Keep it simple
-
-## Common Commands
-
-```bash
-# Development
-npm run dev
-npm run build
-npm run test
-npm run lint
-
-# Analysis
-python scripts/database_migration_tool.py .
-python scripts/api_load_tester.py --analyze
-
-# Deployment
-docker build -t app:latest .
-docker-compose up -d
-kubectl apply -f k8s/
-```
-
-## Troubleshooting
-
-### Common Issues
-
-Check the comprehensive troubleshooting section in `references/backend_security_practices.md`.
-
-### Getting Help
-
-- Review reference documentation
-- Check script output messages
-- Consult tech stack documentation
-- Review error logs
-
-## Resources
-
-- Pattern Reference: `references/api_design_patterns.md`
-- Workflow Guide: `references/database_optimization_guide.md`
-- Technical Guide: `references/backend_security_practices.md`
-- Tool Scripts: `scripts/` directory
+This skill follows the user's stated preferences:
+1. **Security first**: Identify and prevent vulnerabilities (SQL injection, XSS, auth issues)
+2. **Performance conscious**: Optimize database queries, implement appropriate caching
+3. **Code review focus**: Thorough analysis of correctness, maintainability, edge cases
+4. **Functional patterns**: Pure functions, composition, immutability where appropriate
+5. **Explicit error handling**: Result/Either monads, explicit error states
