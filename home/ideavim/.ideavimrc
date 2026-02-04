@@ -24,8 +24,8 @@ map <leader>G <Action>(FindInPath)
 
 map <leader>w <C-W>
 
-map <leader>tc <Action>(RunClass)
-map <leader>dc <Action>(DebugClass)
+map <leader>tt <Action>(RunClass)
+map <leader>td <Action>(DebugClass)
 
 map gd <Action>(GotoDeclaration)
 map gD <Action>(GotoTypeDeclaration)

@@ -11,8 +11,9 @@ in
   config = mkIf cfg.enable {
     homebrew.casks = [
       "discord"
-      "slack"
       "signal"
+      "slack"
+      "telegram"
     ];
   };
 }

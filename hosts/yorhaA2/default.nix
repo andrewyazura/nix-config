@@ -57,7 +57,7 @@ in
         ghostty = {
           backgroundOpacity = 0.94;
           fontFamily = "SF Mono";
-          fontSize = 12;
+          fontSize = 10;
           fontStyle = "SemiBold";
         };
       };
