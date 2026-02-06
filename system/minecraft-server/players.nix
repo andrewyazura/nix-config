@@ -55,6 +55,10 @@ let
       0
       false
     )
+    (mkPlayer "marrianss" "224f0912-1fa3-3d2e-975a-a80afe906913" "68af9b18-9bdb-468f-af01-27d684a16750"
+      0
+      false
+    )
     (mkPlayer "GameMax" "e249f570-bf3b-3ff3-aa8a-12a5909698ca" "c0f697f2-8300-4725-ab4e-9de702b5fc21" 0
       false
     ) # TODO: delete
