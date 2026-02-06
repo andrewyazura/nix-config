@@ -26,11 +26,7 @@ in
       skillsDir = ./skills;
 
       settings = {
-        alwaysThinkingEnabled = true;
-        cleanupPeriodDays = 30;
-        model = "opusplan";
         outputStyle = "Explanatory";
-        planningMode = "auto";
         respectGitignore = true;
 
         permissions =
