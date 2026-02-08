@@ -6,11 +6,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1770583992,
-        "narHash": "sha256-xRTHqedritl9aYWfnFEKRNsbGRL83SsI/IR9QrPwqjM=",
+        "lastModified": 1770590997,
+        "narHash": "sha256-ZlJkuTdVYDgEmM4eUJsv6KeRhz/+ETmpUtXo2B+vTQE=",
         "ref": "refs/heads/main",
-        "rev": "3841021eddfbe910ba4465413a9e33194193ddf9",
-        "revCount": 3,
+        "rev": "fda5f15291f65821af0e44db8abeba430a8882a7",
+        "revCount": 5,
         "type": "git",
         "url": "ssh://git@github.com/yaroslavpashynskyi/BeastMusic.git"
       },
