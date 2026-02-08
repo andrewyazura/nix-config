@@ -7,5 +7,6 @@
 
   services.stresses-bot = {
     enable = true;
+    dataDir = "/var/lib/stresses-bot";
   };
 }

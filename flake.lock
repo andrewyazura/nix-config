@@ -611,11 +611,11 @@
         "uv2nix": "uv2nix_3"
       },
       "locked": {
-        "lastModified": 1770571366,
-        "narHash": "sha256-YDrKnLYKmIX9lRk7P2rrbRsGESmNzuCZ8+L1sjYLXoI=",
+        "lastModified": 1770587379,
+        "narHash": "sha256-MqMinKwh0s9OyFu77BZC3d/wrnJQKnOtUZh2Try3BG0=",
         "ref": "refs/heads/main",
-        "rev": "bb6c435df8667aa6815e64bca26f59a2d220037d",
-        "revCount": 1,
+        "rev": "737f7427b5504d77dff8cc128439e92599a56e5a",
+        "revCount": 3,
         "type": "git",
         "url": "ssh://git@github.com/yaroslavpashynskyi/stresses-bot-nix.git"
       },
