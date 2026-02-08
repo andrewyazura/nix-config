@@ -384,16 +384,16 @@
     },
     "nixpkgs_7": {
       "locked": {
-        "lastModified": 1751274312,
-        "narHash": "sha256-/bVBlRpECLVzjV19t5KMdMFWSwKLtb5RyXdjz3LJT+g=",
-        "owner": "NixOS",
+        "lastModified": 1770197578,
+        "narHash": "sha256-AYqlWrX09+HvGs8zM6ebZ1pwUqjkfpnv8mewYwAo+iM=",
+        "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "50ab793786d9de88ee30ec4e4c24fb4236fc2674",
+        "rev": "00c21e4c93d963c50d4c0c89bfa84ed6e0694df2",
         "type": "github"
       },
       "original": {
-        "owner": "NixOS",
-        "ref": "nixos-24.11",
+        "owner": "nixos",
+        "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -474,6 +474,35 @@
         "type": "github"
       }
     },
+    "pyproject-build-systems_3": {
+      "inputs": {
+        "nixpkgs": [
+          "stresses-bot-app",
+          "nixpkgs"
+        ],
+        "pyproject-nix": [
+          "stresses-bot-app",
+          "pyproject-nix"
+        ],
+        "uv2nix": [
+          "stresses-bot-app",
+          "uv2nix"
+        ]
+      },
+      "locked": {
+        "lastModified": 1763662255,
+        "narHash": "sha256-4bocaOyLa3AfiS8KrWjZQYu+IAta05u3gYZzZ6zXbT0=",
+        "owner": "pyproject-nix",
+        "repo": "build-system-pkgs",
+        "rev": "042904167604c681a090c07eb6967b4dd4dae88c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pyproject-nix",
+        "repo": "build-system-pkgs",
+        "type": "github"
+      }
+    },
     "pyproject-nix": {
       "inputs": {
         "nixpkgs": [
@@ -508,6 +537,27 @@
         "owner": "pyproject-nix",
         "repo": "pyproject.nix",
         "rev": "84c4ea102127c77058ea1ed7be7300261fafc7d2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pyproject-nix",
+        "repo": "pyproject.nix",
+        "type": "github"
+      }
+    },
+    "pyproject-nix_3": {
+      "inputs": {
+        "nixpkgs": [
+          "stresses-bot-app",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1769936401,
+        "narHash": "sha256-kwCOegKLZJM9v/e/7cqwg1p/YjjTAukKPqmxKnAZRgA=",
+        "owner": "pyproject-nix",
+        "repo": "pyproject.nix",
+        "rev": "b0d513eeeebed6d45b4f2e874f9afba2021f7812",
         "type": "github"
       },
       "original": {
@@ -555,20 +605,23 @@
     },
     "stresses-bot-app": {
       "inputs": {
-        "nixpkgs": "nixpkgs_7"
+        "nixpkgs": "nixpkgs_7",
+        "pyproject-build-systems": "pyproject-build-systems_3",
+        "pyproject-nix": "pyproject-nix_3",
+        "uv2nix": "uv2nix_3"
       },
       "locked": {
-        "lastModified": 1768696105,
-        "narHash": "sha256-Xi30lqVCCU7a3dFUmDtcbRQZ4hkWw9sekPqYyYMdm4g=",
-        "ref": "refs/heads/master",
-        "rev": "2bd8b361cbab2932abbf871bed4585de7f2c0a54",
-        "revCount": 24,
+        "lastModified": 1770571366,
+        "narHash": "sha256-YDrKnLYKmIX9lRk7P2rrbRsGESmNzuCZ8+L1sjYLXoI=",
+        "ref": "refs/heads/main",
+        "rev": "bb6c435df8667aa6815e64bca26f59a2d220037d",
+        "revCount": 1,
         "type": "git",
-        "url": "ssh://git@github.com/yaroslavpashynskyi/stresses_bot_aiogram.git"
+        "url": "ssh://git@github.com/yaroslavpashynskyi/stresses-bot-nix.git"
       },
       "original": {
         "type": "git",
-        "url": "ssh://git@github.com/yaroslavpashynskyi/stresses_bot_aiogram.git"
+        "url": "ssh://git@github.com/yaroslavpashynskyi/stresses-bot-nix.git"
       }
     },
     "systems": {
@@ -676,6 +729,31 @@
         "owner": "pyproject-nix",
         "repo": "uv2nix",
         "rev": "b6ed0901aec29583532abe65117b18d86a49b617",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pyproject-nix",
+        "repo": "uv2nix",
+        "type": "github"
+      }
+    },
+    "uv2nix_3": {
+      "inputs": {
+        "nixpkgs": [
+          "stresses-bot-app",
+          "nixpkgs"
+        ],
+        "pyproject-nix": [
+          "stresses-bot-app",
+          "pyproject-nix"
+        ]
+      },
+      "locked": {
+        "lastModified": 1770331927,
+        "narHash": "sha256-jlOvO++uvne/lTgWqdI4VhTV5OpVWi70ZDVBlT6vGSs=",
+        "owner": "pyproject-nix",
+        "repo": "uv2nix",
+        "rev": "5b43a934e15b23bfba6c408cba1c570eccf80080",
         "type": "github"
       },
       "original": {

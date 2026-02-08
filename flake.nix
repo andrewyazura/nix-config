@@ -56,7 +56,7 @@
     };
 
     stresses-bot-app = {
-      url = "git+ssh://git@github.com/yaroslavpashynskyi/stresses_bot_aiogram.git";
+      url = "git+ssh://git@github.com/yaroslavpashynskyi/stresses-bot-nix.git";
     };
   };
 
