@@ -58,6 +58,10 @@
     stresses-bot-app = {
       url = "git+ssh://git@github.com/yaroslavpashynskyi/stresses-bot-nix.git";
     };
+
+    beast-music-app = {
+      url = "git+ssh://git@github.com/yaroslavpashynskyi/BeastMusic.git";
+    };
   };
 
   outputs =

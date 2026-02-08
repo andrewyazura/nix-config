@@ -12,6 +12,7 @@
     ../../users/andrew/system
     ../../users/andrew/system/bunker
 
+    ./apps/beast-music.nix
     ./apps/birthday-api.nix
     ./apps/birthday-bot.nix
     ./apps/stresses-bot.nix
