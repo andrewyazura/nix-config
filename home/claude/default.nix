@@ -2,11 +2,14 @@
   lib,
   config,
   pkgs,
+  inputs,
   ...
 }:
 with lib;
 let
   cfg = config.modules.claude;
+  system = pkgs.stdenv.hostPlatform.system;
+  claude-nix-package = inputs.claude-code.packages.${system}.default;
 in
 {
   options.modules.claude = {
@@ -20,6 +23,7 @@ in
 
     programs.claude-code = {
       enable = true;
+      package = claude-nix-package;
       memory.source = ./memory.md;
 
       commandsDir = ./commands;

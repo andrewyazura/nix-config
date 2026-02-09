@@ -21,6 +21,9 @@ sudo darwin-rebuild switch --flake .              # macOS
 # Build & apply remotely
 nixos-rebuild --flake .#<hostname> --target-host andrew@<hostname> switch --sudo
 
+# Deploy to bunker server (uses deploy-rs)
+nix run github:serokell/deploy-rs -- .#bunker
+
 # Test build without activating
 nixos-rebuild build --flake .#<hostname>
 darwin-rebuild build --flake .
@@ -66,22 +69,41 @@ Prerequisites: Public age key in `.sops.yaml`, private key in `~/.config/sops/ag
 
 ### Configuration Flow
 
-**NixOS systems** use a `mkHost` helper in `flake.nix` that:
-- Takes hostname, system architecture, and optional modules
-- Automatically imports `./system` and `./hosts/${hostname}`
-- Injects `home-manager` and `sops-nix` modules
-- Passes `inputs` and `hostname` as `specialArgs`
+**NixOS systems** use a `mkHost` helper in `flake.nix` (lines 76-95):
+```nix
+mkHost = { hostname, system ? "x86_64-linux", specialArgs ? {} }:
+  nixpkgs.lib.nixosSystem {
+    inherit system;
+    specialArgs = { inherit inputs hostname; } // specialArgs;
+    modules = [
+      ./system                # Auto-imports ALL system modules
+      ./hosts/${hostname}     # Host-specific config
+      inputs.home-manager.nixosModules.home-manager
+      inputs.sops-nix.nixosModules.sops
+    ];
+  };
+```
 
-**Darwin systems** use `nix-darwin.lib.darwinSystem` directly without the helper.
+**Darwin systems** use `mkDarwinHost` (lines 97-115):
+- Similar pattern but does NOT auto-import `./system`
+- Host config must manually import `../../darwin`
 
 Configuration layers (both systems):
-1. **Host config** (`hosts/<hostname>/default.nix`) - imports system or darwin modules
-2. **Shared modules** (`system/` or `darwin/`) - enabled via `modules.<name>.enable = true`
-3. **Home-manager** - configured per-host, imports from:
-   - `home/` - shared home-manager modules
-   - `users/andrew/home/` - user-specific base config
-   - `users/andrew/home/<hostname>/` - per-host user overrides (optional)
-4. **Private config** - additional private modules via `private-config` flake input
+1. **Flake helper** - injects `inputs` and `hostname` as `specialArgs` to all modules
+2. **Host config** (`hosts/<hostname>/default.nix`) - enables system/darwin modules
+3. **Home-manager wiring** (inside host config):
+   ```nix
+   home-manager.users.andrew = {
+     imports = [
+       ../../home                         # All shared home modules
+       ../../users/andrew/home            # User base config
+       ../../users/andrew/home/yorha2b    # Host overrides (optional)
+       inputs.private-config.homeManagerModules.default
+     ];
+     modules = { ... };  # Enable/configure modules
+   };
+   ```
+4. **Private config** - additional modules via `private-config` flake input
 
 ### Module Pattern
 
@@ -94,6 +116,7 @@ let cfg = config.modules.<module-name>;
 in {
   options.modules.<module-name> = {
     enable = mkEnableOption "Description";
+    # Optional: additional options with mkOption
   };
 
   config = mkIf cfg.enable {
@@ -103,6 +126,51 @@ in {
 ```
 
 Enable in configs: `modules.<module-name>.enable = true;`
+
+**Module option customization** (when modules define extra options beyond `enable`):
+```nix
+# Example: Override ghostty font settings on macOS
+modules.ghostty = {
+  enable = true;
+  backgroundOpacity = 0.9;    # Override default
+  fontFamily = "SF Mono";     # Override default
+  fontSize = 12;              # Override default
+  fontStyle = "SemiBold";     # Override default
+};
+```
+
+This pattern allows per-host customization without modifying the base module.
+
+### SpecialArgs Flow (Advanced)
+
+Understanding how `inputs` and `hostname` become available in all modules:
+
+1. **Flake helpers inject specialArgs** (`flake.nix:84-87`):
+   ```nix
+   specialArgs = { inherit inputs hostname; } // specialArgs;
+   ```
+   This makes `inputs` and `hostname` available to ALL system-level modules.
+
+2. **Home-manager receives extraSpecialArgs** (`system/home-manager/default.nix:6-8`):
+   ```nix
+   home-manager = {
+     extraSpecialArgs = inputs // { inherit hostname; };
+   };
+   ```
+   This spreads all flake inputs AND hostname into home-manager modules.
+
+3. **Result**: Every module can access:
+   - `inputs.<flake-name>` - reference any flake input
+   - `hostname` - current machine name for conditional logic
+   - Any module can use: `{ inputs, hostname, ... }: { ... }`
+
+**Example use case** - Platform-specific package selection:
+```nix
+{ pkgs, hostname, ... }:
+{
+  home.packages = if hostname == "yorhaA2" then [ pkgs.darwin-specific ] else [ pkgs.linux-specific ];
+}
+```
 
 ### Secrets Access Control
 
@@ -313,10 +381,97 @@ modules = {
 
 **Neovim** (`home/neovim/`): Lua configs in `configs/` subdirectory. Uses treesitter, LSP (basedpyright, lua-language-server, nil, typescript-language-server), DAP debugging, and fzf-lua.
 
-**Minecraft Server** (`system/minecraft-server/`): Fabric 1.21.11. Players in `players.nix`, mods in `mods.nix` with SHA512 verification via `fetchurl`.
+**Minecraft Server** (`system/minecraft-server/`): Fabric 1.21.11 with sophisticated configuration pattern:
+- Players in `players.nix`, mods in `mods.nix` with SHA512 verification via `fetchurl`
+- Uses `mkOption` with `attrsOf submodule` for per-server configuration
+- Demonstrates `recursiveUpdate` pattern for merging server templates with custom configs
+- Dynamically generates firewall rules for TcpShield protection
+- Imports external flake (`nix-minecraft`) as base infrastructure
 
 **Claude Code** (`home/claude/`): This repo includes a home-manager module configuring Claude Code itself with permissions, hooks, and environment variables.
 
 **Application Flakes**: Several custom applications are included as flake inputs and deployed on specific machines:
-- `duty-reminder-app`, `birthday-api-app`, `birthday-bot-app` - deployed on `bunker` server
-- Applications are imported and configured in host-specific configs
+- `birthday-api-app`, `birthday-bot-app`, `stresses-bot-app`, `beast-music-app` - deployed on `bunker` server
+- Applications are imported and configured in `hosts/bunker/apps/`
+
+**Pattern for integrating external flake applications:**
+1. Add flake input to `flake.nix`:
+   ```nix
+   inputs.my-app = { url = "github:user/my-app"; };
+   ```
+2. Create deployment config in `hosts/<hostname>/apps/my-app.nix`:
+   ```nix
+   { inputs, ... }: {
+     imports = [ inputs.my-app.nixosModules.default ];
+     # Configure the app module here
+   }
+   ```
+3. Import in host config: `imports = [ ./apps/my-app.nix ];`
+
+This pattern allows deploying external Nix-flake-based applications without vendoring code.
+
+## Architectural Patterns
+
+Key patterns used throughout this configuration:
+
+**1. Module Aggregation** - Parent `default.nix` files import all submodules:
+```nix
+# system/default.nix, darwin/default.nix, home/default.nix
+{
+  imports = [
+    ./submodule1
+    ./submodule2
+    # ... all submodules
+  ];
+}
+```
+This centralizes imports and allows auto-discovery of new modules.
+
+**2. Enable Pattern** - Granular control via `mkEnableOption`:
+- Every module has `modules.<name>.enable` option
+- Host configs explicitly enable only needed modules
+- Prevents "everything enabled by default" bloat
+
+**3. Configuration Merging** - `recursiveUpdate` for combining configs:
+```nix
+# Merge base template with host-specific overrides
+recursiveUpdate baseTemplate hostOverrides
+```
+Seen in: Minecraft server configs, module option overrides
+
+**4. Platform Branching** - Conditional logic for cross-platform support:
+```nix
+package = if pkgs.stdenv.isDarwin then macPackage else linuxPackage;
+```
+Seen in: ghostty module, system vs darwin separation
+
+**5. Helper Functions in Modules** - Reduce boilerplate:
+```nix
+# home/neovim/default.nix
+let
+  toLua = str: "lua << EOF\n${str}\nEOF";
+  toLuaFile = path: toLua (builtins.readFile path);
+in { ... }
+```
+
+**6. Secrets as File Paths** - sops-nix exposes secrets at runtime paths:
+```nix
+programs.ssh.includes = [ config.sops.secrets.ssh-config.path ];
+```
+Allows including binary files (certs, keys) without inline content.
+
+**7. Per-Host SSH Key Naming** - Consistent naming convention:
+```
+id_ed25519_<hostname>_<service>_<date>
+```
+Examples: `id_ed25519_yorha2b_bunker_1801`, `id_ed25519_yorha9s_github_1510`
+
+**8. Three-Layer Import Pattern** - Home-manager composition:
+```nix
+home-manager.users.andrew.imports = [
+  ../../home                    # Shared modules (ALL)
+  ../../users/andrew/home       # User base enables
+  ../../users/andrew/home/HOST  # Host-specific overrides
+];
+```
+Creates a pyramid: universal → user-level → host-level customization.

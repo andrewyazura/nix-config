@@ -41,6 +41,7 @@ in
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
+    extraSpecialArgs = { inherit inputs hostname; };
     sharedModules = [
       inputs.private-config.homeManagerModules.default
       inputs.sops-nix.homeManagerModules.sops

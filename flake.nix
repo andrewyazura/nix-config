@@ -39,6 +39,10 @@
       url = "github:ghostty-org/ghostty";
     };
 
+    claude-code = {
+      url = "github:sadjow/claude-code-nix";
+    };
+
     nix-minecraft = {
       url = "github:Infinidoge/nix-minecraft";
     };
