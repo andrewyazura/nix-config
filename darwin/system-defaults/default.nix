@@ -22,6 +22,7 @@ in
         };
 
         NSGlobalDomain = {
+          ApplePressAndHoldEnabled = true;
           NSAutomaticCapitalizationEnabled = false;
           NSAutomaticPeriodSubstitutionEnabled = false;
         };
