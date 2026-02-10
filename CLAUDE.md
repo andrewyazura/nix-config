@@ -154,10 +154,10 @@ Understanding how `inputs` and `hostname` become available in all modules:
 2. **Home-manager receives extraSpecialArgs** (`system/home-manager/default.nix:6-8`):
    ```nix
    home-manager = {
-     extraSpecialArgs = inputs // { inherit hostname; };
+     extraSpecialArgs = { inherit inputs hostname; };
    };
    ```
-   This spreads all flake inputs AND hostname into home-manager modules.
+   This passes `inputs` (as a single attrset) and `hostname` into home-manager modules.
 
 3. **Result**: Every module can access:
    - `inputs.<flake-name>` - reference any flake input
@@ -176,7 +176,7 @@ Understanding how `inputs` and `hostname` become available in all modules:
 
 Defined in `.sops.yaml` with per-machine age keys:
 - `ssh-config` → personal machines (yorha2b, yorha9s, yorhaA2)
-- `duty-reminder.env`, `andrewyazura.{crt,key}` → bunker only
+- `andrewyazura.{crt,key}` → bunker only
 
 ## Adding New Machine
 
@@ -206,11 +206,9 @@ Packages are organized into **purpose-based groups** rather than scattered acros
 
 Located in `home/packages/`, these are **cross-platform** command-line tools available on all machines:
 
-- **base** - Essential CLI tools without dedicated modules (git-lfs, age, sops, tree, ncdu, htop, zip/unzip, ntfs3g)
-- **development** - Fast search tools (ripgrep, fd, tree-sitter)
-- **shell** - Shell enhancements (fastfetch)
+- **base** - Essential CLI tools without dedicated modules (age, fastfetch, git-lfs, htop, ncdu, ntfs3g, sops, tree, zip/unzip)
+- **development** - Search and dev tools (ripgrep, fd, tree-sitter, vi-mongo)
 - **media** - Media CLI tools (mpv)
-- **ai** - AI tools (gemini-cli)
 
 **Note:** Packages with dedicated config modules (git, neovim, tmux, zsh, direnv, btop, yazi, ghostty) are managed by their respective `home/<module>` modules, NOT in package groups. Package groups only contain tools without dedicated configuration.
 
@@ -228,6 +226,7 @@ Platform-specific graphical applications:
 **macOS** (`darwin/gui-apps/`):
 - **base** - firefox, google-chrome, bitwarden, ghostty (Homebrew casks)
 - **communication** - discord, slack, signal
+- **development** - antigravity, intellij-idea, visual-studio-code
 - **gaming** - steam, prismlauncher
 - **media** - spotify
 - **productivity** - obsidian
@@ -251,16 +250,14 @@ modules.packages = {
 
 **Desktop-specific packages** (`users/andrew/home/<hostname>/`):
 ```nix
-# yorha2b, yorha9s, yorhaA2
+# yorhaA2
 modules.packages = {
-  shell.enable = true;  # fastfetch
   media.enable = true;  # mpv
-  ai.enable = true;     # gemini-cli
 };
 ```
 
 **Configured tools** (enabled separately via dedicated modules):
-- git, neovim, tmux, zsh, direnv, btop, yazi, ghostty, ssh, firefox
+- git, neovim, tmux, zsh, direnv, btop, yazi, ghostty, ssh, firefox, claude, gemini, spotify
 
 **Server machines** (bunker, proxmoxnix) automatically get base + development packages from common config.
 
@@ -316,7 +313,7 @@ Add to `home/packages/<category>/` when the tool:
 - Has no dotfiles or settings to manage
 - Is a standalone utility
 
-**Examples:** tree, ncdu, htop, ripgrep, fd, mpv, age, sops, gemini-cli
+**Examples:** tree, ncdu, htop, ripgrep, fd, mpv, age, sops
 
 ```nix
 # home/packages/base/default.nix
