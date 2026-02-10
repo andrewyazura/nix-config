@@ -32,7 +32,7 @@ in
   config = mkIf cfg.enable {
     wayland.windowManager.sway =
       let
-        colors = import ../../common/colors.nix;
+        palette = import ../../common/colors.nix;
       in
       {
         enable = true;
@@ -52,25 +52,25 @@ in
 
           colors = {
             focused = {
-              border = colors.mauve;
-              background = colors.mauve;
-              text = colors.base;
-              indicator = colors.mauve;
-              childBorder = colors.mauve;
+              border = palette.mauve;
+              background = palette.mauve;
+              text = palette.base;
+              indicator = palette.mauve;
+              childBorder = palette.mauve;
             };
             unfocused = {
-              border = colors.base;
-              background = colors.base;
-              text = colors.text;
-              indicator = colors.base;
-              childBorder = colors.base;
+              border = palette.base;
+              background = palette.base;
+              text = palette.text;
+              indicator = palette.base;
+              childBorder = palette.base;
             };
             urgent = {
-              border = colors.red;
-              background = colors.red;
-              text = colors.base;
-              indicator = colors.red;
-              childBorder = colors.red;
+              border = palette.red;
+              background = palette.red;
+              text = palette.base;
+              indicator = palette.red;
+              childBorder = palette.red;
             };
           };
 
@@ -78,7 +78,7 @@ in
           terminal = "ghostty";
           menu =
             let
-              args = "-fn 'AdwaitaMono-12' -nb '${colors.crust}' -nf '${colors.text}' -sb '${colors.mauve}' -sf '${colors.base}'";
+              args = "-fn 'AdwaitaMono-12' -nb '${palette.crust}' -nf '${palette.text}' -sb '${palette.mauve}' -sf '${palette.base}'";
             in
             "${pkgs.dmenu}/bin/dmenu_path | ${pkgs.dmenu}/bin/dmenu ${args} | ${pkgs.findutils}/bin/xargs swaymsg exec --";
 

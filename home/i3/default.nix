@@ -18,7 +18,7 @@ in
 
     xsession.windowManager.i3 =
       let
-        colors = import ../../common/colors.nix;
+        palette = import ../../common/colors.nix;
       in
       {
         enable = true;
@@ -34,25 +34,25 @@ in
 
           colors = {
             focused = {
-              border = colors.mauve;
-              background = colors.mauve;
-              text = colors.base;
-              indicator = colors.mauve;
-              childBorder = colors.mauve;
+              border = palette.mauve;
+              background = palette.mauve;
+              text = palette.base;
+              indicator = palette.mauve;
+              childBorder = palette.mauve;
             };
             unfocused = {
-              border = colors.base;
-              background = colors.base;
-              text = colors.text;
-              indicator = colors.base;
-              childBorder = colors.base;
+              border = palette.base;
+              background = palette.base;
+              text = palette.text;
+              indicator = palette.base;
+              childBorder = palette.base;
             };
             urgent = {
-              border = colors.red;
-              background = colors.red;
-              text = colors.base;
-              indicator = colors.red;
-              childBorder = colors.red;
+              border = palette.red;
+              background = palette.red;
+              text = palette.base;
+              indicator = palette.red;
+              childBorder = palette.red;
             };
           };
 
@@ -70,7 +70,7 @@ in
 
             "${modifier}+d" =
               let
-                args = "-fn 'AdwaitaMono-8' -nb '${colors.crust}' -nf '${colors.text}' -sb '${colors.mauve}' -sf '${colors.base}'";
+                args = "-fn 'AdwaitaMono-8' -nb '${palette.crust}' -nf '${palette.text}' -sb '${palette.mauve}' -sf '${palette.base}'";
               in
               "exec dmenu_run ${args}";
 
