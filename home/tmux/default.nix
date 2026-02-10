@@ -30,6 +30,12 @@ in
         set -g default-terminal "tmux-256color"
         set -ag terminal-overrides ",xterm-256color:RGB"
 
+        set -g status-left-length 50
+        set -g status-left "[#{session_name}] "
+
+        set -g status-right-length 150
+        set -g status-right "#{?window_bigger,[#{window_offset_x}#,#{window_offset_y}] ,}\"#{=21:pane_title}\" %H:%M %d-%b-%y"
+
         unbind C-b
         set -g prefix C-Space
         bind C-Space send-prefix
