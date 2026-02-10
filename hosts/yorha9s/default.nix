@@ -16,7 +16,6 @@
     nix.enable = true;
     work.enable = true;
 
-    # GUI Applications
     gui-apps = {
       base.enable = true;
       communication.enable = true;

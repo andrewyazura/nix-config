@@ -1,6 +1,8 @@
 { config, ... }:
 {
   modules = {
+    claude.enable = true;
+
     packages = {
       media.enable = true;
     };
