@@ -85,6 +85,7 @@ in
               p.json
               p.kotlin
               p.lua
+              p.markdown
               p.nix
               p.python
               p.rust
@@ -153,6 +154,8 @@ in
             config = toLuaFile ./configs/neotest.lua;
           }
           neotest-python
+
+          markdown-preview-nvim
         ];
       };
   };
