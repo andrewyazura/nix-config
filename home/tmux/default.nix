@@ -34,13 +34,22 @@ in
           set -g default-terminal "tmux-256color"
           set -ag terminal-overrides ",xterm-256color:RGB"
 
-          set -g status-style fg=${palette.base},bg=${palette.mauve}
+          set -g mode-style bg=${palette.mauve},fg=${palette.base}
+          set -g status-style bg=${palette.crust},fg=${palette.text}
+
+          set -g message-style bg=${palette.mauve},fg=${palette.base}
+          set -g message-command-style bg=${palette.base},fg=${palette.text}
 
           set -g status-left-length 50
           set -g status-left "[#{session_name}] "
 
           set -g status-right-length 150
           set -g status-right "#{?window_bigger,[#{window_offset_x}#,#{window_offset_y}] ,}\"#{=21:pane_title}\" %A, %B %d %H:%M"
+
+          set -g window-status-format " #I:#W "
+
+          set -g window-status-current-format " #I:#W "
+          set -g window-status-current-style bg=${palette.mauve},fg=${palette.base},bold
 
           unbind C-b
           set -g prefix C-Space
