@@ -56,9 +56,7 @@ in
 
       modules = {
         ghostty = {
-          backgroundOpacity = 0.9;
           fontFamily = "SF Mono";
-          fontSize = 12;
           fontStyle = "SemiBold";
         };
       };

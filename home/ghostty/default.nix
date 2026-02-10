@@ -25,7 +25,7 @@ in
 
     fontSize = mkOption {
       type = types.int;
-      default = 11;
+      default = 12;
       description = "Ghostty font size";
     };
 
@@ -37,7 +37,7 @@ in
 
     backgroundOpacity = mkOption {
       type = types.float;
-      default = 1.0;
+      default = 0.9;
       description = "Ghostty background opacity";
     };
   };
