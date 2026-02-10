@@ -18,25 +18,25 @@ in
     enable = mkEnableOption "Enable ghostty configuration";
 
     fontFamily = mkOption {
-      type = lib.types.str;
+      type = types.str;
       default = "AdwaitaMono Nerd Font";
       description = "Ghostty font family";
     };
 
     fontSize = mkOption {
-      type = lib.types.int;
+      type = types.int;
       default = 11;
       description = "Ghostty font size";
     };
 
     fontStyle = mkOption {
-      type = lib.types.str;
+      type = types.str;
       default = "Regular";
       description = "Ghostty font style";
     };
 
     backgroundOpacity = mkOption {
-      type = lib.types.float;
+      type = types.float;
       default = 1.0;
       description = "Ghostty background opacity";
     };
