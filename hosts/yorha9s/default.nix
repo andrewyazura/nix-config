@@ -24,12 +24,6 @@
       productivity.enable = true;
       gaming.enable = true;
     };
-
-    # Keep old programs module temporarily for compatibility
-    programs = {
-      enable = true;
-      enableMinecraft = true;
-    };
   };
 
   home-manager.users.andrew = {

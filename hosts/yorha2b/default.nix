@@ -1,4 +1,5 @@
-{ inputs, ... }: {
+{ inputs, ... }:
+{
   imports = [
     ./hardware-configuration.nix
     ../../users/andrew/system
@@ -23,12 +24,6 @@
       media.enable = true;
       productivity.enable = true;
       gaming.enable = true;
-    };
-
-    # Keep old programs module temporarily for compatibility
-    programs = {
-      enable = true;
-      enableMinecraft = true;
     };
   };
 
