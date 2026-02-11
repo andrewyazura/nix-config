@@ -25,6 +25,10 @@ Apply whichever are relevant:
 - **Second-Order Effects** — consequences of consequences
 - **Pre-mortem** — assume the decision failed; work backward to find why
 
+## Process
+
+Use the `sequential-thinking` MCP tool to work through perspectives and reasoning frameworks before writing the final output. Each thought step should explore one perspective or framework, revising and branching as needed. Only synthesize into the output structure after reasoning is complete.
+
 ## Output Structure
 
 ```
