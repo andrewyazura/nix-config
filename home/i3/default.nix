@@ -63,80 +63,83 @@ in
             }
           ];
 
-          keybindings = {
-            "${modifier}+Return" = "exec ${terminal}";
-            "${modifier}+Escape" = "exec xsecurelock";
-            "${modifier}+q" = "kill";
+          keybindings =
+            let
+              super = "Mod4";
+              alt = "Mod1";
+              dmenuArgs = "-fn 'AdwaitaMono-8' -nb '${palette.crust}' -nf '${palette.text}' -sb '${palette.mauve}' -sf '${palette.base}'";
+            in
+            {
+              "${alt}+space" = "exec dmenu_run ${dmenuArgs}";
 
-            "${modifier}+d" =
-              let
-                args = "-fn 'AdwaitaMono-8' -nb '${palette.crust}' -nf '${palette.text}' -sb '${palette.mauve}' -sf '${palette.base}'";
-              in
-              "exec dmenu_run ${args}";
+              "${super}+Return" = "exec ${terminal}";
+              "${super}+Escape" = "exec xsecurelock";
+              "${alt}+q" = "kill";
+              "${alt}+w" = "kill";
 
-            "${modifier}+h" = "focus left";
-            "${modifier}+j" = "focus down";
-            "${modifier}+k" = "focus up";
-            "${modifier}+l" = "focus right";
+              "${super}+h" = "focus left";
+              "${super}+j" = "focus down";
+              "${super}+k" = "focus up";
+              "${super}+l" = "focus right";
 
-            "${modifier}+Shift+h" = "move left";
-            "${modifier}+Shift+j" = "move down";
-            "${modifier}+Shift+k" = "move up";
-            "${modifier}+Shift+l" = "move right";
+              "${super}+Shift+h" = "move left";
+              "${super}+Shift+j" = "move down";
+              "${super}+Shift+k" = "move up";
+              "${super}+Shift+l" = "move right";
 
-            "${modifier}+b" = "split h";
-            "${modifier}+v" = "split v";
-            "${modifier}+f" = "fullscreen toggle";
+              "${super}+b" = "split h";
+              "${super}+v" = "split v";
+              "${super}+f" = "fullscreen toggle";
 
-            "${modifier}+s" = "layout stacking";
-            "${modifier}+w" = "layout tabbed";
-            "${modifier}+e" = "layout toggle split";
+              "${super}+s" = "layout stacking";
+              "${super}+w" = "layout tabbed";
+              "${super}+e" = "layout toggle split";
 
-            "${modifier}+Shift+n" = "floating toggle";
-            "${modifier}+n" = "focus mode_toggle";
+              "${super}+Shift+n" = "floating toggle";
+              "${super}+n" = "focus mode_toggle";
 
-            "${modifier}+a" = "focus parent";
+              "${super}+a" = "focus parent";
 
-            "${modifier}+Shift+minus" = "move scratchpad";
-            "${modifier}+minus" = "scratchpad show";
+              "${super}+Shift+minus" = "move scratchpad";
+              "${super}+minus" = "scratchpad show";
 
-            "${modifier}+1" = "workspace number 1";
-            "${modifier}+2" = "workspace number 2";
-            "${modifier}+3" = "workspace number 3";
-            "${modifier}+4" = "workspace number 4";
-            "${modifier}+5" = "workspace number 5";
-            "${modifier}+6" = "workspace number 6";
-            "${modifier}+7" = "workspace number 7";
-            "${modifier}+8" = "workspace number 8";
-            "${modifier}+9" = "workspace number 9";
-            "${modifier}+0" = "workspace number 10";
+              "${super}+1" = "workspace number 1";
+              "${super}+2" = "workspace number 2";
+              "${super}+3" = "workspace number 3";
+              "${super}+4" = "workspace number 4";
+              "${super}+5" = "workspace number 5";
+              "${super}+6" = "workspace number 6";
+              "${super}+7" = "workspace number 7";
+              "${super}+8" = "workspace number 8";
+              "${super}+9" = "workspace number 9";
+              "${super}+0" = "workspace number 10";
 
-            "${modifier}+Shift+1" = "move container to workspace number 1";
-            "${modifier}+Shift+2" = "move container to workspace number 2";
-            "${modifier}+Shift+3" = "move container to workspace number 3";
-            "${modifier}+Shift+4" = "move container to workspace number 4";
-            "${modifier}+Shift+5" = "move container to workspace number 5";
-            "${modifier}+Shift+6" = "move container to workspace number 6";
-            "${modifier}+Shift+7" = "move container to workspace number 7";
-            "${modifier}+Shift+8" = "move container to workspace number 8";
-            "${modifier}+Shift+9" = "move container to workspace number 9";
-            "${modifier}+Shift+0" = "move container to workspace number 10";
+              "${super}+Shift+1" = "move container to workspace number 1";
+              "${super}+Shift+2" = "move container to workspace number 2";
+              "${super}+Shift+3" = "move container to workspace number 3";
+              "${super}+Shift+4" = "move container to workspace number 4";
+              "${super}+Shift+5" = "move container to workspace number 5";
+              "${super}+Shift+6" = "move container to workspace number 6";
+              "${super}+Shift+7" = "move container to workspace number 7";
+              "${super}+Shift+8" = "move container to workspace number 8";
+              "${super}+Shift+9" = "move container to workspace number 9";
+              "${super}+Shift+0" = "move container to workspace number 10";
 
-            "${modifier}+Shift+c" = "reload";
-            "${modifier}+Shift+r" = "restart";
-            "${modifier}+Shift+e" =
-              "exec i3-nagbar -t warning -m 'Do you want to exit i3?' -b 'Yes' 'i3-msg exit'";
+              "${super}+Shift+c" = "reload";
+              "${super}+Shift+r" = "restart";
+              "${super}+Shift+e" =
+                "exec i3-nagbar -t warning -m 'Do you want to exit i3?' -b 'Yes' 'i3-msg exit'";
 
-            "${modifier}+r" = "mode resize";
+              "${super}+r" = "mode resize";
 
-            "XF86AudioRaiseVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+";
-            "XF86AudioLowerVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
-            "XF86AudioMute" = "exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+              "XF86AudioRaiseVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+";
+              "XF86AudioLowerVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
+              "XF86AudioMute" = "exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
 
-            "XF86AudioPlay" = "exec playerctl play-pause";
-            "XF86AudioNext" = "exec playerctl next";
-            "XF86AudioPrev" = "exec playerctl previous";
-          };
+              "XF86AudioPlay" = "exec playerctl play-pause";
+              "XF86AudioNext" = "exec playerctl next";
+              "XF86AudioPrev" = "exec playerctl previous";
+            };
 
           modes = {
             resize = {

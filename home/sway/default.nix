@@ -100,20 +100,10 @@ in
               "${super}+${up}" = "focus up";
               "${super}+${right}" = "focus right";
 
-              "${super}+Left" = "focus left";
-              "${super}+Down" = "focus down";
-              "${super}+Up" = "focus up";
-              "${super}+Right" = "focus right";
-
               "${super}+Shift+${left}" = "move left";
               "${super}+Shift+${down}" = "move down";
               "${super}+Shift+${up}" = "move up";
               "${super}+Shift+${right}" = "move right";
-
-              "${super}+Shift+Left" = "move left";
-              "${super}+Shift+Down" = "move down";
-              "${super}+Shift+Up" = "move up";
-              "${super}+Shift+Right" = "move right";
 
               "${super}+b" = "splith";
               "${super}+v" = "splitv";
