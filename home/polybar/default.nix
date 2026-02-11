@@ -38,7 +38,7 @@ in
         {
           "bar/top" = {
             width = "100%";
-            height = 16;
+            height = 22;
 
             radius = 0;
             line-size = 0;
@@ -57,7 +57,7 @@ in
             padding-left = 0;
             padding-right = 0;
 
-            font-0 = "Adwaita Mono Nerd Font:pixelsize=10;2";
+            font-0 = "Adwaita Mono Nerd Font:pixelsize=12;3";
           };
 
           "module/volume" = {
