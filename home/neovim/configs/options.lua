@@ -77,5 +77,4 @@ vim.lsp.config("typescript_ls", {
 	filetypes = { "typescript" },
 })
 
-vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "go to definition" })
-vim.keymap.set("n", "gD", vim.lsp.buf.type_definition, { desc = "type definition" })
+vim.keymap.set("n", "grd", vim.lsp.buf.definition, { desc = "vim.lsp.buf.definition()" })

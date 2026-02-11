@@ -27,14 +27,12 @@ map <leader>w <C-W>
 map <leader>tt <Action>(RunClass)
 map <leader>td <Action>(DebugClass)
 
-map gd <Action>(GotoDeclaration)
-map gD <Action>(GotoTypeDeclaration)
-
 map gra <Action>(ShowIntentionActions)
-map grn <Action>(RenameElement)
-
-map grr <Action>(FindUsages)
+map grd <Action>(GotoDeclaration)
 map gri <Action>(GotoImplementation)
+map grn <Action>(RenameElement)
+map grr <Action>(FindUsages)
+map grt <Action>(GotoTypeDeclaration)
 
 map <leader>xb <Action>(ActivateProblemsViewToolWindow)
 map <leader>xw <Action>(ActivateProblemsViewToolWindow)
