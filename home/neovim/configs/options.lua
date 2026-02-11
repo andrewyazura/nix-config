@@ -56,7 +56,7 @@ vim.lsp.config("nil_ls", {
 
 vim.lsp.enable("ruff")
 vim.lsp.config("ruff", {
-	cmd = { "ruff", "server" },
+	cmd = { "ruff", "server", "--preview" },
 	filetypes = { "python" },
 })
 
