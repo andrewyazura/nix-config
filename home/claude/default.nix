@@ -11,6 +11,18 @@ let
   system = pkgs.stdenv.hostPlatform.system;
   claude-nix-package = inputs.claude-code.packages.${system}.default;
 
+  soundsDir = ./sounds;
+  mpvBin = lib.getExe pkgs.mpv;
+
+  soundHook = command: {
+    type = "command";
+    inherit command;
+    timeout = 10;
+    async = true;
+  };
+
+  playSound = file: soundHook "${mpvBin} --no-video --really-quiet ${soundsDir}/${file}";
+
   sensitivePaths = [
     # Environment files
     ".env"
@@ -168,7 +180,37 @@ in
           deny = denyPaths sensitivePaths;
         };
 
-        hooks = { };
+        hooks = {
+          UserPromptSubmit = [
+            {
+              hooks = [
+                (soundHook "bash -c '${mpvBin} --no-video --really-quiet ${soundsDir}/officer$((RANDOM % 2 + 1)).ogg'")
+              ];
+            }
+          ];
+          PostToolUseFailure = [
+            {
+              matcher = "Bash";
+              hooks = [ (playSound "alarm.ogg") ];
+            }
+          ];
+          PermissionRequest = [
+            {
+              hooks = [ (playSound "alarm.ogg") ];
+            }
+          ];
+          Stop = [
+            {
+              hooks = [ (playSound "upgbar.ogg") ];
+            }
+          ];
+          Notification = [
+            {
+              matcher = "^(?!permission_prompt)";
+              hooks = [ (playSound "bldaca.ogg") ];
+            }
+          ];
+        };
 
         env = {
           CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR = 1;
