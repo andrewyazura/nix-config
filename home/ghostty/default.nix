@@ -57,11 +57,8 @@ in
           "ssh-terminfo"
           "ssh-env"
         ];
-        theme = "Catppuccin Mocha";
+        theme = "light:Catppuccin Latte,dark:Catppuccin Mocha";
         window-decoration = "server";
-        window-inherit-working-directory = false;
-        window-theme = "ghostty";
-        working-directory = "home";
       };
     };
   };
