@@ -10,6 +10,47 @@ let
   cfg = config.modules.claude;
   system = pkgs.stdenv.hostPlatform.system;
   claude-nix-package = inputs.claude-code.packages.${system}.default;
+
+  sensitivePaths = [
+    # Environment files
+    ".env"
+    ".env.*"
+    "**/.env"
+    "**/.env.*"
+
+    # Sensitive directories
+    "~/.ssh/*"
+    "~/.aws/*"
+    "~/.config/sops/*"
+    "**/secrets/**"
+
+    # Credentials and keys
+    "**/*credentials*"
+    "**/*secret*"
+    "**/*.pem"
+    "**/*.key"
+
+    # Token files
+    "**/token*"
+
+    # Local databases
+    "**/*.sqlite"
+    "**/*.db"
+
+    # Git config (may contain tokens)
+    "**/.git/config"
+  ];
+
+  denyPaths =
+    paths:
+    concatMap (path: [
+      "Read(${path})"
+      "Edit(${path})"
+      "Write(${path})"
+    ]) paths;
+
+  bashCmds = cmds: map (cmd: "Bash(${cmd})") cmds;
+  mcpTools = tools: map (tool: "mcp__${tool}") tools;
 in
 {
   options.modules.claude = {
@@ -17,10 +58,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      nodejs_24 # provides npx for mcp
-    ];
-
     programs.claude-code = {
       enable = true;
       package = claude-nix-package;
@@ -32,129 +69,108 @@ in
       settings = {
         outputStyle = "Explanatory";
         respectGitignore = true;
+        showTurnDuration = true;
+        cleanupPeriodDays = 30;
 
-        permissions =
-          let
-            bashCmds = cmds: map (cmd: "Bash(${cmd})") cmds;
-            mcpTools = tools: map (tool: "mcp__${tool}") tools;
-          in
-          {
-            allow = [
-              "Edit"
-              "Explore"
-              "Read"
-              "Search"
-              "Skill"
-              "WebFetch"
-              "WebSearch"
-              "Write"
-            ]
-            # MCP Server Tools
-            ++ mcpTools [
-              # Full access (all tools)
-              "context7__*"
-              "memory__*"
+        permissions = {
+          allow = [
+            # Core built-in tools
+            "Edit"
+            "Glob"
+            "Grep"
+            "NotebookEdit"
+            "Read"
+            "Skill"
+            "Task"
+            "WebFetch"
+            "WebSearch"
+            "Write"
+          ]
+          # MCP Server Tools
+          ++ mcpTools [
+            # Full access (all tools)
+            "context7__*"
+            "memory__*"
 
-              # MongoDB - READ ONLY
-              "mongodb__connect"
-              "mongodb__list-databases"
-              "mongodb__list-collections"
-              "mongodb__find"
-              "mongodb__count"
-              "mongodb__aggregate"
-              "mongodb__collection-schema"
-              "mongodb__collection-indexes"
-              "mongodb__collection-storage-size"
-              "mongodb__db-stats"
-              "mongodb__explain"
-              "mongodb__atlas-list-projects"
-              "mongodb__atlas-list-clusters"
-              "mongodb__atlas-inspect-cluster"
-              "mongodb__atlas-inspect-access-list"
-              "mongodb__atlas-list-db-users"
-            ]
-            # Shell utilities
-            ++ bashCmds [
-              "cat *"
-              "cp *"
-              "ls *"
-              "mkdir *"
-              "mv *"
-              "tree *"
+            # MongoDB — READ ONLY
+            "mongodb__connect"
+            "mongodb__list-databases"
+            "mongodb__list-collections"
+            "mongodb__find"
+            "mongodb__count"
+            "mongodb__aggregate"
+            "mongodb__collection-schema"
+            "mongodb__collection-indexes"
+            "mongodb__collection-storage-size"
+            "mongodb__db-stats"
+            "mongodb__explain"
+            "mongodb__atlas-list-projects"
+            "mongodb__atlas-list-clusters"
+            "mongodb__atlas-inspect-cluster"
+            "mongodb__atlas-inspect-access-list"
+            "mongodb__atlas-list-db-users"
+          ]
+          # Shell utilities
+          ++ bashCmds [
+            "cp *"
+            "ls *"
+            "mkdir *"
+            "mv *"
+            "tree *"
 
-              "head *"
-              "tail *"
+            "diff *"
+            "fd *"
+            "jq *"
+            "wc *"
 
-              "diff *"
-              "fd *"
-              "find *"
-              "grep *"
-              "jq *"
-              "rg *"
-              "wc *"
+            "chmod *"
+            "which *"
+            "env *"
 
-              "git *"
+            "git *"
 
-              # Nix
-              "nix search *"
-              "nix fmt *"
+            # Nix
+            "nix search *"
+            "nix fmt *"
 
-              # Python
-              "python *"
-              "python3 *"
-              "pytest *"
-              "mypy *"
-              "uv *"
-              "uvx *"
-              "pre-commit run *"
-              "pip *"
+            # Python
+            "python *"
+            "python3 *"
+            "pytest *"
+            "ruff *"
+            "ty *"
+            "uv *"
+            "uvx *"
+            "pre-commit *"
 
-              # Node.js
-              "npm *"
-              "npx *"
-              "node *"
-              "nvm *"
-            ];
+            # Node.js
+            "npm *"
+            "npx *"
+            "node *"
 
-            deny = [
-              # Environment files
-              "Read(.env)"
-              "Read(.env.*)"
-              "Read(**/.env)"
-              "Read(**/.env.*)"
+            # Kotlin/JVM
+            "gradle *"
+            "./gradlew *"
+            "java *"
+            "kotlin *"
 
-              # Sensitive directories
-              "Read(~/.ssh/*)"
-              "Read(~/.aws/*)"
-              "Read(~/.config/sops/*)"
-              "Read(**/secrets/**)"
+            # Infrastructure
+            "docker *"
+            "docker compose *"
+            "make *"
+            "curl *"
+          ];
 
-              # Credentials and keys
-              "Read(**/*credentials*)"
-              "Read(**/*secret*)"
-              "Read(**/*.pem)"
-              "Read(**/*.key)"
-
-              # Token files
-              "Read(**/token*)"
-
-              # Local databases
-              "Read(**/*.sqlite)"
-              "Read(**/*.db)"
-
-              # Git config (may contain tokens)
-              "Read(**/.git/config)"
-            ];
-          };
+          deny = denyPaths sensitivePaths;
+        };
 
         hooks = { };
 
         env = {
           CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR = 1;
-          CLAUDE_CODE_DISABLE_TERMINAL_TITLE = 0;
           CLAUDE_CODE_SHELL = "zsh";
-          DISABLE_NON_ESSENTIAL_MODEL_CALLS = 1;
           DISABLE_TELEMETRY = 1;
+          MCP_TIMEOUT = 30000;
         };
       };
 
@@ -163,7 +179,7 @@ in
           command = "npx";
           args = [
             "-y"
-            "@upstash/context7-mcp"
+            "@upstash/context7-mcp@2.1.1"
           ];
         };
 
@@ -171,7 +187,7 @@ in
           command = "npx";
           args = [
             "-y"
-            "@modelcontextprotocol/server-memory"
+            "@modelcontextprotocol/server-memory@2026.1.26"
           ];
         };
 
@@ -179,7 +195,7 @@ in
           command = "npx";
           args = [
             "-y"
-            "@mongodb-js/mongodb-mcp-server"
+            "@mongodb-js/mongodb-mcp-server@0.0.3"
           ];
         };
       };
