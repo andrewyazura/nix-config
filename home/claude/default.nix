@@ -63,7 +63,6 @@ in
       package = claude-nix-package;
       memory.source = ./memory.md;
 
-      commandsDir = ./commands;
       skillsDir = ./skills;
 
       settings = {
