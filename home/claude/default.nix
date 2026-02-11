@@ -58,6 +58,10 @@ in
   };
 
   config = mkIf cfg.enable {
+    home.packages = with pkgs; [
+      nodejs_24 # provides npx for mcp servers
+    ];
+
     programs.claude-code = {
       enable = true;
       package = claude-nix-package;
@@ -90,6 +94,7 @@ in
             # Full access (all tools)
             "context7__*"
             "memory__*"
+            "sequential-thinking__*"
 
             # MongoDB — READ ONLY
             "mongodb__connect"
@@ -195,6 +200,14 @@ in
           args = [
             "-y"
             "@mongodb-js/mongodb-mcp-server@0.0.3"
+          ];
+        };
+
+        sequential-thinking = {
+          command = "npx";
+          args = [
+            "-y"
+            "@modelcontextprotocol/server-sequential-thinking@2025.12.18"
           ];
         };
       };
