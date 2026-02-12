@@ -23,6 +23,7 @@ nixos-rebuild --flake .#<hostname> --target-host andrew@<hostname> switch --sudo
 
 # Deploy to bunker server (uses deploy-rs)
 nix run github:serokell/deploy-rs -- .#bunker
+nix run github:serokell/deploy-rs -- .#bunker --remote-build  # Cross-arch
 
 # Test build without activating
 nixos-rebuild build --flake .#<hostname>
@@ -69,7 +70,7 @@ Prerequisites: Public age key in `.sops.yaml`, private key in `~/.config/sops/ag
 
 ### Configuration Flow
 
-**NixOS systems** use a `mkHost` helper in `flake.nix` (lines 76-95):
+**NixOS systems** use a `mkHost` helper in `flake.nix`:
 ```nix
 mkHost = { hostname, system ? "x86_64-linux", specialArgs ? {} }:
   nixpkgs.lib.nixosSystem {
@@ -84,7 +85,7 @@ mkHost = { hostname, system ? "x86_64-linux", specialArgs ? {} }:
   };
 ```
 
-**Darwin systems** use `mkDarwinHost` (lines 97-115):
+**Darwin systems** use `mkDarwinHost`:
 - Similar pattern but does NOT auto-import `./system`
 - Host config must manually import `../../darwin`
 
@@ -145,23 +146,25 @@ This pattern allows per-host customization without modifying the base module.
 
 Understanding how `inputs` and `hostname` become available in all modules:
 
-1. **Flake helpers inject specialArgs** (`flake.nix:84-87`):
+1. **Flake helpers inject specialArgs**:
    ```nix
    specialArgs = { inherit inputs hostname; } // specialArgs;
    ```
    This makes `inputs` and `hostname` available to ALL system-level modules.
 
-2. **Home-manager receives extraSpecialArgs** (`system/home-manager/default.nix:6-8`):
+2. **Home-manager receives extraSpecialArgs** (in `system/home-manager/default.nix`):
    ```nix
    home-manager = {
      extraSpecialArgs = { inherit inputs hostname; };
+     sharedModules = [ inputs.sops-nix.homeManagerModules.sops ];
    };
    ```
-   This passes `inputs` (as a single attrset) and `hostname` into home-manager modules.
+   This passes `inputs` and `hostname` into home-manager modules. The `sharedModules` line means **sops-nix secrets are also available in home-manager modules**, not just system-level ones.
 
 3. **Result**: Every module can access:
    - `inputs.<flake-name>` - reference any flake input
    - `hostname` - current machine name for conditional logic
+   - `sops.secrets.*` - encrypted secrets (both system and home-manager levels)
    - Any module can use: `{ inputs, hostname, ... }: { ... }`
 
 **Example use case** - Platform-specific package selection:
@@ -257,49 +260,22 @@ modules.packages = {
 ```
 
 **Configured tools** (enabled separately via dedicated modules):
-- git, neovim, tmux, zsh, direnv, btop, yazi, ghostty, ssh, firefox, claude, gemini, spotify
+- git, neovim, tmux, zsh, direnv, btop, yazi, ghostty, ssh, firefox, claude, gemini, spotify, mcp, opencode
 
 **Server machines** (bunker, proxmoxnix) automatically get base + development packages from common config.
 
-### Host Configuration Examples
+### Where to Enable What
 
-```nix
-# Desktop system config (yorha2b, yorha9s)
-# hosts/<hostname>/default.nix
-modules.gui-apps = {
-  base.enable = true;
-  communication.enable = true;
-  media.enable = true;
-  productivity.enable = true;
-  gaming.enable = true;  # Optional
-};
-
-# macOS system config (yorhaA2)
-# hosts/yorhaA2/default.nix
-modules = {
-  gui-apps.base.enable = true;
-  gui-apps.communication.enable = true;
-  gui-apps.gaming.enable = true;
-  # ... other gui-apps
-
-  darwin-packages.docker.enable = true;
-  darwin-packages.gnuTools.enable = true;
-};
-
-# Package enables are in users/andrew/home/, not host configs!
-```
-
-### Benefits
-
-- **Consistency**: All machines get same CLI tools from home-manager
-- **No Duplication**: Single source of truth per package
-- **Granular Control**: Enable/disable entire categories
-- **Cross-Platform**: macOS gets full CLI stack without platform-specific config
+- **System/Darwin modules** (gui-apps, networking, audio, etc.) → `hosts/<hostname>/default.nix`
+- **Home-manager modules** (packages, CLI tools, dotfiles) → `users/andrew/home/default.nix` (shared) or `users/andrew/home/<hostname>/default.nix` (host-specific)
 
 ## Adding New Module
 
+Use the `/nix-module` Claude Code skill to generate boilerplate: it creates the module file, adds the import to the parent `default.nix`, and reports next steps.
+
+Manual process:
 1. Create module in `system/`, `darwin/`, or `home/` using the module pattern above
-2. Import in parent `default.nix`
+2. Import in parent `default.nix` (alphabetical order)
 3. Enable with `modules.<name>.enable = true;`
 
 ## Adding New Packages
