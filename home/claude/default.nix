@@ -127,6 +127,7 @@ in
           # Shell utilities
           ++ bashCmds [
             "cp *"
+            "find *"
             "ls *"
             "mkdir *"
             "mv *"
