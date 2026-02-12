@@ -9,7 +9,7 @@ with lib;
 let
   cfg = config.modules.claude;
   system = pkgs.stdenv.hostPlatform.system;
-  claude-nix-package = inputs.claude-code.packages.${system}.default;
+  claude-package = inputs.claude-code.packages.${system}.default;
 
   soundsDir = ./sounds;
   mpvBin = lib.getExe pkgs.mpv;
@@ -74,7 +74,7 @@ in
   config = mkIf cfg.enable {
     programs.claude-code = {
       enable = true;
-      package = claude-nix-package;
+      package = claude-package;
       memory.source = ./memory.md;
 
       skillsDir = ./skills;

@@ -1,15 +1,11 @@
 {
   lib,
   config,
-  pkgs,
-  inputs,
   ...
 }:
 with lib;
 let
   cfg = config.modules.opencode;
-  system = pkgs.stdenv.hostPlatform.system;
-  opencode-package = inputs.opencode.packages.${system}.default;
 in
 {
   options.modules.opencode = {
@@ -20,7 +16,6 @@ in
     programs.opencode = {
       enable = true;
       enableMcpIntegration = true;
-      package = opencode-package;
     };
   };
 }
