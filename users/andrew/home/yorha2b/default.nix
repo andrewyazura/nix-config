@@ -1,6 +1,10 @@
 { config, ... }:
 {
   modules = {
+    claude.enable = true;
+    mcp.enable = true;
+    opencode.enable = true;
+
     packages = {
       media.enable = true;
     };

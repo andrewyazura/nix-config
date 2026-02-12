@@ -17,7 +17,6 @@
     wooting.enable = true;
     work.enable = true;
 
-    # GUI Applications
     gui-apps = {
       base.enable = true;
       communication.enable = true;
@@ -49,7 +48,7 @@
           };
 
           HDMI-A-1 = {
-            position = "3840 0";
+            position = "3840 360";
             mode = "2560x1440@144Hz";
           };
         };

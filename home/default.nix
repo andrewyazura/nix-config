@@ -10,7 +10,9 @@
     ./gnome
     ./i3
     ./ideavim
+    ./mcp
     ./neovim
+    ./opencode
     ./packages
     ./polybar
     ./spotify

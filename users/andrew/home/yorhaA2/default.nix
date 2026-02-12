@@ -4,6 +4,8 @@
     claude.enable = true;
     gemini.enable = true;
     ideavim.enable = true;
+    mcp.enable = true;
+    opencode.enable = true;
     work.enable = true;
 
     packages = {

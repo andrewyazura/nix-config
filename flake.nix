@@ -43,6 +43,10 @@
       url = "github:sadjow/claude-code-nix";
     };
 
+    opencode = {
+      url = "github:aodhanhayter/opencode-flake";
+    };
+
     nix-minecraft = {
       url = "github:Infinidoge/nix-minecraft";
     };
