@@ -83,7 +83,7 @@ in
                 motd = "\\u00A7a\\u00A7l8 let dambili\\u00A7r\\u00A7r";
               };
 
-              files = {
+              symlinks = {
                 "server-icon.png" = ./bombas-server-icon.png;
               };
             };

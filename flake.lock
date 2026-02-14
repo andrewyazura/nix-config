@@ -6,11 +6,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1770590997,
-        "narHash": "sha256-ZlJkuTdVYDgEmM4eUJsv6KeRhz/+ETmpUtXo2B+vTQE=",
+        "lastModified": 1771101684,
+        "narHash": "sha256-fzcJahpVORjRPisTuMykLCllzLh0zWr9zObTbL0horI=",
         "ref": "refs/heads/main",
-        "rev": "fda5f15291f65821af0e44db8abeba430a8882a7",
-        "revCount": 5,
+        "rev": "525e05a1634d7c5e12d539ddaa6450b93e9ec661",
+        "revCount": 7,
         "type": "git",
         "url": "ssh://git@github.com/yaroslavpashynskyi/BeastMusic.git"
       },
@@ -224,24 +224,6 @@
         "type": "github"
       }
     },
-    "flake-utils_4": {
-      "inputs": {
-        "systems": "systems_5"
-      },
-      "locked": {
-        "lastModified": 1731533236,
-        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
     "ghostty": {
       "inputs": {
         "flake-compat": "flake-compat_2",
@@ -330,15 +312,15 @@
     "nix-minecraft": {
       "inputs": {
         "flake-compat": "flake-compat_3",
-        "flake-utils": "flake-utils_4",
-        "nixpkgs": "nixpkgs_6"
+        "nixpkgs": "nixpkgs_6",
+        "systems": "systems_5"
       },
       "locked": {
-        "lastModified": 1768962252,
-        "narHash": "sha256-HyWOOHcySV8rl36gs4+n0sxPinxpwWOgwXibfFPYeZ0=",
+        "lastModified": 1770864818,
+        "narHash": "sha256-VsRzFJ8+ndGgcwguZSQGHed/gragpW478qMqdNpm75k=",
         "owner": "Infinidoge",
         "repo": "nix-minecraft",
-        "rev": "433cf697394104123e1fd02fa689534ac1733bfa",
+        "rev": "ca04d472340d6a3c8fe4f4a9c0d74faad048c204",
         "type": "github"
       },
       "original": {
@@ -442,11 +424,11 @@
     },
     "nixpkgs_6": {
       "locked": {
-        "lastModified": 1748929857,
-        "narHash": "sha256-lcZQ8RhsmhsK8u7LIFsJhsLh/pzR9yZ8yqpTzyGdj+Q=",
+        "lastModified": 1769461804,
+        "narHash": "sha256-msG8SU5WsBUfVVa/9RPLaymvi5bI8edTavbIq3vRlhI=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "c2a03962b8e24e669fb37b7df10e7c79531ff1a4",
+        "rev": "bfc1b8a4574108ceef22f02bafcf6611380c100d",
         "type": "github"
       },
       "original": {
@@ -719,11 +701,11 @@
         "uv2nix": "uv2nix_3"
       },
       "locked": {
-        "lastModified": 1770587379,
-        "narHash": "sha256-MqMinKwh0s9OyFu77BZC3d/wrnJQKnOtUZh2Try3BG0=",
+        "lastModified": 1771101728,
+        "narHash": "sha256-5zM1QHiAXuE4h43qafGuEi3B8LiWnMuUtfJOV9FgYTc=",
         "ref": "refs/heads/main",
-        "rev": "737f7427b5504d77dff8cc128439e92599a56e5a",
-        "revCount": 3,
+        "rev": "ddb43e60edd139daadecd0e973f2bad16dec65a8",
+        "revCount": 5,
         "type": "git",
         "url": "ssh://git@github.com/yaroslavpashynskyi/stresses-bot-nix.git"
       },
