@@ -24,8 +24,8 @@ wk.setup({
 wk.add({
 	{ "<leader>F", desc = "format buffer" },
 	{ "<leader>f", group = "+find" },
-	{ "<leader>g", group = "+goto with trouble)" },
 	{ "<leader>gr", group = "+references" },
+	{ "<leader>gR", group = "+references (float)" },
 	{ "<leader>x", group = "+trouble" },
 	{ "<leader>w", proxy = "<C-w>", group = "+windows" },
 })
