@@ -7,7 +7,6 @@
       ai-tools.enable = true;
     };
 
-    gemini.enable = true;
     ideavim.enable = true;
     theme.enable = false;
     work.enable = true;
