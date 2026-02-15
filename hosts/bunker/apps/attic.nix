@@ -6,6 +6,21 @@
 {
   imports = [ inputs.attic.nixosModules.atticd ];
 
+  services.postgresql = {
+    ensureDatabases = [ "atticd" ];
+    ensureUsers = [
+      {
+        name = "atticd";
+        ensureDBOwnership = true;
+      }
+    ];
+  };
+
+  systemd.services.atticd = {
+    after = [ "postgresql.service" "postgresql-setup.service" ];
+    requires = [ "postgresql.service" "postgresql-setup.service" ];
+  };
+
   services.atticd = {
     enable = true;
     mode = "monolithic";
@@ -13,7 +28,7 @@
 
     settings = {
       listen = "[::]:8080";
-      database.url = "sqlite:///var/lib/atticd/server.db?mode=rwc";
+      database.url = "postgresql:///atticd";
 
       storage = {
         type = "local";
@@ -43,6 +58,11 @@
 
     locations."/" = {
       proxyPass = "http://[::1]:8080";
+      extraConfig = ''
+        proxy_read_timeout 100s;
+        proxy_send_timeout 100s;
+        proxy_connect_timeout 60s;
+      '';
     };
   };
 }
