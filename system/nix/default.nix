@@ -1,50 +1,38 @@
 {
-  lib,
-  config,
   ...
 }:
-with lib;
-let
-  cfg = config.modules.nix;
-in
 {
   imports = [ ../../common/nix ];
 
-  options.modules.nix = {
-    enable = mkEnableOption "Enable nix configuration";
+  nix.gc.dates = "weekly";
+
+  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "en_US.UTF-8";
+    LC_IDENTIFICATION = "en_US.UTF-8";
+    LC_MEASUREMENT = "en_US.UTF-8";
+    LC_MONETARY = "en_US.UTF-8";
+    LC_NAME = "en_US.UTF-8";
+    LC_NUMERIC = "en_US.UTF-8";
+    LC_PAPER = "en_US.UTF-8";
+    LC_TELEPHONE = "en_US.UTF-8";
+    LC_TIME = "en_US.UTF-8";
   };
 
-  config = mkIf cfg.enable {
-    nix.gc.dates = "weekly";
+  services.pcscd.enable = true;
 
-    i18n.defaultLocale = "en_US.UTF-8";
-    i18n.extraLocaleSettings = {
-      LC_ADDRESS = "en_US.UTF-8";
-      LC_IDENTIFICATION = "en_US.UTF-8";
-      LC_MEASUREMENT = "en_US.UTF-8";
-      LC_MONETARY = "en_US.UTF-8";
-      LC_NAME = "en_US.UTF-8";
-      LC_NUMERIC = "en_US.UTF-8";
-      LC_PAPER = "en_US.UTF-8";
-      LC_TELEPHONE = "en_US.UTF-8";
-      LC_TIME = "en_US.UTF-8";
+  programs = {
+    gnupg.agent = {
+      enable = true;
+      settings = {
+        default-cache-ttl = 86400;
+        max-cache-ttl = 86400;
+      };
     };
 
-    services.pcscd.enable = true;
-
-    programs = {
-      gnupg.agent = {
-        enable = true;
-        settings = {
-          default-cache-ttl = 86400;
-          max-cache-ttl = 86400;
-        };
-      };
-
-      ssh = {
-        startAgent = true;
-        enableAskPassword = true; # installs ssh-askpass, which obsidian depends on
-      };
+    ssh = {
+      startAgent = true;
+      enableAskPassword = true; # installs ssh-askpass, which obsidian depends on
     };
   };
 }

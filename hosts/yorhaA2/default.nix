@@ -15,10 +15,12 @@ in
   ];
 
   modules = {
-    profiles.desktop.enable = true;
-    profiles.gaming.enable = true;
+    profiles = {
+      desktop.enable = true;
+      development.enable = true;
+      gaming.enable = true;
+    };
 
-    nix.enable = true;
     work.enable = true;
   };
 
@@ -46,6 +48,14 @@ in
       };
 
       home.homeDirectory = lib.mkForce "/Users/${username}";
+    };
+  };
+
+  sops = {
+    age.sshKeyPaths = [ "/Users/andrew/.ssh/id_ed25519_yorhaA2_nixconfig_3011" ];
+    secrets.netrc = {
+      sopsFile = ../../secrets/netrc-yorhaA2;
+      format = "binary";
     };
   };
 

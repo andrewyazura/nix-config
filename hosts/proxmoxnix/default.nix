@@ -16,7 +16,6 @@
         };
       };
     };
-    nix.enable = true;
   };
 
   home-manager.users.andrew = {
@@ -31,8 +30,6 @@
   nix.settings = {
     trusted-users = [ "@wheel" ];
   };
-
-  # Packages now managed via home-manager package groups
 
   documentation.nixos.enable = false;
   time.timeZone = lib.mkForce "Europe/London";

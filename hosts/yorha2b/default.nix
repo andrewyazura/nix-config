@@ -10,11 +10,10 @@
   modules = {
     profiles = {
       desktop.enable = true;
+      development.enable = true;
       gaming.enable = true;
     };
 
-    gnome.enable = true;
-    nix.enable = true;
     sway.enable = true;
     wooting.enable = true;
     work.enable = true;
@@ -49,6 +48,14 @@
 
         focus-output = "DP-3";
       };
+    };
+  };
+
+  sops = {
+    age.sshKeyPaths = [ "/home/andrew/.ssh/id_ed25519_yorha2b_nixconfig_1510" ];
+    secrets.netrc = {
+      sopsFile = ../../secrets/netrc-yorha2b;
+      format = "binary";
     };
   };
 

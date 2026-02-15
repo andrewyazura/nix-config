@@ -12,6 +12,7 @@
     ../../users/andrew/system
     ../../users/andrew/system/bunker
 
+    ./apps/attic.nix
     ./apps/beast-music.nix
     ./apps/birthday-api.nix
     ./apps/birthday-bot.nix
@@ -19,8 +20,6 @@
   ];
 
   modules = {
-    nix.enable = true;
-
     minecraft-server = {
       enable = true;
 
@@ -86,6 +85,16 @@
         owner = "nginx";
         group = "nginx";
         mode = "0400";
+      };
+
+      attic-env = {
+        sopsFile = ../../secrets/attic-env;
+        format = "binary";
+      };
+
+      netrc = {
+        sopsFile = ../../secrets/netrc-bunker;
+        format = "binary";
       };
     };
   };
