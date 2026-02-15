@@ -26,7 +26,7 @@ jobs:
       - name: Configure SSH for bunker
         run: |
           ssh-keyscan -H ${{ secrets.BUNKER_HOST }} >> ~/.ssh/known_hosts
-          printf 'Host bunker\n  HostName %s\n  User andrew\n  StrictHostKeyChecking accept-new\n' "${{ secrets.BUNKER_HOST }}" >> ~/.ssh/config
+          printf 'Host bunker\n  HostName %s\n  User deploy\n  StrictHostKeyChecking accept-new\n' "${{ secrets.BUNKER_HOST }}" >> ~/.ssh/config
 
       - name: Setup Attic
         uses: ryanccn/attic-action@v0

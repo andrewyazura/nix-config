@@ -63,7 +63,18 @@
     ];
   };
 
-  users.users.root.hashedPassword = "!";
+  users.users = {
+    root.hashedPassword = "!";
+
+    deploy = {
+      isNormalUser = true;
+      extraGroups = [ "wheel" ];
+      shell = pkgs.bash;
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN8nY1Ba470FDscLuFJsTeScqBcxruyx7b5rlHntvex1"
+      ];
+    };
+  };
   security.sudo.wheelNeedsPassword = false;
 
   sops = {
