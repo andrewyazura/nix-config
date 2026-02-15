@@ -9,20 +9,14 @@
   ];
 
   modules = {
-    audio.enable = true;
-    fonts.enable = true;
-    i3.enable = true;
-    networking.enable = true;
-    nix.enable = true;
-    work.enable = true;
-
-    gui-apps = {
-      base.enable = true;
-      communication.enable = true;
-      media.enable = true;
-      productivity.enable = true;
+    profiles = {
+      desktop.enable = true;
       gaming.enable = true;
     };
+
+    i3.enable = true;
+    nix.enable = true;
+    work.enable = true;
   };
 
   home-manager.users.andrew = {

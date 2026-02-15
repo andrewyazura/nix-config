@@ -63,7 +63,7 @@ Prerequisites: Public age key in `.sops.yaml`, private key in `~/.config/sops/ag
 | `hosts/<hostname>/` | Machine-specific configs (+ `hardware-config.nix` for NixOS) |
 | `system/` | Shared NixOS modules (audio, networking, desktop environments) |
 | `darwin/` | macOS-specific modules (Homebrew, AeroSpace, system defaults) |
-| `home/` | Shared home-manager modules (git, zsh, neovim, ghostty, etc.) |
+| `home/` | Shared home-manager modules (git, zsh, neovim, ghostty, profiles, etc.) |
 | `users/andrew/home/` | User-specific home configs; `default.nix` + per-host overrides |
 | `common/` | Shared constants: `colors.nix` (Catppuccin), fonts, wallpapers |
 | `secrets/` | Encrypted files managed by sops-nix |
@@ -239,35 +239,67 @@ Platform-specific graphical applications:
 - **docker** - colima, docker, docker-compose (+ environment variables)
 - **gnuTools** - coreutils-prefixed
 
+### Profiles
+
+Profiles are a thin layer that batch-enables groups of modules. They exist at all three layers:
+
+**Home profiles** (`home/profiles/default.nix`):
+| Profile | Modules Enabled |
+|---------|----------------|
+| `base` | zsh, git, ssh, tmux, btop, direnv, packages.base |
+| `development` | neovim, packages.development |
+| `desktop` | ghostty, yazi, spotify, packages.media |
+| `ai-tools` | claude, mcp, opencode |
+
+**System profiles** (`system/profiles/default.nix`):
+| Profile | Modules Enabled |
+|---------|----------------|
+| `desktop` | audio, fonts, networking, gui-apps.{base, communication, media, productivity} |
+| `gaming` | gui-apps.gaming |
+
+**Darwin profiles** (`darwin/profiles/default.nix`):
+| Profile | Modules Enabled |
+|---------|----------------|
+| `desktop` | aerospace, fonts, homebrew, system-defaults, all gui-apps, darwin-packages.{docker, gnuTools} |
+
+**Usage in host configs:**
+```nix
+# Desktop machine
+modules.profiles = {
+  desktop.enable = true;
+  gaming.enable = true;
+};
+
+# Server gets only base (via shared user config)
+modules.profiles.base.enable = true;
+```
+
+**Composability** — profiles use `mkDefault`, so individual modules can be overridden:
+```nix
+modules.profiles.desktop.enable = true;
+modules.spotify.enable = false;  # priority 100 beats mkDefault's 1000
+```
+
+**Not in any profile** (must be enabled per-host): sway, waybar, i3, polybar, gnome, ideavim, gemini, work, wooting, minecraft-server, firefox
+
 ### Package Configuration Hierarchy
 
-Package enables follow the same pattern as other home-manager modules:
+Packages are organized into purpose-based groups rather than scattered across files. Modules with dedicated config (`home/<name>/`) are enabled via profiles or individually — **not** in package groups.
 
-**Common packages** (`users/andrew/home/default.nix`):
-```nix
-modules.packages = {
-  base.enable = true;        # git-lfs, age, sops, tree, ncdu, htop...
-  development.enable = true;  # ripgrep, fd, tree-sitter
-};
-```
+**Shared user config** (`users/andrew/home/default.nix`) enables `profiles.base` for all machines, providing essential CLI tools.
 
-**Desktop-specific packages** (`users/andrew/home/<hostname>/`):
-```nix
-# yorhaA2
-modules.packages = {
-  media.enable = true;  # mpv
-};
-```
+**Desktop machines** add `profiles.{development, desktop, ai-tools}` in per-host overrides (`users/andrew/home/<hostname>/default.nix`).
 
-**Configured tools** (enabled separately via dedicated modules):
+**Server machines** (bunker, proxmoxnix) receive only `profiles.base` — no desktop packages, no neovim, no development tools.
+
+**Configured tools** (enabled via profiles or individually):
 - git, neovim, tmux, zsh, direnv, btop, yazi, ghostty, ssh, firefox, claude, gemini, spotify, mcp, opencode
-
-**Server machines** (bunker, proxmoxnix) automatically get base + development packages from common config.
 
 ### Where to Enable What
 
-- **System/Darwin modules** (gui-apps, networking, audio, etc.) → `hosts/<hostname>/default.nix`
+- **System/Darwin modules** (gui-apps, networking, audio, etc.) → `hosts/<hostname>/default.nix` (prefer profiles for standard groupings)
 - **Home-manager modules** (packages, CLI tools, dotfiles) → `users/andrew/home/default.nix` (shared) or `users/andrew/home/<hostname>/default.nix` (host-specific)
+- **Profiles** → Use at the appropriate layer to batch-enable related modules
 
 ## Adding New Module
 
@@ -443,8 +475,18 @@ Examples: `id_ed25519_yorha2b_bunker_1801`, `id_ed25519_yorha9s_github_1510`
 ```nix
 home-manager.users.andrew.imports = [
   ../../home                    # Shared modules (ALL)
-  ../../users/andrew/home       # User base enables
-  ../../users/andrew/home/HOST  # Host-specific overrides
+  ../../users/andrew/home       # User base enables (profiles.base)
+  ../../users/andrew/home/HOST  # Host-specific overrides (profiles.desktop, etc.)
 ];
 ```
 Creates a pyramid: universal → user-level → host-level customization.
+
+**9. Profile Modules** - Batch-enable groups via `mkDefault`:
+```nix
+# Profile sets mkDefault true — overridable by direct assignment
+(mkIf cfg.desktop.enable {
+  modules.ghostty.enable = mkDefault true;
+  modules.spotify.enable = mkDefault true;
+})
+```
+Profiles don't touch imports — they're a thin enable layer on top of the existing module system. Individual overrides (`modules.foo.enable = false;`) always win because normal priority (100) beats `mkDefault` (1000).

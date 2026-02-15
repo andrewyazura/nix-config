@@ -4,23 +4,7 @@
     homeDirectory = "/home/andrew";
   };
 
-  modules = {
-    btop.enable = true;
-    direnv.enable = true;
-    ghostty.enable = true;
-    git.enable = true;
-    neovim.enable = true;
-    spotify.enable = true;
-    ssh.enable = true;
-    tmux.enable = true;
-    yazi.enable = true;
-    zsh.enable = true;
-
-    packages = {
-      base.enable = true;
-      development.enable = true;
-    };
-  };
+  modules.profiles.base.enable = true;
 
   programs = {
     git = {

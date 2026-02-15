@@ -15,6 +15,7 @@
     ./opencode
     ./packages
     ./polybar
+    ./profiles
     ./spotify
     ./ssh
     ./sway

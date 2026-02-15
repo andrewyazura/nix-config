@@ -15,27 +15,10 @@ in
   ];
 
   modules = {
-    aerospace.enable = true;
-    fonts.enable = true;
-    homebrew.enable = true;
+    profiles.desktop.enable = true;
+
     nix.enable = true;
-    system-defaults.enable = true;
     work.enable = true;
-
-    gui-apps = {
-      base.enable = true;
-      communication.enable = true;
-      development.enable = true;
-      gaming.enable = true;
-      media.enable = true;
-      productivity.enable = true;
-      system-tools.enable = true;
-    };
-
-    darwin-packages = {
-      docker.enable = true;
-      gnuTools.enable = true;
-    };
   };
 
   home-manager = {

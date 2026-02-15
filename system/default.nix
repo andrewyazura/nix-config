@@ -9,6 +9,7 @@
     ./minecraft-server
     ./networking
     ./nix
+    ./profiles
     ./sway
     ./wooting
   ];

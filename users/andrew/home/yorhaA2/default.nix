@@ -1,16 +1,15 @@
 { config, lib, ... }:
 {
   modules = {
-    claude.enable = true;
+    profiles = {
+      development.enable = true;
+      desktop.enable = true;
+      ai-tools.enable = true;
+    };
+
     gemini.enable = true;
     ideavim.enable = true;
-    mcp.enable = true;
-    opencode.enable = true;
     work.enable = true;
-
-    packages = {
-      media.enable = true;
-    };
   };
   home.stateVersion = "25.05";
 

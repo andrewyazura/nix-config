@@ -8,22 +8,16 @@
   ];
 
   modules = {
-    audio.enable = true;
-    fonts.enable = true;
+    profiles = {
+      desktop.enable = true;
+      gaming.enable = true;
+    };
+
     gnome.enable = true;
-    networking.enable = true;
     nix.enable = true;
     sway.enable = true;
     wooting.enable = true;
     work.enable = true;
-
-    gui-apps = {
-      base.enable = true;
-      communication.enable = true;
-      media.enable = true;
-      productivity.enable = true;
-      gaming.enable = true;
-    };
   };
 
   home-manager.users.andrew = {
