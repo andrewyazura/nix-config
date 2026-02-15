@@ -10,6 +10,7 @@ in
 {
   options.modules.profiles = {
     desktop.enable = mkEnableOption "Desktop system profile";
+    development.enable = mkEnableOption "Development profile";
     gaming.enable = mkEnableOption "Gaming profile";
   };
 
@@ -20,6 +21,12 @@ in
         fonts.enable = mkDefault true;
         networking.enable = mkDefault true;
         desktop-apps.enable = mkDefault true;
+      };
+    })
+
+    (mkIf cfg.development.enable {
+      modules = {
+        development-apps.enable = mkDefault true;
       };
     })
 

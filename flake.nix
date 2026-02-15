@@ -66,6 +66,10 @@
     beast-music-app = {
       url = "git+ssh://git@github.com/yaroslavpashynskyi/BeastMusic.git";
     };
+
+    attic = {
+      url = "github:zhaofengli/attic";
+    };
   };
 
   outputs =

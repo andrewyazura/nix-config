@@ -18,3 +18,33 @@ creation_rules:
       - *yorha9s
       - *yorhaA2
     format: binary
+
+  - path_regex: secrets/attic-env
+    key_groups:
+    - age:
+      - *bunker
+    format: binary
+
+  - path_regex: secrets/netrc-bunker
+    key_groups:
+    - age:
+      - *bunker
+    format: binary
+
+  - path_regex: secrets/netrc-yorha2b
+    key_groups:
+    - age:
+      - *yorha2b
+    format: binary
+
+  - path_regex: secrets/netrc-yorha9s
+    key_groups:
+    - age:
+      - *yorha9s
+    format: binary
+
+  - path_regex: secrets/netrc-yorhaA2
+    key_groups:
+    - age:
+      - *yorhaA2
+    format: binary

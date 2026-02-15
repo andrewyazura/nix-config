@@ -54,6 +54,76 @@ ssh-to-age -i ~/.ssh/id_ed25519_<host>_nixconfig_<date> -private-key -o keys.txt
 
 Prerequisites: Public age key in `.sops.yaml`, private key in `~/.config/sops/age/keys.txt`
 
+### CI/CD
+
+**Workflows** (`.github/workflows/`):
+- **check.yml** — Runs `nixfmt --check` on push to `main` and PRs. Uses `nix shell nixpkgs#nixfmt` to avoid evaluating the full flake (which requires SSH for private inputs).
+- **deploy-bunker.yml** — Builds bunker config, pushes to Attic cache, and deploys via `deploy-rs`. Auto-triggers on push to `main` (with derivation-based change detection) and manually via `workflow_dispatch`.
+
+**GitHub Secrets Required:**
+| Secret | Purpose |
+|--------|---------|
+| `SSH_PRIVATE_KEY` | ED25519 key for bunker SSH + private repo deploy key |
+| `BUNKER_HOST` | Bunker server IP or hostname |
+| `ATTIC_TOKEN` | Attic push+pull token for CI |
+
+```bash
+# Trigger manual deploy
+gh workflow run deploy-bunker.yml
+```
+
+### Binary Cache (Attic)
+
+Self-hosted Nix binary cache on bunker at `cache.andrewyazura.com`. CI pushes build artifacts; all machines pull from it as a substituter. The NixOS module (`inputs.attic.nixosModules.atticd`) provides `atticd-atticadm` on bunker's PATH for token management.
+
+**Admin token management** (run on bunker with `sudo`):
+
+The `atticd-atticadm` CLI reads the server config and database directly, so it must run as root on bunker. Tokens are JWTs with specific permission scopes.
+
+```bash
+# Generate admin token (full access — for initial setup and emergencies)
+sudo atticd-atticadm make-token \
+  --sub "admin" \
+  --validity "1d" \
+  --create-cache "*" \
+  --configure-cache "*" \
+  --configure-cache-retention "*" \
+  --destroy-cache "*" \
+  --pull "*" \
+  --push "*" \
+  --delete "*"
+
+# Generate per-machine push+pull token (for nix substituter auth + local pushes)
+sudo atticd-atticadm make-token --sub "<hostname>" --pull "main" --push "main" --validity "10y"
+
+# Generate CI push+pull token
+sudo atticd-atticadm make-token --sub "ci" --pull "main" --push "main" --validity "1y"
+```
+
+**Initial cache setup** (one-time, using admin token):
+
+```bash
+# Login with admin token from a machine with attic CLI
+attic login bunker https://cache.andrewyazura.com <admin-token>
+
+# Create the cache
+attic cache create main
+
+# Get cache public key (needed for nix trusted-public-keys)
+attic cache info main
+```
+
+**Day-to-day usage**:
+
+```bash
+# Push a store path to cache
+attic push main /nix/store/<path>
+
+# Watch and push a build
+attic watch-store main &
+nix build .#nixosConfigurations.bunker.config.system.build.toplevel
+```
+
 ## Architecture
 
 ### Key Directories
