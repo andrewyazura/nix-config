@@ -6,6 +6,8 @@
   ];
 
   modules = {
+    binary-cache.enable = false;
+
     minecraft-server = {
       enable = true;
       servers.bombas = {
