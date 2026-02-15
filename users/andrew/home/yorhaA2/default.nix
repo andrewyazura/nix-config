@@ -9,6 +9,7 @@
 
     gemini.enable = true;
     ideavim.enable = true;
+    karabiner.enable = true;
     work.enable = true;
   };
   home.stateVersion = "25.05";

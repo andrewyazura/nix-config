@@ -6,6 +6,7 @@
     ./fonts
     ./gaming
     ./homebrew
+    ./karabiner
     ./nix
     ./profiles
     ./system-defaults

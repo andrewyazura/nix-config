@@ -25,6 +25,7 @@ in
         };
         fonts.enable = mkDefault true;
         homebrew.enable = mkDefault true;
+        karabiner.enable = mkDefault true;
         system-defaults.enable = mkDefault true;
         system-tools.enable = mkDefault true;
       };
