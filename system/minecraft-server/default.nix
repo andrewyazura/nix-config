@@ -60,6 +60,7 @@ in
 
           serverTemplate = {
             enable = true;
+            enableReload = true;
             package = pkgs.fabricServers.fabric-1_21_11;
 
             symlinks.mods = pkgs.linkFarmFromDrvs "mods" (attrValues mods);
@@ -84,7 +85,10 @@ in
               };
 
               symlinks = {
-                "server-icon.png" = ./bombas-server-icon.png;
+                "server-icon.png" = builtins.path {
+                  path = ./bombas-server-icon.png;
+                  name = "bombas-server-icon.png";
+                };
               };
             };
           };
