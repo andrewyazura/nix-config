@@ -50,10 +50,10 @@ jobs:
             echo "Bunker config changed — will deploy"
           fi
 
-      - name: Build and push to cache
+      - name: Build bunker config
         if: github.event_name == 'workflow_dispatch' || steps.check.outputs.changed == 'true'
         run: nix build .#nixosConfigurations.bunker.config.system.build.toplevel
 
       - name: Deploy to bunker
         if: github.event_name == 'workflow_dispatch' || steps.check.outputs.changed == 'true'
-        run: nix run github:serokell/deploy-rs -- .#bunker
+        run: nix run github:serokell/deploy-rs -- .#bunker --ssh-user deploy
