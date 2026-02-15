@@ -22,6 +22,7 @@
     ./spotify
     ./ssh
     ./sway
+    ./theme
     ./tmux
     ./waybar
     ./yazi

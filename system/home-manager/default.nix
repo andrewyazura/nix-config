@@ -6,6 +6,9 @@
     extraSpecialArgs = {
       inherit inputs hostname;
     };
-    sharedModules = [ inputs.sops-nix.homeManagerModules.sops ];
+    sharedModules = [
+      inputs.catppuccin.homeModules.catppuccin
+      inputs.sops-nix.homeManagerModules.sops
+    ];
   };
 }

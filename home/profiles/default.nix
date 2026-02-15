@@ -40,6 +40,7 @@ in
         ghostty.enable = mkDefault true;
         media-packages.enable = mkDefault true;
         spotify.enable = mkDefault true;
+        theme.enable = mkDefault true;
         yazi.enable = mkDefault true;
       };
     })

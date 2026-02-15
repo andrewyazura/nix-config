@@ -70,6 +70,10 @@
     attic = {
       url = "github:zhaofengli/attic";
     };
+
+    catppuccin = {
+      url = "github:catppuccin/nix";
+    };
   };
 
   outputs =
