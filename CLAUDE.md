@@ -203,36 +203,30 @@ Defined in `.sops.yaml` with per-machine age keys:
 
 ## Package Management Architecture
 
-Packages are organized into **purpose-based groups** rather than scattered across files:
+Packages are organized into **flat, top-level modules** — each category is its own module under `modules.<name>`.
 
 ### CLI Tools (Home-Manager Level)
 
-Located in `home/packages/`, these are **cross-platform** command-line tools available on all machines:
+Located as top-level modules under `home/`, these are **cross-platform** command-line tools available on all machines:
 
-- **base** - Essential CLI tools without dedicated modules (age, fastfetch, git-lfs, htop, ncdu, ntfs3g, sops, tree, zip/unzip)
-- **development** - Search and dev tools (ripgrep, fd, tree-sitter, vi-mongo)
-- **media** - Media CLI tools (mpv)
+- **base-packages** (`home/base-packages/`) - Essential CLI tools without dedicated modules (age, fastfetch, git-lfs, htop, ncdu, ntfs3g, sops, tree, zip/unzip)
+- **dev-packages** (`home/dev-packages/`) - Search and dev tools (ripgrep, fd, tree-sitter, vi-mongo)
+- **media-packages** (`home/media-packages/`) - Media CLI tools (mpv)
 
 **Note:** Packages with dedicated config modules (git, neovim, tmux, zsh, direnv, btop, yazi, ghostty) are managed by their respective `home/<module>` modules, NOT in package groups. Package groups only contain tools without dedicated configuration.
 
 ### GUI Applications (System/Darwin Level)
 
-Platform-specific graphical applications:
+Platform-specific graphical applications, each a top-level module:
 
-**NixOS** (`system/gui-apps/`):
-- **base** - firefox, chromium, bitwarden-desktop, ghostty
-- **communication** - discord, vesktop, signal-desktop
-- **media** - spotify, obs-studio
-- **productivity** - obsidian
-- **gaming** - prismlauncher
+**NixOS** (`system/`):
+- **desktop-apps** - firefox, chromium, bitwarden-desktop, ghostty, discord, vesktop, signal-desktop, obs-studio, obsidian, spotify
+- **gaming** - prismlauncher, steam
 
-**macOS** (`darwin/gui-apps/`):
-- **base** - firefox, google-chrome, bitwarden, ghostty (Homebrew casks)
-- **communication** - discord, slack, signal
-- **development** - antigravity, intellij-idea, visual-studio-code
+**macOS** (`darwin/`):
+- **desktop-apps** - firefox, google-chrome, bitwarden, ghostty, discord, signal, slack, telegram, spotify, claude, obsidian (Homebrew casks)
+- **development-apps** - antigravity, intellij-idea, visual-studio-code
 - **gaming** - steam, prismlauncher
-- **media** - spotify
-- **productivity** - obsidian
 - **system-tools** - focusrite-control-2, mos
 
 **macOS System Packages** (`darwin/system-packages/`):
@@ -246,21 +240,22 @@ Profiles are a thin layer that batch-enables groups of modules. They exist at al
 **Home profiles** (`home/profiles/default.nix`):
 | Profile | Modules Enabled |
 |---------|----------------|
-| `base` | zsh, git, ssh, tmux, btop, direnv, packages.base |
-| `development` | neovim, packages.development |
-| `desktop` | ghostty, yazi, spotify, packages.media |
+| `base` | zsh, git, ssh, tmux, btop, direnv, base-packages |
+| `development` | neovim, dev-packages |
+| `desktop` | ghostty, yazi, spotify, media-packages |
 | `ai-tools` | claude, mcp, opencode |
 
 **System profiles** (`system/profiles/default.nix`):
 | Profile | Modules Enabled |
 |---------|----------------|
-| `desktop` | audio, fonts, networking, gui-apps.{base, communication, media, productivity} |
-| `gaming` | gui-apps.gaming |
+| `desktop` | audio, fonts, networking, desktop-apps |
+| `gaming` | gaming |
 
 **Darwin profiles** (`darwin/profiles/default.nix`):
 | Profile | Modules Enabled |
 |---------|----------------|
-| `desktop` | aerospace, fonts, homebrew, system-defaults, all gui-apps, darwin-packages.{docker, gnuTools} |
+| `desktop` | aerospace, fonts, homebrew, system-defaults, desktop-apps, development-apps, system-tools, darwin-packages.{docker, gnuTools} |
+| `gaming` | gaming |
 
 **Usage in host configs:**
 ```nix
@@ -284,7 +279,7 @@ modules.spotify.enable = false;  # priority 100 beats mkDefault's 1000
 
 ### Package Configuration Hierarchy
 
-Packages are organized into purpose-based groups rather than scattered across files. Modules with dedicated config (`home/<name>/`) are enabled via profiles or individually — **not** in package groups.
+Modules with dedicated config (`home/<name>/`) are enabled via profiles or individually — **not** in package groups.
 
 **Shared user config** (`users/andrew/home/default.nix`) enables `profiles.base` for all machines, providing essential CLI tools.
 
@@ -297,7 +292,7 @@ Packages are organized into purpose-based groups rather than scattered across fi
 
 ### Where to Enable What
 
-- **System/Darwin modules** (gui-apps, networking, audio, etc.) → `hosts/<hostname>/default.nix` (prefer profiles for standard groupings)
+- **System/Darwin modules** (desktop-apps, gaming, networking, audio, etc.) → `hosts/<hostname>/default.nix` (prefer profiles for standard groupings)
 - **Home-manager modules** (packages, CLI tools, dotfiles) → `users/andrew/home/default.nix` (shared) or `users/andrew/home/<hostname>/default.nix` (host-specific)
 - **Profiles** → Use at the appropriate layer to batch-enable related modules
 
@@ -316,7 +311,7 @@ Manual process:
 
 ### When to Use Package Groups
 
-Add to `home/packages/<category>/` when the tool:
+Add to `home/<category>-packages/` when the tool:
 - Works out-of-the-box without configuration
 - Has no dotfiles or settings to manage
 - Is a standalone utility
@@ -324,7 +319,7 @@ Add to `home/packages/<category>/` when the tool:
 **Examples:** tree, ncdu, htop, ripgrep, fd, mpv, age, sops
 
 ```nix
-# home/packages/base/default.nix
+# home/base-packages/default.nix
 config = mkIf cfg.enable {
   home.packages = with pkgs; [
     tree
