@@ -4,6 +4,7 @@
 {
   imports = [ ../../common/nix ];
 
+  nix.settings.auto-optimise-store = true;
   nix.gc.dates = "weekly";
 
   i18n.defaultLocale = "en_US.UTF-8";
