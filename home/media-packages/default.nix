@@ -6,10 +6,10 @@
 }:
 with lib;
 let
-  cfg = config.modules.packages.media;
+  cfg = config.modules.media-packages;
 in
 {
-  options.modules.packages.media = {
+  options.modules.media-packages = {
     enable = mkEnableOption "Enable media CLI packages";
   };
 

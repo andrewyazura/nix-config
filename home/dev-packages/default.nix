@@ -6,10 +6,10 @@
 }:
 with lib;
 let
-  cfg = config.modules.packages.development;
+  cfg = config.modules.dev-packages;
 in
 {
-  options.modules.packages.development = {
+  options.modules.dev-packages = {
     enable = mkEnableOption "Enable development packages";
   };
 

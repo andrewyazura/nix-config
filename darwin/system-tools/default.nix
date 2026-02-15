@@ -1,10 +1,10 @@
 { lib, config, ... }:
 with lib;
 let
-  cfg = config.modules.gui-apps.system-tools;
+  cfg = config.modules.system-tools;
 in
 {
-  options.modules.gui-apps.system-tools = {
+  options.modules.system-tools = {
     enable = mkEnableOption "Enable macOS-specific system utility applications";
   };
 

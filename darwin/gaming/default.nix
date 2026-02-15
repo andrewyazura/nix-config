@@ -1,10 +1,10 @@
 { lib, config, ... }:
 with lib;
 let
-  cfg = config.modules.gui-apps.gaming;
+  cfg = config.modules.gaming;
 in
 {
-  options.modules.gui-apps.gaming = {
+  options.modules.gaming = {
     enable = mkEnableOption "Enable gaming GUI applications (macOS)";
   };
 

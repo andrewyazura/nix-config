@@ -5,10 +5,10 @@
 }:
 with lib;
 let
-  cfg = config.modules.gui-apps.development;
+  cfg = config.modules.development-apps;
 in
 {
-  options.modules.gui-apps.development = {
+  options.modules.development-apps = {
     enable = mkEnableOption "Enable development GUI applications";
   };
 

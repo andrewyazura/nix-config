@@ -6,10 +6,10 @@
 }:
 with lib;
 let
-  cfg = config.modules.packages.base;
+  cfg = config.modules.base-packages;
 in
 {
-  options.modules.packages.base = {
+  options.modules.base-packages = {
     enable = mkEnableOption "Enable base CLI packages";
   };
 

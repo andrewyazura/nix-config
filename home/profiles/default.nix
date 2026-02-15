@@ -21,7 +21,7 @@ in
         btop.enable = mkDefault true;
         direnv.enable = mkDefault true;
         git.enable = mkDefault true;
-        packages.base.enable = mkDefault true;
+        base-packages.enable = mkDefault true;
         ssh.enable = mkDefault true;
         tmux.enable = mkDefault true;
         zsh.enable = mkDefault true;
@@ -31,14 +31,14 @@ in
     (mkIf cfg.development.enable {
       modules = {
         neovim.enable = mkDefault true;
-        packages.development.enable = mkDefault true;
+        dev-packages.enable = mkDefault true;
       };
     })
 
     (mkIf cfg.desktop.enable {
       modules = {
         ghostty.enable = mkDefault true;
-        packages.media.enable = mkDefault true;
+        media-packages.enable = mkDefault true;
         spotify.enable = mkDefault true;
         yazi.enable = mkDefault true;
       };

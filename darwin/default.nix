@@ -1,12 +1,15 @@
 {
   imports = [
     ./aerospace
+    ./desktop-apps
+    ./development-apps
     ./fonts
-    ./gui-apps
+    ./gaming
     ./homebrew
     ./nix
     ./profiles
     ./system-defaults
     ./system-packages
+    ./system-tools
   ];
 }

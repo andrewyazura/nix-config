@@ -1,7 +1,9 @@
 {
   imports = [
+    ./base-packages
     ./btop
     ./claude
+    ./dev-packages
     ./direnv
     ./firefox
     ./gemini
@@ -11,9 +13,9 @@
     ./i3
     ./ideavim
     ./mcp
+    ./media-packages
     ./neovim
     ./opencode
-    ./packages
     ./polybar
     ./profiles
     ./spotify

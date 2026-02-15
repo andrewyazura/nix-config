@@ -1,9 +1,10 @@
 {
   imports = [
     ./audio
+    ./desktop-apps
     ./fonts
+    ./gaming
     ./gnome
-    ./gui-apps
     ./home-manager
     ./i3
     ./minecraft-server

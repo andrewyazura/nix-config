@@ -16,6 +16,7 @@ in
 
   modules = {
     profiles.desktop.enable = true;
+    profiles.gaming.enable = true;
 
     nix.enable = true;
     work.enable = true;
