@@ -67,7 +67,7 @@ in
             let
               super = "Mod4";
               alt = "Mod1";
-              dmenuArgs = "-fn 'AdwaitaMono-8' -nb '${palette.crust}' -nf '${palette.text}' -sb '${palette.mauve}' -sf '${palette.base}'";
+              dmenuArgs = "-fn 'AdwaitaMono-12' -nb '${palette.crust}' -nf '${palette.text}' -sb '${palette.mauve}' -sf '${palette.base}'";
             in
             {
               "${alt}+space" = "exec dmenu_run ${dmenuArgs}";
