@@ -2,6 +2,7 @@
   imports = [
     ./audio
     ./desktop-apps
+    ./development-apps
     ./fonts
     ./gaming
     ./gnome

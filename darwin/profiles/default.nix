@@ -10,6 +10,7 @@ in
 {
   options.modules.profiles = {
     desktop.enable = mkEnableOption "macOS desktop profile";
+    development.enable = mkEnableOption "Development profile";
     gaming.enable = mkEnableOption "Gaming profile";
   };
 
@@ -22,11 +23,16 @@ in
           docker.enable = mkDefault true;
           gnuTools.enable = mkDefault true;
         };
-        development-apps.enable = mkDefault true;
         fonts.enable = mkDefault true;
         homebrew.enable = mkDefault true;
         system-defaults.enable = mkDefault true;
         system-tools.enable = mkDefault true;
+      };
+    })
+
+    (mkIf cfg.development.enable {
+      modules = {
+        development-apps.enable = mkDefault true;
       };
     })
 
