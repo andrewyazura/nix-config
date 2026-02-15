@@ -34,17 +34,23 @@
 
       sway = {
         enable = true;
-        output = {
-          DP-3 = {
-            position = "0 0";
-            mode = "3840x2160@144Hz";
-          };
+        output =
+          let
+            wallpaperPath = ../../common/wallpapers/nix-black-4k.png;
+          in
+          {
+            DP-3 = {
+              position = "0 0";
+              mode = "3840x2160@144Hz";
+              bg = "${wallpaperPath} fill";
+            };
 
-          HDMI-A-1 = {
-            position = "3840 360";
-            mode = "2560x1440@144Hz";
+            HDMI-A-1 = {
+              position = "3840 360";
+              mode = "2560x1440@144Hz";
+              bg = "${wallpaperPath} fill";
+            };
           };
-        };
 
         focus-output = "DP-3";
       };
