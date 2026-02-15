@@ -18,10 +18,10 @@ in
   config = mkMerge [
     (mkIf cfg.base.enable {
       modules = {
+        base-packages.enable = mkDefault true;
         btop.enable = mkDefault true;
         direnv.enable = mkDefault true;
         git.enable = mkDefault true;
-        base-packages.enable = mkDefault true;
         ssh.enable = mkDefault true;
         tmux.enable = mkDefault true;
         zsh.enable = mkDefault true;

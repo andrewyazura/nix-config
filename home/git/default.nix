@@ -13,6 +13,11 @@ in
       enable = true;
       lfs.enable = true;
 
+      signing = {
+        key = "970E41F6C58CCA2A";
+        signByDefault = true;
+      };
+
       includes = [
         {
           contents = {
