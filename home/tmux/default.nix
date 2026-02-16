@@ -34,6 +34,9 @@ in
           set -g default-terminal "tmux-256color"
           set -ag terminal-overrides ",xterm-256color:RGB"
 
+          set -g set-titles on
+          set -g set-titles-string "#{pane_title}"
+
           set -g mode-style bg=${palette.mauve},fg=${palette.base}
           set -g status-style bg=${palette.crust},fg=${palette.text}
 
