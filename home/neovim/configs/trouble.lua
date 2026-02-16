@@ -10,16 +10,17 @@ local float_modes = {
 
 local float_config = {
 	focus = true,
+	auto_jump = false,
 	win = {
 		type = "float",
 		relative = "editor",
 		size = { width = 0.5, height = 0.6 },
 		border = "rounded",
 	},
-	keys = {
-		["<cr>"] = "jump_close",
-		["<esc>"] = "close",
-	},
+	config = function(opts)
+		opts.keys["<cr>"] = "jump_close"
+		opts.keys["<esc>"] = "close"
+	end,
 }
 
 local modes = {}
