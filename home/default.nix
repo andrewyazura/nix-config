@@ -12,7 +12,6 @@
     ./gnome
     ./i3
     ./ideavim
-    ./karabiner
     ./mcp
     ./media-packages
     ./neovim
