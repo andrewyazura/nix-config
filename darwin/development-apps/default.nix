@@ -14,9 +14,8 @@ in
 
   config = mkIf cfg.enable {
     homebrew.casks = [
-      "antigravity"
       "intellij-idea"
-      "visual-studio-code"
+      "zed"
     ];
   };
 }
