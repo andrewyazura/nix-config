@@ -15,8 +15,9 @@ in
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      ripgrep
       fd
+      gh
+      ripgrep
       tree-sitter
       vi-mongo
     ];
