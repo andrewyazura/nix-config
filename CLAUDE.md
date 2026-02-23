@@ -312,19 +312,21 @@ Profiles are a thin layer that batch-enables groups of modules. They exist at al
 |---------|----------------|
 | `base` | zsh, git, ssh, tmux, btop, direnv, base-packages |
 | `development` | neovim, dev-packages |
-| `desktop` | ghostty, yazi, spotify, media-packages |
+| `desktop` | ghostty, yazi, spotify, theme, media-packages |
 | `ai-tools` | claude, mcp, opencode |
 
 **System profiles** (`system/profiles/default.nix`):
 | Profile | Modules Enabled |
 |---------|----------------|
 | `desktop` | audio, fonts, networking, desktop-apps |
+| `development` | development-apps |
 | `gaming` | gaming |
 
 **Darwin profiles** (`darwin/profiles/default.nix`):
 | Profile | Modules Enabled |
 |---------|----------------|
-| `desktop` | aerospace, fonts, homebrew, system-defaults, desktop-apps, development-apps, system-tools, darwin-packages.{docker, gnuTools} |
+| `desktop` | aerospace, fonts, homebrew, system-defaults, desktop-apps, system-tools, darwin-packages.{docker, gnuTools} |
+| `development` | development-apps |
 | `gaming` | gaming |
 
 **Usage in host configs:**
@@ -358,7 +360,7 @@ Modules with dedicated config (`home/<name>/`) are enabled via profiles or indiv
 **Server machines** (bunker, proxmoxnix) receive only `profiles.base` — no desktop packages, no neovim, no development tools.
 
 **Configured tools** (enabled via profiles or individually):
-- git, neovim, tmux, zsh, direnv, btop, yazi, ghostty, ssh, firefox, claude, gemini, spotify, mcp, opencode
+- git, neovim, tmux, zsh, direnv, btop, yazi, ghostty, ssh, firefox, claude, gemini, spotify, theme, mcp, opencode
 
 ### Where to Enable What
 
