@@ -72,10 +72,13 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      bubblewrap
-      socat
-    ];
+    home.packages = lib.optionals pkgs.stdenv.isLinux (
+      with pkgs;
+      [
+        bubblewrap
+        socat
+      ]
+    );
 
     programs.claude-code = {
       enable = true;
