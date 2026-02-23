@@ -43,11 +43,11 @@ in
         menuExtraClock = {
           FlashDateSeparators = false;
           IsAnalog = false;
-          Show24Hour = true;
-          ShowDate = 1;
-          ShowDayOfMonth = true;
-          ShowDayOfWeek = true;
-          ShowSeconds = true;
+          Show24Hour = false;
+          ShowDate = 2;
+          ShowDayOfMonth = false;
+          ShowDayOfWeek = false;
+          ShowSeconds = false;
         };
       };
     };
