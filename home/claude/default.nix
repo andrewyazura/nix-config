@@ -173,8 +173,6 @@ in
             "pytest *"
             "ruff *"
             "ty *"
-            "uv *"
-            "uvx *"
             "pre-commit *"
 
             # Node.js
@@ -191,6 +189,14 @@ in
             # Infrastructure
             "docker *"
             "make *"
+          ];
+
+          ask = bashCmds [
+            "uv *"
+            "uvx *"
+
+            "npm i *"
+            "npm install *"
           ];
 
           deny =
