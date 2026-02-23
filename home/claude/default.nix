@@ -72,14 +72,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = lib.optionals pkgs.stdenv.isLinux (
-      with pkgs;
-      [
-        bubblewrap
-        socat
-      ]
-    );
-
     programs.claude-code = {
       enable = true;
       package = claude-package;
@@ -168,29 +160,12 @@ in
             "which *"
             "xargs *"
 
+            # Version control
             "git *"
-
-            # Nix
-            "nix search *"
-            "nix fmt *"
-            "nix eval *"
-            "nix build *"
-            "nix flake show *"
-            "nix flake metadata *"
-            "nix flake info *"
-            "nix flake archive *"
-            "nix derivation show *"
-            "nix show-derivation *"
-            "nix path-info *"
-            "nix store diff-closures *"
-            "nix hash *"
-            "nix-instantiate *"
-            "nix-env *"
-            "nix-shell *"
-            "nix-store *"
-
-            # GitHub CLI
             "gh *"
+
+            # Nix ecosystem
+            "nix*"
 
             # Python
             "python *"
@@ -215,7 +190,6 @@ in
 
             # Infrastructure
             "docker *"
-            "docker compose *"
             "make *"
           ];
 
@@ -231,15 +205,6 @@ in
               "rm -rf *"
               "chmod 777 *"
             ];
-        };
-
-        sandbox = {
-          enabled = true;
-          autoAllowBashIfSandboxed = true;
-          excludedCommands = [
-            "git"
-            "docker"
-          ];
         };
 
         hooks = {

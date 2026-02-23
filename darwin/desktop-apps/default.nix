@@ -15,7 +15,6 @@ in
       "ghostty"
       "google-chrome"
 
-      "discord"
       "signal"
       "slack"
       "telegram"
