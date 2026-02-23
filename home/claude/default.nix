@@ -72,11 +72,15 @@ in
   };
 
   config = mkIf cfg.enable {
+    home.packages = with pkgs; [
+      bubblewrap
+      socat
+    ];
+
     programs.claude-code = {
       enable = true;
       package = claude-package;
       memory.source = ./memory.md;
-
       skillsDir = ./skills;
 
       settings = {
@@ -126,27 +130,64 @@ in
           ]
           # Shell utilities
           ++ bashCmds [
+            "basename *"
+            "cat *"
+            "chmod *"
             "cp *"
+            "cut *"
+            "date *"
+            "diff *"
+            "dirname *"
+            "du *"
+            "echo *"
+            "env *"
+            "fd *"
+            "file *"
             "find *"
+            "head *"
+            "jq *"
+            "ln *"
             "ls *"
             "mkdir *"
             "mv *"
+            "pwd *"
+            "readlink *"
+            "realpath *"
+            "sort *"
+            "stat *"
+            "tail *"
+            "tar *"
+            "touch *"
+            "tr *"
             "tree *"
-
-            "diff *"
-            "fd *"
-            "jq *"
+            "uniq *"
             "wc *"
-
-            "chmod *"
             "which *"
-            "env *"
+            "xargs *"
 
             "git *"
 
             # Nix
             "nix search *"
             "nix fmt *"
+            "nix eval *"
+            "nix build *"
+            "nix flake show *"
+            "nix flake metadata *"
+            "nix flake info *"
+            "nix flake archive *"
+            "nix derivation show *"
+            "nix show-derivation *"
+            "nix path-info *"
+            "nix store diff-closures *"
+            "nix hash *"
+            "nix-instantiate *"
+            "nix-env *"
+            "nix-shell *"
+            "nix-store *"
+
+            # GitHub CLI
+            "gh *"
 
             # Python
             "python *"
@@ -173,10 +214,29 @@ in
             "docker *"
             "docker compose *"
             "make *"
-            "curl *"
           ];
 
-          deny = denyPaths sensitivePaths;
+          deny =
+            (denyPaths sensitivePaths)
+            ++ bashCmds [
+              "git push *"
+              "docker system *"
+              "nix-env -e *"
+              "nix-env --uninstall *"
+              "nix-store --delete *"
+              "nix-store --gc *"
+              "rm -rf *"
+              "chmod 777 *"
+            ];
+        };
+
+        sandbox = {
+          enabled = true;
+          autoAllowBashIfSandboxed = true;
+          excludedCommands = [
+            "git"
+            "docker"
+          ];
         };
 
         hooks = {
