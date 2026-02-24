@@ -19,6 +19,8 @@ local float_config = {
 	},
 	config = function(opts)
 		opts.keys["<cr>"] = "jump_close"
+		opts.keys["<c-s>"] = "jump_split_close"
+		opts.keys["<c-v>"] = "jump_vsplit_close"
 		opts.keys["<esc>"] = "close"
 	end,
 }
