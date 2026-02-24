@@ -77,4 +77,10 @@ vim.lsp.config("typescript_ls", {
 	filetypes = { "typescript" },
 })
 
+vim.lsp.enable("kotlin_ls")
+vim.lsp.config("kotlin_ls", {
+	cmd = { "/opt/homebrew/bin/kotlin-lsp", "--stdio" },
+	filetypes = { "kotlin" },
+})
+
 vim.keymap.set("n", "grd", vim.lsp.buf.definition, { desc = "vim.lsp.buf.definition()" })

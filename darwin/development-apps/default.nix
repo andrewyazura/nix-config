@@ -13,9 +13,15 @@ in
   };
 
   config = mkIf cfg.enable {
-    homebrew.casks = [
-      "intellij-idea"
-      "zed"
-    ];
+    homebrew = {
+      taps = [ "jetbrains/utils" ];
+      brews = [ "jetbrains/utils/kotlin-lsp" ];
+
+      casks = [
+        "claude-devtools"
+        "intellij-idea"
+        "zed"
+      ];
+    };
   };
 }
