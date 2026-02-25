@@ -10,6 +10,8 @@
     ideavim.enable = true;
     theme.enable = false;
     work.enable = true;
+
+    neovim.vaultPath = "~/Documents/notes";
   };
   home.stateVersion = "25.05";
 

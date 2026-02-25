@@ -27,6 +27,7 @@ wk.add({
 	{ "<leader>c", group = "+calls" },
 	{ "<leader>f", group = "+find" },
 	{ "<leader>gr", group = "+references" },
+	{ "<leader>o", group = "+obsidian" },
 	{ "<leader>gR", group = "+references (float)" },
 	{ "<leader>q", group = "+session" },
 	{ "<leader>t", group = "+test" },
