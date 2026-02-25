@@ -239,7 +239,7 @@ in
           ];
           Notification = [
             {
-              matcher = "^(?!permission_prompt)";
+              matcher = "^(?!permission_prompt|idle_prompt)";
               hooks = [ (playSound "bldaca.ogg") ];
             }
           ];
