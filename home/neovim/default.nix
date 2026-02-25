@@ -12,7 +12,11 @@ let
     pname = "neotest-gradle";
     version = "unstable";
     src = inputs.neotest-gradle-src;
-    dependencies = with pkgs.vimPlugins; [ neotest nvim-nio plenary-nvim ];
+    dependencies = with pkgs.vimPlugins; [
+      neotest
+      nvim-nio
+      plenary-nvim
+    ];
   };
 in
 {
