@@ -2,11 +2,18 @@
   lib,
   config,
   pkgs,
+  inputs,
   ...
 }:
 with lib;
 let
   cfg = config.modules.neovim;
+  neotest-gradle = pkgs.vimUtils.buildVimPlugin {
+    pname = "neotest-gradle";
+    version = "unstable";
+    src = inputs.neotest-gradle-src;
+    dependencies = with pkgs.vimPlugins; [ neotest nvim-nio plenary-nvim ];
+  };
 in
 {
   options.modules.neovim = {
@@ -101,6 +108,7 @@ in
             config = toLuaFile ./configs/neotest.lua;
           }
           neotest-python # for neotest
+          neotest-gradle # for neotest
 
           {
             plugin = nvim-autopairs;
@@ -149,11 +157,13 @@ in
               p.gitcommit
               p.go
               p.html
+              p.java
               p.javascript
               p.json
               p.kotlin
               p.lua
               p.markdown
+              p.markdown_inline
               p.nix
               p.python
               p.regex

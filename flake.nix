@@ -74,6 +74,11 @@
     catppuccin = {
       url = "github:catppuccin/nix";
     };
+
+    neotest-gradle-src = {
+      url = "github:andrewyazura/neotest-gradle";
+      flake = false;
+    };
   };
 
   outputs =
