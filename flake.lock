@@ -384,11 +384,11 @@
     "neotest-gradle-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1772000900,
-        "narHash": "sha256-DILjCfThyiIaOOnFveeNniYthUWaP1B553hLIQi9fMk=",
+        "lastModified": 1772011511,
+        "narHash": "sha256-apQc6vl70YUBS8Ln4Bzo2/09riw09alYStH+Aivbp5A=",
         "owner": "andrewyazura",
         "repo": "neotest-gradle",
-        "rev": "75e87ded083d8e1e22729d485f9912b7eca03664",
+        "rev": "86e4d1acc3a7e80f03ec04a99a48af72b13f3d3a",
         "type": "github"
       },
       "original": {
