@@ -84,3 +84,16 @@ vim.lsp.config("kotlin_ls", {
 })
 
 vim.keymap.set("n", "grd", vim.lsp.buf.definition, { desc = "vim.lsp.buf.definition()" })
+vim.keymap.set("n", "grl", vim.lsp.buf.declaration, { desc = "Go to declaration" })
+vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature help" })
+
+vim.diagnostic.config({
+	virtual_text = {
+		prefix = "●",
+		source = "if_many",
+		spacing = 2,
+	},
+	signs = true,
+	underline = true,
+	severity_sort = true,
+})
