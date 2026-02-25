@@ -8,7 +8,7 @@ end, { desc = "Restore Session" })
 
 vim.keymap.set("n", "<leader>qS", function()
 	require("persistence").select()
-end)
+end, { desc = "Select Session" })
 
 vim.keymap.set("n", "<leader>ql", function()
 	persistence.load({ last = true })

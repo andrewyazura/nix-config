@@ -1,3 +1,14 @@
+vim.filetype.add({
+	extension = {
+		zsh = "sh",
+	},
+	filename = {
+		[".zshrc"] = "sh",
+		[".zshenv"] = "sh",
+		[".zprofile"] = "sh",
+	},
+})
+
 require("nvim-treesitter").setup()
 require("treesitter-context").setup({ enable = true })
 

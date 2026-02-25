@@ -23,9 +23,14 @@ wk.setup({
 
 wk.add({
 	{ "<leader>F", desc = "format buffer" },
+	{ "<leader>T", group = "+todo" },
+	{ "<leader>c", group = "+calls" },
 	{ "<leader>f", group = "+find" },
 	{ "<leader>gr", group = "+references" },
 	{ "<leader>gR", group = "+references (float)" },
-	{ "<leader>x", group = "+trouble" },
+	{ "<leader>q", group = "+session" },
+	{ "<leader>t", group = "+test" },
+	{ "<leader>u", desc = "toggle undo tree" },
 	{ "<leader>w", proxy = "<C-w>", group = "+windows" },
+	{ "<leader>x", group = "+trouble" },
 })
