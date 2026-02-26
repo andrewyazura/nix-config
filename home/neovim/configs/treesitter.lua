@@ -12,12 +12,16 @@ vim.filetype.add({
 require("nvim-treesitter").setup()
 require("treesitter-context").setup({ enable = true })
 
+local ts_indent_disabled = { kotlin = true }
+
 vim.api.nvim_create_autocmd("FileType", {
 	callback = function(args)
 		local lang = vim.treesitter.language.get_lang(args.match)
 		if lang and vim.treesitter.language.add(lang) then
 			vim.treesitter.start(args.buf, lang)
-			vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+			if not ts_indent_disabled[args.match] then
+				vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+			end
 		end
 	end,
 })

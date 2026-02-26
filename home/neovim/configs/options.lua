@@ -13,6 +13,15 @@ vim.opt.shiftwidth = 2
 vim.opt.timeout = true
 vim.opt.timeoutlen = 300
 
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "kotlin",
+	callback = function()
+		vim.opt_local.tabstop = 4
+		vim.opt_local.softtabstop = 4
+		vim.opt_local.shiftwidth = 4
+	end,
+})
+
 vim.opt.conceallevel = 0
 vim.opt.termguicolors = true
 

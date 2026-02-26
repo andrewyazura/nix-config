@@ -10,6 +10,11 @@ conform.setup({
 		python = { "ruff_organize_imports", "ruff_format" },
 		typescript = { "prettier" },
 	},
+	formatters = {
+		ktfmt = {
+			prepend_args = { "--kotlinlang-style" },
+		},
+	},
 })
 
 vim.keymap.set("n", "<leader>F", function()
