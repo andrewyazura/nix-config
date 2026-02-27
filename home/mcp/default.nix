@@ -29,14 +29,6 @@ in
           ];
         };
 
-        memory = {
-          command = "npx";
-          args = [
-            "-y"
-            "@modelcontextprotocol/server-memory@2026.1.26"
-          ];
-        };
-
         mongodb = {
           command = "npx";
           args = [
