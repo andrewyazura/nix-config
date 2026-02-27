@@ -122,6 +122,12 @@ in
             "mongodb__atlas-inspect-cluster"
             "mongodb__atlas-inspect-access-list"
             "mongodb__atlas-list-db-users"
+
+            # IDE integration
+            "ide__getDiagnostics"
+
+            # Datadog — full access
+            "datadog-mcp__*"
           ]
           # Shell utilities
           ++ bashCmds [
@@ -159,6 +165,20 @@ in
             "wc *"
             "which *"
             "xargs *"
+            "curl *"
+            "grep *"
+            "rg *"
+            "rm *"
+            "ssh *"
+            "tee *"
+            "test *"
+            "timeout *"
+            "zip *"
+            "unzip *"
+            "wait"
+            "export *"
+            "source *"
+            "tree-sitter *"
 
             # Version control
             "git *"
@@ -174,6 +194,18 @@ in
             "ruff *"
             "ty *"
             "pre-commit *"
+            "poetry *"
+            "mypy *"
+            "uv *"
+            "uvx *"
+            ".venv/bin/python *"
+            ".venv/bin/ruff *"
+
+            # Environment-prefixed commands
+            "PYTHONPATH=* *"
+            "DD_TRACE_ENABLED=* *"
+            "SKIP_INTEGRATION_TESTS=* *"
+            "CI=* *"
 
             # Node.js
             "npm *"
@@ -192,9 +224,6 @@ in
           ];
 
           ask = bashCmds [
-            "uv *"
-            "uvx *"
-
             "npm i *"
             "npm install *"
           ];
@@ -202,12 +231,33 @@ in
           deny =
             (denyPaths sensitivePaths)
             ++ bashCmds [
+              # Git — destructive operations
               "git push *"
-              "docker system *"
+              "git push --force *"
+              "git push -f *"
+              "git reset --hard *"
+              "git checkout -- *"
+              "git restore . *"
+              "git clean -f *"
+              "git clean -fd *"
+              "git branch -D *"
+
+              # Nix — garbage collection and removal (legacy + new CLI)
               "nix-env -e *"
               "nix-env --uninstall *"
               "nix-store --delete *"
               "nix-store --gc *"
+              "nix-collect-garbage *"
+              "nix store gc *"
+              "nix store delete *"
+              "nix profile remove *"
+
+              # Docker — destructive operations
+              "docker system *"
+              "docker volume rm *"
+
+              # Filesystem — destructive
+              "rm -r *"
               "rm -rf *"
               "chmod 777 *"
             ];

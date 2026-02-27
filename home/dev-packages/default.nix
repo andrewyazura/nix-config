@@ -17,6 +17,7 @@ in
     home.packages = with pkgs; [
       fd
       gh
+      jq
       ripgrep
       tree-sitter
       vi-mongo
