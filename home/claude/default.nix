@@ -14,6 +14,23 @@ let
   hooks = import ./hooks.nix { inherit lib pkgs; };
   permissions = import ./permissions.nix { inherit lib; };
 
+  statusline = pkgs.writeShellScript "claude-statusline" ''
+    input=$(cat)
+
+    MODEL=$(echo "$input" | ${pkgs.jq}/bin/jq -r '.model.display_name // "?"')
+    PCT=$(echo "$input" | ${pkgs.jq}/bin/jq -r '.context_window.used_percentage // 0' | cut -d. -f1)
+    COST=$(echo "$input" | ${pkgs.jq}/bin/jq -r '.cost.total_cost_usd // 0' | xargs printf '%.2f')
+
+    BAR_WIDTH=10
+    FILLED=$((PCT * BAR_WIDTH / 100))
+    EMPTY=$((BAR_WIDTH - FILLED))
+    BAR=""
+    [ "$FILLED" -gt 0 ] && BAR=$(printf "%''${FILLED}s" | tr ' ' '▓')
+    [ "$EMPTY" -gt 0 ] && BAR="''${BAR}$(printf "%''${EMPTY}s" | tr ' ' '░')"
+
+    echo "[$MODEL] $BAR ''${PCT}% | \$''${COST}"
+  '';
+
   mcpCfg = config.programs.mcp;
 in
 {
@@ -58,6 +75,13 @@ in
 
         # Show usage tips in the spinner while Claude works
         spinnerTipsEnabled = true;
+
+        # Bottom status bar showing model, context usage, and cost
+        # https://code.claude.com/docs/en/statusline
+        statusLine = {
+          type = "command";
+          command = "${statusline}";
+        };
 
         inherit hooks;
         inherit permissions;
