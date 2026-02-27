@@ -37,7 +37,7 @@ in
 
     backgroundOpacity = mkOption {
       type = types.float;
-      default = 0.9;
+      default = 1.0;
       description = "Ghostty background opacity";
     };
   };
