@@ -44,8 +44,6 @@ in
       package = claude-package;
       memory.source = ./memory.md;
       skillsDir = ./skills;
-      agentsDir = ./agents;
-      rulesDir = ./rules;
 
       settings = {
         # Response formatting style
