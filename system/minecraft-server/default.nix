@@ -101,7 +101,7 @@ in
 
     networking.firewall =
       let
-        tcpShieldIps = [
+        allowedIps = [
           # neoprotect
           "51.195.127.71/32"
           "51.195.127.72/32"
@@ -117,6 +117,7 @@ in
           "54.36.238.139/32"
           "54.36.238.170/32"
           "54.36.238.180/32"
+          "82.22.5.0/24"
         ];
 
         allPorts = mapAttrsToList (
@@ -130,7 +131,7 @@ in
           port:
           concatMapStrings (ip: ''
             iptables -A INPUT -p tcp -s ${ip} --dport ${port} -j ACCEPT
-          '') tcpShieldIps
+          '') allowedIps
         ) uniquePorts;
 
         extraStopCommands = concatMapStrings (port: ''
