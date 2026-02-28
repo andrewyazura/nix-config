@@ -58,6 +58,10 @@ in
         # Show usage tips in the spinner while Claude works
         spinnerTipsEnabled = true;
 
+        # Agent team display mode: split panes in tmux, fallback to in-process
+        # https://code.claude.com/docs/en/agent-teams
+        teammateMode = "tmux";
+
         # Bottom status bar showing model and context usage
         # https://code.claude.com/docs/en/statusline
         statusLine = {
@@ -98,6 +102,10 @@ in
           # MCP server startup timeout in ms (default: 10000)
           # https://code.claude.com/docs/en/mcp
           MCP_TIMEOUT = 30000;
+
+          # Enable experimental agent teams (multiple parallel Claude sessions)
+          # https://code.claude.com/docs/en/agent-teams
+          CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS = 1;
         };
       };
 
