@@ -11,12 +11,23 @@ let
   };
 
   playSound = file: soundHook "${mpvBin} --no-video --really-quiet ${soundsDir}/${file}";
+
+  playRandomSound =
+    files:
+    let
+      count = toString (builtins.length files);
+      paths = lib.concatMapStringsSep " " (f: "${soundsDir}/${f}") files;
+    in
+    soundHook "bash -c 'set -- ${paths}; shift $((RANDOM % ${count})); ${mpvBin} --no-video --really-quiet \"$1\"'";
 in
 {
   UserPromptSubmit = [
     {
       hooks = [
-        (soundHook "bash -c '${mpvBin} --no-video --really-quiet ${soundsDir}/officer$((RANDOM % 2 + 1)).ogg'")
+        (playRandomSound [
+          "officer1.ogg"
+          "officer2.ogg"
+        ])
       ];
     }
   ];

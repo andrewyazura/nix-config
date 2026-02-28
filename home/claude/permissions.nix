@@ -142,8 +142,21 @@ in
     "git *"
     "gh *"
 
-    # Nix ecosystem
-    "nix*"
+    # Nix CLI
+    "nix build *"
+    "nix develop *"
+    "nix eval *"
+    "nix flake *"
+    "nix fmt"
+    "nix fmt *"
+    "nix log *"
+    "nix path-info *"
+    "nix run *"
+    "nix shell *"
+    "nix-build *"
+    "nix-shell *"
+    "nixos-rebuild *"
+    "darwin-rebuild *"
 
     # Python
     "python *"

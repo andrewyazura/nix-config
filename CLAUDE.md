@@ -460,7 +460,15 @@ modules = {
 - Dynamically generates firewall rules for TcpShield protection
 - Imports external flake (`nix-minecraft`) as base infrastructure
 
-**Claude Code** (`home/claude/`): This repo includes a home-manager module configuring Claude Code itself with permissions, hooks, and environment variables.
+**Claude Code** (`home/claude/`): Home-manager module configuring Claude Code via the `claude-code` flake input.
+- `default.nix` — installs package, wires settings (outputStyle, statusLine, env vars), and bridges MCP servers from `programs.mcp` into `programs.claude-code.mcpServers`
+- `permissions.nix` — three-tier allow/ask/deny permission model with helpers (`bashCmds`, `mcpTools`, `denyPaths`) for generating permission entries
+- `hooks.nix` — lifecycle sound effects using mpv (UserPromptSubmit, PostToolUseFailure, Stop, Notification, PermissionRequest)
+- `memory.md` — sourced as the global `~/.claude/CLAUDE.md` via `programs.claude-code.memory.source`
+- `skills/` — custom Claude Code skills (debug, analyzing-problems, reviewing-architecture, security-review)
+- `sounds/` — OGG audio files played by hook commands
+
+**MCP Servers** (`home/mcp/`): Defines Model Context Protocol servers (context7, mongodb, sequential-thinking) via `programs.mcp`. Installs Node.js for npx execution. The claude module reads `config.programs.mcp.servers` and transforms entries into `programs.claude-code.mcpServers`, keeping server definitions decoupled from Claude Code config.
 
 **Application Flakes**: Several custom applications are included as flake inputs and deployed on specific machines:
 - `birthday-api-app`, `birthday-bot-app`, `stresses-bot-app`, `beast-music-app` - deployed on `bunker` server
