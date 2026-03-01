@@ -137,7 +137,6 @@
         yorha9s = mkHost { hostname = "yorha9s"; };
 
         bunker = mkHost { hostname = "bunker"; };
-        proxmoxnix = mkHost { hostname = "proxmoxnix"; };
       };
 
       darwinConfigurations = {
