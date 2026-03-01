@@ -20,6 +20,87 @@ let
     "**/.git/config"
   ];
 
+  readOnlyUtils = [
+    "cat"
+    "head"
+    "tail"
+    "less"
+    "more"
+    "bat"
+    "grep"
+    "rg"
+    "ag"
+    "ack"
+    "zgrep"
+    "find"
+    "fd"
+    "locate"
+    "whereis"
+    "which"
+    "type"
+    "ls"
+    "tree"
+    "exa"
+    "eza"
+    "stat"
+    "file"
+    "jq"
+    "yq"
+    "awk"
+    "sed"
+    "wc"
+    "sort"
+    "uniq"
+    "cut"
+    "tr"
+    "du"
+    "df"
+    "free"
+    "top"
+    "htop"
+    "ps"
+    "echo"
+    "printf"
+    "date"
+    "pwd"
+    "whoami"
+  ];
+
+  # Safe read-only dev and git commands
+  readOnlyDev = [
+    "git status"
+    "git diff*"
+    "git log*"
+    "git show*"
+    "git branch*"
+    "uv --version"
+    "uv pip list"
+    "uv pip freeze"
+    "pip list"
+    "pip show *"
+    "npm list*"
+    "yarn list*"
+  ];
+
+  stateModifiers = [
+    "pip install *"
+    "pip uninstall *"
+    "uv *"
+    "npm *"
+    "yarn *"
+    "pnpm *"
+    "git add *"
+    "git commit *"
+    "git push *"
+    "git stash *"
+    "nix *"
+    "nix-env *"
+    "nix-shell *"
+    "make *"
+    "cargo *"
+    "go *"
+  ];
+
   denyPaths =
     paths:
     concatMap (path: [
@@ -29,27 +110,28 @@ let
     ]) paths;
 
   bashCmds = cmds: map (cmd: "Bash(${cmd})") cmds;
+  bashCmdsWithArgs = cmds: map (cmd: "Bash(${cmd} *)") cmds;
   mcpTools = tools: map (tool: "mcp__${tool}") tools;
 in
 {
   allow = [
-    "Bash"
-    "Edit"
     "Glob"
     "Grep"
-    "NotebookEdit"
     "Read"
     "Skill"
     "Task"
     "WebFetch"
     "WebSearch"
+    "Edit"
     "Write"
+    "NotebookEdit"
   ]
+  ++ bashCmdsWithArgs readOnlyUtils
+  ++ bashCmds readOnlyDev
   ++ mcpTools [
     "context7__*"
     "memory__*"
     "sequential-thinking__*"
-
     "mongodb__connect"
     "mongodb__list-databases"
     "mongodb__list-collections"
@@ -66,22 +148,13 @@ in
     "mongodb__atlas-inspect-cluster"
     "mongodb__atlas-inspect-access-list"
     "mongodb__atlas-list-db-users"
-
     "ide__getDiagnostics"
-
     "datadog-mcp__*"
   ];
 
-  deny =
-    (denyPaths sensitivePaths)
-    ++ bashCmds [
-      "sudo *"
-      "git push --force *"
-      "git push -f *"
-      "git reset --hard *"
-      "git clean -f *"
-      "git clean -fd *"
-      "git branch -D *"
-      "chmod 777 *"
-    ];
+  deny = denyPaths sensitivePaths;
+
+  ask = bashCmds stateModifiers;
+
+  defaultMode = "ask";
 }
