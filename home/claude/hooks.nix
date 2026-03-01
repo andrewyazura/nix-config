@@ -18,6 +18,13 @@ let
       paths = lib.concatMapStringsSep " " (f: "${soundsDir}/${f}") files;
     in
     soundHook "bash -c 'set -- ${paths}; shift $((RANDOM % ${count})); ${pkgs.mpv}/bin/mpv --no-video --really-quiet \"$1\"'";
+
+  postToolUseLog = pkgs.writeShellScript "claude-post-tool-log" ''
+    input=$(cat)
+    command=$(echo "$input" | ${pkgs.jq}/bin/jq -r '.tool_input.command // ""')
+    timestamp=$(${pkgs.coreutils}/bin/date -u +"%Y-%m-%dT%H:%M:%SZ")
+    echo "$timestamp $command" >> ~/.claude/bash-commands.log
+  '';
 in
 {
   UserPromptSubmit = [
@@ -50,6 +57,19 @@ in
     {
       matcher = "^(?!permission_prompt|idle_prompt)";
       hooks = [ (playSound "bldaca.ogg") ];
+    }
+  ];
+  PostToolUse = [
+    {
+      matcher = "Bash";
+      hooks = [
+        {
+          type = "command";
+          command = "${postToolUseLog}";
+          timeout = 5;
+          async = true;
+        }
+      ];
     }
   ];
 }
