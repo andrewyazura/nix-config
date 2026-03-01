@@ -1,9 +1,13 @@
 { config, ... }:
 {
-  modules.profiles = {
-    development.enable = true;
-    desktop.enable = true;
-    ai-tools.enable = true;
+  modules = {
+    profiles = {
+      development.enable = true;
+      desktop.enable = true;
+      ai-tools.enable = true;
+    };
+
+    neovim.vaultPath = "~/Documents/notes";
   };
   home.stateVersion = "24.11";
 
