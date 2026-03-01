@@ -14,9 +14,9 @@
       gaming.enable = true;
     };
 
-    sway.enable = true;
+    gnome.enable = true;
+    sway.enable = false;
     wooting.enable = true;
-    work.enable = true;
   };
 
   home-manager.users.andrew = {
@@ -33,7 +33,7 @@
       waybar.enable = true;
 
       sway = {
-        enable = true;
+        enable = false;
         output =
           let
             wallpaperPath = ../../common/wallpapers/nix-black-4k.png;

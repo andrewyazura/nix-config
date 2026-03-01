@@ -5,5 +5,4 @@
   };
 
   modules.profiles.base.enable = true;
-
 }
