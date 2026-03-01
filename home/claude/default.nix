@@ -74,6 +74,11 @@ in
 
         sandbox = {
           enabled = true;
+          autoAllowBashIfSandboxed = true;
+          excludedCommands = [
+            "git"
+            "docker"
+          ];
           filesystem = {
             allowWrite = [ "//tmp" ];
           };
