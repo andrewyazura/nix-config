@@ -14,6 +14,22 @@ in
     inputs.private-config.darwinModules.default
   ];
 
+  # Workaround for nixpkgs#493775: jeepney's installCheck fails on Darwin
+  # because dbus-daemon requires launchd's DBUS_LAUNCHD_SESSION_BUS_SOCKET.
+  # Remove this overlay once the upstream fix lands.
+  nixpkgs.overlays = [
+    (_final: prev: {
+      python313Packages = prev.python313Packages.overrideScope (
+        _pyFinal: pyPrev: {
+          jeepney = pyPrev.jeepney.overrideAttrs {
+            doInstallCheck = false;
+            pythonImportsCheck = [ ];
+          };
+        }
+      );
+    })
+  ];
+
   modules = {
     profiles = {
       desktop.enable = true;
