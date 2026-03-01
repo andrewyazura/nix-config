@@ -42,7 +42,7 @@ in
         showTurnDuration = true;
 
         # Days before inactive session transcripts are auto-deleted
-        cleanupPeriodDays = 30;
+        cleanupPeriodDays = 365;
 
         # Auto-save learnings per-project to ~/.claude/projects/<project>/memory/
         # https://code.claude.com/docs/en/memory
@@ -61,6 +61,7 @@ in
         # Agent team display mode: split panes in tmux, fallback to in-process
         # https://code.claude.com/docs/en/agent-teams
         teammateMode = "tmux";
+        alwaysThinkingEnabled = true;
 
         # Bottom status bar showing model and context usage
         # https://code.claude.com/docs/en/statusline
