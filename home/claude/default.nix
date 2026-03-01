@@ -23,8 +23,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = optionals pkgs.stdenv.isLinux [ pkgs.bubblewrap ];
-
     programs.claude-code = {
       enable = true;
       package = claude-package;
@@ -70,18 +68,6 @@ in
         statusLine = {
           type = "command";
           command = "${statusline}";
-        };
-
-        sandbox = {
-          enabled = true;
-          autoAllowBashIfSandboxed = true;
-          excludedCommands = [
-            "git"
-            "docker"
-          ];
-          filesystem = {
-            allowWrite = [ "//tmp" ];
-          };
         };
 
         inherit hooks;
