@@ -11,11 +11,11 @@
   modules = {
     profiles = {
       desktop.enable = true;
+      development.enable = true;
       gaming.enable = true;
     };
 
     i3.enable = true;
-    work.enable = true;
   };
 
   home-manager.users.andrew = {

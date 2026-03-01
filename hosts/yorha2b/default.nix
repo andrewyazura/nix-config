@@ -30,7 +30,7 @@
 
     modules = {
       gnome.enable = true;
-      waybar.enable = true;
+      waybar.enable = false;
 
       sway = {
         enable = false;
