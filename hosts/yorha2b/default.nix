@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, pkgs, ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -81,6 +81,10 @@
     enable = true;
     enable32Bit = true;
   };
+
+  environment.systemPackages = with pkgs; [
+    blender
+  ];
 
   time.timeZone = "Europe/Warsaw";
 
