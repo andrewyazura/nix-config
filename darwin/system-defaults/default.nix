@@ -29,10 +29,15 @@ in
 
         dock = {
           autohide = true;
+          tilesize = 48; # default = 64
           orientation = "bottom";
-          show-recents = true;
+          show-recents = false;
+
+          # 1 = disabled
           wvous-bl-corner = 1;
           wvous-br-corner = 1;
+          wvous-tl-corner = 1;
+          wvous-tr-corner = 1;
         };
 
         finder = {
