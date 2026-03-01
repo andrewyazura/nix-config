@@ -156,5 +156,5 @@ in
 
   ask = bashCmds stateModifiers;
 
-  defaultMode = "ask";
+  defaultMode = "default";
 }
