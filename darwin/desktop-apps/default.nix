@@ -23,6 +23,8 @@ in
 
       "claude"
       "obsidian"
+
+      "ankerwork"
     ];
   };
 }
