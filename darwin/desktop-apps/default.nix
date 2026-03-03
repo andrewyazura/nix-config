@@ -10,21 +10,17 @@ in
 
   config = mkIf cfg.enable {
     homebrew.casks = [
+      "ankerwork"
       "bitwarden"
+      "claude"
       "firefox"
       "ghostty"
       "google-chrome"
-
+      "obsidian"
       "signal"
       "slack"
-      "telegram"
-
       "spotify"
-
-      "claude"
-      "obsidian"
-
-      "ankerwork"
+      "telegram"
     ];
   };
 }
