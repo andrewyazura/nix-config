@@ -5,7 +5,6 @@
     ./claude
     ./dev-packages
     ./direnv
-    ./firefox
     ./gemini
     ./ghostty
     ./git
