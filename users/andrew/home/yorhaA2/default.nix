@@ -8,6 +8,7 @@
     };
 
     ideavim.enable = true;
+    tmux.showBattery = true;
     theme.enable = false;
     work.enable = true;
 
