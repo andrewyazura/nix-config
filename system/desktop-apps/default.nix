@@ -19,15 +19,11 @@ in
       inputs.ghostty.packages.x86_64-linux.default
 
       google-chrome
-      firefox
-
-      discord
-      signal-desktop
-      vesktop
-
       obs-studio
       obsidian
+      signal-desktop
       spotify
+      vesktop
     ];
   };
 }

@@ -66,7 +66,6 @@ let
     "whoami"
   ];
 
-  # Safe read-only dev and git commands
   readOnlyDev = [
     "git status"
     "git diff*"

@@ -12,7 +12,6 @@ in
     homebrew.casks = [
       "ankerwork"
       "claude"
-      "firefox"
       "ghostty"
       "google-chrome"
       "obsidian"

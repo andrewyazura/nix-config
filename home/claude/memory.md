@@ -55,11 +55,3 @@ For multi-step tasks, state a brief plan:
 ```
 
 Strong success criteria let you loop independently. Weak criteria ("make it work") require constant clarification.
-
-## 5. Verification
-
-**Verification is the single highest-leverage thing you can do.**
-
-- Compile/build after each file change, run relevant tests after each logical unit
-- After implementation, use a subagent to review for edge cases and missed code paths
-- Do not commit changes unless explicitly asked — summarize what was done and let the user decide
