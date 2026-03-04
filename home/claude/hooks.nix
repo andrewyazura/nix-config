@@ -22,8 +22,23 @@ let
   postToolUseLog = pkgs.writeShellScript "claude-post-tool-log" ''
     input=$(cat)
     command=$(echo "$input" | ${pkgs.jq}/bin/jq -r '.tool_input.command // ""')
+    project=$(echo "$input" | ${pkgs.jq}/bin/jq -r '.cwd // ""' | ${pkgs.coreutils}/bin/basename)
     timestamp=$(${pkgs.coreutils}/bin/date -u +"%Y-%m-%dT%H:%M:%SZ")
-    echo "$timestamp $command" >> ~/.claude/bash-commands.log
+    echo "[$timestamp] [$project] [Bash] $command" >> ~/.claude/bash-commands.log
+  '';
+
+  permissionRequestLog = pkgs.writeShellScript "claude-permission-request-log" ''
+    input=$(cat)
+    tool=$(echo "$input" | ${pkgs.jq}/bin/jq -r '.tool_name // "unknown"')
+    detail=$(echo "$input" | ${pkgs.jq}/bin/jq -r '
+      if .tool_name == "Bash" then (.tool_input.command // "")
+      elif .tool_name == "Write" or .tool_name == "Edit" or .tool_name == "Read" then (.tool_input.file_path // "")
+      else (.tool_input | tostring | .[0:200])
+      end
+    ')
+    project=$(echo "$input" | ${pkgs.jq}/bin/jq -r '.cwd // ""' | ${pkgs.coreutils}/bin/basename)
+    timestamp=$(${pkgs.coreutils}/bin/date -u +"%Y-%m-%dT%H:%M:%SZ")
+    echo "[$timestamp] [$project] [$tool] $detail" >> ~/.claude/permission-requests.log
   '';
 in
 {
@@ -37,15 +52,17 @@ in
       ];
     }
   ];
-  PostToolUseFailure = [
-    {
-      matcher = "Bash";
-      hooks = [ (playSound "alarm.ogg") ];
-    }
-  ];
   PermissionRequest = [
     {
-      hooks = [ (playSound "alarm.ogg") ];
+      hooks = [
+        (playSound "alarm.ogg")
+        {
+          type = "command";
+          command = "${permissionRequestLog}";
+          timeout = 5;
+          async = true;
+        }
+      ];
     }
   ];
   Stop = [
