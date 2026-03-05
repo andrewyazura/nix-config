@@ -90,6 +90,7 @@ vim.lsp.enable("kotlin_ls")
 vim.lsp.config("kotlin_ls", {
 	cmd = { "/opt/homebrew/bin/kotlin-lsp", "--stdio" },
 	filetypes = { "kotlin" },
+	root_markers = { "settings.gradle.kts", "settings.gradle" },
 })
 
 -- Strip textDocument.version from workspace edits to work around kotlin-lsp
