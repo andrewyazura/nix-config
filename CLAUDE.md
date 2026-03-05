@@ -8,7 +8,7 @@ Nix flake-based configuration managing multiple NixOS systems and macOS using ni
 
 **Machines:**
 - `yorha2b`, `yorha9s` - NixOS desktops (x86_64-linux)
-- `bunker`, `proxmoxnix` - NixOS servers (x86_64-linux)
+- `bunker` - NixOS server (x86_64-linux)
 - `yorhaA2` - macOS (aarch64-darwin)
 
 ## Common Commands
@@ -158,6 +158,15 @@ mkHost = { hostname, system ? "x86_64-linux", specialArgs ? {} }:
 **Darwin systems** use `mkDarwinHost`:
 - Similar pattern but does NOT auto-import `./system`
 - Host config must manually import `../../darwin`
+- Includes `inputs.sops-nix.darwinModules.sops` (the darwin equivalent of the NixOS sops module)
+
+**Notable flake inputs** (beyond nixpkgs, home-manager, sops-nix):
+- `catppuccin` — theming flake, injected as a `sharedModule` in home-manager for both darwin and NixOS
+- `disko` — declarative disk partitioning, used in `hosts/bunker/disko-config.nix`
+- `nixos-hardware` — hardware profiles for NixOS machines
+- `nix-minecraft` — Minecraft server infrastructure for the bunker
+- `private-config` — private flake with additional modules and home-manager configs
+- `claude-code` — Claude Code package flake
 
 Configuration layers (both systems):
 1. **Flake helper** - injects `inputs` and `hostname` as `specialArgs` to all modules
@@ -226,10 +235,13 @@ Understanding how `inputs` and `hostname` become available in all modules:
    ```nix
    home-manager = {
      extraSpecialArgs = { inherit inputs hostname; };
-     sharedModules = [ inputs.sops-nix.homeManagerModules.sops ];
+     sharedModules = [
+       inputs.sops-nix.homeManagerModules.sops
+       inputs.catppuccin.homeModules.catppuccin
+     ];
    };
    ```
-   This passes `inputs` and `hostname` into home-manager modules. The `sharedModules` line means **sops-nix secrets are also available in home-manager modules**, not just system-level ones.
+   This passes `inputs` and `hostname` into home-manager modules. The `sharedModules` line means **sops-nix secrets and catppuccin theming are available in all home-manager modules**.
 
 3. **Result**: Every module can access:
    - `inputs.<flake-name>` - reference any flake input
@@ -250,6 +262,8 @@ Understanding how `inputs` and `hostname` become available in all modules:
 Defined in `.sops.yaml` with per-machine age keys:
 - `ssh-config` → personal machines (yorha2b, yorha9s, yorhaA2)
 - `andrewyazura.{crt,key}` → bunker only
+- `attic-env` → bunker only (Attic binary cache auth)
+- `netrc-<hostname>` → per-machine netrc files for private flake input authentication
 
 ## Adding New Machine
 
@@ -357,7 +371,7 @@ Modules with dedicated config (`home/<name>/`) are enabled via profiles or indiv
 
 **Desktop machines** add `profiles.{development, desktop, ai-tools}` in per-host overrides (`users/andrew/home/<hostname>/default.nix`).
 
-**Server machines** (bunker, proxmoxnix) receive only `profiles.base` — no desktop packages, no neovim, no development tools.
+**Server machines** (bunker) receive only `profiles.base` — no desktop packages, no neovim, no development tools.
 
 **Configured tools** (enabled via profiles or individually):
 - git, neovim, tmux, zsh, direnv, btop, yazi, ghostty, ssh, firefox, claude, gemini, spotify, theme, mcp, opencode
@@ -461,11 +475,12 @@ modules = {
 - Imports external flake (`nix-minecraft`) as base infrastructure
 
 **Claude Code** (`home/claude/`): Home-manager module configuring Claude Code via the `claude-code` flake input.
-- `default.nix` — installs package, wires settings (outputStyle, statusLine, env vars), and bridges MCP servers from `programs.mcp` into `programs.claude-code.mcpServers`
-- `permissions.nix` — three-tier allow/ask/deny permission model with helpers (`bashCmds`, `mcpTools`, `denyPaths`) for generating permission entries
-- `hooks.nix` — lifecycle sound effects using mpv (UserPromptSubmit, PostToolUseFailure, Stop, Notification, PermissionRequest)
+- `default.nix` — installs package, wires settings (outputStyle, statusLine, env vars, teammateMode, thinking, etc.), and bridges MCP servers from `programs.mcp` into `programs.claude-code.mcpServers`
+- `permissions.nix` — three-tier allow/ask/deny permission model with helpers (`bashCmds`, `bashCmdsWithArgs`, `mcpTools`, `denyPaths`) for generating permission entries
+- `hooks.nix` — lifecycle hooks: sound effects via mpv (UserPromptSubmit, PermissionRequest, Stop, Notification) + logging scripts (PermissionRequest logs to `~/.claude/permission-requests.log`, PostToolUse/Bash logs commands to `~/.claude/bash-commands.log`)
+- `statusline.nix` — custom status bar command showing model and context usage
 - `memory.md` — sourced as the global `~/.claude/CLAUDE.md` via `programs.claude-code.memory.source`
-- `skills/` — custom Claude Code skills (debug, analyzing-problems, reviewing-architecture, security-review)
+- `skills/` — custom Claude Code skills (grill, suggest-commits, tdd, techdebt). Additional project-level skills live in `.claude/skills/` (nix-module)
 - `sounds/` — OGG audio files played by hook commands
 
 **MCP Servers** (`home/mcp/`): Defines Model Context Protocol servers (context7, mongodb, sequential-thinking) via `programs.mcp`. Installs Node.js for npx execution. The claude module reads `config.programs.mcp.servers` and transforms entries into `programs.claude-code.mcpServers`, keeping server definitions decoupled from Claude Code config.
