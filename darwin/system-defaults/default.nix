@@ -64,8 +64,6 @@ in
 
         fn = "0xFF00000003";
         leftCtrl = "0x7000000E0";
-        leftOption = "0x7000000E2";
-        leftCommand = "0x7000000E3";
       in
       {
         KeyMappingsBuiltin = {
@@ -83,6 +81,8 @@ in
             ProgramArguments = [
               "/usr/bin/hidutil"
               "property"
+              "--matching"
+              ''{"Built-In": true}''
               "--set"
               ''
                 {"UserKeyMapping":[
@@ -104,40 +104,6 @@ in
                     {
                       "HIDKeyboardModifierMappingSrc": ${leftCtrl},
                       "HIDKeyboardModifierMappingDst": ${fn}
-                    }
-                ]}''
-            ];
-          };
-        };
-
-        KeyMappingsWooting = {
-          serviceConfig = {
-            Label = "com.local.KeyMappingsWooting";
-            RunAtLoad = true;
-            LaunchEvents = {
-              "com.apple.iokit.matching" = {
-                "com.apple.device-attach" = {
-                  "idVendor" = 12771;
-                };
-              };
-            };
-
-            ProgramArguments = [
-              "/usr/bin/hidutil"
-              "property"
-              "--matching"
-              ''{ "VendorID": 12771 }''
-              "--set"
-              ''
-                {"UserKeyMapping":[
-                    {
-                      "HIDKeyboardModifierMappingSrc": ${leftOption},
-                      "HIDKeyboardModifierMappingDst": ${leftCommand}
-                    },
-
-                    {
-                      "HIDKeyboardModifierMappingSrc": ${leftCommand},
-                      "HIDKeyboardModifierMappingDst": ${leftOption}
                     }
                 ]}''
             ];
