@@ -37,6 +37,7 @@ let
     "locate"
     "whereis"
     "which"
+    "command"
     "type"
     "ls"
     "tree"
@@ -53,6 +54,9 @@ let
     "uniq"
     "cut"
     "tr"
+    "tee"
+    "xargs"
+    "curl"
     "du"
     "df"
     "free"
@@ -64,40 +68,73 @@ let
     "date"
     "pwd"
     "whoami"
+    "python3"
+    "python"
+    "gpg"
   ];
 
   readOnlyDev = [
     "git status"
-    "git diff*"
-    "git log*"
-    "git show*"
-    "git branch*"
+    "git diff:*"
+    "git log:*"
+    "git show:*"
+    "git branch:*"
     "uv --version"
     "uv pip list"
     "uv pip freeze"
     "pip list"
-    "pip show *"
-    "npm list*"
-    "yarn list*"
+    "pip show:*"
+    "npm list:*"
+    "yarn list:*"
+  ];
+
+  readOnlyGh = [
+    "gh api:*"
+    "gh pr view:*"
+    "gh pr list:*"
+    "gh search prs:*"
+    "gh search issues:*"
+    "gh search commits:*"
+    "gh auth:*"
+  ];
+
+  readOnlyNix = [
+    "nix eval:*"
+    "nix build:*"
+    "nix flake show:*"
+    "nix flake metadata:*"
+    "nix flake check:*"
+    "nix fmt:*"
+    "nix derivation show:*"
+    "nix show-derivation:*"
+    "nix-instantiate:*"
+    "nix-store --query:*"
+    "nix-store -q:*"
+    "darwin-rebuild build:*"
+  ];
+
+  readOnlyPlatform = [
+    "brew info:*"
+    "launchctl list:*"
   ];
 
   stateModifiers = [
-    "pip install *"
-    "pip uninstall *"
-    "uv *"
-    "npm *"
-    "yarn *"
-    "pnpm *"
-    "git add *"
-    "git commit *"
-    "git push *"
-    "git stash *"
-    "nix *"
-    "nix-env *"
-    "nix-shell *"
-    "make *"
-    "cargo *"
-    "go *"
+    "pip install:*"
+    "pip uninstall:*"
+    "uv:*"
+    "npm:*"
+    "yarn:*"
+    "pnpm:*"
+    "git add:*"
+    "git commit:*"
+    "git push:*"
+    "git stash:*"
+    "nix:*"
+    "nix-env:*"
+    "nix-shell:*"
+    "make:*"
+    "cargo:*"
+    "go:*"
   ];
 
   denyPaths =
@@ -109,7 +146,7 @@ let
     ]) paths;
 
   bashCmds = cmds: map (cmd: "Bash(${cmd})") cmds;
-  bashCmdsWithArgs = cmds: map (cmd: "Bash(${cmd} *)") cmds;
+  bashCmdsWithArgs = cmds: map (cmd: "Bash(${cmd}:*)") cmds;
   mcpTools = tools: map (tool: "mcp__${tool}") tools;
 in
 {
@@ -127,6 +164,9 @@ in
   ]
   ++ bashCmdsWithArgs readOnlyUtils
   ++ bashCmds readOnlyDev
+  ++ bashCmds readOnlyGh
+  ++ bashCmds readOnlyNix
+  ++ bashCmds readOnlyPlatform
   ++ mcpTools [
     "context7__*"
     "memory__*"
