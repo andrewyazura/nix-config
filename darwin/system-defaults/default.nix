@@ -138,11 +138,6 @@ in
                     {
                       "HIDKeyboardModifierMappingSrc": ${leftCommand},
                       "HIDKeyboardModifierMappingDst": ${leftOption}
-                    },
-
-                    {
-                      "HIDKeyboardModifierMappingSrc": ${leftCtrl},
-                      "HIDKeyboardModifierMappingDst": ${leftCtrl}
                     }
                 ]}''
             ];
