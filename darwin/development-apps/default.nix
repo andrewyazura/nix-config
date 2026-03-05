@@ -18,7 +18,6 @@ in
       brews = [ "jetbrains/utils/kotlin-lsp" ];
 
       casks = [
-        "claude-devtools"
         "intellij-idea"
         "zed"
       ];

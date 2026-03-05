@@ -11,7 +11,6 @@ in
   config = mkIf cfg.enable {
     homebrew.casks = [
       "ankerwork"
-      "claude"
       "ghostty"
       "google-chrome"
       "obsidian"
