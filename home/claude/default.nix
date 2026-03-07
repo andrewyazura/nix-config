@@ -9,7 +9,7 @@ with lib;
 let
   cfg = config.modules.claude;
   system = pkgs.stdenv.hostPlatform.system;
-  claude-package = inputs.claude-code.packages.${system}.default;
+  claude-package = inputs.llm-agents.packages.${system}.claude-code;
 
   hooks = import ./hooks.nix { inherit lib pkgs; };
   permissions = import ./permissions.nix { inherit lib; };
