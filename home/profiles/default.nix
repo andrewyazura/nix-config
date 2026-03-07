@@ -48,6 +48,7 @@ in
     (mkIf cfg.ai-tools.enable {
       modules = {
         claude.enable = mkDefault true;
+        gemini.enable = mkDefault true;
         mcp.enable = mkDefault true;
         opencode.enable = mkDefault true;
       };
