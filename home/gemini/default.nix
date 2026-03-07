@@ -2,34 +2,16 @@
   lib,
   config,
   pkgs,
+  inputs,
   ...
 }:
 with lib;
 let
   cfg = config.modules.gemini;
+  system = pkgs.stdenv.hostPlatform.system;
+  gemini-package = inputs.llm-agents.packages.${system}.gemini-cli;
 
-  # Define the settings structure matching the CLI's expectation
-  geminiSettings = {
-    tools = {
-      autoAccept = true;
-    };
-    general = {
-      preferredEditor = "nvim";
-      vimMode = true;
-      previewFeatures = true;
-    };
-    security = {
-      auth = {
-        selectedType = "gemini-api-key";
-      };
-    };
-    ui = {
-      theme = "Default";
-    };
-  };
-
-  # Generate the JSON file in the Nix store
-  geminiSettingsFile = pkgs.writeText "gemini-settings.json" (builtins.toJSON geminiSettings);
+  mcpCfg = config.programs.mcp;
 in
 {
   options.modules.gemini = {
@@ -39,18 +21,50 @@ in
   config = mkIf cfg.enable {
     programs.gemini-cli = {
       enable = true;
-      # We manage the settings file manually to avoid symlink conflicts
-      settings = { };
+      package = gemini-package;
+
+      settings = {
+        # Vim keybindings in the input field
+        vimMode = false;
+
+        # How to handle tool execution approvals (default, always, never)
+        defaultApprovalMode = "default";
+
+        # Automatically check for updates on startup
+        enableAutoUpdate = true;
+
+        # Max context turns to retain in the session
+        maxSessionTurns = -1;
+
+        # Threshold to trigger context compression (0.0 - 1.0)
+        compressionThreshold = 0.5;
+
+        # Output format (text, json)
+        outputFormat = "text";
+
+        # Show line numbers in code blocks
+        showLineNumbers = true;
+
+        # Honor .gitignore patterns in file picker and search
+        respectGitignore = true;
+
+        # Use ripgrep for searching if available
+        useRipgrep = true;
+
+        # Enable agent skills
+        enableSkills = true;
+
+        mcpServers = mkIf mcpCfg.enable (
+          mapAttrs (
+            name: server:
+            {
+              command = server.command;
+              args = server.args or [ ];
+            }
+            // optionalAttrs (server ? env) { env = server.env; }
+          ) mcpCfg.servers
+        );
+      };
     };
-
-    # Disable the module's automatic file generation (assuming it uses this path)
-    home.file.".gemini/settings.json".enable = false;
-
-    # Activation script to copy the config file
-    home.activation.configureGemini = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      $DRY_RUN_CMD mkdir -p $HOME/.gemini
-      $DRY_RUN_CMD cp -f ${geminiSettingsFile} $HOME/.gemini/settings.json
-      $DRY_RUN_CMD chmod 644 $HOME/.gemini/settings.json
-    '';
   };
 }
