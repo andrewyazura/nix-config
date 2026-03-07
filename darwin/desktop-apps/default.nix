@@ -18,6 +18,7 @@ in
       "slack"
       "spotify"
       "telegram"
+      "vesktop"
     ];
   };
 }
