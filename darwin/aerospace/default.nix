@@ -86,5 +86,19 @@ in
           };
       };
     };
+
+    system = {
+      defaults = {
+        CustomUserPreferences = {
+          "com.apple.dock" = {
+            "workspaces-auto-swoosh" = false;
+          };
+        };
+
+        dock = {
+          mru-spaces = false;
+        };
+      };
+    };
   };
 }
