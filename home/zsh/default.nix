@@ -26,6 +26,15 @@ in
 
       shellAliases = {
         ll = "ls -ahl --group-directories-first";
+
+        ga = "git add";
+        gcm = "git commit";
+        gpl = "git pull";
+        gplr = "git pull --rebase";
+        gplra = "git pull --rebase --autostash";
+        gps = "git push";
+        grb = "git rebase";
+        gst = "git status";
         gw = "git worktree";
       };
     };
