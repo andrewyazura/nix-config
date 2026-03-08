@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 with lib;
 let
   cfg = config.modules.git;
@@ -9,6 +14,8 @@ in
   };
 
   config = mkIf cfg.enable {
+    home.packages = [ pkgs.difftastic ];
+
     programs.git = {
       enable = true;
       lfs.enable = true;

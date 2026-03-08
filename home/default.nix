@@ -4,6 +4,7 @@
     ./btop
     ./claude
     ./dev-packages
+    ./difftastic
     ./direnv
     ./gemini
     ./ghostty

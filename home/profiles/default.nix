@@ -31,6 +31,7 @@ in
     (mkIf cfg.development.enable {
       modules = {
         dev-packages.enable = mkDefault true;
+        difftastic.enable = mkDefault true;
         lazygit.enable = mkDefault true;
         neovim.enable = mkDefault true;
       };

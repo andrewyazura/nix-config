@@ -18,6 +18,15 @@ in
     programs.lazygit = {
       enable = true;
       enableZshIntegration = true;
+      settings = {
+        git = {
+          pagers = [
+            {
+              externalDiffCommand = "difft --color=always";
+            }
+          ];
+        };
+      };
     };
   };
 }
