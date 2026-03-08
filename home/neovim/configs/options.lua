@@ -1,3 +1,16 @@
+local ukrainian_langmap = table.concat({
+	-- Lowercase
+	"йq,цw,уe,кr,еt,нy,гu,шi,щo,зp,х[,ї],",
+	"фa,іs,вd,аf,пg,рh,оj,лk,дl,ж\\;,є',",
+	"яz,чx,сc,мv,иb,тn,ьm,б\\,,ю.,",
+
+	-- Uppercase
+	"ЙQ,ЦW,УE,КR,ЕT,НY,ГU,ШI,ЩO,ЗP,Х{,Ї},",
+	'ФA,ІS,ВD,АF,ПG,РH,ОJ,ЛK,ДL,Ж:,Є",',
+	"ЯZ,ЧX,СC,МV,ИB,ТN,ЬM,Б<,Ю>",
+})
+
+vim.opt.langmap = ukrainian_langmap
 vim.g.mapleader = " "
 vim.g.maplocalleader = ""
 

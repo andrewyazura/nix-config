@@ -75,6 +75,18 @@ in
         set -g status-left-length 150
         set -g status-right-length 150
 
+        bind р select-pane -L # h
+        bind о select-pane -L # j
+        bind л select-pane -U # k
+        bind д select-pane -R # l
+
+        bind Ж command-prompt # ;
+        bind в detach-client # d
+        bind з previous-window # p
+        bind с new-window # c
+        bind т next-window # n
+        bind і choose-tree -Zs # s
+
         unbind C-b
         set -g prefix C-Space
         bind C-Space send-prefix
