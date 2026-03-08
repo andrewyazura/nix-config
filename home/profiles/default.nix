@@ -30,8 +30,9 @@ in
 
     (mkIf cfg.development.enable {
       modules = {
-        neovim.enable = mkDefault true;
         dev-packages.enable = mkDefault true;
+        lazygit.enable = mkDefault true;
+        neovim.enable = mkDefault true;
       };
     })
 

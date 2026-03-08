@@ -11,6 +11,7 @@
     ./gnome
     ./i3
     ./ideavim
+    ./lazygit
     ./mcp
     ./media-packages
     ./neovim
