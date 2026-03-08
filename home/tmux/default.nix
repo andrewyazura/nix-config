@@ -53,7 +53,12 @@ in
               set -agF status-right "#{E:@catppuccin_status_cpu}"
             '';
           }
-          resurrect
+          {
+            plugin = resurrect;
+            extraConfig = ''
+              set -g @resurrect-processes '~nvim ~lazygit'
+            '';
+          }
         ]
         ++ optional cfg.showBattery {
           plugin = battery;
