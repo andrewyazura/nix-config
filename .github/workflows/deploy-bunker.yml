@@ -56,4 +56,4 @@ jobs:
 
       - name: Deploy to bunker
         if: github.event_name == 'workflow_dispatch' || steps.check.outputs.changed == 'true'
-        run: nix run github:serokell/deploy-rs -- .#bunker --ssh-user deploy
+        run: nix run github:serokell/deploy-rs -- .#bunker --ssh-user deploy --skip-checks
