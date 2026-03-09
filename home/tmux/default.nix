@@ -7,6 +7,7 @@
 with lib;
 let
   cfg = config.modules.tmux;
+  catppuccinFlavor = config.catppuccin.flavor;
 in
 {
   options.modules.tmux = {
@@ -30,7 +31,7 @@ in
           {
             plugin = catppuccin;
             extraConfig = ''
-              set -g @catppuccin_flavor "mocha"
+              set -g @catppuccin_flavor "${catppuccinFlavor}"
               set -g @catppuccin_window_status_style "basic"
 
               set -g @catppuccin_window_number "#I"
@@ -53,12 +54,7 @@ in
               set -agF status-right "#{E:@catppuccin_status_cpu}"
             '';
           }
-          {
-            plugin = resurrect;
-            extraConfig = ''
-              set -g @resurrect-processes '~nvim ~lazygit'
-            '';
-          }
+          resurrect
         ]
         ++ optional cfg.showBattery {
           plugin = battery;

@@ -1,57 +1,72 @@
 {
   lib,
   config,
+  pkgs,
   ...
 }:
 with lib;
 let
   cfg = config.modules.theme;
+  isLight = cfg.flavor == "latte";
 in
 {
   options.modules.theme = {
-    enable = mkEnableOption "Enable global Catppuccin Mocha dark theme";
-  };
+    enable = mkEnableOption "Enable global Catppuccin theme";
 
-  config = mkIf cfg.enable {
-    # Set flavor and accent globally so catppuccin submodules inherit them.
-    # Do NOT set catppuccin.enable — it would auto-theme every supported
-    # program (btop, tmux, ghostty, etc.), overriding their existing configs.
-    catppuccin = {
-      flavor = "mocha";
-      accent = "mauve";
-    };
-
-    catppuccin.kvantum.enable = true;
-    catppuccin.cursors.enable = true;
-
-    gtk = {
-      enable = true;
-      gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
-      gtk4.extraConfig.gtk-application-prefer-dark-theme = 1;
-    };
-
-    qt = {
-      enable = true;
-      platformTheme.name = "kvantum";
-      style.name = "kvantum";
-    };
-
-    dconf = {
-      enable = true;
-      settings."org/gnome/desktop/interface" = {
-        color-scheme = "prefer-dark";
-      };
-    };
-
-    services.xsettingsd = {
-      enable = true;
-      settings = {
-        "Net/ThemeName" = "Adwaita-dark";
-        "Xft/Antialias" = true;
-        "Xft/Hinting" = true;
-        "Xft/HintStyle" = "hintslight";
-        "Xft/RGBA" = "rgb";
-      };
+    flavor = mkOption {
+      type = types.enum [
+        "latte"
+        "frappe"
+        "macchiato"
+        "mocha"
+      ];
+      default = "mocha";
+      description = "Catppuccin flavor (latte = light, others = dark)";
     };
   };
+
+  config = mkIf cfg.enable (mkMerge [
+    {
+      catppuccin = {
+        enable = true;
+        flavor = cfg.flavor;
+        accent = "mauve";
+
+        gemini-cli.enable = false; # conflicts with ~/.gemini/settings.json
+        tmux.enable = false; # configured in tmux module
+      };
+    }
+
+    (mkIf pkgs.stdenv.isLinux {
+      gtk = {
+        enable = true;
+        gtk3.extraConfig.gtk-application-prefer-dark-theme = if isLight then 0 else 1;
+        gtk4.extraConfig.gtk-application-prefer-dark-theme = if isLight then 0 else 1;
+      };
+
+      qt = {
+        enable = true;
+        platformTheme.name = "kvantum";
+        style.name = "kvantum";
+      };
+
+      dconf = {
+        enable = true;
+        settings."org/gnome/desktop/interface" = {
+          color-scheme = if isLight then "prefer-light" else "prefer-dark";
+        };
+      };
+
+      services.xsettingsd = {
+        enable = true;
+        settings = {
+          "Net/ThemeName" = if isLight then "Adwaita" else "Adwaita-dark";
+          "Xft/Antialias" = true;
+          "Xft/Hinting" = true;
+          "Xft/HintStyle" = "hintslight";
+          "Xft/RGBA" = "rgb";
+        };
+      };
+    })
+  ]);
 }

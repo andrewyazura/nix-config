@@ -9,8 +9,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    catppuccin.btop.enable = true;
-
     programs.btop = {
       enable = true;
       settings = {

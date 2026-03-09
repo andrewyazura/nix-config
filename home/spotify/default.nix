@@ -15,10 +15,6 @@ in
   config = mkIf cfg.enable {
     programs.spotify-player = {
       enable = true;
-      themes = import ./themes.nix;
-      settings = {
-        theme = "Catppuccin-mocha";
-      };
     };
   };
 }

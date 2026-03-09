@@ -9,9 +9,9 @@
 
     ideavim.enable = true;
     tmux.showBattery = true;
-    theme.enable = false;
     work.enable = true;
 
+    theme.flavor = "latte";
     neovim.vaultPath = "~/Documents/notes";
   };
   home.stateVersion = "25.05";

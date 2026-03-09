@@ -37,7 +37,7 @@ in
 
     backgroundOpacity = mkOption {
       type = types.float;
-      default = 1.0;
+      default = 0.98;
       description = "Ghostty background opacity";
     };
   };
@@ -57,7 +57,6 @@ in
           "ssh-terminfo"
           "ssh-env"
         ];
-        theme = "light:Catppuccin Latte,dark:Catppuccin Mocha";
         window-decoration = "server";
       };
     };
