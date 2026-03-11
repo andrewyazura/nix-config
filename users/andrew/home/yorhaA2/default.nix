@@ -11,7 +11,7 @@
     tmux.showBattery = true;
     work.enable = true;
 
-    theme.flavor = "latte";
+    theme.flavor = "mocha";
     neovim.vaultPath = "~/Documents/notes";
   };
   home.stateVersion = "25.05";
