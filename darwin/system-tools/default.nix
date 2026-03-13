@@ -15,7 +15,6 @@ in
       {
         name = "mos";
         args = {
-          # Suppress quarantine warning for this app
           no_quarantine = true;
         };
       }

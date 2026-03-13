@@ -18,6 +18,8 @@ in
       brews = [ "jetbrains/utils/kotlin-lsp" ];
 
       casks = [
+        "bruno"
+        "headlamp" # xattr -dr com.apple.quarantine /Applications/Headlamp.app
         "intellij-idea"
         "zed"
       ];
