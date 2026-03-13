@@ -9,6 +9,8 @@ in
   };
 
   config = mkIf cfg.enable {
+    catppuccin.zsh-syntax-highlighting.enable = false;
+
     programs.zsh = {
       enable = true;
       enableCompletion = true;
