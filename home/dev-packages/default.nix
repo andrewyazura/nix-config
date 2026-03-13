@@ -18,6 +18,7 @@ in
       fd
       gh
       jq
+      k9s
       ripgrep
       tree-sitter
       vi-mongo
