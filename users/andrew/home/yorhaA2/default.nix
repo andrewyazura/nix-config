@@ -46,6 +46,7 @@
     zsh = {
       shellAliases = {
         copy = "pbcopy";
+        paste = "pbpaste";
         ls = "ls --color=auto";
       };
       initContent = ''

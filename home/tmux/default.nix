@@ -16,6 +16,8 @@ in
   };
 
   config = mkIf cfg.enable {
+    home.packages = with pkgs; [ jq ];
+
     programs.tmux = {
       enable = true;
       clock24 = true;
@@ -87,6 +89,8 @@ in
         bind с new-window # c
         bind т next-window # n
         bind і choose-tree -Zs # s
+
+        bind U run-shell "${pkgs.zsh}/bin/zsh -ic 'paste | jq -r . | copy'"
 
         unbind C-b
         set -g prefix C-Space

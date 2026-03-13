@@ -36,7 +36,8 @@
 
     zsh = {
       shellAliases = {
-        copy = "xclip -selection clipboard";
+        copy = "xclip -i -selection clipboard";
+        paste = "xclip -o -selection clipboard";
       };
     };
   };

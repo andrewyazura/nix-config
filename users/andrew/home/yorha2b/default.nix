@@ -37,6 +37,7 @@
     zsh = {
       shellAliases = {
         copy = "wl-copy";
+        paste = "wl-paste";
       };
     };
   };
