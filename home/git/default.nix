@@ -19,6 +19,7 @@ in
     programs.git = {
       enable = true;
       lfs.enable = true;
+      settings.pull.rebase = true;
 
       signing = {
         key = "970E41F6C58CCA2A";
