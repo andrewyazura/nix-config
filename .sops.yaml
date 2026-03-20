@@ -25,6 +25,12 @@ creation_rules:
       - *bunker
     format: binary
 
+  - path_regex: secrets/beammp-env
+    key_groups:
+    - age:
+      - *bunker
+    format: dotenv
+
   - path_regex: secrets/netrc-bunker
     key_groups:
     - age:
