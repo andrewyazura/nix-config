@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 with lib;
 let
   cfg = config.modules.gnome;
@@ -9,8 +14,20 @@ in
   };
 
   config = mkIf cfg.enable {
-    dconf.settings."org/gnome/desktop/wm/keybindings" = {
-      minimize = [ ];
+    dconf = {
+      enable = true;
+      settings = {
+        "org/gnome/shell" = {
+          disable-user-extensions = false;
+          enabled-extensions = with pkgs.gnomeExtensions; [
+            pop-shell.extensionUuid
+          ];
+        };
+
+        "org/gnome/desktop/wm/keybindings" = {
+          minimize = [ ];
+        };
+      };
     };
   };
 }

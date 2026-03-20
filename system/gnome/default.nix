@@ -23,11 +23,8 @@ in
       };
     };
 
-    environment = {
-      systemPackages = with pkgs; [
-        dconf
-        gnomeExtensions.pop-shell
-      ];
-    };
+    environment.systemPackages = with pkgs.gnomeExtensions; [
+      pop-shell
+    ];
   };
 }
