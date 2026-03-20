@@ -19,7 +19,6 @@
     ./opencode
     ./polybar
     ./profiles
-    ./spotify
     ./ssh
     ./sway
     ./theme
