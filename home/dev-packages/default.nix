@@ -15,11 +15,8 @@ in
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      fd
       gh
-      jq
       k9s
-      ripgrep
       tree-sitter
       vi-mongo
     ];

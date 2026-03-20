@@ -16,11 +16,15 @@ in
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       age
+      duf
       fastfetch
+      fd
       git-lfs
       htop
+      jq
       ncdu
       ntfs3g
+      ripgrep
       sops
       tree
       unzip
