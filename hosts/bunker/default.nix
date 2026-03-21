@@ -104,6 +104,11 @@
         format = "binary";
       };
 
+      beammp-env = {
+        sopsFile = ../../secrets/beammp-env;
+        format = "binary";
+      };
+
       netrc = {
         sopsFile = ../../secrets/netrc-bunker;
         format = "binary";
