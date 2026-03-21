@@ -12,33 +12,29 @@ in
 {
   imports = [ inputs.nix-minecraft.nixosModules.minecraft-servers ];
 
-  options.modules.minecraft-server = {
+  options.modules.minecraft-server = with types; {
     enable = mkEnableOption "Enable Minecraft server configuration";
 
     servers = mkOption {
-      type = types.attrsOf (
-        types.submodule ({
-          options = {
-            jvmOpts = mkOption {
-              type = types.nullOr types.str;
-              default = null;
-              description = "JVM options for the server";
-            };
-
-            serverProperties = mkOption {
-              type =
-                with types;
-                attrsOf (oneOf [
-                  bool
-                  int
-                  str
-                ]);
-              default = { };
-              description = "Propeties for the server.properties file";
-            };
+      type = attrsOf (submodule ({
+        options = {
+          jvmOpts = mkOption {
+            type = nullOr str;
+            default = null;
+            description = "JVM options for the server";
           };
-        })
-      );
+
+          serverProperties = mkOption {
+            type = attrsOf (oneOf [
+              bool
+              int
+              str
+            ]);
+            default = { };
+            description = "Propeties for the server.properties file";
+          };
+        };
+      }));
 
       default = { };
       description = "Per-server configuration overrides";
