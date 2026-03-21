@@ -30,6 +30,10 @@ in
         "${toString v.port}:${toString v.port}/tcp"
         "${toString v.port}:${toString v.port}/udp"
       ];
+      extraOptions = [
+        "--tty"
+        "--interactive"
+      ];
       volumes = [
         "/var/lib/beammp/${name}/client-mods:/beammp/Resources/Client"
         "/var/lib/beammp/${name}/server-mods:/beammp/Resources/Server"
