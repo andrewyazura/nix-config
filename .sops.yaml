@@ -25,7 +25,7 @@ creation_rules:
       - *bunker
     format: binary
 
-  - path_regex: secrets/beammp-env
+  - path_regex: secrets/beammp-akina-env
     key_groups:
     - age:
       - *bunker

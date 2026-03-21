@@ -1,6 +1,7 @@
 {
   imports = [
     ./audio
+    ./beammp-server
     ./desktop-apps
     ./development-apps
     ./fonts

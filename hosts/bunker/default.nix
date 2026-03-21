@@ -1,6 +1,7 @@
 {
-  lib,
+  config,
   inputs,
+  lib,
   pkgs,
   ...
 }:
@@ -21,6 +22,17 @@
   ];
 
   modules = {
+    beammp-server = {
+      enable = true;
+
+      servers = {
+        akina = {
+          port = 3814;
+          environmentFiles = [ config.sops.secrets.beammp-akina-env.path ];
+        };
+      };
+    };
+
     minecraft-server = {
       enable = true;
 
@@ -104,8 +116,8 @@
         format = "binary";
       };
 
-      beammp-env = {
-        sopsFile = ../../secrets/beammp-env;
+      beammp-akina-env = {
+        sopsFile = ../../secrets/beammp-akina-env;
         format = "binary";
       };
 
