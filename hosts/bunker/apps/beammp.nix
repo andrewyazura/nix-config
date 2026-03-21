@@ -6,6 +6,10 @@
       "3814:3814/tcp"
       "3814:3814/udp"
     ];
+    volumes = [
+      "/var/lib/beammp-server/client-mods:/beammp/Resources/Client"
+      "/var/lib/beammp-server/server-mods:/beammp/Resources/Server"
+    ];
     environmentFiles = [ config.sops.secrets.beammp-env.path ];
   };
 
