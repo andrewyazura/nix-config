@@ -30,13 +30,11 @@ in
         ll = "ls -ahl --group-directories-first";
 
         ga = "git add";
-        gcm = "git commit";
-        gpl = "git pull";
-        gplr = "git pull --rebase";
-        gplra = "git pull --rebase --autostash";
-        gps = "git push";
-        grb = "git rebase";
-        gst = "git status";
+        gc = "git commit";
+        gp = "git pull";
+        gP = "git push";
+        gr = "git rebase";
+        gs = "git status";
         gw = "git worktree";
       };
     };
