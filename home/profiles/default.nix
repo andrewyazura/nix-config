@@ -25,6 +25,7 @@ in
         ssh.enable = mkDefault true;
         tmux.enable = mkDefault true;
         zsh.enable = mkDefault true;
+        yazi.enable = mkDefault true;
       };
     })
 
@@ -42,7 +43,6 @@ in
         ghostty.enable = mkDefault true;
         media-packages.enable = mkDefault true;
         theme.enable = mkDefault true;
-        yazi.enable = mkDefault true;
       };
     })
 
