@@ -11,14 +11,15 @@ in
   config = mkIf cfg.enable {
     homebrew.casks = [
       "ankerwork"
+      "discord"
       "ghostty"
       "google-chrome"
       "obsidian"
       "signal"
       "slack"
+      "sol"
       "spotify"
       "telegram"
-      "vesktop"
     ];
   };
 }

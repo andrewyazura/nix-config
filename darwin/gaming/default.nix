@@ -10,8 +10,8 @@ in
 
   config = mkIf cfg.enable {
     homebrew.casks = [
-      "steam"
       "prismlauncher"
+      "steam"
     ];
   };
 }
