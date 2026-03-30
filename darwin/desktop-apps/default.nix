@@ -14,12 +14,11 @@ in
       "discord"
       "ghostty"
       "google-chrome"
+      "obs"
       "obsidian"
       "signal"
       "slack"
-      "sol"
       "spotify"
-      "telegram"
     ];
   };
 }
