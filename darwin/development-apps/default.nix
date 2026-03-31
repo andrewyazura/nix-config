@@ -22,7 +22,12 @@ in
         "dbeaver-community"
         "headlamp" # xattr -dr com.apple.quarantine /Applications/Headlamp.app
         "intellij-idea"
-        "xcodes"
+        "lens"
+        "mongodb-compass"
+        "pritunl"
+        "proxyman"
+        "tuple"
+        "xcodes-app"
         "zed"
       ];
     };

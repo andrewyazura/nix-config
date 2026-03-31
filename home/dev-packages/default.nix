@@ -15,8 +15,13 @@ in
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
+      awscli2
+      colima
+      docker
+      docker-compose
       gh
       k9s
+      kubectl
       tree-sitter
       vi-mongo
     ];

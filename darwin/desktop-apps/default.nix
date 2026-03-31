@@ -10,6 +10,7 @@ in
 
   config = mkIf cfg.enable {
     homebrew.casks = [
+      "1password"
       "ankerwork"
       "discord"
       "ghostty"
