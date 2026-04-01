@@ -11,13 +11,6 @@ in
   config = mkIf cfg.enable {
     homebrew.casks = [
       "focusrite-control-2"
-
-      {
-        name = "mos";
-        args = {
-          no_quarantine = true;
-        };
-      }
     ];
   };
 }
