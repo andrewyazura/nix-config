@@ -10,6 +10,7 @@ in
 
   config = mkIf cfg.enable {
     homebrew.casks = [
+      "Sikarugir-App/sikarugir/sikarugir"
       "prismlauncher"
       "steam"
     ];
