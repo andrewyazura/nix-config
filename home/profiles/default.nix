@@ -52,6 +52,7 @@ in
         gemini.enable = mkDefault true;
         mcp.enable = mkDefault true;
         opencode.enable = mkDefault true;
+        pi.enable = mkDefault true;
       };
     })
   ];

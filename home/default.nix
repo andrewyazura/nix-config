@@ -17,6 +17,7 @@
     ./media-packages
     ./neovim
     ./opencode
+    ./pi
     ./polybar
     ./profiles
     ./ssh
