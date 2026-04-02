@@ -69,6 +69,9 @@ in
         set -g default-command "${pkgs.zsh}/bin/zsh --login"
         set -g default-shell "${pkgs.zsh}/bin/zsh"
 
+        set -g extended-keys on
+        set -g extended-keys-format csi-u
+
         set -g default-terminal "tmux-256color"
         set -ag terminal-overrides ",xterm-256color:RGB"
 
