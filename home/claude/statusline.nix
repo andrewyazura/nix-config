@@ -1,20 +1,125 @@
-{ pkgs }:
-pkgs.writeShellScript "claude-statusline" ''
-  input=$(cat)
+{ lib, pkgs }:
+let
+  settings = {
+    version = 3;
+    lines = [
+      # Line 1: model, context, session timer, cost
+      [
+        {
+          id = "1";
+          type = "model";
+          color = "cyan";
+        }
+        {
+          id = "2";
+          type = "separator";
+        }
+        {
+          id = "3";
+          type = "context-bar";
+          color = "brightBlack";
+        }
+        {
+          id = "4";
+          type = "separator";
+        }
+        {
+          id = "5";
+          type = "context-percentage";
+          color = "brightBlack";
+        }
+        {
+          id = "6";
+          type = "separator";
+        }
+        {
+          id = "7";
+          type = "session-clock";
+          color = "blue";
+        }
+        {
+          id = "8";
+          type = "separator";
+        }
+        {
+          id = "9";
+          type = "session-cost";
+          color = "green";
+        }
+      ]
 
-  MODEL=$(echo "$input" | ${pkgs.jq}/bin/jq -r '.model.display_name // "?"')
-  PCT=$(echo "$input" | ${pkgs.jq}/bin/jq -r '.context_window.used_percentage // 0' | cut -d. -f1)
-  DURATION_MS=$(echo "$input" | ${pkgs.jq}/bin/jq -r '.cost.total_duration_ms // 0')
+      # Line 2: token breakdown, git info
+      [
+        {
+          id = "10";
+          type = "tokens-input";
+          color = "brightBlack";
+        }
+        {
+          id = "11";
+          type = "separator";
+        }
+        {
+          id = "12";
+          type = "tokens-output";
+          color = "brightBlack";
+        }
+        {
+          id = "13";
+          type = "separator";
+        }
+        {
+          id = "14";
+          type = "tokens-cached";
+          color = "brightBlack";
+        }
+        {
+          id = "15";
+          type = "separator";
+        }
+        {
+          id = "16";
+          type = "git-branch";
+          color = "magenta";
+        }
+        {
+          id = "17";
+          type = "separator";
+        }
+        {
+          id = "18";
+          type = "git-changes";
+          color = "yellow";
+        }
+      ]
 
-  BAR_WIDTH=10
-  FILLED=$((PCT * BAR_WIDTH / 100))
-  EMPTY=$((BAR_WIDTH - FILLED))
-  BAR=""
-  [ "$FILLED" -gt 0 ] && BAR=$(printf "%''${FILLED}s" | tr ' ' '=')
-  [ "$EMPTY" -gt 0 ] && BAR="''${BAR}$(printf "%''${EMPTY}s" | tr ' ' '-')"
-  DURATION_SEC=$((DURATION_MS / 1000))
-  MINS=$((DURATION_SEC / 60))
-  SECS=$((DURATION_SEC % 60))
+      # Line 3: unused
+      [ ]
+    ];
+    flexMode = "full-minus-40";
+    compactThreshold = 60;
+    colorLevel = 2;
+    inheritSeparatorColors = false;
+    globalBold = false;
+    powerline = {
+      enabled = false;
+      separators = [ "" ];
+      separatorInvertBackground = [ false ];
+      startCaps = [ ];
+      endCaps = [ ];
+      autoAlign = false;
+    };
+  };
 
-  echo "[$MODEL] [$BAR] [''${PCT}%] [''${MINS}m ''${SECS}s]"
-''
+  settingsFile = pkgs.writeText "ccstatusline-settings.json" (builtins.toJSON settings);
+in
+{
+  configFile = {
+    "ccstatusline/settings.json" = {
+      source = settingsFile;
+      force = true;
+    };
+  };
+
+  command = "ccstatusline";
+}

@@ -13,7 +13,7 @@ let
 
   hooks = import ./hooks.nix { inherit lib pkgs; };
   permissions = import ./permissions.nix { inherit lib; };
-  statusline = import ./statusline.nix { inherit pkgs; };
+  statusline = import ./statusline.nix { inherit lib pkgs; };
 
 in
 {
@@ -26,6 +26,8 @@ in
       ccstatusline
       ccusage
     ];
+
+    xdg.configFile = statusline.configFile;
 
     programs.claude-code = {
       enable = true;
@@ -72,7 +74,7 @@ in
         # https://code.claude.com/docs/en/statusline
         statusLine = {
           type = "command";
-          command = "${statusline}";
+          command = statusline.command;
         };
 
         inherit hooks;
