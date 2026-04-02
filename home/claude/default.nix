@@ -9,13 +9,12 @@ with lib;
 let
   cfg = config.modules.claude;
   system = pkgs.stdenv.hostPlatform.system;
-  claude-package = inputs.llm-agents.packages.${system}.claude-code;
+  llm-agents = inputs.llm-agents.packages.${system};
 
   hooks = import ./hooks.nix { inherit lib pkgs; };
   permissions = import ./permissions.nix { inherit lib; };
   statusline = import ./statusline.nix { inherit pkgs; };
 
-  mcpCfg = config.programs.mcp;
 in
 {
   options.modules.claude = {
@@ -23,9 +22,15 @@ in
   };
 
   config = mkIf cfg.enable {
+    home.packages = with llm-agents; [
+      ccstatusline
+      ccusage
+    ];
+
     programs.claude-code = {
       enable = true;
-      package = claude-package;
+      package = llm-agents.claude-code;
+      enableMcpIntegration = true;
       memory.source = ./memory.md;
       skillsDir = ./skills;
 
@@ -103,23 +108,8 @@ in
           # MCP server startup timeout in ms (default: 10000)
           # https://code.claude.com/docs/en/mcp
           MCP_TIMEOUT = 30000;
-
-          # Enable experimental agent teams (multiple parallel Claude sessions)
-          # https://code.claude.com/docs/en/agent-teams
-          CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS = 1;
         };
       };
-
-      mcpServers = mkIf mcpCfg.enable (
-        mapAttrs (
-          name: server:
-          {
-            command = server.command;
-            args = server.args or [ ];
-          }
-          // optionalAttrs (server ? env) { env = server.env; }
-        ) mcpCfg.servers
-      );
     };
   };
 }
