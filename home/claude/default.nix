@@ -69,6 +69,7 @@ in
         # https://code.claude.com/docs/en/agent-teams
         teammateMode = "tmux";
         alwaysThinkingEnabled = true;
+        effortLevel = "high";
 
         # Bottom status bar showing model and context usage
         # https://code.claude.com/docs/en/statusline
