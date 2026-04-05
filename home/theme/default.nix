@@ -32,7 +32,6 @@ in
         flavor = cfg.flavor;
         accent = "mauve";
 
-        gemini-cli.enable = false; # conflicts with ~/.gemini/settings.json
         tmux.enable = false; # configured in tmux module
       };
     }

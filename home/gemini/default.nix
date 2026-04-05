@@ -20,6 +20,26 @@ in
     programs.gemini-cli = {
       enable = true;
       package = gemini-package;
+      settings = {
+        general = {
+          sessionRetention = {
+            warningAcknowledged = true;
+            enabled = true;
+            maxAge = "120d";
+          };
+          vimMode = false;
+          enableNotifications = true;
+        };
+        security.auth.selectedType = "oauth-personal";
+        ui = {
+          showMemoryUsage = true;
+          showCitations = true;
+          showModelInfoInChat = true;
+          showUserIdentity = true;
+          loadingPhrases = "all";
+        };
+        experimental.plan = true;
+      };
     };
   };
 }
