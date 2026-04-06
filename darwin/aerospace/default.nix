@@ -9,6 +9,8 @@ in
   };
 
   config = mkIf cfg.enable {
+    launchd.user.agents.aerospace.serviceConfig.KeepAlive = mkForce false;
+
     services = {
       aerospace = {
         enable = true;
@@ -17,8 +19,8 @@ in
             modifier = "alt";
           in
           {
-            enable-normalization-flatten-containers = false;
-            enable-normalization-opposite-orientation-for-nested-containers = false;
+            enable-normalization-flatten-containers = true;
+            enable-normalization-opposite-orientation-for-nested-containers = true;
 
             mode.main.binding = {
               "${modifier}-enter" = "exec-and-forget /Applications/Ghostty.app/Contents/MacOS/ghostty";
@@ -33,19 +35,20 @@ in
               "${modifier}-shift-k" = "move up";
               "${modifier}-shift-l" = "move right";
 
-              "${modifier}-ctrl-h" = "move-workspace-to-monitor left";
-              "${modifier}-ctrl-j" = "move-workspace-to-monitor down";
-              "${modifier}-ctrl-k" = "move-workspace-to-monitor up";
-              "${modifier}-ctrl-l" = "move-workspace-to-monitor right";
+              "${modifier}-ctrl-h" = "join-with left";
+              "${modifier}-ctrl-j" = "join-with down";
+              "${modifier}-ctrl-k" = "join-with up";
+              "${modifier}-ctrl-l" = "join-with right";
 
-              "${modifier}-b" = "split horizontal";
-              "${modifier}-v" = "split vertical";
+              "${modifier}-ctrl-shift-h" = "move-workspace-to-monitor left";
+              "${modifier}-ctrl-shift-j" = "move-workspace-to-monitor down";
+              "${modifier}-ctrl-shift-k" = "move-workspace-to-monitor up";
+              "${modifier}-ctrl-shift-l" = "move-workspace-to-monitor right";
+
               "${modifier}-f" = "fullscreen";
-
               "${modifier}-s" = "layout v_accordion";
               "${modifier}-w" = "layout h_accordion";
               "${modifier}-e" = "layout tiles horizontal vertical";
-
               "${modifier}-shift-n" = "layout floating tiling";
 
               "${modifier}-1" = "workspace 1";
@@ -83,6 +86,13 @@ in
               enter = "mode main";
               esc = "mode main";
             };
+
+            on-window-detected = [
+              {
+                check-further-callbacks = true;
+                run = "layout floating";
+              }
+            ];
           };
       };
     };
