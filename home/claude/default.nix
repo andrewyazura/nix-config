@@ -12,7 +12,7 @@ let
   llm-agents = inputs.llm-agents.packages.${system};
 
   hooks = import ./hooks.nix { inherit lib pkgs; };
-  permissions = import ./permissions.nix { inherit lib; };
+  permissions = import ../../common/llm-permissions.nix { inherit lib; };
   statusline = import ./statusline.nix { inherit lib pkgs; };
 
 in
@@ -33,7 +33,7 @@ in
       enable = true;
       package = llm-agents.claude-code;
       enableMcpIntegration = true;
-      memory.source = ./memory.md;
+      memory.source = ../../common/llm-memory.md;
       skillsDir = ./skills;
 
       settings = {
