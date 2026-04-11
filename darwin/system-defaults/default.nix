@@ -54,6 +54,14 @@ in
           ShowDayOfWeek = false;
           ShowSeconds = false;
         };
+
+        CustomSystemPreferences = {
+          "FeatureFlags/Domain/UIKit" = {
+            redesigned_text_cursor = {
+              Enabled = false;
+            };
+          };
+        };
       };
     };
   };
