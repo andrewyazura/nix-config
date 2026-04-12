@@ -75,6 +75,7 @@ in
           nil
           ty
           typescript-language-server
+          zls
         ];
 
         plugins = with pkgs.vimPlugins; [
@@ -183,6 +184,7 @@ in
               p.typescript
               p.vimdoc
               p.yaml
+              p.zig
             ]);
             config = toLuaFile ./configs/treesitter.lua;
           }

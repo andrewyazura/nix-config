@@ -106,21 +106,12 @@ vim.lsp.config("kotlin_ls", {
 	root_markers = { "settings.gradle.kts", "settings.gradle" },
 })
 
--- Strip textDocument.version from workspace edits to work around kotlin-lsp
--- returning stale version numbers, causing Neovim to reject the edit with
--- "Buffer ... newer than edits."
-local rename_handler = vim.lsp.handlers["textDocument/rename"]
-vim.lsp.handlers["textDocument/rename"] = function(err, result, ctx, config)
-	local client = vim.lsp.get_client_by_id(ctx.client_id)
-	if client and client.name == "kotlin_ls" and result and result.documentChanges then
-		for _, change in ipairs(result.documentChanges) do
-			if change.textDocument then
-				change.textDocument.version = nil
-			end
-		end
-	end
-	return rename_handler(err, result, ctx, config)
-end
+vim.lsp.enable("zls")
+vim.lsp.config("zls", {
+	cmd = { "zls" },
+	filetypes = { "zig" },
+	root_markers = { "build.zig" },
+})
 
 vim.keymap.set("n", "grd", vim.lsp.buf.definition, { desc = "vim.lsp.buf.definition()" })
 vim.keymap.set("n", "grl", vim.lsp.buf.declaration, { desc = "Go to declaration" })
