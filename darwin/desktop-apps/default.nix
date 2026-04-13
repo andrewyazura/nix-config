@@ -12,6 +12,7 @@ in
     homebrew.casks = [
       "1password"
       "ankerwork"
+      "bitwarden"
       "discord"
       "ghostty"
       "google-chrome"
@@ -20,6 +21,7 @@ in
       "signal"
       "slack"
       "spotify"
+      "termius"
     ];
   };
 }

@@ -15,7 +15,9 @@ in
   config = mkIf cfg.enable {
     homebrew = {
       taps = [ "jetbrains/utils" ];
-      brews = [ "jetbrains/utils/kotlin-lsp" ];
+      brews = [
+        "jetbrains/utils/kotlin-lsp"
+      ];
 
       casks = [
         "bruno"
@@ -23,10 +25,10 @@ in
         "intellij-idea"
         "lens"
         "mongodb-compass"
+        "orbstack"
         "pritunl"
         "proxyman"
         "tuple"
-        "xcodes-app"
         "zed"
       ];
     };

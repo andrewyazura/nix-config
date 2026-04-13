@@ -20,7 +20,6 @@ in
         aerospace.enable = mkDefault true;
         desktop-apps.enable = mkDefault true;
         darwin-packages = {
-          docker.enable = mkDefault true;
           gnuTools.enable = mkDefault true;
         };
         fonts.enable = mkDefault true;
