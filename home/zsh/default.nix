@@ -31,6 +31,7 @@ in
 
         ga = "git add";
         gc = "git commit";
+        gl = "git log";
         gp = "git pull";
         gP = "git push";
         gr = "git rebase";
