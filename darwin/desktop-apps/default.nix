@@ -16,6 +16,7 @@ in
       "discord"
       "ghostty"
       "google-chrome"
+      "mp3tag"
       "obs"
       "obsidian"
       "signal"
