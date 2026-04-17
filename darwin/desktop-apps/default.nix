@@ -16,6 +16,7 @@ in
       "discord"
       "ghostty"
       "google-chrome"
+      "hiddenbar"
       "mp3tag"
       "obs"
       "obsidian"
