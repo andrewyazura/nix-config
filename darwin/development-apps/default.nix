@@ -20,6 +20,7 @@ in
       ];
 
       casks = [
+        "blender"
         "bruno"
         "dbeaver-community"
         "intellij-idea"
