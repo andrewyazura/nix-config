@@ -98,5 +98,5 @@ in
     defaults.smb.NetBIOSName = hostname;
   };
 
-  time.timeZone = "Europe/Kyiv";
+  time.timeZone = "Europe/Warsaw";
 }
