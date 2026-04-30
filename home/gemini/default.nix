@@ -54,6 +54,7 @@ in
           showModelInfoInChat = true;
           showUserIdentity = true;
           loadingPhrases = "all";
+          escapePastedAtSymbols = true;
         };
 
         security.auth.selectedType = "oauth-personal";
@@ -62,13 +63,14 @@ in
           enableAgents = true;
           taskTracker = true;
           jitContext = true;
-          plan = true;
           modelSteering = true;
+          autoMemory = true;
+          generalistProfile = true;
+          contextManagement = true;
+          directWebFetch = true;
         };
 
-        env = {
-          GEMINI_TELEMETRY_ENABLED = "0";
-        };
+        telemetry.enabled = false;
       };
     };
   };
