@@ -66,7 +66,7 @@ in
           # formatters
           ktfmt
           nixfmt
-          nodePackages.prettier
+          prettier
           ruff
           stylua
 
