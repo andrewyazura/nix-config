@@ -42,6 +42,10 @@ let
     timestamp=$(${pkgs.coreutils}/bin/date -u +"%Y-%m-%dT%H:%M:%SZ")
     echo "[$timestamp] [$project] [$tool] $detail" >> ~/.claude/permission-requests.log
   '';
+
+  startSessionHook = pkgs.writeShellScript "start-session-hook" ''
+    cat >> ~/claude.log
+  '';
 in
 {
   UserPromptSubmit = [
@@ -85,6 +89,18 @@ in
         {
           type = "command";
           command = "${postToolUseLog}";
+          timeout = 5;
+          async = true;
+        }
+      ];
+    }
+  ];
+  SessionStart = [
+    {
+      hooks = [
+        {
+          type = "command";
+          command = "${startSessionHook}";
           timeout = 5;
           async = true;
         }

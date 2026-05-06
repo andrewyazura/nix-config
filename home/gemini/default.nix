@@ -10,6 +10,10 @@ let
   cfg = config.modules.gemini;
   system = pkgs.stdenv.hostPlatform.system;
   llm-agents = inputs.llm-agents.packages.${system};
+
+  startSessionHook = pkgs.writeShellScript "start-session-hook" ''
+    cat > ~/gemini.log
+  '';
 in
 {
   options.modules.gemini = {
@@ -71,6 +75,20 @@ in
         };
 
         telemetry.enabled = false;
+
+        hooks = {
+          SessionStart = [
+            {
+              hooks = [
+                {
+                  type = "command";
+                  command = "${startSessionHook}";
+                  name = "start";
+                }
+              ];
+            }
+          ];
+        };
       };
     };
   };
