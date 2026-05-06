@@ -57,6 +57,9 @@ in
         vimAlias = true;
         vimdiffAlias = true;
 
+        withRuby = false;
+        withPython3 = false;
+
         extraPackages = with pkgs; [
           # tools
           fd
@@ -81,12 +84,14 @@ in
         plugins = with pkgs.vimPlugins; [
           {
             plugin = catppuccin-nvim;
+            type = "lua";
             config = toLuaFile ./configs/options.lua;
             # this hack sets leader key before any other hotkeys are added
           }
 
           {
             plugin = conform-nvim;
+            type = "lua";
             config = toLuaFile ./configs/conform.lua;
           }
 
@@ -95,27 +100,29 @@ in
 
           {
             plugin = flash-nvim;
+            type = "lua";
             config = toLuaFile ./configs/flash.lua;
           }
 
           {
             plugin = fzf-lua;
+            type = "lua";
             config = toLuaFile ./configs/fzf.lua;
           }
 
           {
             plugin = gitsigns-nvim;
+            type = "lua";
             config = toLuaFile ./configs/gitsigns.lua;
           }
 
           hardtime-nvim
-
           markdown-preview-nvim
-
           mini-icons
 
           {
             plugin = neotest;
+            type = "lua";
             config = toLuaFile ./configs/neotest.lua;
           }
           neotest-python # for neotest
@@ -123,11 +130,13 @@ in
 
           {
             plugin = nvim-autopairs;
+            type = "lua";
             config = toLuaFile ./configs/autopairs.lua;
           }
 
           {
             plugin = nvim-cmp;
+            type = "lua";
             config = toLuaFile ./configs/cmp.lua;
           }
           cmp-buffer # for nvim-cmp
@@ -139,6 +148,7 @@ in
 
           {
             plugin = nvim-dap;
+            type = "lua";
             config = toLuaFile ./configs/dap.lua;
           }
           nvim-dap-ui # for nvim-dap
@@ -147,11 +157,13 @@ in
 
           {
             plugin = nvim-surround;
+            type = "lua";
             config = toLuaFile ./configs/surround.lua;
           }
 
           {
             plugin = obsidian-nvim;
+            type = "lua";
             config = toLua ''
               ${builtins.readFile ./configs/obsidian.lua}
               setup_obsidian("${cfg.vaultPath}")
@@ -186,6 +198,7 @@ in
               p.yaml
               p.zig
             ]);
+            type = "lua";
             config = toLuaFile ./configs/treesitter.lua;
           }
           nvim-treesitter-context # for nvim-treesitter
@@ -193,31 +206,37 @@ in
 
           {
             plugin = oil-nvim;
+            type = "lua";
             config = toLuaFile ./configs/oil.lua;
           }
 
           {
             plugin = persistence-nvim;
+            type = "lua";
             config = toLuaFile ./configs/persistence.lua;
           }
 
           {
             plugin = todo-comments-nvim;
+            type = "lua";
             config = toLuaFile ./configs/todo-comments.lua;
           }
 
           {
             plugin = trouble-nvim;
+            type = "lua";
             config = toLuaFile ./configs/trouble.lua;
           }
 
           {
             plugin = undotree;
+            type = "lua";
             config = toLuaFile ./configs/undotree.lua;
           }
 
           {
             plugin = which-key-nvim;
+            type = "lua";
             config = toLuaFile ./configs/which-key.lua;
           }
         ];

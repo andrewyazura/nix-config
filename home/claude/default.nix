@@ -33,8 +33,8 @@ in
       enable = true;
       package = llm-agents.claude-code;
       enableMcpIntegration = true;
-      memory.source = ../../common/llm-memory.md;
-      skillsDir = ./skills;
+      context = ../../common/llm-memory.md;
+      skills = ./skills;
 
       settings = {
         # Response formatting style
