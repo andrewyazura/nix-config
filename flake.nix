@@ -2,13 +2,9 @@
   description = "nix configuration";
 
   inputs = {
-    nixpkgs = {
-      url = "github:nixos/nixpkgs/nixos-unstable";
-    };
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    nixos-hardware = {
-      url = "github:NixOS/nixos-hardware/master";
-    };
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -35,48 +31,21 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    ghostty = {
-      url = "github:ghostty-org/ghostty";
-    };
-
-    llm-agents.url = "github:numtide/llm-agents.nix";
-
-    nix-minecraft = {
-      url = "github:Infinidoge/nix-minecraft";
-    };
-
-    private-config = {
-      url = "git+ssh://git@github.com/andrewyazura/private-nix-config.git";
-    };
-
-    birthday-api-app = {
-      url = "github:orehzzz/birthday-api";
-    };
-
-    birthday-bot-app = {
-      url = "github:orehzzz/birthday-telegram-bot";
-    };
-
-    stresses-bot-app = {
-      url = "git+ssh://git@github.com/yaroslavpashynskyi/stresses-bot-nix.git";
-    };
-
-    beast-music-app = {
-      url = "git+ssh://git@github.com/yaroslavpashynskyi/BeastMusic.git";
-    };
-
-    attic = {
-      url = "github:zhaofengli/attic";
-    };
-
-    catppuccin = {
-      url = "github:catppuccin/nix";
-    };
-
     neotest-gradle-src = {
       url = "github:andrewyazura/neotest-gradle";
       flake = false;
     };
+
+    attic.url = "github:zhaofengli/attic";
+    beast-music-app.url = "git+ssh://git@github.com/yaroslavpashynskyi/BeastMusic.git";
+    birthday-api-app.url = "github:orehzzz/birthday-api";
+    birthday-bot-app.url = "github:orehzzz/birthday-telegram-bot";
+    catppuccin.url = "github:catppuccin/nix";
+    ghostty.url = "github:ghostty-org/ghostty";
+    llm-agents.url = "github:numtide/llm-agents.nix";
+    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
+    private-config.url = "git+ssh://git@github.com/andrewyazura/private-nix-config.git";
+    stresses-bot-app.url = "git+ssh://git@github.com/yaroslavpashynskyi/stresses-bot-nix.git";
   };
 
   outputs =
