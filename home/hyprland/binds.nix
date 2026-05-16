@@ -67,22 +67,22 @@ in
     (mkBind "ALT + Q" "hl.dsp.window.close()")
     (mkBind "ALT + W" "hl.dsp.window.close()")
 
-    (mkBind "SUPER + H" "hl.dsp.movefocus('l')")
-    (mkBind "SUPER + J" "hl.dsp.movefocus('d')")
-    (mkBind "SUPER + K" "hl.dsp.movefocus('u')")
-    (mkBind "SUPER + L" "hl.dsp.movefocus('r')")
+    (mkBind "SUPER + H" "hl.dsp.focus({ direction = 'l' })")
+    (mkBind "SUPER + J" "hl.dsp.focus({ direction = 'd' })")
+    (mkBind "SUPER + K" "hl.dsp.focus({ direction = 'u' })")
+    (mkBind "SUPER + L" "hl.dsp.focus({ direction = 'r' })")
 
-    (mkBind "SUPER SHIFT + H" "hl.dsp.movewindow('l')")
-    (mkBind "SUPER SHIFT + J" "hl.dsp.movewindow('d')")
-    (mkBind "SUPER SHIFT + K" "hl.dsp.movewindow('u')")
-    (mkBind "SUPER SHIFT + L" "hl.dsp.movewindow('r')")
+    (mkBind "SUPER + SHIFT + H" "hl.dsp.window.move({ direction = 'l' })")
+    (mkBind "SUPER + SHIFT + J" "hl.dsp.window.move({ direction = 'd' })")
+    (mkBind "SUPER + SHIFT + K" "hl.dsp.window.move({ direction = 'u' })")
+    (mkBind "SUPER + SHIFT + L" "hl.dsp.window.move({ direction = 'r' })")
 
-    (mkBind "SUPER + E" "hl.dsp.togglesplit()")
-    (mkBind "SUPER + F" "hl.dsp.fullscreen('0')")
-    (mkBind "SUPER SHIFT + N" "hl.dsp.togglefloating()")
+    (mkBind "SUPER + E" "hl.dsp.layout('togglesplit')")
+    (mkBind "SUPER + F" "hl.dsp.window.fullscreen()")
+    (mkBind "SUPER + SHIFT + N" "hl.dsp.window.float({ action = 'toggle' })")
 
-    (mkBind "SUPER + MINUS" "hl.dsp.togglespecialworkspace()")
-    (mkBind "SUPER SHIFT + MINUS" "hl.dsp.movetoworkspace('special')")
+    (mkBind "SUPER + MINUS" "hl.dsp.workspace.toggle_special('')")
+    (mkBind "SUPER + SHIFT + MINUS" "hl.dsp.window.move({ workspace = 'special' })")
 
     (mkBind "SUPER + R" "hl.dsp.submap('resize')")
 
@@ -98,8 +98,10 @@ in
     (mkLockedBind "XF86AudioPrev" "hl.dsp.exec_cmd('playerctl previous')")
 
   ]
-  ++ (map (x: mkBind "SUPER + ${x.key}" "hl.dsp.workspace('${x.ws}')") workspaces)
-  ++ (map (x: mkBind "SUPER SHIFT + ${x.key}" "hl.dsp.movetoworkspace('${x.ws}')") workspaces);
+  ++ (map (x: mkBind "SUPER + ${x.key}" "hl.dsp.focus({ workspace = '${x.ws}' })") workspaces)
+  ++ (map (
+    x: mkBind "SUPER + SHIFT + ${x.key}" "hl.dsp.window.move({ workspace = '${x.ws}' })"
+  ) workspaces);
 
   define_submap = {
     _args = [

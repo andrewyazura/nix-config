@@ -13,6 +13,7 @@ let
   hyprlandPlugins = inputs.hyprland-plugins.packages.${system};
 
   binds = import ./binds.nix { inherit lib; };
+  mkLua = lib.generators.mkLuaInline;
 in
 {
   options.modules.hyprland = {
@@ -38,8 +39,8 @@ in
             gaps_out = 20;
             border_size = 2;
             col = {
-              active_border = "";
-              inactive_border = "";
+              active_border = mkLua "0xff";
+              inactive_border = mkLua "0xff";
             };
 
             no_focus_fallback = true;
@@ -61,20 +62,28 @@ in
             force_no_accel = true;
             sensitivity = 0;
           };
-
-          device = [
-            {
-              name = "wooting-wooting-60he+";
-              kb_options = "grp:win_space_toggle";
-              kb_layout = "us,ua";
-            }
-            {
-              name = "sonix-usb-device";
-              kb_options = "grp:win_space_toggle";
-              kb_layout = "us,ua";
-            }
-          ];
         };
+
+        device = [
+          {
+            _args = [
+              {
+                name = "wooting-wooting-60he+";
+                kb_options = "grp:win_space_toggle";
+                kb_layout = "us,ua";
+              }
+            ];
+          }
+          {
+            _args = [
+              {
+                name = "sonix-usb-device";
+                kb_options = "grp:win_space_toggle";
+                kb_layout = "us,ua";
+              }
+            ];
+          }
+        ];
       }
       // binds;
     };

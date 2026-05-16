@@ -32,6 +32,7 @@ in
         flavor = cfg.flavor;
         accent = "mauve";
 
+        hyprland.enable = false; # causes "attempt to call a nil value (field 'source')"
         tmux.enable = false; # configured in tmux module
       };
     }
