@@ -16,8 +16,23 @@ let
   mkLua = lib.generators.mkLuaInline;
 in
 {
-  options.modules.hyprland = {
+  options.modules.hyprland = with types; {
     enable = mkEnableOption "Enable hyprland configuration";
+
+    output = mkOption {
+      default = [ ];
+      type = listOf (submodule {
+        options = {
+          output = mkOption { type = str; };
+          mode = mkOption { type = str; };
+          position = mkOption { type = str; };
+          scale = mkOption {
+            default = 1;
+            type = int;
+          };
+        };
+      });
+    };
   };
 
   config = mkIf cfg.enable {
@@ -84,6 +99,8 @@ in
             ];
           }
         ];
+
+        monitor = builtins.map (monitor: { _args = [ monitor ]; }) cfg.output;
       }
       // binds;
     };

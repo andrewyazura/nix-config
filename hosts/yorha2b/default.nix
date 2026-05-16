@@ -31,6 +31,22 @@
     modules = {
       gnome.enable = true;
 
+      hyprland = {
+        enable = true;
+        output = [
+          {
+            output = "DP-1";
+            mode = "3840x2160@144";
+            position = "0x0";
+          }
+          {
+            output = "DP-2";
+            mode = "2560x1440@144";
+            position = "3840x360";
+          }
+        ];
+      };
+
       sway = {
         enable = false;
         output =
@@ -38,20 +54,20 @@
             wallpaperPath = ../../common/wallpapers/nix-black-4k.png;
           in
           {
-            DP-3 = {
+            DP-1 = {
               position = "0 0";
               mode = "3840x2160@144Hz";
               bg = "${wallpaperPath} fill";
             };
 
-            HDMI-A-1 = {
+            DP-2 = {
               position = "3840 360";
               mode = "2560x1440@144Hz";
               bg = "${wallpaperPath} fill";
             };
           };
 
-        focus-output = "DP-3";
+        focus-output = "DP-2";
       };
     };
   };
