@@ -14,7 +14,6 @@ let
   hooks = import ./hooks.nix { inherit lib pkgs; };
   permissions = import ../../common/llm-permissions.nix { inherit lib; };
   statusline = import ./statusline.nix { inherit lib pkgs; };
-
 in
 {
   options.modules.claude = {
