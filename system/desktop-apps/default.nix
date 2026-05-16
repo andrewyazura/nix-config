@@ -18,12 +18,12 @@ in
     environment.systemPackages = with pkgs; [
       inputs.ghostty.packages.x86_64-linux.default
 
+      anki
       google-chrome
       obs-studio
       obsidian
       signal-desktop
       spotify
-      vesktop
     ];
   };
 }
