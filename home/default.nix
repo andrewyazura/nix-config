@@ -10,6 +10,7 @@
     ./ghostty
     ./git
     ./gnome
+    ./hyprland
     ./i3
     ./ideavim
     ./lazygit

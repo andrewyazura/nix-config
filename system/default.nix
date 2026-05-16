@@ -8,6 +8,7 @@
     ./gaming
     ./gnome
     ./home-manager
+    ./hyprland
     ./i3
     ./minecraft-server
     ./networking

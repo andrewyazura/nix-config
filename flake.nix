@@ -31,6 +31,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
+
     neotest-gradle-src = {
       url = "github:andrewyazura/neotest-gradle";
       flake = false;
@@ -42,6 +47,7 @@
     birthday-bot-app.url = "github:orehzzz/birthday-telegram-bot";
     catppuccin.url = "github:catppuccin/nix";
     ghostty.url = "github:ghostty-org/ghostty";
+    hyprland.url = "github:hyprwm/Hyprland";
     llm-agents.url = "github:numtide/llm-agents.nix";
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
     private-config.url = "git+ssh://git@github.com/andrewyazura/private-nix-config.git";

@@ -15,7 +15,7 @@
     };
 
     gnome.enable = true;
-    sway.enable = false;
+    hyprland.enable = true;
     wooting.enable = true;
   };
 
@@ -30,7 +30,6 @@
 
     modules = {
       gnome.enable = true;
-      waybar.enable = false;
 
       sway = {
         enable = false;
