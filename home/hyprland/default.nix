@@ -57,18 +57,46 @@ in
             col = {
               active_border = palette.mauve;
               inactive_border = palette.base;
+              nogroup_border = palette.base;
+              nogroup_border_active = palette.mauve;
             };
 
             no_focus_fallback = true;
             resize_on_border = true;
+            layout = "dwindle";
+          };
+
+          dwindle = {
+            preserve_split = true;
+            smart_split = false;
+            force_split = 2;
           };
 
           decoration = {
             rounding = 10;
             rounding_power = 4.0;
             blur.enabled = true;
-            shadow.enabled = true;
-            glow.enabled = true;
+            shadow = {
+              enabled = true;
+              color = palette.base;
+            };
+            glow = {
+              enabled = true;
+              color = palette.mauve;
+            };
+          };
+
+          group = {
+            col = {
+              border_active = palette.mauve;
+              border_inactive = palette.base;
+            };
+            groupbar = {
+              col = {
+                active = palette.mauve;
+                inactive = palette.base;
+              };
+            };
           };
 
           input = {
