@@ -207,7 +207,7 @@ in
 
     programs = {
       swaylock.enable = true;
-      waybar.systemd.target = "hyprland-session.target";
+      waybar.systemd.target = [ "hyprland-session.target" ];
     };
   };
 }

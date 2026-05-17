@@ -27,8 +27,8 @@ in
           mode = mkOption { type = str; };
           position = mkOption { type = str; };
           scale = mkOption {
-            default = 1;
-            type = int;
+            default = 1.0;
+            type = float;
           };
         };
       });
@@ -73,7 +73,7 @@ in
           input = {
             kb_layout = "us,ua";
             kb_options = "grp:win_space_toggle,caps:swapescape";
-            follow_mouse = 0;
+            follow_mouse = 2;
             force_no_accel = true;
             sensitivity = 0;
           };
@@ -125,7 +125,7 @@ in
         };
       };
 
-      waybar.systemd.target = "hyprland-session.target";
+      waybar.systemd.targets = [ "hyprland-session.target" ];
     };
 
     home.pointerCursor = {
