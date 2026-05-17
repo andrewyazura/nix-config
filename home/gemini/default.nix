@@ -30,7 +30,7 @@ in
       settings = {
         general = {
           vimMode = true;
-          checkpointing.enabled = true;
+          checkpointing.enabled = false;
 
           defaultApprovalMode = "auto_edit";
 
@@ -90,6 +90,12 @@ in
           ];
         };
       };
+    };
+
+    home.sessionVariables = {
+      GEMINI_CLI_HOME = "$HOME/.local/share/gemini";
+      GEMINI_CLI_SYSTEM_SETTINGS_PATH = "$HOME/.gemini/settings.json";
+      GEMINI_CLI_TRUST_WORKSPACE = "true";
     };
   };
 }
