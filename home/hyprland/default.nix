@@ -114,14 +114,26 @@ in
       };
     };
 
-    programs.hyprlock = {
-      enable = true;
-      settings = {
-        general = {
-          hide_cursor = false;
-          ignore_empty_input = true;
+    programs = {
+      hyprlock = {
+        enable = true;
+        settings = {
+          general = {
+            hide_cursor = false;
+            ignore_empty_input = true;
+          };
         };
       };
+
+      waybar.systemd.target = "hyprland-session.target";
+    };
+
+    home.pointerCursor = {
+      package = pkgs.apple-cursor;
+      name = "macOS";
+      size = 24;
+      gtk.enable = true;
+      hyprcursor.enable = true;
     };
   };
 }

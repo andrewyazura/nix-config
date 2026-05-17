@@ -30,6 +30,7 @@
 
     modules = {
       gnome.enable = true;
+      waybar.enable = true;
 
       hyprland = {
         enable = true;

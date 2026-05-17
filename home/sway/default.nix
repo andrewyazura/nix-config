@@ -205,6 +205,9 @@ in
         '';
       };
 
-    programs.swaylock.enable = true;
+    programs = {
+      swaylock.enable = true;
+      waybar.systemd.target = "hyprland-session.target";
+    };
   };
 }
