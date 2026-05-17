@@ -8,6 +8,7 @@
 with lib;
 let
   cfg = config.modules.hyprland;
+  palette = import ../../common/colors.nix;
   system = pkgs.stdenv.hostPlatform.system;
   hyprlandPkgs = inputs.hyprland.packages.${system};
   hyprlandPlugins = inputs.hyprland-plugins.packages.${system};
@@ -54,8 +55,8 @@ in
             gaps_out = 20;
             border_size = 2;
             col = {
-              active_border = mkLua "0xff";
-              inactive_border = mkLua "0xff";
+              active_border = palette.mauve;
+              inactive_border = palette.base;
             };
 
             no_focus_fallback = true;
