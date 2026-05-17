@@ -67,17 +67,18 @@ in
     (mkBind "ALT + Q" "hl.dsp.window.close()")
     (mkBind "ALT + W" "hl.dsp.window.close()")
 
-    (mkBind "SUPER + H" "hl.dsp.focus({ direction = 'l' })")
-    (mkBind "SUPER + J" "hl.dsp.focus({ direction = 'd' })")
-    (mkBind "SUPER + K" "hl.dsp.focus({ direction = 'u' })")
-    (mkBind "SUPER + L" "hl.dsp.focus({ direction = 'r' })")
+    (mkBind "SUPER + H" "function() hl.dispatch(hl.plugin.hy3.move_focus('l')) end")
+    (mkBind "SUPER + J" "function() hl.dispatch(hl.plugin.hy3.move_focus('d')) end")
+    (mkBind "SUPER + K" "function() hl.dispatch(hl.plugin.hy3.move_focus('u')) end")
+    (mkBind "SUPER + L" "function() hl.dispatch(hl.plugin.hy3.move_focus('r')) end")
 
-    (mkBind "SUPER + SHIFT + H" "hl.dsp.window.move({ direction = 'l' })")
-    (mkBind "SUPER + SHIFT + J" "hl.dsp.window.move({ direction = 'd' })")
-    (mkBind "SUPER + SHIFT + K" "hl.dsp.window.move({ direction = 'u' })")
-    (mkBind "SUPER + SHIFT + L" "hl.dsp.window.move({ direction = 'r' })")
+    (mkBind "SUPER + SHIFT + H" "function() hl.dispatch(hl.plugin.hy3.move_window('l')) end")
+    (mkBind "SUPER + SHIFT + J" "function() hl.dispatch(hl.plugin.hy3.move_window('d')) end")
+    (mkBind "SUPER + SHIFT + K" "function() hl.dispatch(hl.plugin.hy3.move_window('u')) end")
+    (mkBind "SUPER + SHIFT + L" "function() hl.dispatch(hl.plugin.hy3.move_window('r')) end")
 
-    (mkBind "SUPER + E" "hl.dsp.layout('togglesplit')")
+    (mkBind "SUPER + E" "function() hl.dispatch(hl.plugin.hy3.change_group('opposite')) end")
+    (mkBind "SUPER + W" "function() hl.dispatch(hl.plugin.hy3.change_group('tab')) end")
     (mkBind "SUPER + F" "hl.dsp.window.fullscreen()")
     (mkBind "SUPER + SHIFT + N" "hl.dsp.window.float({ action = 'toggle' })")
 
@@ -88,7 +89,6 @@ in
 
     (mkBind "PRINT" ''hl.dsp.exec_cmd('grim -g "$(slurp)" - | wl-copy')'')
 
-    # Audio / Media (Locked binds allowing use while screen is locked)
     (mkLockedBind "XF86AudioRaiseVolume" "hl.dsp.exec_cmd('wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+')")
     (mkLockedBind "XF86AudioLowerVolume" "hl.dsp.exec_cmd('wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-')")
     (mkLockedBind "XF86AudioMute" "hl.dsp.exec_cmd('wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle')")
@@ -96,7 +96,6 @@ in
     (mkLockedBind "XF86AudioPlay" "hl.dsp.exec_cmd('playerctl play-pause')")
     (mkLockedBind "XF86AudioNext" "hl.dsp.exec_cmd('playerctl next')")
     (mkLockedBind "XF86AudioPrev" "hl.dsp.exec_cmd('playerctl previous')")
-
   ]
   ++ (map (x: mkBind "SUPER + ${x.key}" "hl.dsp.focus({ workspace = '${x.ws}' })") workspaces)
   ++ (map (

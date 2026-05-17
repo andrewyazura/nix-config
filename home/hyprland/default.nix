@@ -9,12 +9,13 @@ with lib;
 let
   cfg = config.modules.hyprland;
   palette = import ../../common/colors.nix;
+
   system = pkgs.stdenv.hostPlatform.system;
   hyprlandPkgs = inputs.hyprland.packages.${system};
   hyprlandPlugins = inputs.hyprland-plugins.packages.${system};
+  hy3Pkgs = inputs.hy3.packages.${system};
 
   binds = import ./binds.nix { inherit lib; };
-  mkLua = lib.generators.mkLuaInline;
 in
 {
   options.modules.hyprland = with types; {
@@ -44,7 +45,7 @@ in
 
       plugins = with hyprlandPlugins; [
         csgo-vulkan-fix
-        hyprbars
+        hy3Pkgs.hy3
       ];
 
       configType = "lua";
@@ -63,13 +64,7 @@ in
 
             no_focus_fallback = true;
             resize_on_border = true;
-            layout = "dwindle";
-          };
-
-          dwindle = {
-            preserve_split = true;
-            smart_split = false;
-            force_split = 2;
+            layout = "hy3";
           };
 
           decoration = {

@@ -41,6 +41,11 @@
       inputs.hyprland.follows = "hyprland";
     };
 
+    hy3 = {
+      url = "github:outfoxxed/hy3?ref=hl0.55.0";
+      inputs.hyprland.follows = "hyprland";
+    };
+
     neotest-gradle-src = {
       url = "github:andrewyazura/neotest-gradle";
       flake = false;

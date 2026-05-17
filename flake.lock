@@ -505,6 +505,27 @@
         "type": "github"
       }
     },
+    "hy3": {
+      "inputs": {
+        "hyprland": [
+          "hyprland"
+        ]
+      },
+      "locked": {
+        "lastModified": 1778750252,
+        "narHash": "sha256-P3wwiIfqo89evW7xzI+wOI/qM1WPZBiiSmGNtBmYeVk=",
+        "owner": "outfoxxed",
+        "repo": "hy3",
+        "rev": "a7282db2d7ca336d3c9faa5d10d75fc43eed37aa",
+        "type": "github"
+      },
+      "original": {
+        "owner": "outfoxxed",
+        "ref": "hl0.55.0",
+        "repo": "hy3",
+        "type": "github"
+      }
+    },
     "hyprcursor": {
       "inputs": {
         "hyprlang": [
@@ -1391,6 +1412,7 @@
         "disko": "disko",
         "ghostty": "ghostty",
         "home-manager": "home-manager_2",
+        "hy3": "hy3",
         "hyprland": "hyprland",
         "hyprland-plugins": "hyprland-plugins",
         "llm-agents": "llm-agents",
