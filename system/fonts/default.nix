@@ -1,19 +1,19 @@
 {
   lib,
   config,
-  pkgs,
   ...
 }:
 with lib;
-let
-  cfg = config.modules.fonts;
-in
 {
-  options.modules.fonts = {
-    enable = mkEnableOption "Enable fonts configuration";
-  };
+  imports = [ ../../common/fonts ];
 
-  config = mkIf cfg.enable {
-    fonts.packages = with pkgs; [ adwaita-fonts ] ++ import ../../common/fonts { inherit pkgs; };
+  config = mkIf config.modules.fonts.enable {
+    fonts.fontconfig = {
+      defaultFonts = {
+        monospace = [ "SFMono Nerd Font" ];
+        sansSerif = [ "SF Pro Display" ];
+        serif = [ "New York" ];
+      };
+    };
   };
 }

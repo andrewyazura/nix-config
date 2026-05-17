@@ -3,7 +3,7 @@
     ./aerospace
     ./desktop-apps
     ./development-apps
-    ./fonts
+    ../common/fonts
     ./gaming
     ./homebrew
     ./nix

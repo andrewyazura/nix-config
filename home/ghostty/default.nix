@@ -19,7 +19,7 @@ in
 
     fontFamily = mkOption {
       type = types.str;
-      default = "AdwaitaMono Nerd Font";
+      default = "SFMono Nerd Font";
       description = "Ghostty font family";
     };
 

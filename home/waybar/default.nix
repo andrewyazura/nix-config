@@ -75,11 +75,10 @@ in
         * {
           border: none;
           border-radius: 0;
-          font-family: "Adwaita Mono Nerd Font";
+          font-family: "SFMono Nerd Font";
           font-size: 14px;
           min-height: 0;
         }
-
         window#waybar {
           background: ${colors.crust};
           color: ${colors.text};

@@ -60,7 +60,7 @@ in
 
       modules = {
         ghostty = {
-          fontFamily = "SF Mono";
+          fontFamily = "SFMono Nerd Font";
           fontStyle = "SemiBold";
         };
       };

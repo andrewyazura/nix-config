@@ -1,8 +1,25 @@
-{ pkgs }:
-with pkgs;
-[
-  fira-code
+{
+  lib,
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
+with lib;
+let
+  cfg = config.modules.fonts;
+in
+{
+  options.modules.fonts.enable = mkEnableOption "Enable fonts configuration";
 
-  nerd-fonts.adwaita-mono
-  nerd-fonts.fira-code
-]
+  config = mkIf cfg.enable {
+    fonts.packages = with pkgs; [
+      fira-code
+      nerd-fonts.fira-code
+    ] ++ (with inputs.apple-fonts.packages.${stdenv.hostPlatform.system}; [
+      sf-pro-nerd
+      sf-mono-nerd
+      ny-nerd
+    ]);
+  };
+}
