@@ -58,7 +58,7 @@ in
             padding-right = 0;
 
             font-0 = "SFMono Nerd Font:pixelsize=12;3";
-            };
+          };
           "module/volume" = {
             type = "internal/pulseaudio";
 
