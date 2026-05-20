@@ -27,7 +27,7 @@ in
     virtualisation.oci-containers.containers = mapAttrs' (
       name: v:
       nameValuePair "beammp-${name}" {
-        image = "rouhim/beammp-server:latest";
+        image = "rouhim/beammp-server@sha256:049404da7e9e3c7fdf7f18d1bd21489ca4ac607f08630fd4cf3298966d5e6821";
         ports = [
           "${toString v.port}:${toString v.port}/tcp"
           "${toString v.port}:${toString v.port}/udp"
