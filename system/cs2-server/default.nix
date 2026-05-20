@@ -69,6 +69,10 @@ in
           "sops-nix.service"
         ];
 
+        environment = {
+          HOME = installDir;
+        };
+
         serviceConfig = {
           User = "cs2";
           Group = "cs2";
@@ -77,6 +81,7 @@ in
           Restart = "always";
           RestartSec = "10s";
           EnvironmentFile = v.environmentFiles;
+          TimeoutStartSec = "15min";
         };
 
         preStart = ''
@@ -85,17 +90,31 @@ in
             +login anonymous \
             +app_update 730 \
             +quit
+
+          mkdir -p ${installDir}/.steam/sdk64
+          STEAMCLIENT=$(${pkgs.findutils}/bin/find ${installDir} -type f -name "steamclient.so" | ${pkgs.gnugrep}/bin/grep "linux64" | ${pkgs.coreutils}/bin/head -n 1)
+
+          if [ -n "$STEAMCLIENT" ]; then
+            ln -sf "$STEAMCLIENT" ${installDir}/.steam/sdk64/steamclient.so
+            echo "Successfully linked steamclient.so from $STEAMCLIENT"
+          else
+            echo "CRITICAL ERROR: Could not find steamclient.so anywhere in ${installDir}"
+          fi
         '';
 
         script = ''
-          ${pkgs.steam-run}/bin/steam-run ${installDir}/game/bin/linuxsteamrt64/cs2 \
-            -dedicated \
-            -ip 0.0.0.0 \
-            -port ${toString v.port} \
-            -tickrate ${toString v.tickrate} \
-            -maxplayers 10 \
-            +map de_dust2 \
-            +sv_setsteamaccount $GSLT_TOKEN
+          ${pkgs.steam-run}/bin/steam-run bash -c '
+            export LD_LIBRARY_PATH=${installDir}/game/bin/linuxsteamrt64:$LD_LIBRARY_PATH
+            
+            exec ${installDir}/game/bin/linuxsteamrt64/cs2 \
+              -dedicated \
+              -ip 0.0.0.0 \
+              -port ${toString v.port} \
+              -tickrate ${toString v.tickrate} \
+              -maxplayers 10 \
+              +map de_dust2 \
+              +sv_setsteamaccount $GSLT_TOKEN
+          '
         '';
       }
     ) cfg.servers;
