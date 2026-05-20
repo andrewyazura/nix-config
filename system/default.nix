@@ -2,6 +2,7 @@
   imports = [
     ./audio
     ./beammp-server
+    ./cs2-server
     ./desktop-apps
     ./development-apps
     ./fonts

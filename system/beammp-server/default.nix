@@ -17,6 +17,7 @@ in
 
           environmentFiles = mkOption {
             type = listOf str;
+            default = [ ];
           };
         };
       });

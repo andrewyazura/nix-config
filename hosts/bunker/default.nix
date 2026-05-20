@@ -27,7 +27,24 @@
       servers = {
         akina = {
           port = 3814;
-          environmentFiles = [ config.sops.secrets.beammp-akina-env.path ];
+          environmentFiles = [
+            config.sops.secrets.beammp-akina-env.path
+          ];
+        };
+      };
+    };
+
+    cs2-server = {
+      enable = true;
+
+      servers = {
+        deathmatch = {
+          port = 27015;
+          tvPort = 27020;
+          tickrate = 128;
+          environmentFiles = [
+            config.sops.secrets.cs2-env.path
+          ];
         };
       };
     };
@@ -117,6 +134,11 @@
 
       beammp-akina-env = {
         sopsFile = ../../secrets/beammp-akina-env;
+        format = "binary";
+      };
+
+      cs2-env = {
+        sopsFile = ../../secrets/cs2-env;
         format = "binary";
       };
 

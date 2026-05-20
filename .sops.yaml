@@ -31,6 +31,12 @@ creation_rules:
       - *bunker
     format: dotenv
 
+  - path_regex: secrets/cs2-env
+    key_groups:
+    - age:
+      - *bunker
+    format: dotenv
+
   - path_regex: secrets/netrc-bunker
     key_groups:
     - age:
