@@ -29,12 +29,14 @@ creation_rules:
     key_groups:
     - age:
       - *bunker
+      - *yorhaA2
     format: dotenv
 
   - path_regex: secrets/cs2-env
     key_groups:
     - age:
       - *bunker
+      - *yorhaA2
     format: dotenv
 
   - path_regex: secrets/netrc-bunker
