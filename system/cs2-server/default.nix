@@ -112,7 +112,7 @@ in
               -port ${toString v.port} \
               -tickrate ${toString v.tickrate} \
               -maxplayers 10 \
-              +map de_dust2 \
+              -authkey $STEAM_WEB_API_KEY \
               +sv_setsteamaccount $GSLT_TOKEN
           '
         '';

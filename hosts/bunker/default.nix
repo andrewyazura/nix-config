@@ -38,7 +38,7 @@
       enable = true;
 
       servers = {
-        deathmatch = {
+        server-1 = {
           port = 27015;
           tvPort = 27020;
           tickrate = 128;
