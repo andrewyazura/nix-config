@@ -14,7 +14,7 @@
       gaming.enable = true;
     };
 
-    gnome.enable = true;
+    gnome.enable = false;
     hyprland.enable = true;
     wooting.enable = true;
   };
@@ -29,7 +29,7 @@
     ];
 
     modules = {
-      gnome.enable = true;
+      gnome.enable = false;
       waybar.enable = true;
 
       hyprland = {
