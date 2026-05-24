@@ -129,11 +129,27 @@ in
       // binds;
     };
 
-    services.hyprlauncher = {
-      enable = true;
-      settings = {
-        general = {
-          grab_focus = true;
+    services = {
+      hyprlauncher = {
+        enable = true;
+        settings = {
+          general = {
+            grab_focus = true;
+          };
+        };
+      };
+
+      hyprpaper = {
+        enable = true;
+        settings = {
+          wallpaper =
+            let
+              wallpaperPath = ../../common/wallpapers/nix-black-4k.png;
+            in
+            [
+              "DP-1,${wallpaperPath}"
+              "DP-2,${wallpaperPath}"
+            ];
         };
       };
     };
