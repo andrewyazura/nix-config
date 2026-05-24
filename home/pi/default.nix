@@ -17,9 +17,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = with llm-agents; [
-      pi
-      ccusage-pi
-    ];
+    home.packages = [ llm-agents.pi ];
   };
 }
