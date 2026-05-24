@@ -48,8 +48,8 @@ in
 
     (mkIf cfg.ai-tools.enable {
       modules = {
+        antigravity.enable = mkDefault true;
         claude.enable = mkDefault true;
-        gemini.enable = mkDefault true;
         mcp.enable = mkDefault true;
         opencode.enable = mkDefault true;
         pi.enable = mkDefault true;

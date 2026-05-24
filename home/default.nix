@@ -1,12 +1,12 @@
 {
   imports = [
+    ./antigravity
     ./base-packages
     ./btop
     ./claude
     ./dev-packages
     ./difftastic
     ./direnv
-    ./gemini
     ./ghostty
     ./git
     ./gnome
