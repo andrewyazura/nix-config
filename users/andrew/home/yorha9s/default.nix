@@ -6,8 +6,6 @@
       desktop.enable = true;
       ai-tools.enable = true;
     };
-
-    neovim.vaultPath = "~/Documents/notes";
   };
   home.stateVersion = "24.11";
 

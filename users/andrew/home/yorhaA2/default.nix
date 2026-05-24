@@ -12,7 +12,6 @@
     work.enable = true;
 
     theme.flavor = "mocha";
-    neovim.vaultPath = "~/Documents/notes";
   };
   home.stateVersion = "25.05";
 

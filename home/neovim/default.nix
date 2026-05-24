@@ -22,11 +22,6 @@ in
 {
   options.modules.neovim = {
     enable = mkEnableOption "Enable neovim configuration";
-    vaultPath = mkOption {
-      type = types.str;
-      default = "~/obsidian";
-      description = "Path to Obsidian vault";
-    };
   };
 
   config = mkIf cfg.enable {
@@ -147,16 +142,6 @@ in
           type = "lua";
           config = builtins.readFile ./configs/surround.lua;
         }
-
-        {
-          plugin = obsidian-nvim;
-          type = "lua";
-          config = ''
-            ${builtins.readFile ./configs/obsidian.lua}
-            setup_obsidian("${cfg.vaultPath}")
-          '';
-        }
-        plenary-nvim # for obsidian-nvim
 
         {
           plugin = nvim-treesitter.withPlugins (p: [
