@@ -130,7 +130,7 @@ in
 
         in
         mapAttrs (
-          name: value: recursiveUpdate (recursiveUpdate serverTemplate value) (cfg.servers.${name} or { })
+          name: value: recursiveUpdate (recursiveUpdate serverTemplate value) (builtins.removeAttrs (cfg.servers.${name} or { }) [ "backup" ])
         ) customServers;
     };
 
