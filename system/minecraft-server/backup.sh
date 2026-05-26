@@ -7,8 +7,8 @@ set -euo pipefail
 # - RETENTION_DAYS
 # - RCLONE_CONFIG_FILE (optional)
 
-DATA_DIR="/var/lib/minecraft/$SERVER_NAME"
-BACKUP_DIR="/var/lib/minecraft/backups"
+DATA_DIR="/srv/minecraft/$SERVER_NAME"
+BACKUP_DIR="/tmp/minecraft-backup"
 DATE=$(date +%Y-%m-%d_%H-%M-%S)
 BACKUP_FILE="$BACKUP_DIR/${SERVER_NAME}_backup_${DATE}.tar.gz"
 
@@ -40,7 +40,8 @@ else
 fi
 
 echo "Compressing world files..."
-tar --exclude='backups' --exclude='logs' -czf "$BACKUP_FILE" -C "/var/lib/minecraft" "$SERVER_NAME"
+# Compress only the "world" folder inside the server's data directory
+tar -czf "$BACKUP_FILE" -C "$DATA_DIR" "world"
 
 if [ "$SERVER_RUNNING" -eq 1 ]; then
   send_command "save-on"
