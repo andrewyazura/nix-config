@@ -58,6 +58,14 @@
         serverProperties = {
           server-port = 25565;
         };
+
+        backup = {
+          enable = true;
+          remote = "gdrive-andrewyazura:minecraft-backups";
+          rcloneConfigFile = config.sops.secrets.rclone-config.path;
+          calendar = "04:00";
+          retentionDays = 7;
+        };
       };
     };
   };
@@ -145,6 +153,14 @@
       netrc = {
         sopsFile = ../../secrets/netrc-bunker;
         format = "binary";
+      };
+
+      rclone-config = {
+        sopsFile = ../../secrets/rclone-gdrive-andrewyazura-config;
+        format = "binary";
+        owner = "minecraft";
+        group = "minecraft";
+        mode = "0400";
       };
     };
   };

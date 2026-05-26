@@ -8,6 +8,7 @@
 with lib;
 let
   cfg = config.modules.minecraft-server;
+  enabledBackupServers = filterAttrs (name: server: server.backup.enable) cfg.servers;
 in
 {
   imports = [ inputs.nix-minecraft.nixosModules.minecraft-servers ];
@@ -31,7 +32,45 @@ in
               str
             ]);
             default = { };
-            description = "Propeties for the server.properties file";
+            description = "Properties for the server.properties file";
+          };
+
+          backup = {
+            enable = mkOption {
+              type = bool;
+              default = false;
+              description = "Enable scheduled rclone backups for this Minecraft server.";
+            };
+
+            remote = mkOption {
+              type = str;
+              example = "drive:backups/minecraft";
+              description = "rclone remote destination (e.g., 'drive:backups/minecraft').";
+            };
+
+            rcloneConfigFile = mkOption {
+              type = nullOr path;
+              default = null;
+              description = "Path to rclone.conf file (if not using environment variables).";
+            };
+
+            environmentFile = mkOption {
+              type = nullOr path;
+              default = null;
+              description = "Path to sops-decrypted or env file containing rclone secrets.";
+            };
+
+            calendar = mkOption {
+              type = str;
+              default = "04:00";
+              description = "Systemd timer calendar expression (when to run the backup).";
+            };
+
+            retentionDays = mkOption {
+              type = int;
+              default = 7;
+              description = "Number of days to keep local and remote backups.";
+            };
           };
         };
       }));
@@ -134,5 +173,56 @@ in
           iptables -D INPUT -p tcp --dport ${port} -j ACCEPT || true
         '') uniquePorts;
       };
+
+    systemd.services = mapAttrs' (
+      name: server:
+      nameValuePair "minecraft-backup-${name}" {
+        description = "Scheduled rclone backup for Minecraft server ${name}";
+        wants = [ "network-online.target" ];
+        after = [
+          "network-online.target"
+          "sops-nix.service"
+        ];
+
+        path = with pkgs; [
+          bash
+          findutils
+          gnutar
+          gzip
+          rclone
+          systemd
+          tmux
+        ];
+
+        environment = {
+          SERVER_NAME = name;
+          RCLONE_REMOTE = server.backup.remote;
+          RETENTION_DAYS = toString server.backup.retentionDays;
+          RCLONE_CONFIG_FILE = optionalString (server.backup.rcloneConfigFile != null) (
+            toString server.backup.rcloneConfigFile
+          );
+        };
+
+        serviceConfig = {
+          Type = "oneshot";
+          User = "minecraft";
+          Group = "minecraft";
+          EnvironmentFile = optional (server.backup.environmentFile != null) server.backup.environmentFile;
+          ExecStart = "${pkgs.bash}/bin/bash ${./backup.sh}";
+        };
+      }
+    ) enabledBackupServers;
+
+    systemd.timers = mapAttrs' (
+      name: server:
+      nameValuePair "minecraft-backup-${name}" {
+        description = "Timer for scheduled rclone backup for Minecraft server ${name}";
+        wantedBy = [ "timers.target" ];
+        timerConfig = {
+          OnCalendar = server.backup.calendar;
+          Persistent = true;
+        };
+      }
+    ) enabledBackupServers;
   };
 }

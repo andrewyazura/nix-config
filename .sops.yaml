@@ -62,3 +62,10 @@ creation_rules:
     - age:
       - *yorhaA2
     format: binary
+
+  - path_regex: secrets/rclone-gdrive-andrewyazura-config
+    key_groups:
+    - age:
+      - *bunker
+      - *yorha2b
+    format: binary
