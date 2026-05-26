@@ -32,6 +32,5 @@ wk.add({
 	{ "<leader>q", group = "+session" },
 	{ "<leader>t", group = "+test" },
 	{ "<leader>u", desc = "toggle undo tree" },
-	{ "<leader>w", proxy = "<C-w>", group = "+windows" },
 	{ "<leader>x", group = "+trouble" },
 })

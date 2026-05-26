@@ -38,6 +38,13 @@ in
   };
 
   config = mkIf cfg.enable {
+    home.packages = with pkgs; [
+      grim
+      playerctl
+      slurp
+      wl-clipboard
+    ];
+
     wayland.windowManager.hyprland = {
       enable = true;
       package = hyprlandPkgs.hyprland;
