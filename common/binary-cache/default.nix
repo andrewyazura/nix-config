@@ -19,7 +19,7 @@ in
       ];
 
       trusted-public-keys = [
-        "main:T8v5SdwjNhvJowlHJFFNB1O9PbXyLrZ+vRKe7OWGCa8="
+        "main:3p3SLFLPh7NUwZ/1940Ez5F3DX/LmMOfJeWSoMaSgxI="
       ];
 
       netrc-file = "/run/secrets/netrc";
