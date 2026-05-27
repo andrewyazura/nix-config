@@ -1,6 +1,12 @@
 const std = @import("std");
 const mem = std.mem;
-const targets = [_][]const u8{ "nvim", "lazygit", "gemini", "claude" };
+
+const targets = std.StaticStringMap([]const u8).initComptime(.{
+    .{ "nvim",            ":nvim" },
+    .{ "lazygit",         ":lazygit" },
+});
+
+const nix_shell_prefix = ":bash --rcfile /private/tmp/nix-shell";
 
 pub fn main(init: std.process.Init) !void {
     const alloc = std.heap.smp_allocator;
@@ -13,8 +19,7 @@ pub fn main(init: std.process.Init) !void {
 
     const cwd = std.Io.Dir.cwd();
 
-    const limit = 1024 * 1024;
-    const resurrect_save_buffer = try cwd.readFileAlloc(io, resurrect_path, alloc, .limited(limit));
+    const resurrect_save_buffer = try cwd.readFileAlloc(io, resurrect_path, alloc, .limited(1024 * 1024));
     defer alloc.free(resurrect_save_buffer);
 
     const tmp_path = try mem.concat(alloc, u8, &.{ resurrect_path, ".tmp" });
@@ -32,17 +37,27 @@ pub fn main(init: std.process.Init) !void {
         }
 
         var columns: [11][]const u8 = undefined;
-        var iterator = mem.splitScalar(u8, line, '\t');
+        var col_iter = mem.splitScalar(u8, line, '\t');
         for (&columns) |*c| {
-            c.* = iterator.next() orelse break;
+            c.* = col_iter.next() orelse break;
         }
 
-        std.debug.print("{s}\n", .{columns[9]});
-        std.debug.print("{s}\n\n", .{columns[10]});
+        const replacement: []const u8 =
+            if (targets.get(columns[9])) |cmd| cmd
+            else if (mem.startsWith(u8, columns[10], nix_shell_prefix)) ":"
+            else "";
 
-        try tmp_file.writeStreamingAll(io, line);
-        try tmp_file.writeStreamingAll(io, "\n");
-        continue;
+        if (replacement.len > 0) {
+            for (columns[0..10]) |col| {
+                try tmp_file.writeStreamingAll(io, col);
+                try tmp_file.writeStreamingAll(io, "\t");
+            }
+            try tmp_file.writeStreamingAll(io, replacement);
+            try tmp_file.writeStreamingAll(io, "\n");
+        } else {
+            try tmp_file.writeStreamingAll(io, line);
+            try tmp_file.writeStreamingAll(io, "\n");
+        }
     }
 
     try std.Io.Dir.renameAbsolute(tmp_path, resurrect_path, io);
