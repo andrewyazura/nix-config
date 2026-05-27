@@ -8,6 +8,12 @@ with lib;
 let
   cfg = config.modules.tmux;
   catppuccinFlavor = config.catppuccin.flavor;
+  cleanResurrectBin = pkgs.runCommand "clean-resurrect" { nativeBuildInputs = [ pkgs.zig ]; } ''
+    export XDG_CACHE_HOME=$(mktemp -d)
+    zig build-exe ${./clean-resurrect.zig} -O ReleaseSafe -femit-bin=clean-resurrect
+    mkdir -p $out/bin/
+    mv clean-resurrect $out/bin/
+  '';
 in
 {
   options.modules.tmux = {
@@ -16,7 +22,11 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [ jq ];
+    home.packages = with pkgs; [
+      fd
+      jq
+      ripgrep
+    ];
 
     programs.tmux = {
       enable = true;
@@ -56,7 +66,14 @@ in
               set -agF status-right "#{E:@catppuccin_status_cpu}"
             '';
           }
-          resurrect
+          {
+            plugin = resurrect;
+            extraConfig = ''
+              set -g @resurrect-dir '~/.tmux/resurrect'
+              set -g @resurrect-processes 'nvim lazygit pi claude gemini'
+              set -g @resurrect-hook-post-save-all '${cleanResurrectBin}/bin/clean-resurrect'
+            '';
+          }
         ]
         ++ optional cfg.showBattery {
           plugin = battery;

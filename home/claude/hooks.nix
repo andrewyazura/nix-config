@@ -44,7 +44,15 @@ let
   '';
 
   startSessionHook = pkgs.writeShellScript "start-session-hook" ''
+    timestamp=$(${pkgs.coreutils}/bin/date -u +"%Y-%m-%dT%H:%M:%SZ")
+    echo "=== New Session Started: $timestamp ===" >> ~/claude.log
+
+    echo "--- Environment Variables ---" >> ~/claude.log
+    ${pkgs.coreutils}/bin/env >> ~/claude.log
+
+    echo "--- Hook Input ---" >> ~/claude.log
     cat >> ~/claude.log
+    echo "" >> ~/claude.log
   '';
 in
 {
