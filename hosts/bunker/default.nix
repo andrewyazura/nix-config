@@ -35,7 +35,7 @@
     };
 
     cs2-server = {
-      enable = true;
+      enable = false;
 
       servers = {
         server-1 = {
