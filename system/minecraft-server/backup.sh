@@ -5,11 +5,12 @@ set -euo pipefail
 # - SERVER_NAME
 # - RCLONE_REMOTE
 # - RETENTION_DAYS
+# - RCLONE_SECRET_CONFIG (optional, path to read-only sops secret)
 
 DATA_DIR="/srv/minecraft/$SERVER_NAME"
 BACKUP_DIR="/tmp/minecraft-backup"
 DATE=$(date +%Y-%m-%d_%H-%M-%S)
-BACKUP_FILE="$BACKUP_DIR/${SERVER_NAME}_backup_${DATE}.tar.gz"
+BACKUP_FILE="$BACKUP_DIR/${SERVER_NAME}_backup_${DATE}.tar"
 
 echo "Starting backup for server: $SERVER_NAME..."
 mkdir -p "$BACKUP_DIR"
@@ -56,8 +57,8 @@ else
   echo "Server is not running. Backing up files offline."
 fi
 
-echo "Compressing world files..."
-tar -czf "$BACKUP_FILE" -C "$DATA_DIR" "world"
+echo "Archiving world files..."
+tar -cf "$BACKUP_FILE" -C "$DATA_DIR" "world"
 
 if [ "$SERVER_RUNNING" -eq 1 ]; then
   send_command "save-on"
@@ -65,16 +66,18 @@ if [ "$SERVER_RUNNING" -eq 1 ]; then
 fi
 
 echo "Uploading backup to remote: $RCLONE_REMOTE..."
-# Since config is copied to the default path (~/.config/rclone/rclone.conf),
-# rclone will natively load it without requiring a custom --config flag.
-rclone copy "$BACKUP_FILE" "$RCLONE_REMOTE/$SERVER_NAME"
+# Since the config is copied to our writable temp path and exported via RCLONE_CONFIG,
+# rclone will natively load and update it without requiring a custom --config flag.
+# We pass --verbose to output upload progress/speed to journalctl logs, and
+# --non-interactive to immediately fail with a clear error rather than hanging if prompted.
+rclone copy --verbose --non-interactive --drive-chunk-size 256M "$BACKUP_FILE" "$RCLONE_REMOTE/$SERVER_NAME"
 
 echo "Backup uploaded successfully."
 
 echo "Cleaning up local backups older than $RETENTION_DAYS days..."
-find "$BACKUP_DIR" -name "${SERVER_NAME}_backup_*.tar.gz" -mtime +"$RETENTION_DAYS" -type f -delete
+find "$BACKUP_DIR" -name "${SERVER_NAME}_backup_*.tar" -mtime +"$RETENTION_DAYS" -type f -delete
 
 echo "Cleaning up remote backups older than $RETENTION_DAYS days..."
-rclone delete "$RCLONE_REMOTE/$SERVER_NAME" --min-age "${RETENTION_DAYS}d" --rmdirs
+rclone delete --verbose --non-interactive "$RCLONE_REMOTE/$SERVER_NAME" --min-age "${RETENTION_DAYS}d" --rmdirs
 
 echo "Backup process completed!"
