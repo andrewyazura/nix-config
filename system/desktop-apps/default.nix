@@ -26,6 +26,7 @@ in
       qbittorrent
       signal-desktop
       spotify
+      vesktop
     ];
   };
 }
