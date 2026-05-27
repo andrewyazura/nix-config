@@ -201,7 +201,9 @@ in
           SERVER_NAME = name;
           RCLONE_REMOTE = server.backup.remote;
           RETENTION_DAYS = toString server.backup.retentionDays;
-          RCLONE_SECRET_CONFIG = optionalString (server.backup.rcloneConfigFile != null) (toString server.backup.rcloneConfigFile);
+          RCLONE_SECRET_CONFIG = optionalString (server.backup.rcloneConfigFile != null) (
+            toString server.backup.rcloneConfigFile
+          );
         };
 
         serviceConfig = {
