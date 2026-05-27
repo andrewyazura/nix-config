@@ -5,7 +5,6 @@ set -euo pipefail
 # - SERVER_NAME
 # - RCLONE_REMOTE
 # - RETENTION_DAYS
-# - RCLONE_CONFIG_FILE (optional)
 
 DATA_DIR="/srv/minecraft/$SERVER_NAME"
 BACKUP_DIR="/tmp/minecraft-backup"
@@ -14,6 +13,24 @@ BACKUP_FILE="$BACKUP_DIR/${SERVER_NAME}_backup_${DATE}.tar.gz"
 
 echo "Starting backup for server: $SERVER_NAME..."
 mkdir -p "$BACKUP_DIR"
+
+# Securely sync the read-only sops-nix secret (if provided via RCLONE_SECRET_CONFIG)
+# to a writable copy inside our temporary backup directory (which is fully owned and
+# writable by the minecraft user).
+WRITABLE_RCLONE_CONFIG="$BACKUP_DIR/rclone.conf"
+
+if [ -n "${RCLONE_SECRET_CONFIG:-}" ] && [ -f "$RCLONE_SECRET_CONFIG" ]; then
+  if [ ! -f "$WRITABLE_RCLONE_CONFIG" ] || [ "$RCLONE_SECRET_CONFIG" -nt "$WRITABLE_RCLONE_CONFIG" ]; then
+    echo "Syncing latest rclone configuration from secrets..."
+    mkdir -p "$(dirname "$WRITABLE_RCLONE_CONFIG")"
+    cp "$RCLONE_SECRET_CONFIG" "$WRITABLE_RCLONE_CONFIG"
+    chmod 600 "$WRITABLE_RCLONE_CONFIG"
+  fi
+fi
+
+# Export the standard RCLONE_CONFIG environment variable so rclone natively uses our writable copy.
+# This permits rclone to successfully write back refreshed Google Drive OAuth tokens.
+export RCLONE_CONFIG="$WRITABLE_RCLONE_CONFIG"
 
 send_command() {
   local cmd="$1"
@@ -40,7 +57,6 @@ else
 fi
 
 echo "Compressing world files..."
-# Compress only the "world" folder inside the server's data directory
 tar -czf "$BACKUP_FILE" -C "$DATA_DIR" "world"
 
 if [ "$SERVER_RUNNING" -eq 1 ]; then
@@ -49,12 +65,9 @@ if [ "$SERVER_RUNNING" -eq 1 ]; then
 fi
 
 echo "Uploading backup to remote: $RCLONE_REMOTE..."
-RCLONE_CMD=("rclone")
-if [ -n "${RCLONE_CONFIG_FILE:-}" ]; then
-  RCLONE_CMD+=("--config" "$RCLONE_CONFIG_FILE")
-fi
-RCLONE_CMD+=("copy" "$BACKUP_FILE" "$RCLONE_REMOTE/$SERVER_NAME")
-"${RCLONE_CMD[@]}"
+# Since config is copied to the default path (~/.config/rclone/rclone.conf),
+# rclone will natively load it without requiring a custom --config flag.
+rclone copy "$BACKUP_FILE" "$RCLONE_REMOTE/$SERVER_NAME"
 
 echo "Backup uploaded successfully."
 
@@ -62,11 +75,6 @@ echo "Cleaning up local backups older than $RETENTION_DAYS days..."
 find "$BACKUP_DIR" -name "${SERVER_NAME}_backup_*.tar.gz" -mtime +"$RETENTION_DAYS" -type f -delete
 
 echo "Cleaning up remote backups older than $RETENTION_DAYS days..."
-RCLONE_DEL_CMD=("rclone")
-if [ -n "${RCLONE_CONFIG_FILE:-}" ]; then
-  RCLONE_DEL_CMD+=("--config" "$RCLONE_CONFIG_FILE")
-fi
-RCLONE_DEL_CMD+=("delete" "$RCLONE_REMOTE/$SERVER_NAME" "--min-age" "${RETENTION_DAYS}d" --rmdirs)
-"${RCLONE_DEL_CMD[@]}"
+rclone delete "$RCLONE_REMOTE/$SERVER_NAME" --min-age "${RETENTION_DAYS}d" --rmdirs
 
 echo "Backup process completed!"

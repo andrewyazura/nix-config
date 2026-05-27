@@ -51,7 +51,7 @@ in
             rcloneConfigFile = mkOption {
               type = nullOr path;
               default = null;
-              description = "Path to rclone.conf file (if not using environment variables).";
+              description = "Path to the read-only decrypted sops-nix secret configuration file.";
             };
 
             environmentFile = mkOption {
@@ -201,9 +201,7 @@ in
           SERVER_NAME = name;
           RCLONE_REMOTE = server.backup.remote;
           RETENTION_DAYS = toString server.backup.retentionDays;
-          RCLONE_CONFIG_FILE = optionalString (server.backup.rcloneConfigFile != null) (
-            toString server.backup.rcloneConfigFile
-          );
+          RCLONE_SECRET_CONFIG = optionalString (server.backup.rcloneConfigFile != null) (toString server.backup.rcloneConfigFile);
         };
 
         serviceConfig = {
