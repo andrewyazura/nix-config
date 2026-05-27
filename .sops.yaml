@@ -29,6 +29,7 @@ creation_rules:
     key_groups:
     - age:
       - *bunker
+      - *yorha2b
       - *yorhaA2
     format: dotenv
 
@@ -36,6 +37,7 @@ creation_rules:
     key_groups:
     - age:
       - *bunker
+      - *yorha2b
       - *yorhaA2
     format: dotenv
 
