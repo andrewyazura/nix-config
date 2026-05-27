@@ -20,6 +20,7 @@ in
       ];
 
       casks = [
+        "antigravity-cli"
         "blender"
         "bruno"
         "dbeaver-community"
