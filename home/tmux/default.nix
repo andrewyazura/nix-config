@@ -44,16 +44,12 @@ in
             plugin = catppuccin;
             extraConfig = ''
               set -g @catppuccin_flavor "${catppuccinFlavor}"
-              set -g @catppuccin_window_status_style "basic"
 
               set -g @catppuccin_window_number "#I"
               set -g @catppuccin_window_text " #W"
 
               set -g @catppuccin_window_current_number "#I"
               set -g @catppuccin_window_current_text " #W"
-
-              set -g @catppuccin_status_left_separator "█"
-              set -g @catppuccin_status_right_separator "█"
 
               set -g status-left ""
               set -g status-right "#{E:@catppuccin_status_session}"

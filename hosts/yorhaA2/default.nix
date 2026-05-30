@@ -44,7 +44,9 @@ in
     backupFileExtension = "backup";
     useGlobalPkgs = true;
     useUserPackages = true;
-    extraSpecialArgs = { inherit inputs hostname; };
+    extraSpecialArgs = {
+      inherit inputs hostname;
+    };
     sharedModules = [
       inputs.catppuccin.homeModules.catppuccin
       inputs.private-config.homeManagerModules.default
@@ -57,13 +59,6 @@ in
         ../../users/andrew/home
         ../../users/andrew/home/yorhaA2
       ];
-
-      modules = {
-        ghostty = {
-          fontFamily = "SFMono Nerd Font";
-          fontStyle = "SemiBold";
-        };
-      };
 
       home.homeDirectory = lib.mkForce "/Users/${username}";
     };

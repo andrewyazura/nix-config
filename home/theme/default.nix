@@ -29,6 +29,7 @@ in
     {
       catppuccin = {
         enable = true;
+        autoEnable = true;
         flavor = cfg.flavor;
         accent = "mauve";
 
