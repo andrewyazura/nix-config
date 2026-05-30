@@ -22,7 +22,7 @@
   programs = {
     ssh = {
       includes = [ config.sops.secrets.ssh-config.path ];
-      matchBlocks = {
+      settings = {
         "bunker" = {
           identityFile = "~/.ssh/id_ed25519_yorha2b_bunker_1801";
         };
