@@ -81,17 +81,30 @@
     };
   };
 
-  boot.loader = {
-    grub = {
-      enable = true;
-      device = "nodev";
-      efiSupport = true;
-      configurationLimit = 10;
-      gfxmodeEfi = "2560x1440";
+  boot = {
+    supportedFilesystems = [ "zfs" ];
+    zfs = {
+      forceImportRoot = false;
+      extraPools = [
+        "disk_alpha"
+        "disk_beta"
+      ];
     };
 
-    efi.canTouchEfiVariables = true;
+    loader = {
+      grub = {
+        enable = true;
+        device = "nodev";
+        efiSupport = true;
+        configurationLimit = 10;
+        gfxmodeEfi = "2560x1440";
+      };
+
+      efi.canTouchEfiVariables = true;
+    };
   };
+
+  networking.hostId = "a0489983";
 
   hardware.graphics = {
     enable = true;
