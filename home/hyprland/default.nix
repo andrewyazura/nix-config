@@ -72,6 +72,7 @@ in
             no_focus_fallback = true;
             resize_on_border = true;
             layout = "hy3";
+            allow_tearing = true;
           };
 
           decoration = {
@@ -109,6 +110,19 @@ in
             sensitivity = 0;
           };
         };
+
+        window_rule = [
+          {
+            _args = [
+              {
+                match = {
+                  class = "cs2";
+                };
+                immediate = true;
+              }
+            ];
+          }
+        ];
 
         device = [
           {
