@@ -68,9 +68,8 @@ fi
 echo "Uploading backup to remote: $RCLONE_REMOTE..."
 # Since the config is copied to our writable temp path and exported via RCLONE_CONFIG,
 # rclone will natively load and update it without requiring a custom --config flag.
-# We pass --verbose to output upload progress/speed to journalctl logs, and
-# --non-interactive to immediately fail with a clear error rather than hanging if prompted.
-rclone copy --verbose --non-interactive --drive-chunk-size 256M "$BACKUP_FILE" "$RCLONE_REMOTE/$SERVER_NAME"
+# We pass --verbose to output upload progress/speed to journalctl logs.
+rclone copy --verbose --drive-chunk-size 256M "$BACKUP_FILE" "$RCLONE_REMOTE/$SERVER_NAME"
 
 echo "Backup uploaded successfully."
 
@@ -78,6 +77,6 @@ echo "Cleaning up local backups older than $RETENTION_DAYS days..."
 find "$BACKUP_DIR" -name "${SERVER_NAME}_backup_*.tar" -mtime +"$RETENTION_DAYS" -type f -delete
 
 echo "Cleaning up remote backups older than $RETENTION_DAYS days..."
-rclone delete --verbose --non-interactive "$RCLONE_REMOTE/$SERVER_NAME" --min-age "${RETENTION_DAYS}d" --rmdirs
+rclone delete --verbose "$RCLONE_REMOTE/$SERVER_NAME" --min-age "${RETENTION_DAYS}d" --rmdirs
 
 echo "Backup process completed!"
