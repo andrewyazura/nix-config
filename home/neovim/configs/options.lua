@@ -70,6 +70,12 @@ vim.lsp.config("lua_ls", {
 	},
 })
 
+vim.lsp.enable("gopls")
+vim.lsp.config("gopls", {
+	cmd = { "gopls" },
+	filetypes = { "go", "gomod", "gowork", "gotmpl" },
+})
+
 vim.lsp.enable("nil_ls")
 vim.lsp.config("nil_ls", {
 	cmd = { "nil" },

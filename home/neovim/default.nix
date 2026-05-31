@@ -56,6 +56,7 @@ in
         stylua
 
         # lsp servers
+        gopls
         lua-language-server
         nil
         ty
