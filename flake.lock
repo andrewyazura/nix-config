@@ -109,11 +109,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1780321451,
-        "narHash": "sha256-JNoY/u3cebTJ8MSAFYl9zrBsiDXoska+JXfxob1QOVQ=",
+        "lastModified": 1780322945,
+        "narHash": "sha256-mZKRU596LNKiu239bzyAoEjLnQ/zLMCGwIudq0UAsYw=",
         "ref": "refs/heads/main",
-        "rev": "e0105f2cc74e111c3ca128ca8046efeec25e1365",
-        "revCount": 34,
+        "rev": "28d85948ece84ae5d0c2701724e4c563069f39d1",
+        "revCount": 35,
         "type": "git",
         "url": "ssh://git@github.com/andrewyazura/bingo.git"
       },
