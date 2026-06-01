@@ -15,6 +15,7 @@
 
     ./apps/attic.nix
     ./apps/beast-music.nix
+    ./apps/bingo.nix
     ./apps/birthday-api.nix
     ./apps/birthday-bot.nix
     ./apps/stresses-bot.nix

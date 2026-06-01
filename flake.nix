@@ -53,6 +53,7 @@
 
     attic.url = "github:zhaofengli/attic";
     beast-music-app.url = "git+ssh://git@github.com/yaroslavpashynskyi/BeastMusic.git";
+    bingo-app.url = "git+ssh://git@github.com/andrewyazura/bingo.git";
     birthday-api-app.url = "github:orehzzz/birthday-api";
     birthday-bot-app.url = "github:orehzzz/birthday-telegram-bot";
     catppuccin.url = "github:catppuccin/nix";
