@@ -19,6 +19,7 @@ in
       inputs.ghostty.packages.x86_64-linux.default
 
       bruno
+      dbeaver-bin
     ];
   };
 }
