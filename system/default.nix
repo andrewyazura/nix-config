@@ -16,6 +16,7 @@
     ./nix
     ./profiles
     ./sway
+    ./tailscale
     ./wooting
   ];
 }
