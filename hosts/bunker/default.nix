@@ -65,7 +65,7 @@
           remote = "gdrive-andrewyazura:minecraft-backups";
           rcloneConfigFile = config.sops.secrets.rclone-config.path;
           calendar = "04:00";
-          retentionDays = 7;
+          retentionDays = 1;
         };
       };
     };

@@ -68,7 +68,7 @@ in
 
             retentionDays = mkOption {
               type = int;
-              default = 7;
+              default = 1;
               description = "Number of days to keep local and remote backups.";
             };
           };
