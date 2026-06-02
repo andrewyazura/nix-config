@@ -9,8 +9,11 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    services.tailscale = {
-      enable = true;
+    services = {
+      tailscale.enable = true;
+      openssh.enable = true;
     };
+
+    programs.mosh.enable = true;
   };
 }
