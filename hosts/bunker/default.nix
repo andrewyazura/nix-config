@@ -85,7 +85,7 @@
   };
 
   documentation.nixos.enable = false;
-  time.timeZone = lib.mkForce "Europe/London";
+  time.timeZone = lib.mkForce "UTC";
   console.keyMap = "us";
 
   boot = {
