@@ -53,6 +53,7 @@ in
       plugins = with hyprlandPlugins; [
         csgo-vulkan-fix
         hy3Pkgs.hy3
+        hyprbars
       ];
 
       configType = "lua";

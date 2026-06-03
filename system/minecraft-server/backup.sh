@@ -73,10 +73,10 @@ rclone copy --verbose --drive-chunk-size 256M "$BACKUP_FILE" "$RCLONE_REMOTE/$SE
 
 echo "Backup uploaded successfully."
 
-echo "Cleaning up local backups older than $RETENTION_DAYS days..."
-find "$BACKUP_DIR" -name "${SERVER_NAME}_backup_*.tar" -mtime +"$RETENTION_DAYS" -type f -delete
+# Add a 30-minute buffer to account for minor daily timing fluctuations
+RETENTION_MINUTES=$((RETENTION_DAYS * 24 * 60 - 30))
 
-echo "Cleaning up remote backups older than $RETENTION_DAYS days..."
-rclone delete --verbose "$RCLONE_REMOTE/$SERVER_NAME" --min-age "${RETENTION_DAYS}d" --rmdirs
+echo "Cleaning up local backups older than $RETENTION_DAYS days..."
+find "$BACKUP_DIR" -name "${SERVER_NAME}_backup_*.tar" -mmin +"$RETENTION_MINUTES" -type f -delete
 
 echo "Backup process completed!"
