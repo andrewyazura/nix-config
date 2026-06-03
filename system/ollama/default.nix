@@ -17,11 +17,14 @@ in
   config = lib.mkIf cfg.enable {
     services.ollama = {
       enable = true;
+      host = "0.0.0.0";
       package = pkgs.ollama-rocm;
       models = cfg.modelsPath;
       environmentVariables = {
         HSA_OVERRIDE_GFX_VERSION = "11.0.0";
       };
     };
+
+    networking.firewall.interfaces."podman+".allowedTCPPorts = [ 11434 ];
   };
 }

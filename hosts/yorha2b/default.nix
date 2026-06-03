@@ -3,6 +3,7 @@
   imports = [
     ./hardware-configuration.nix
     ../../users/andrew/system
+    ../../users/andrew/system/yorha2b
 
     inputs.private-config.nixosModules.default
   ];
