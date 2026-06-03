@@ -14,6 +14,7 @@
     ./minecraft-server
     ./networking
     ./nix
+    ./ollama
     ./profiles
     ./sway
     ./tailscale

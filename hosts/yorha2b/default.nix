@@ -16,6 +16,7 @@
 
     gnome.enable = false;
     hyprland.enable = true;
+    ollama.enable = true;
     tailscale.enable = true;
     wooting.enable = true;
   };
