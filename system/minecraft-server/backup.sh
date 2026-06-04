@@ -8,7 +8,7 @@ set -euo pipefail
 # - RCLONE_SECRET_CONFIG (optional, path to read-only sops secret)
 
 DATA_DIR="/srv/minecraft/$SERVER_NAME"
-BACKUP_DIR="/tmp/minecraft-backup"
+BACKUP_DIR="/tmp/minecraft-backup-$SERVER_NAME"
 DATE=$(date +%Y-%m-%d_%H-%M-%S)
 BACKUP_FILE="$BACKUP_DIR/${SERVER_NAME}_backup_${DATE}.tar"
 
@@ -24,6 +24,7 @@ if [ -n "${RCLONE_SECRET_CONFIG:-}" ] && [ -f "$RCLONE_SECRET_CONFIG" ]; then
   if [ ! -f "$WRITABLE_RCLONE_CONFIG" ] || [ "$RCLONE_SECRET_CONFIG" -nt "$WRITABLE_RCLONE_CONFIG" ]; then
     echo "Syncing latest rclone configuration from secrets..."
     mkdir -p "$(dirname "$WRITABLE_RCLONE_CONFIG")"
+    rm -f "$WRITABLE_RCLONE_CONFIG"
     cp "$RCLONE_SECRET_CONFIG" "$WRITABLE_RCLONE_CONFIG"
     chmod 600 "$WRITABLE_RCLONE_CONFIG"
   fi
