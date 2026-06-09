@@ -17,6 +17,7 @@ in
     networking = {
       hostName = hostname;
       networkmanager.enable = true;
+      networkmanager.wifi.powersave = false;
       nameservers = [ "1.1.1.1" ];
     };
   };
