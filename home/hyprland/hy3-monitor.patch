@@ -1,0 +1,25 @@
+diff --git a/src/Hy3Layout.cpp b/src/Hy3Layout.cpp
+index 29ec653..e447788 100644
+--- a/src/Hy3Layout.cpp
++++ b/src/Hy3Layout.cpp
+@@ -149,7 +149,7 @@ PHLWORKSPACE Hy3Layout::workspace() {
+ 	return space->workspace();
+ }
+ 
+-CMonitor* Hy3Layout::monitor() {
++Monitor::CMonitor* Hy3Layout::monitor() {
+ 	auto ws = workspace();
+ 	if (!ws) return nullptr;
+ 	return ws->m_monitor.get();
+diff --git a/src/Hy3Layout.hpp b/src/Hy3Layout.hpp
+index 7a67437..8ce82be 100644
+--- a/src/Hy3Layout.hpp
++++ b/src/Hy3Layout.hpp
+@@ -180,7 +180,7 @@ public:
+ 	Hy3Node* getNodeFromTarget(SP<Layout::ITarget> target);
+ 
+ 	PHLWORKSPACE workspace();
+-	CMonitor* monitor();
++	Monitor::CMonitor* monitor();
+ 
+ 	UP<Hy3RootNode> root;
