@@ -17,6 +17,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = [ llm-agents.antigravity ];
+    home.packages = [ llm-agents.antigravity-cli ];
   };
 }
