@@ -25,8 +25,8 @@ in
     };
   };
 
-  config = mkIf cfg.enable (mkMerge [
-    {
+  config = mkMerge [
+    (mkIf cfg.enable {
       catppuccin = {
         enable = true;
         autoEnable = true;
@@ -36,29 +36,27 @@ in
         hyprland.enable = false; # causes "attempt to call a nil value (field 'source')"
         tmux.enable = false; # configured in tmux module
       };
-    }
 
-    (mkIf pkgs.stdenv.isLinux {
-      gtk = {
+      gtk = mkIf pkgs.stdenv.isLinux {
         enable = true;
         gtk3.extraConfig.gtk-application-prefer-dark-theme = if isLight then 0 else 1;
         gtk4.extraConfig.gtk-application-prefer-dark-theme = if isLight then 0 else 1;
       };
 
-      qt = {
+      qt = mkIf pkgs.stdenv.isLinux {
         enable = true;
         platformTheme.name = "kvantum";
         style.name = "kvantum";
       };
 
-      dconf = {
+      dconf = mkIf pkgs.stdenv.isLinux {
         enable = true;
         settings."org/gnome/desktop/interface" = {
           color-scheme = if isLight then "prefer-light" else "prefer-dark";
         };
       };
 
-      services.xsettingsd = {
+      services.xsettingsd = mkIf pkgs.stdenv.isLinux {
         enable = true;
         settings = {
           "Net/ThemeName" = if isLight then "Adwaita" else "Adwaita-dark";
@@ -69,5 +67,12 @@ in
         };
       };
     })
-  ]);
+
+    (mkIf (!cfg.enable) {
+      catppuccin = {
+        enable = false;
+        autoEnable = false;
+      };
+    })
+  ];
 }
