@@ -2,27 +2,27 @@
 with pkgs;
 {
   "fabric-api" = fetchurl {
-    url = "https://cdn.modrinth.com/data/P7dR8mSH/versions/DdVHbeR1/fabric-api-0.141.1+1.21.11.jar";
-    sha512 = "0pk785blm80s8549g0v3ha2j65vpz3q8fy0gfkblvxj844kpxkh78mq2rhy4zmw7yx89hj2yh6635kidh6wk669vwwk14i2pvf4anqq";
+    url = "https://cdn.modrinth.com/data/P7dR8mSH/versions/yALY9gHM/fabric-api-0.151.0%2B26.1.2.jar";
+    sha512 = "3fkqc6i51srfzy1p7339zg18hr64fa3kgnw7hpiw2m0dipzkgym1k94i6pdscz6bm1q7mzl91w56py7ggpzjj4jm15l2qmr8ac391yh";
   };
   "skin-restorer" = fetchurl {
-    url = "https://cdn.modrinth.com/data/ghrZDhGW/versions/8K5Fuf9S/skinrestorer-2.4.3+1.21.11-fabric.jar";
-    sha512 = "1wv85zxwbm61xmimjf1zxh25cldqir3ghyd08376mq144lvyix4z92wgb730m4nhliizhazxqkz0mrc316gbkcpj1lz2yz038y0868s";
+    url = "https://cdn.modrinth.com/data/ghrZDhGW/versions/9MoU6vsD/skinrestorer-2.8.0%2B26.1-fabric.jar";
+    sha512 = "0bfxbcn6a1jm1rk40j847xy210ad528acd7mymrarqk93vyl8fnnkprbcqb5hhbwvs4vyvm58k9yqqlxrbwgjp56hn9dyqcd8dg0hgr";
   };
   "lithium" = fetchurl {
-    url = "https://cdn.modrinth.com/data/gvQqBUqZ/versions/gl30uZvp/lithium-fabric-0.21.2+mc1.21.11.jar";
-    sha512 = "2v3nv6wl4jmnjw924zk1jf1ppgq78asgb14sv2p1xk6ad3vs2a6s12z45c8d1jzrnqaa6zr41igycn9cfjdidp2qbqsl39y0485aqll";
+    url = "https://cdn.modrinth.com/data/gvQqBUqZ/versions/GiCfpS6V/lithium-fabric-0.24.5%2Bmc26.1.2.jar";
+    sha512 = "0vsv0pm0dcdj2fbds8jxg974qb15y7pdikclrbzgpipx63y5hzy4ag2c80phnnv6pjd6gy72s8py32q90nkvllp7fz7ckch5lsvscaw";
   };
   "vanish" = fetchurl {
-    url = "https://cdn.modrinth.com/data/UL4bJFDY/versions/NpTm6CT2/vanish-1.6.6+1.21.11.jar";
-    sha512 = "29369705ldwn50j3wh763v00grxsaafk2gnxxrsxr2l6xmh12vnwnn7ln7qcc8z71bf7z6c79g7ikq0851r378bp7c99xlmyiwxfjs1";
+    url = "https://cdn.modrinth.com/data/UL4bJFDY/versions/MAfndrvo/vanish-1.6.9%2B26.1.2.jar";
+    sha512 = "1v3wyjfwdkx00dzyc01z2v0djkkk8r9yqjxswcc98ycw67n7x0y9fgvhsv1l8w901dkdx2v68ak8v75bbzp812wv1pqlznj9a0kqw7g";
   };
   "proxy-protocol-support" = fetchurl {
-    url = "https://cdn.modrinth.com/data/mfONdVnp/versions/pvePrqOz/proxy-protocol-support-1.1.0-fabric.jar";
-    sha512 = "343lzllrcqa2d7nz4y1jdzbh2jm3x9jrfmkmm4aiacmb6rwbab1awlw5jzlx4gq1qxz1fjmr5vkfwdp58rfv76r1iplx4jrvksngl37";
+    url = "https://cdn.modrinth.com/data/mfONdVnp/versions/ULyNKtAz/proxy-protocol-support-1.2.1-fabric.jar";
+    sha512 = "1p5bvlw01wfqfwf32b3jvp05f5bfz91sahczy9g2ykwhlzkxs74rzkj20bbhbrnk13qj5jpis31y60pr8haf0j42bz75233wganf0m1";
   };
   "easy-auth" = fetchurl {
-    url = "https://cdn.modrinth.com/data/aZj58GfX/versions/LPQE6Dfu/easyauth-mc1.21.11-3.4.1.jar";
-    sha512 = "3n1wngbrvlg1k9wlvwp7ca226080cj9n57d15a0cj2iizahzfvc6wpnjgyh9kcf78s8c7f5qczlhps785zc4vrx1px6ql90l8br89x8";
+    url = "https://cdn.modrinth.com/data/aZj58GfX/versions/h9nSM2ZF/easyauth-mc26.1-3.4.3-SNAPSHOT.48.jar";
+    sha512 = "1rx1d55jskkhh3i8rxkkzzk8whrba2d6frjkckal29wd1c2hfk0s3pm4ckwlxdwq42xdrp3kvzpllrwaxn9vbr7p6lxwd10shm8j6hb";
   };
 }

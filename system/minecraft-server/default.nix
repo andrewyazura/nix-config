@@ -96,7 +96,7 @@ in
           serverTemplate = {
             enable = true;
             enableReload = true;
-            package = pkgs.fabricServers.fabric-26_1_2;
+            package = pkgs.fabricServers.fabric-26_1_2.override { jre_headless = pkgs.jdk25_headless; };
 
             symlinks.mods = pkgs.linkFarmFromDrvs "mods" (attrValues mods);
 
@@ -116,7 +116,7 @@ in
           customServers = {
             bombas = {
               serverProperties = {
-                motd = "\\u00A7a\\u00A7l8 let dambili\\u00A7r\\u00A7r";
+                motd = "[26.1.2] \\u00A7a\\u00A7l8 let dambili\\u00A7r\\u00A7r";
               };
 
               symlinks = {
