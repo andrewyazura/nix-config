@@ -96,7 +96,7 @@ in
           serverTemplate = {
             enable = true;
             enableReload = true;
-            package = pkgs.fabricServers.fabric-1_21_11;
+            package = pkgs.fabricServers.fabric-26_1_2;
 
             symlinks.mods = pkgs.linkFarmFromDrvs "mods" (attrValues mods);
 
