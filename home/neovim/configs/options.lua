@@ -109,7 +109,7 @@ vim.lsp.enable("kotlin_ls")
 vim.lsp.config("kotlin_ls", {
 	cmd = { "/opt/homebrew/bin/kotlin-lsp", "--stdio" },
 	filetypes = { "kotlin" },
-	root_markers = { "settings.gradle.kts", "settings.gradle" },
+	root_markers = { "settings.gradle.kts", "settings.gradle", "build.gradle.kts", "build.gradle", ".git" },
 })
 
 vim.lsp.enable("zls")
