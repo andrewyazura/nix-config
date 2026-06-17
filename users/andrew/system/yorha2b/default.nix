@@ -1,5 +1,2 @@
 {
-  modules = {
-    stuff.enable = true;
-  };
 }

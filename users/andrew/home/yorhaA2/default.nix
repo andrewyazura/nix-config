@@ -9,7 +9,6 @@
 
     ideavim.enable = true;
     tmux.showBattery = true;
-    work.enable = true;
 
     theme.flavor = "mocha";
   };

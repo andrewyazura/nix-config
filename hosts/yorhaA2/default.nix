@@ -36,8 +36,6 @@ in
       development.enable = true;
       gaming.enable = true;
     };
-
-    work.enable = true;
   };
 
   home-manager = {
