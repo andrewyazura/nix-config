@@ -90,7 +90,6 @@
       forceImportRoot = false;
       extraPools = [
         "disk_alpha"
-        "disk_beta"
       ];
     };
 
