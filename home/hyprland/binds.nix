@@ -79,6 +79,8 @@ in
 
     (mkBind "SUPER + E" "function() hl.dispatch(hl.plugin.hy3.change_group('opposite')) end")
     (mkBind "SUPER + W" "function() hl.dispatch(hl.plugin.hy3.change_group('tab')) end")
+    (mkBind "SUPER + B" "function() hl.dispatch(hl.plugin.hy3.make_group('h')) end")
+    (mkBind "SUPER + V" "function() hl.dispatch(hl.plugin.hy3.make_group('v')) end")
     (mkBind "SUPER + F" "hl.dsp.window.fullscreen()")
     (mkBind "SUPER + SHIFT + N" "hl.dsp.window.float({ action = 'toggle' })")
 
