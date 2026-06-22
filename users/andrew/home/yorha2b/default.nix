@@ -1,6 +1,7 @@
 { config, ... }:
 {
   modules = {
+    cs2.enable = true;
     profiles = {
       development.enable = true;
       desktop.enable = true;

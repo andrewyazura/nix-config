@@ -4,6 +4,7 @@
     ./base-packages
     ./btop
     ./claude
+    ./cs2
     ./dev-packages
     ./difftastic
     ./direnv
