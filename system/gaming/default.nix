@@ -16,7 +16,9 @@ in
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       prismlauncher
-      steam
     ];
+
+    programs.steam.enable = true;
+    programs.gamemode.enable = true;
   };
 }

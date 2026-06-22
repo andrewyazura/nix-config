@@ -108,6 +108,8 @@
 
   networking.hostId = "a0489983";
 
+  powerManagement.cpuFreqGovernor = "performance";
+
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
