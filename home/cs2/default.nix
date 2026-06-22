@@ -9,11 +9,14 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.file.".local/share/Steam/steamapps/common/Counter-Strike Global Offensive/game/csgo/cfg/autoexec.cfg" = {
-      source = ./autoexec.cfg;
-    };
-    home.file.".local/share/Steam/steamapps/common/Counter-Strike Global Offensive/game/csgo/cfg/practice.cfg" = {
-      source = ./practice.cfg;
-    };
+    home.file.".local/share/Steam/steamapps/common/Counter-Strike Global Offensive/game/csgo/cfg/autoexec.cfg" =
+      {
+        source = ./autoexec.cfg;
+      };
+
+    home.file.".local/share/Steam/steamapps/common/Counter-Strike Global Offensive/game/csgo/cfg/practice.cfg" =
+      {
+        source = ./practice.cfg;
+      };
   };
 }
