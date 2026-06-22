@@ -24,6 +24,7 @@ in
       "signal"
       "slack"
       "spotify"
+      "stats"
       "termius"
     ];
   };
