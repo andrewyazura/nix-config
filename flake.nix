@@ -63,6 +63,7 @@
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
     private-config.url = "git+ssh://git@github.com/andrewyazura/private-nix-config.git";
     stresses-bot-app.url = "git+ssh://git@github.com/yaroslavpashynskyi/stresses-bot-nix.git";
+    nixpkgs-26-05.url = "github:nixos/nixpkgs/nixos-26.05";
   };
 
   outputs =

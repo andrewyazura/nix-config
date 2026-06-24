@@ -17,9 +17,11 @@
 
     gnome.enable = false;
     hyprland.enable = true;
+    logitech-g920.enable = true;
     ollama.enable = true;
     tailscale.enable = true;
     wooting.enable = true;
+    wivrn.enable = true;
   };
 
   home-manager.users.andrew = {
@@ -85,6 +87,17 @@
   };
 
   boot = {
+    kernelPatches = [
+      {
+        name = "amdgpu-ignore-ctx-privileges";
+        patch = pkgs.fetchpatch {
+          name = "cap_sys_nice_begone.patch";
+          url = "https://github.com/Frogging-Family/community-patches/raw/master/linux61-tkg/cap_sys_nice_begone.mypatch";
+          hash = "sha256-Y3a0+x2xvHsfLax/uwycdJf3xLxvVfkfDVqjkxNaYEo=";
+        };
+      }
+    ];
+
     supportedFilesystems = [ "zfs" ];
     zfs = {
       forceImportRoot = false;
@@ -113,6 +126,10 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
+  };
+
+  programs.steam.package = pkgs.steam.override {
+    extraBwrapArgs = [ "--bind /disk_alpha /disk_alpha" ];
   };
 
   environment.systemPackages = with pkgs; [
