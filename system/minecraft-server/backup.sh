@@ -15,6 +15,12 @@ BACKUP_FILE="$BACKUP_DIR/${SERVER_NAME}_backup_${DATE}.tar"
 echo "Starting backup for server: $SERVER_NAME..."
 mkdir -p "$BACKUP_DIR"
 
+# Add a 30-minute buffer to account for minor daily timing fluctuations
+RETENTION_MINUTES=$((RETENTION_DAYS * 24 * 60 - 30))
+
+echo "Cleaning up local backups older than $RETENTION_DAYS days..."
+find "$BACKUP_DIR" -name "${SERVER_NAME}_backup_*.tar" -mmin +"$RETENTION_MINUTES" -type f -delete
+
 # Securely sync the read-only sops-nix secret (if provided via RCLONE_SECRET_CONFIG)
 # to a writable copy inside our temporary backup directory (which is fully owned and
 # writable by the minecraft user).
@@ -73,11 +79,5 @@ echo "Uploading backup to remote: $RCLONE_REMOTE..."
 rclone copy --verbose --drive-chunk-size 256M "$BACKUP_FILE" "$RCLONE_REMOTE/$SERVER_NAME"
 
 echo "Backup uploaded successfully."
-
-# Add a 30-minute buffer to account for minor daily timing fluctuations
-RETENTION_MINUTES=$((RETENTION_DAYS * 24 * 60 - 30))
-
-echo "Cleaning up local backups older than $RETENTION_DAYS days..."
-find "$BACKUP_DIR" -name "${SERVER_NAME}_backup_*.tar" -mmin +"$RETENTION_MINUTES" -type f -delete
 
 echo "Backup process completed!"
