@@ -23,7 +23,7 @@
 
   modules = {
     beammp-server = {
-      enable = true;
+      enable = false;
 
       servers = {
         akina = {
@@ -36,13 +36,19 @@
     };
 
     cs2-server = {
-      enable = false;
+      enable = true;
 
       servers = {
         server-1 = {
           port = 27015;
           tvPort = 27020;
           tickrate = 128;
+          admins = {
+            "kenough" = {
+              identity = "76561198341773564";
+              flags = [ "@css/root" ];
+            };
+          };
           environmentFiles = [
             config.sops.secrets.cs2-env.path
           ];

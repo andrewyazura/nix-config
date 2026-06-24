@@ -31,6 +31,24 @@ in
             default = 64;
           };
 
+          map = mkOption {
+            type = str;
+            default = "de_dust2";
+          };
+
+          admins = mkOption {
+            type = attrsOf (submodule {
+              options = {
+                identity = mkOption { type = str; };
+                flags = mkOption {
+                  type = listOf str;
+                  default = [ "@css/root" ];
+                };
+              };
+            });
+            default = { };
+          };
+
           environmentFiles = mkOption {
             type = listOf str;
             default = [ ];
@@ -100,6 +118,42 @@ in
           else
             echo "CRITICAL ERROR: Could not find steamclient.so anywhere in ${installDir}"
           fi
+
+          # Install plugins
+          mkdir -p ${installDir}/game/csgo/addons ${installDir}/game/csgo/cfg
+          chmod -R +w ${installDir}/game/csgo/addons ${installDir}/game/csgo/cfg 2>/dev/null || true
+
+          cp -rfT --no-preserve=mode ${
+            pkgs.callPackage ./plugins.nix { }
+          }/addons ${installDir}/game/csgo/addons
+
+          if [ -d ${pkgs.callPackage ./plugins.nix { }}/cfg ]; then
+            cp -rnT --no-preserve=mode ${pkgs.callPackage ./plugins.nix { }}/cfg ${installDir}/game/csgo/cfg
+          fi
+
+          chmod -R +w ${installDir}/game/csgo/addons ${installDir}/game/csgo/cfg
+
+          # Inject Metamod into gameinfo.gi
+          GAMEINFO="${installDir}/game/csgo/gameinfo.gi"
+          if [ -f "$GAMEINFO" ]; then
+            if ! ${pkgs.gnugrep}/bin/grep -q "csgo/addons/metamod" "$GAMEINFO"; then
+              ${pkgs.gawk}/bin/awk '/SearchPaths/ {print; getline; print; print "\t\t\tGame\tcsgo/addons/metamod"; next} 1' "$GAMEINFO" > "$GAMEINFO.tmp"
+              mv "$GAMEINFO.tmp" "$GAMEINFO"
+            fi
+          fi
+
+          # Setup Admins
+          ${
+            if v.admins != { } then
+              ''
+                  mkdir -p ${installDir}/game/csgo/addons/counterstrikesharp/configs
+                  cat <<'EOF' > ${installDir}/game/csgo/addons/counterstrikesharp/configs/admins.json
+                ${builtins.toJSON v.admins}
+                EOF
+              ''
+            else
+              ""
+          }
         '';
 
         script = ''
@@ -113,7 +167,8 @@ in
               -tickrate ${toString v.tickrate} \
               -maxplayers 10 \
               -authkey $STEAM_WEB_API_KEY \
-              +sv_setsteamaccount $GSLT_TOKEN
+              +sv_setsteamaccount $GSLT_TOKEN \
+              +map ${v.map}
           '
         '';
       }
