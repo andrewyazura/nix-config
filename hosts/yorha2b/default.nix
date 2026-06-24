@@ -136,6 +136,10 @@
     blender
   ];
 
+  environment.sessionVariables = {
+    STEAM_COMPAT_MOUNTS = "/disk_alpha";
+  };
+
   time.timeZone = "Europe/Warsaw";
 
   system.stateVersion = "24.11";
