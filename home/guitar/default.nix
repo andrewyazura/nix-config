@@ -1,8 +1,14 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 with lib;
 let
   cfg = config.modules.guitar;
-in {
+in
+{
   options.modules.guitar = {
     enable = mkEnableOption "Enable guitar recording software and plugins";
   };
