@@ -11,8 +11,8 @@ let
   };
 
   cssharp = pkgs.fetchurl {
-    url = "https://github.com/roflmuffin/CounterStrikeSharp/releases/download/v1.0.369/counterstrikesharp-with-runtime-linux-1.0.369.zip";
-    sha256 = "1mn6rmpay6xbzxz3744jyq05p59n0bj1mkg4i5zg12b4bq2h33n4";
+    url = "https://github.com/roflmuffin/CounterStrikeSharp/releases/download/v1.0.370/counterstrikesharp-with-runtime-linux-1.0.370.zip";
+    sha256 = "0ydbwh966nsv05x8dqyclamb0r5gy4aanppwpigqfmbx8qr6cqpf";
   };
 
   matchzy = pkgs.fetchurl {
