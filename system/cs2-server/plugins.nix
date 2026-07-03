@@ -16,8 +16,8 @@ let
   };
 
   matchzy = pkgs.fetchurl {
-    url = "https://github.com/shobhit-pathak/MatchZy/releases/download/0.8.15/MatchZy-0.8.15.zip";
-    sha256 = "0mvbb21d33lqya9v8v1pkn2x6il5hjkx00k0vlalky2xavbmana2";
+    url = "https://github.com/sivert-io/MatchZy-Enhanced/releases/download/v1.4.21/MatchZy-1.4.21.zip";
+    sha256 = "0wmn49ga23yq9xxl0gjbdb3dh4r2djh7g2cdbmgjnh9wc8y09sbs";
   };
 
 in
