@@ -19,6 +19,7 @@ in
       gh
       kubectl
       tree-sitter
+      uv
       vi-mongo
     ];
   };
