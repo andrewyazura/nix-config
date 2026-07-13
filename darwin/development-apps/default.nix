@@ -20,8 +20,6 @@ in
       ];
 
       casks = [
-        "antigravity-cli"
-        "blender"
         "bruno"
         "dbeaver-community"
         "intellij-idea"
@@ -31,7 +29,6 @@ in
         "pritunl"
         "proxyman"
         "tuple"
-        "zed"
       ];
     };
   };
