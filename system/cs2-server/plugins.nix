@@ -6,13 +6,13 @@
 
 let
   metamod = pkgs.fetchurl {
-    url = "https://mms.alliedmods.net/mmsdrop/2.0/mmsource-2.0.0-git1402-linux.tar.gz";
-    sha256 = "0bhymj7dnjfa7rcn634q5bkqdn07741fz2398l2djgs79k549na7";
+    url = "https://mms.alliedmods.net/mmsdrop/2.0/mmsource-2.0.0-git1407-linux.tar.gz";
+    sha256 = "0pw3d1v3k24pgrhpn25gc7gbpjl8sy6fydin0ii71cyj400pbcs9";
   };
 
   cssharp = pkgs.fetchurl {
-    url = "https://github.com/roflmuffin/CounterStrikeSharp/releases/download/v1.0.370/counterstrikesharp-with-runtime-linux-1.0.370.zip";
-    sha256 = "0ydbwh966nsv05x8dqyclamb0r5gy4aanppwpigqfmbx8qr6cqpf";
+    url = "https://github.com/roflmuffin/CounterStrikeSharp/releases/download/v1.0.371/counterstrikesharp-with-runtime-linux-1.0.371.zip";
+    sha256 = "07fh28c21nfcvhmfbn53rdzcsa9z6s44mmf3mzzwjj23ayfnjzs4";
   };
 
   matchzy = pkgs.fetchurl {
