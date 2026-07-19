@@ -42,7 +42,7 @@
         server-1 = {
           port = 27015;
           tvPort = 27020;
-          tickrate = 128;
+          tickrate = 64;
           admins = {
             "kenough" = {
               identity = "76561198341773564";
