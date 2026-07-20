@@ -22,6 +22,7 @@ in
       casks = [
         "bruno"
         "dbeaver-community"
+        "headlamp"
         "intellij-idea"
         "lens"
         "mongodb-compass"
