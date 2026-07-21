@@ -12,7 +12,6 @@ let
   llm-agents = inputs.llm-agents.packages.${system};
 
   hooks = import ./hooks.nix { inherit lib pkgs; };
-  permissions = import ../../common/llm-permissions.nix { inherit lib; };
   statusline = import ./statusline.nix { inherit lib pkgs; };
 in
 {
@@ -78,7 +77,6 @@ in
         };
 
         inherit hooks;
-        inherit permissions;
 
         env = {
           # Default timeout for Bash tool commands in ms (default: 120000)
