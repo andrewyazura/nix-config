@@ -206,7 +206,14 @@ in
               -maxplayers 10 \
               -authkey $STEAM_WEB_API_KEY \
               +sv_setsteamaccount $GSLT_TOKEN \
-              +${if v.workshopCollection != null then "host_workshop_collection ${v.workshopCollection}" else if isNumeric v.map then "host_workshop_map ${v.map}" else "map ${v.map}"}
+              +${
+                if v.workshopCollection != null then
+                  "host_workshop_collection ${v.workshopCollection}"
+                else if isNumeric v.map then
+                  "host_workshop_map ${v.map}"
+                else
+                  "map ${v.map}"
+              }
           '
         '';
       }
