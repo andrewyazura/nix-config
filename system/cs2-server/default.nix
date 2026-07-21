@@ -7,6 +7,7 @@
 with lib;
 let
   cfg = config.modules.cs2-server;
+  isNumeric = str: builtins.match "[0-9]+" str != null;
 in
 {
   options.modules.cs2-server = with types; {
@@ -52,6 +53,18 @@ in
           environmentFiles = mkOption {
             type = listOf str;
             default = [ ];
+          };
+
+          workshopCollection = mkOption {
+            type = nullOr str;
+            default = null;
+            description = "Optional Steam Workshop collection ID to load on startup";
+          };
+
+          workshopMaps = mkOption {
+            type = listOf str;
+            default = [ ];
+            description = "List of Steam Workshop map IDs to populate in the server's mapcycle and maplist";
           };
         };
       });
@@ -154,6 +167,31 @@ in
             else
               ""
           }
+
+          # Setup Custom Workshop Maps List
+          ${
+            if v.workshopMaps != [ ] then
+              let
+                maplistContent = concatStringsSep "\n" (map (id: "ds:${id}") v.workshopMaps);
+              in
+              ''
+                mkdir -p ${installDir}/game/csgo/cfg
+                cat <<'EOF' > ${installDir}/game/csgo/mapcycle.txt
+                ${maplistContent}
+                EOF
+                cat <<'EOF' > ${installDir}/game/csgo/maplist.txt
+                ${maplistContent}
+                EOF
+                cat <<'EOF' > ${installDir}/game/csgo/cfg/mapcycle.txt
+                ${maplistContent}
+                EOF
+                cat <<'EOF' > ${installDir}/game/csgo/cfg/maplist.txt
+                ${maplistContent}
+                EOF
+              ''
+            else
+              ""
+          }
         '';
 
         script = ''
@@ -168,7 +206,7 @@ in
               -maxplayers 10 \
               -authkey $STEAM_WEB_API_KEY \
               +sv_setsteamaccount $GSLT_TOKEN \
-              +map ${v.map}
+              +${if v.workshopCollection != null then "host_workshop_collection ${v.workshopCollection}" else if isNumeric v.map then "host_workshop_map ${v.map}" else "map ${v.map}"}
           '
         '';
       }

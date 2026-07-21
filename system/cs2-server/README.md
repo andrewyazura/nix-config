@@ -96,3 +96,42 @@ nixos-rebuild --flake .#<machine-name> --target-host andrew@<machine-name> switc
 ```bash
 nix run github:serokell/deploy-rs -- .#<machine-name>
 ```
+
+---
+
+## 4. Managing Steam Workshop Maps and Collections
+You can configure Steam Workshop maps and collections directly in the Nix config.
+
+### Launching a Single Workshop Map on Startup
+To start the server directly on a Workshop map:
+1. Locate the Map ID from the Steam Workshop URL (e.g., `3070288532`).
+2. Set the `map` attribute in your host configuration to this ID:
+   ```nix
+   modules.cs2-server.servers.server-1 = {
+     map = "3070288532"; 
+     # (The Nix config automatically detects numeric IDs and uses +host_workshop_map instead of +map)
+   };
+   ```
+
+### Hosting a Workshop Map Collection
+To start the server with a pre-configured Workshop Collection (allowing rotation/voting):
+1. Obtain the Collection ID from the Steam Workshop collection URL.
+2. Set the `workshopCollection` option in your host configuration:
+   ```nix
+   modules.cs2-server.servers.server-1 = {
+     workshopCollection = "YOUR_COLLECTION_ID";
+   };
+   ```
+
+### Populating the Map Pool and Voting Menus
+To provide a custom list of Workshop map IDs that plugins (like MatchZy or map choosers) can use for voting, map cycling, or practice commands:
+1. Define the `workshopMaps` list of map ID strings in your server definition:
+   ```nix
+   modules.cs2-server.servers.server-1 = {
+     workshopMaps = [
+       "3070288532" # Map ID 1
+       "3070290869" # Map ID 2
+     ];
+   };
+   ```
+2. On startup, the configuration automatically creates and populates `mapcycle.txt` and `maplist.txt` inside your CS2 installation directories with these maps formatted with the standard `ds:` workshop map prefix.

@@ -60,6 +60,10 @@
           environmentFiles = [
             config.sops.secrets.cs2-env.path
           ];
+          workshopMaps = [
+            "3070244462" # Aim Botz
+            "3100869952" # Recoil Master
+          ];
         };
       };
     };
