@@ -13,7 +13,7 @@ in
       enable = true;
       onActivation = {
         autoUpdate = true;
-        cleanup = "none";
+        cleanup = "zap";
       };
     };
   };

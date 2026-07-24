@@ -51,7 +51,6 @@
         export LANGUAGE=en_US.UTF-8
 
         eval "$(/opt/homebrew/bin/brew shellenv)"
-        export PATH=/Users/andrew/.bcode/bin:$PATH
       '';
     };
   };
