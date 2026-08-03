@@ -19,6 +19,7 @@ in
       "slack"
       "spotify"
       "stats"
+      "telegram"
       "wispr-flow"
     ];
   };
