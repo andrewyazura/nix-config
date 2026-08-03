@@ -6,8 +6,8 @@
 
 let
   metamod = pkgs.fetchurl {
-    url = "https://mms.alliedmods.net/mmsdrop/2.0/mmsource-2.0.0-git1407-linux.tar.gz";
-    sha256 = "0pw3d1v3k24pgrhpn25gc7gbpjl8sy6fydin0ii71cyj400pbcs9";
+    url = "https://mms.alliedmods.net/mmsdrop/2.0/mmsource-2.0.0-git1410-linux.tar.gz";
+    sha256 = "0x3n7krm8jgvx8wfrw1xpia80g5pbvw59wafxdqq5vdajjgdmzxb";
   };
 
   cssharp = pkgs.fetchurl {
@@ -16,8 +16,8 @@ let
   };
 
   matchzy = pkgs.fetchurl {
-    url = "https://github.com/sivert-io/MatchZy-Enhanced/releases/download/v1.4.21/MatchZy-1.4.21.zip";
-    sha256 = "0wmn49ga23yq9xxl0gjbdb3dh4r2djh7g2cdbmgjnh9wc8y09sbs";
+    url = "https://github.com/sivert-io/MatchZy-Enhanced/releases/download/v1.4.23/MatchZy-1.4.23.zip";
+    sha256 = "1vvkn8vba60ghspy3r8i20wmy2skkacha12ppgckppmbvc1dbcgs";
   };
 
 in
