@@ -14,7 +14,12 @@ in
 
   config = mkIf cfg.enable {
     homebrew = {
-      taps = [ "jetbrains/utils" ];
+      taps = [
+        {
+          name = "jetbrains/utils";
+          trusted = true;
+        }
+      ];
       brews = [
         "jetbrains/utils/kotlin-lsp"
       ];
