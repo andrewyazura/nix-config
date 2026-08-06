@@ -19,6 +19,10 @@ in
             modifier = "alt";
           in
           {
+            config-version = 2;
+
+            persistent-workspaces = map toString (range 1 10);
+
             enable-normalization-flatten-containers = true;
             enable-normalization-opposite-orientation-for-nested-containers = true;
 
