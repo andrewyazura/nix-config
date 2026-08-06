@@ -18,9 +18,7 @@ in
       "signal"
       "slack"
       "spotify"
-      "stats"
       "telegram"
-      "wispr-flow"
     ];
   };
 }

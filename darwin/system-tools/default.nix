@@ -11,7 +11,7 @@ in
   config = mkIf cfg.enable {
     homebrew.casks = [
       "focusrite-control-2"
-      "tailscale"
+      "tailscale-app"
     ];
   };
 }
