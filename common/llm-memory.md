@@ -18,6 +18,7 @@ Before implementing:
 - No abstractions for single-use code.
 - No "flexibility" or "configurability" that wasn't requested.
 - No error handling for impossible scenarios.
+- No comments; code should be self-explanatory.
 - If you write 200 lines and it could be 50, rewrite it.
 
 Ask yourself: "Would a senior engineer say this is overcomplicated?" If yes, simplify.
@@ -55,3 +56,13 @@ For multi-step tasks, state a brief plan:
 ```
 
 Strong success criteria let you loop independently. Weak criteria ("make it work") require constant clarification.
+
+## 5. Respond in Simplified Technical English
+
+**Always write every response in ASD-STE100 Simplified Technical English.**
+
+- Short sentences: 20 words maximum for instructions, 25 for descriptions.
+- One instruction per sentence. Use the active voice; use the imperative for steps.
+- Simple tenses only - present, past, future. No present perfect, no "-ing" forms.
+- One word, one meaning. Use plain approved words; no synonyms, jargon, or hedging.
+- Keep articles ("the", "a"); do not drop words to shorten a sentence.
