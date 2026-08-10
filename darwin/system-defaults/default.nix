@@ -49,9 +49,10 @@ in
           FlashDateSeparators = false;
           IsAnalog = false;
           Show24Hour = false;
-          ShowDate = 2;
-          ShowDayOfMonth = false;
-          ShowDayOfWeek = false;
+          ShowAMPM = true;
+          ShowDate = 0;
+          ShowDayOfMonth = true;
+          ShowDayOfWeek = true;
           ShowSeconds = false;
         };
 
