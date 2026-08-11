@@ -29,9 +29,10 @@ in
     })
 
     (mkIf cfg.enableLazygit {
-      programs.lazygit.settings.git.pagers = [
+      programs.lazygit.settings.git.diffRenderers = [
         {
-          externalDiffCommand = "difft --color=always";
+          command = "difft --color=always";
+          type = "extDiff";
         }
       ];
     })
