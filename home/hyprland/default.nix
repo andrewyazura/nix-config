@@ -52,11 +52,7 @@ in
 
       plugins = with hyprlandPlugins; [
         csgo-vulkan-fix
-        (hy3Pkgs.hy3.overrideAttrs (old: {
-          patches = (old.patches or [ ]) ++ [
-            ./hy3-monitor.patch
-          ];
-        }))
+        hy3Pkgs.hy3
         hyprbars
       ];
 
@@ -199,6 +195,7 @@ in
     };
 
     home.pointerCursor = {
+      enable = true;
       package = pkgs.apple-cursor;
       name = "macOS";
       size = 24;

@@ -24,7 +24,7 @@ in
       enable = true;
       host = "0.0.0.0";
       package = pkgs.ollama-rocm;
-      models = cfg.modelsPath;
+      modelsDir = cfg.modelsPath;
       environmentVariables = {
         HSA_OVERRIDE_GFX_VERSION = "11.0.0";
       };
