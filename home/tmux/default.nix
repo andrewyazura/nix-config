@@ -54,6 +54,9 @@ in
               set -g status-left ""
               set -g status-right "#{E:@catppuccin_status_session}"
               set -ag status-right "#{E:@catppuccin_status_uptime}"
+
+              set -ag message-style "fill=#{@thm_mantle},align=left"
+              set -ag message-command-style "fill=#{@thm_mantle},align=left"
             '';
           }
           {
@@ -77,6 +80,7 @@ in
             set -agF status-right "#{E:@catppuccin_status_battery}"
           '';
         };
+
 
       extraConfig = ''
         set -g default-command "${pkgs.zsh}/bin/zsh --login"
