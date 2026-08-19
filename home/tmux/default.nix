@@ -81,7 +81,6 @@ in
           '';
         };
 
-
       extraConfig = ''
         set -g default-command "${pkgs.zsh}/bin/zsh --login"
         set -g default-shell "${pkgs.zsh}/bin/zsh"
