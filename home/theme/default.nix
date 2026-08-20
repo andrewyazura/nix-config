@@ -7,6 +7,7 @@
 with lib;
 let
   cfg = config.modules.theme;
+  isLinux = pkgs.stdenv.hostPlatform.isLinux;
   isLight = cfg.flavor == "latte";
 in
 {
@@ -37,26 +38,26 @@ in
         tmux.enable = false; # configured in tmux module
       };
 
-      gtk = mkIf pkgs.stdenv.isLinux {
+      gtk = mkIf isLinux {
         enable = true;
         gtk3.extraConfig.gtk-application-prefer-dark-theme = if isLight then 0 else 1;
         gtk4.extraConfig.gtk-application-prefer-dark-theme = if isLight then 0 else 1;
       };
 
-      qt = mkIf pkgs.stdenv.isLinux {
+      qt = mkIf isLinux {
         enable = true;
         platformTheme.name = "kvantum";
         style.name = "kvantum";
       };
 
-      dconf = mkIf pkgs.stdenv.isLinux {
+      dconf = mkIf isLinux {
         enable = true;
         settings."org/gnome/desktop/interface" = {
           color-scheme = if isLight then "prefer-light" else "prefer-dark";
         };
       };
 
-      services.xsettingsd = mkIf pkgs.stdenv.isLinux {
+      services.xsettingsd = mkIf isLinux {
         enable = true;
         settings = {
           "Net/ThemeName" = if isLight then "Adwaita" else "Adwaita-dark";

@@ -7,6 +7,7 @@
 with lib;
 let
   cfg = config.modules.ghostty;
+  isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
   mock = pkgs.emptyDirectory // {
     meta = {
       mainProgram = "ghostty";
@@ -46,7 +47,7 @@ in
     programs.ghostty = {
       enable = true;
       enableZshIntegration = true;
-      package = if pkgs.stdenv.isDarwin then mock else pkgs.ghostty;
+      package = if isDarwin then mock else pkgs.ghostty;
 
       settings = {
         background-opacity = cfg.backgroundOpacity;
