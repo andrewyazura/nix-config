@@ -25,5 +25,13 @@ jobs:
       - uses: actions/checkout@v4
       - uses: DeterminateSystems/nix-installer-action@main
       - uses: DeterminateSystems/magic-nix-cache-action@main
+
+      # beast-music-app is a private input fetched over ssh, so evaluating
+      # bunker needs a key. Deploy Bunker already does this; Check never had to
+      # until it started evaluating.
+      - uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
       - name: Evaluate bunker config
         run: nix eval --raw .#nixosConfigurations.bunker.config.system.build.toplevel.drvPath
