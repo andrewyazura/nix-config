@@ -13,3 +13,17 @@ jobs:
       - uses: DeterminateSystems/magic-nix-cache-action@main
       - name: Check formatting
         run: nix shell nixpkgs#nixfmt -c nixfmt --check .
+
+  # Evaluation only, not a build. A push to main deploys bunker, and until this
+  # job existed the first thing to evaluate the config was the deploy workflow
+  # itself — so a branch that did not evaluate went green here and failed after
+  # the merge. Building needs a Linux builder and several minutes; evaluating
+  # catches the mistakes that actually get made.
+  eval:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - name: Evaluate bunker config
+        run: nix eval --raw .#nixosConfigurations.bunker.config.system.build.toplevel.drvPath
