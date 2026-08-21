@@ -15,6 +15,7 @@ in
       "ghostty"
       "google-chrome"
       "hiddenbar"
+      "obsidian"
       "signal"
       "slack"
       "spotify"
