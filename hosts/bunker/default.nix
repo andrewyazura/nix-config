@@ -18,6 +18,7 @@
     ./apps/bingo.nix
     ./apps/birthday-api.nix
     ./apps/birthday-bot.nix
+    ./apps/oauth-consent.nix
     ./apps/stresses-bot.nix
   ];
 
