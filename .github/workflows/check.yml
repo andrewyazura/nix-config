@@ -14,11 +14,6 @@ jobs:
       - name: Check formatting
         run: nix shell nixpkgs#nixfmt -c nixfmt --check .
 
-  # Evaluation only, not a build. A push to main deploys bunker, and until this
-  # job existed the first thing to evaluate the config was the deploy workflow
-  # itself — so a branch that did not evaluate went green here and failed after
-  # the merge. Building needs a Linux builder and several minutes; evaluating
-  # catches the mistakes that actually get made.
   eval:
     runs-on: ubuntu-latest
     steps:
@@ -26,9 +21,6 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@main
       - uses: DeterminateSystems/magic-nix-cache-action@main
 
-      # beast-music-app is a private input fetched over ssh, so evaluating
-      # bunker needs a key. Deploy Bunker already does this; Check never had to
-      # until it started evaluating.
       - uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
