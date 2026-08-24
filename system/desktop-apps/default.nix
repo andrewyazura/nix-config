@@ -19,12 +19,14 @@ in
       inputs.ghostty.packages.x86_64-linux.default
 
       anki
+      discord
       google-chrome
       obs-studio
       obsidian
       qbittorrent
       signal-desktop
       spotify
+      telegram-desktop
       vesktop
     ];
   };

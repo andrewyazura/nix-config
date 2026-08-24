@@ -92,10 +92,6 @@ in
           # Shell used for Bash tool execution
           CLAUDE_CODE_SHELL = "zsh";
 
-          # Disable all telemetry/analytics
-          # https://code.claude.com/docs/en/settings
-          DISABLE_TELEMETRY = 1;
-
           # Disable crash/error reporting (pairs with DISABLE_TELEMETRY)
           DISABLE_ERROR_REPORTING = 1;
 
