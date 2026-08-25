@@ -32,6 +32,14 @@ in
             default = 1.0;
             type = float;
           };
+          bitdepth = mkOption {
+            default = null;
+            type = nullOr int;
+          };
+          cm = mkOption {
+            default = null;
+            type = nullOr str;
+          };
         };
       });
     };
@@ -150,7 +158,9 @@ in
           }
         ];
 
-        monitor = builtins.map (monitor: { _args = [ monitor ]; }) cfg.output;
+        monitor = builtins.map (monitor: {
+          _args = [ (filterAttrs (_: v: v != null) monitor) ];
+        }) cfg.output;
       }
       // binds;
     };

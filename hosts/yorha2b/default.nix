@@ -42,14 +42,15 @@
         enable = true;
         output = [
           {
-            output = "DP-1";
-            mode = "3840x2160@144";
+            output = "DP-2";
+            mode = "2560x1440@144";
             position = "0x0";
           }
           {
-            output = "DP-2";
-            mode = "2560x1440@144";
-            position = "3840x360";
+            output = "DP-1";
+            mode = "2560x1440@500";
+            position = "2560x0";
+            bitdepth = 10;
           }
         ];
       };
