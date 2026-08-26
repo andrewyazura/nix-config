@@ -126,24 +126,11 @@
   };
 
   networking.hostId = "a0489983";
-
   powerManagement.cpuFreqGovernor = "performance";
 
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
-  };
-
-  programs.steam.package = pkgs.steam.override {
-    extraBwrapArgs = [ "--bind /disk_alpha /disk_alpha" ];
-  };
-
-  environment.systemPackages = with pkgs; [
-    blender
-  ];
-
-  environment.sessionVariables = {
-    STEAM_COMPAT_MOUNTS = "/disk_alpha";
   };
 
   time.timeZone = "Europe/Warsaw";
