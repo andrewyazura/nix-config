@@ -2,6 +2,7 @@
 {
   modules = {
     cs2.enable = true;
+    ghostty.fontStyle = "Medium";
     profiles = {
       development.enable = true;
       desktop.enable = true;

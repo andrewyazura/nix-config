@@ -75,7 +75,7 @@ in
         * {
           border: none;
           border-radius: 0;
-          font-family: "SFMono Nerd Font";
+          font-family: "JetBrainsMono Nerd Font";
           font-size: 14px;
           min-height: 0;
         }

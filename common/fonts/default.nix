@@ -2,7 +2,6 @@
   lib,
   config,
   pkgs,
-  inputs,
   ...
 }:
 with lib;
@@ -13,16 +12,12 @@ in
   options.modules.fonts.enable = mkEnableOption "Enable fonts configuration";
 
   config = mkIf cfg.enable {
-    fonts.packages =
-      with pkgs;
-      [
-        fira-code
-        nerd-fonts.fira-code
-      ]
-      ++ (with inputs.apple-fonts.packages.${stdenv.hostPlatform.system}; [
-        sf-pro-nerd
-        sf-mono-nerd
-        ny-nerd
-      ]);
+    fonts.packages = with pkgs; [
+      fira-code
+      inter
+      nerd-fonts.fira-code
+      nerd-fonts.jetbrains-mono
+      noto-fonts
+    ];
   };
 }

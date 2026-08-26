@@ -206,8 +206,8 @@ in
 
     home.pointerCursor = {
       enable = true;
-      package = pkgs.apple-cursor;
-      name = "macOS";
+      package = pkgs.catppuccin-cursors.mochaDark;
+      name = "catppuccin-mocha-dark-cursors";
       size = 24;
       gtk.enable = true;
       hyprcursor.enable = true;

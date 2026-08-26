@@ -10,9 +10,9 @@ with lib;
   config = mkIf config.modules.fonts.enable {
     fonts.fontconfig = {
       defaultFonts = {
-        monospace = [ "SFMono Nerd Font" ];
-        sansSerif = [ "SF Pro Display" ];
-        serif = [ "New York" ];
+        monospace = [ "JetBrainsMono Nerd Font" ];
+        sansSerif = [ "Inter" ];
+        serif = [ "Noto Serif" ];
       };
     };
   };
