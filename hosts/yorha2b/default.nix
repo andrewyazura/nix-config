@@ -33,15 +33,6 @@
       inputs.private-config.homeManagerModules.default
     ];
 
-    wayland.windowManager.hyprland.settings.env = [
-      {
-        _args = [
-          "AQ_DRM_DEVICES"
-          "/dev/dri/by-path/pci-0000:03:00.0-card"
-        ];
-      }
-    ];
-
     modules = {
       gnome.enable = false;
       guitar.enable = true;
