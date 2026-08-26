@@ -62,7 +62,7 @@ in
   bind = [
     (mkBind "SUPER + RETURN" "hl.dsp.exec_cmd('ghostty')")
     (mkBind "ALT + SPACE" "hl.dsp.exec_cmd('hyprlauncher')")
-    (mkBind "SUPER + ESCAPE" "hl.dsp.exec_cmd('hyprlock')")
+    (mkBind "CTRL + ALT + Q" "hl.dsp.exec_cmd('hyprlock')")
 
     (mkBind "ALT + Q" "hl.dsp.window.close()")
     (mkBind "ALT + W" "hl.dsp.window.close()")

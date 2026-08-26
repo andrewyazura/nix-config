@@ -46,5 +46,7 @@ in
       serviceConfig.Type = "idle";
       unitConfig.After = mkForce [ "multi-user.target" ];
     };
+
+    security.pam.services.hyprlock = { };
   };
 }
