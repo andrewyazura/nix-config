@@ -34,23 +34,23 @@ in
 
           colors = {
             focused = {
-              border = palette.mauve;
-              background = palette.mauve;
-              text = palette.base;
-              indicator = palette.mauve;
-              childBorder = palette.mauve;
+              border = palette.accent;
+              background = palette.accent;
+              text = palette.bg;
+              indicator = palette.accent;
+              childBorder = palette.accent;
             };
             unfocused = {
-              border = palette.base;
-              background = palette.base;
+              border = palette.overlay;
+              background = palette.surface;
               text = palette.text;
-              indicator = palette.base;
-              childBorder = palette.base;
+              indicator = palette.overlay;
+              childBorder = palette.overlay;
             };
             urgent = {
               border = palette.red;
               background = palette.red;
-              text = palette.base;
+              text = palette.bg;
               indicator = palette.red;
               childBorder = palette.red;
             };
@@ -67,7 +67,7 @@ in
             let
               super = "Mod4";
               alt = "Mod1";
-              dmenuArgs = "-fn 'AdwaitaMono-12' -nb '${palette.crust}' -nf '${palette.text}' -sb '${palette.mauve}' -sf '${palette.base}'";
+              dmenuArgs = "-fn 'AdwaitaMono-12' -nb '${palette.bg}' -nf '${palette.text}' -sb '${palette.accent}' -sf '${palette.bg}'";
             in
             {
               "${alt}+space" = "exec dmenu_run ${dmenuArgs}";

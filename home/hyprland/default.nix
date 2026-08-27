@@ -10,6 +10,9 @@ let
   cfg = config.modules.hyprland;
   palette = import ../../common/colors.nix;
 
+  rgb = c: "rgb(${removePrefix "#" c})";
+  argb = c: "0xFF${removePrefix "#" c}";
+
   system = pkgs.stdenv.hostPlatform.system;
   hyprlandPkgs = inputs.hyprland.packages.${system};
   hyprlandPlugins = inputs.hyprland-plugins.packages.${system};
@@ -72,10 +75,10 @@ in
             gaps_out = 20;
             border_size = 2;
             col = {
-              active_border = palette.mauve;
-              inactive_border = palette.base;
-              nogroup_border = palette.base;
-              nogroup_border_active = palette.mauve;
+              active_border = palette.accent;
+              inactive_border = palette.overlay;
+              nogroup_border = palette.overlay;
+              nogroup_border_active = palette.accent;
             };
 
             no_focus_fallback = true;
@@ -88,25 +91,22 @@ in
             rounding = 10;
             rounding_power = 4.0;
             blur.enabled = true;
-            shadow = {
-              enabled = true;
-              color = palette.base;
-            };
+            shadow.enabled = false;
             glow = {
               enabled = true;
-              color = palette.mauve;
+              color = palette.accent;
             };
           };
 
           group = {
             col = {
-              border_active = palette.mauve;
-              border_inactive = palette.base;
+              border_active = palette.accent;
+              border_inactive = palette.overlay;
             };
             groupbar = {
               col = {
-                active = palette.mauve;
-                inactive = palette.base;
+                active = palette.accent;
+                inactive = palette.surface;
               };
             };
           };
@@ -165,6 +165,21 @@ in
       // binds;
     };
 
+    xdg.configFile."hypr/hyprtoolkit.conf".text = ''
+      background = ${argb palette.bg}
+      base = ${argb palette.surface}
+      alternate_base = ${argb palette.raised}
+      text = ${argb palette.text}
+      bright_text = ${argb palette.bright}
+      link_text = ${argb palette.blue}
+      accent = ${argb palette.accent}
+      accent_secondary = ${argb palette.accentAlt}
+      rounding_large = 10
+      rounding_small = 5
+      font_family = Inter
+      font_family_monospace = JetBrainsMono Nerd Font
+    '';
+
     services = {
       hypridle = {
         enable = true;
@@ -211,6 +226,7 @@ in
             ];
         };
       };
+
     };
 
     programs = {
@@ -221,6 +237,40 @@ in
             hide_cursor = false;
             ignore_empty_input = true;
           };
+
+          background = [
+            { color = rgb palette.bg; }
+          ];
+
+          input-field = [
+            {
+              size = "320, 48";
+              position = "0, -80";
+              halign = "center";
+              valign = "center";
+              rounding = 4;
+              outline_thickness = 2;
+              outer_color = rgb palette.accent;
+              inner_color = rgb palette.surface;
+              font_color = rgb palette.text;
+              check_color = rgb palette.accentAlt;
+              fail_color = rgb palette.red;
+              placeholder_text = "";
+              fade_on_empty = false;
+            }
+          ];
+
+          label = [
+            {
+              text = "$TIME";
+              color = rgb palette.text;
+              font_family = "Inter";
+              font_size = 96;
+              position = "0, 80";
+              halign = "center";
+              valign = "center";
+            }
+          ];
         };
       };
 

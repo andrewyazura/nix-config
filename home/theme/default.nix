@@ -8,72 +8,39 @@ with lib;
 let
   cfg = config.modules.theme;
   isLinux = pkgs.stdenv.hostPlatform.isLinux;
-  isLight = cfg.flavor == "latte";
 in
 {
   options.modules.theme = {
-    enable = mkEnableOption "Enable global Catppuccin theme";
-
-    flavor = mkOption {
-      type = types.enum [
-        "latte"
-        "frappe"
-        "macchiato"
-        "mocha"
-      ];
-      default = "mocha";
-      description = "Catppuccin flavor (latte = light, others = dark)";
-    };
+    enable = mkEnableOption "Enable the global dark theme";
   };
 
-  config = mkMerge [
-    (mkIf cfg.enable {
-      catppuccin = {
-        enable = true;
-        autoEnable = true;
-        flavor = cfg.flavor;
-        accent = "mauve";
+  config = mkIf cfg.enable {
+    gtk = mkIf isLinux {
+      enable = true;
+      gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
+      gtk4.extraConfig.gtk-application-prefer-dark-theme = 1;
+    };
 
-        hyprland.enable = false; # causes "attempt to call a nil value (field 'source')"
-        tmux.enable = false; # configured in tmux module
-      };
+    qt = mkIf isLinux {
+      enable = true;
+      platformTheme.name = "adwaita";
+      style.name = "adwaita-dark";
+    };
 
-      gtk = mkIf isLinux {
-        enable = true;
-        gtk3.extraConfig.gtk-application-prefer-dark-theme = if isLight then 0 else 1;
-        gtk4.extraConfig.gtk-application-prefer-dark-theme = if isLight then 0 else 1;
-      };
+    dconf = mkIf isLinux {
+      enable = true;
+      settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
+    };
 
-      qt = mkIf isLinux {
-        enable = true;
-        platformTheme.name = "kvantum";
-        style.name = "kvantum";
+    services.xsettingsd = mkIf isLinux {
+      enable = true;
+      settings = {
+        "Net/ThemeName" = "Adwaita-dark";
+        "Xft/Antialias" = true;
+        "Xft/Hinting" = true;
+        "Xft/HintStyle" = "hintslight";
+        "Xft/RGBA" = "rgb";
       };
-
-      dconf = mkIf isLinux {
-        enable = true;
-        settings."org/gnome/desktop/interface" = {
-          color-scheme = if isLight then "prefer-light" else "prefer-dark";
-        };
-      };
-
-      services.xsettingsd = mkIf isLinux {
-        enable = true;
-        settings = {
-          "Net/ThemeName" = if isLight then "Adwaita" else "Adwaita-dark";
-          "Xft/Antialias" = true;
-          "Xft/Hinting" = true;
-          "Xft/HintStyle" = "hintslight";
-          "Xft/RGBA" = "rgb";
-        };
-      };
-    })
-
-    (mkIf (!cfg.enable) {
-      catppuccin = {
-        enable = false;
-        autoEnable = false;
-      };
-    })
-  ];
+    };
+  };
 }

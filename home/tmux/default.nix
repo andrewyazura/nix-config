@@ -7,13 +7,19 @@
 with lib;
 let
   cfg = config.modules.tmux;
-  catppuccinFlavor = config.catppuccin.flavor;
+  colors = import ../../common/colors.nix;
   cleanResurrectBin = pkgs.runCommand "clean-resurrect" { nativeBuildInputs = [ pkgs.zig ]; } ''
     export XDG_CACHE_HOME=$(mktemp -d)
     zig build-exe ${./clean-resurrect.zig} -O ReleaseSafe -femit-bin=clean-resurrect
     mkdir -p $out/bin/
     mv clean-resurrect $out/bin/
   '';
+
+  separator = "#[fg=${colors.muted}]│";
+  statusRight =
+    "#[fg=${colors.accent}] #S "
+    + "${separator}#[fg=${colors.subtle}] #{cpu_percentage} "
+    + optionalString cfg.showBattery "${separator}#[fg=${colors.subtle}] #{battery_percentage} ";
 in
 {
   options.modules.tmux = {
@@ -41,28 +47,9 @@ in
         with pkgs.tmuxPlugins;
         [
           {
-            plugin = catppuccin;
-            extraConfig = ''
-              set -g @catppuccin_flavor "${catppuccinFlavor}"
-
-              set -g @catppuccin_window_number "#I"
-              set -g @catppuccin_window_text " #W"
-
-              set -g @catppuccin_window_current_number "#I"
-              set -g @catppuccin_window_current_text " #W"
-
-              set -g status-left ""
-              set -g status-right "#{E:@catppuccin_status_session}"
-              set -ag status-right "#{E:@catppuccin_status_uptime}"
-
-              set -ag message-style "fill=#{@thm_mantle},align=left"
-              set -ag message-command-style "fill=#{@thm_mantle},align=left"
-            '';
-          }
-          {
             plugin = cpu;
             extraConfig = ''
-              set -agF status-right "#{E:@catppuccin_status_cpu}"
+              set -g status-right "${statusRight}"
             '';
           }
           {
@@ -74,12 +61,7 @@ in
             '';
           }
         ]
-        ++ optional cfg.showBattery {
-          plugin = battery;
-          extraConfig = ''
-            set -agF status-right "#{E:@catppuccin_status_battery}"
-          '';
-        };
+        ++ optional cfg.showBattery { plugin = battery; };
 
       extraConfig = ''
         set -g default-command "${pkgs.zsh}/bin/zsh --login"
@@ -94,8 +76,21 @@ in
         set -g set-titles on
         set -g set-titles-string "#{pane_title}"
 
+        set -g status-style "bg=${colors.bg},fg=${colors.muted}"
+        set -g status-left ""
         set -g status-left-length 150
         set -g status-right-length 150
+
+        set -g window-status-format "#[fg=${colors.muted}] #I #W "
+        set -g window-status-current-format "#[fg=${colors.accent},bold] #I #W "
+        set -g window-status-separator ""
+
+        set -g pane-border-style "fg=${colors.overlay}"
+        set -g pane-active-border-style "fg=${colors.accent}"
+
+        set -g message-style "bg=${colors.surface},fg=${colors.text}"
+        set -g message-command-style "bg=${colors.surface},fg=${colors.text}"
+        set -g mode-style "bg=${colors.overlay},fg=${colors.bright}"
 
         bind р select-pane -L # h
         bind о select-pane -L # j

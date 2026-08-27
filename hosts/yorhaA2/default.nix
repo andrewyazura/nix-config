@@ -30,7 +30,6 @@ in
       inherit inputs hostname;
     };
     sharedModules = [
-      inputs.catppuccin.homeModules.catppuccin
       inputs.private-config.homeManagerModules.default
       inputs.sops-nix.homeManagerModules.sops
     ];

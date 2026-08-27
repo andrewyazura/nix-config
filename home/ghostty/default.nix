@@ -7,6 +7,7 @@
 with lib;
 let
   cfg = config.modules.ghostty;
+  colors = import ../../common/colors.nix;
   isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
   mock = pkgs.emptyDirectory // {
     meta = {
@@ -38,7 +39,7 @@ in
 
     backgroundOpacity = mkOption {
       type = types.float;
-      default = 0.98;
+      default = 1.0;
       description = "Ghostty background opacity";
     };
   };
@@ -50,6 +51,32 @@ in
       package = if isDarwin then mock else pkgs.ghostty;
 
       settings = {
+        background = colors.bg;
+        foreground = colors.text;
+        cursor-color = colors.accent;
+        cursor-text = colors.bg;
+        selection-background = colors.overlay;
+        selection-foreground = colors.bright;
+
+        palette = [
+          "0=${colors.overlay}"
+          "1=${colors.red}"
+          "2=${colors.green}"
+          "3=${colors.yellow}"
+          "4=${colors.blue}"
+          "5=${colors.accent}"
+          "6=${colors.teal}"
+          "7=${colors.text}"
+          "8=${colors.muted}"
+          "9=${colors.pink}"
+          "10=${colors.green}"
+          "11=${colors.yellow}"
+          "12=${colors.indigo}"
+          "13=${colors.accent}"
+          "14=${colors.accentAlt}"
+          "15=${colors.bright}"
+        ];
+
         background-opacity = cfg.backgroundOpacity;
         font-family = cfg.fontFamily;
         font-size = cfg.fontSize;

@@ -44,7 +44,7 @@ in
             line-size = 0;
             border-size = 0;
 
-            background = "${colors.crust}";
+            background = "${colors.bg}";
             foreground = "${colors.text}";
 
             modules-left = "i3";
@@ -67,7 +67,7 @@ in
 
             format-muted = "muted";
             format-muted-background = "${colors.red}";
-            format-muted-foreground = "${colors.base}";
+            format-muted-foreground = "${colors.bg}";
           };
 
           "module/i3" = {
@@ -83,22 +83,22 @@ in
             label-mode-padding = 1;
 
             label-focused = "%name%";
-            label-focused-background = "${colors.mauve}";
-            label-focused-underline = "${colors.base}";
-            label-focused-foreground = "${colors.base}";
+            label-focused-background = "${colors.accent}";
+            label-focused-underline = "${colors.bg}";
+            label-focused-foreground = "${colors.bg}";
             label-focused-padding = 1;
 
             label-unfocused = "%name%";
             label-unfocused-padding = 1;
 
             label-visible = "%name%";
-            label-visible-background = "${colors.mauve}";
-            label-visible-underline = "${colors.base}";
+            label-visible-background = "${colors.accent}";
+            label-visible-underline = "${colors.bg}";
             label-visible-padding = 1;
 
             label-urgent = "%name%";
             label-urgent-background = "${colors.red}";
-            label-urgent-underline = "${colors.base}";
+            label-urgent-underline = "${colors.bg}";
             label-urgent-padding = 1;
           };
 
@@ -129,19 +129,19 @@ in
               adapter = "AC0";
 
               format-full = "<ramp-capacity> <label-full>";
-              format-full-background = "${colors.base}";
+              format-full-background = "${colors.bg}";
               format-full-foreground = "${colors.green}";
 
               format-charging = "<ramp-capacity> <label-charging>";
-              format-charging-background = "${colors.base}";
+              format-charging-background = "${colors.bg}";
               format-charging-foreground = "${colors.green}";
 
               format-discharging = "<ramp-capacity> <label-discharging>";
-              format-discharging-background = "${colors.base}";
-              format-discharging-foreground = "${colors.mauve}";
+              format-discharging-background = "${colors.bg}";
+              format-discharging-foreground = "${colors.accent}";
 
               format-low = "<ramp-capacity> <label-low>";
-              format-low-background = "${colors.base}";
+              format-low-background = "${colors.bg}";
               format-low-foreground = "${colors.red}";
 
               label-full = label;
@@ -166,7 +166,7 @@ in
             format-disconnected = "";
 
             label-connected = "%ifname% %downspeed:7%";
-            label-connected-foreground = "${colors.mauve}";
+            label-connected-foreground = "${colors.accent}";
           };
 
           "module/wifi" = {
@@ -178,11 +178,11 @@ in
             format-disconnected = "<label-disconnected>";
 
             label-connected = "%essid% %downspeed:7%";
-            label-connected-foreground = "${colors.mauve}";
+            label-connected-foreground = "${colors.accent}";
 
             label-disconnected = "not connected";
             label-disconnected-background = "${colors.red}";
-            label-disconnected-foreground = "${colors.base}";
+            label-disconnected-foreground = "${colors.bg}";
 
             ramp-signal-0 = "▁";
             ramp-signal-1 = "▂";

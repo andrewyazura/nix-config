@@ -51,7 +51,6 @@
     bingo-app.url = "git+ssh://git@github.com/andrewyazura/bingo.git";
     birthday-api-app.url = "github:orehzzz/birthday-api";
     birthday-bot-app.url = "github:orehzzz/birthday-telegram-bot";
-    catppuccin.url = "github:catppuccin/nix";
     ghostty.url = "github:ghostty-org/ghostty";
     hyprland.url = "github:hyprwm/Hyprland";
     llm-agents.url = "github:numtide/llm-agents.nix";

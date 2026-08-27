@@ -9,8 +9,6 @@
 
     ideavim.enable = true;
     tmux.showBattery = true;
-
-    theme.flavor = "mocha";
   };
   home.stateVersion = "25.05";
 

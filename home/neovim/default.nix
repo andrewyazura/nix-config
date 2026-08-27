@@ -66,7 +66,7 @@ in
 
       plugins = with pkgs.vimPlugins; [
         {
-          plugin = catppuccin-nvim;
+          plugin = oxocarbon-nvim;
           type = "lua";
           config = builtins.readFile ./configs/options.lua;
           # this hack sets leader key before any other hotkeys are added

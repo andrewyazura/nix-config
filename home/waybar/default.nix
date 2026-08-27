@@ -79,37 +79,51 @@ in
           font-size: 14px;
           min-height: 0;
         }
+
         window#waybar {
-          background: ${colors.crust};
+          background: ${colors.bg};
           color: ${colors.text};
         }
 
         #workspaces button {
-          padding: 0 5px;
+          padding: 0 8px;
           background: transparent;
+          color: ${colors.muted};
         }
 
         #workspaces button.active, #workspaces button.visible {
-          background: ${colors.mauve};
-          color: ${colors.base};
+          color: ${colors.accent};
+          box-shadow: inset 0 -2px ${colors.accent};
         }
 
         #workspaces button.urgent {
-          background: ${colors.red};
-          color: ${colors.base};
+          color: ${colors.red};
+          box-shadow: inset 0 -2px ${colors.red};
         }
 
-        #clock, #pulseaudio, #network, #cpu, #memory, #backlight, #tray {
-          margin-right: 10px;
+        #clock, #pulseaudio, #network, #battery {
+          margin-right: 12px;
+          color: ${colors.subtle};
         }
 
         #network {
-          color: ${colors.mauve};
+          color: ${colors.accent};
         }
 
         #network.disconnected {
-          background: ${colors.red};
-          color: ${colors.base};
+          color: ${colors.red};
+        }
+
+        #pulseaudio.muted {
+          color: ${colors.muted};
+        }
+
+        #battery.warning {
+          color: ${colors.yellow};
+        }
+
+        #battery.critical {
+          color: ${colors.red};
         }
       '';
     };

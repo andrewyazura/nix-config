@@ -38,15 +38,24 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.opt.conceallevel = 0
 vim.opt.termguicolors = true
 
-require("catppuccin").setup({
-	transparent_background = true,
-	background = {
-		light = "latte",
-		dark = "mocha",
-	},
-})
+vim.opt.background = "dark"
+vim.cmd([[colorscheme oxocarbon]])
 
-vim.cmd([[colorscheme catppuccin]])
+local oxocarbon_bg = 0x161616
+local surface = 0x0c0c0c
+
+for name, hl in pairs(vim.api.nvim_get_hl(0, {})) do
+	if hl.bg == oxocarbon_bg then
+		hl.bg = nil
+		vim.api.nvim_set_hl(0, name, hl)
+	end
+end
+
+for _, name in ipairs({ "NormalFloat", "FloatBorder", "Pmenu", "PmenuSbar", "PmenuThumb" }) do
+	local hl = vim.api.nvim_get_hl(0, { name = name, link = false })
+	hl.bg = surface
+	vim.api.nvim_set_hl(0, name, hl)
+end
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
