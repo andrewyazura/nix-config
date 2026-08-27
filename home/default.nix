@@ -24,7 +24,6 @@
     ./polybar
     ./profiles
     ./ssh
-    ./sway
     ./theme
     ./tmux
     ./waybar

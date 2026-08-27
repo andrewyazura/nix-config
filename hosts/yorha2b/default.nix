@@ -49,29 +49,6 @@
           }
         ];
       };
-
-      sway = {
-        enable = false;
-        output =
-          let
-            wallpaperPath = ../../common/wallpapers/nix-black-4k.png;
-          in
-          {
-            DP-1 = {
-              position = "0 0";
-              mode = "3840x2160@144Hz";
-              bg = "${wallpaperPath} fill";
-            };
-
-            DP-2 = {
-              position = "3840 360";
-              mode = "2560x1440@144Hz";
-              bg = "${wallpaperPath} fill";
-            };
-          };
-
-        focus-output = "DP-2";
-      };
     };
   };
 

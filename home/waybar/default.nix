@@ -25,7 +25,7 @@ in
           layer = "top";
           position = "top";
           height = 24;
-          modules-left = [ "sway/workspaces" ];
+          modules-left = [ "hyprland/workspaces" ];
           modules-center = [ ];
           modules-right = [
             "network"
@@ -34,7 +34,7 @@ in
             "battery"
           ];
 
-          "sway/workspaces" = {
+          "hyprland/workspaces" = {
             disable-scroll = true;
             format = "{name}";
           };
