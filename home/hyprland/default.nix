@@ -111,6 +111,13 @@ in
             };
           };
 
+          misc = {
+            background_color = palette.bg;
+            disable_hyprland_logo = true;
+            disable_splash_rendering = true;
+            force_default_wallpaper = 0;
+          };
+
           xwayland = {
             use_nearest_neighbor = false;
           };
@@ -210,20 +217,6 @@ in
           general = {
             grab_focus = true;
           };
-        };
-      };
-
-      hyprpaper = {
-        enable = true;
-        settings = {
-          wallpaper =
-            let
-              wallpaperPath = ../../common/wallpapers/nix-black-4k.png;
-            in
-            [
-              "DP-1,${wallpaperPath}"
-              "DP-2,${wallpaperPath}"
-            ];
         };
       };
 

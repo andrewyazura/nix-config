@@ -14,8 +14,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.file."Pictures/wallpapers/current.png".source = ../../common/wallpapers/nix-black-4k.png;
-
     xsession.windowManager.i3 =
       let
         palette = import ../../common/colors.nix;
@@ -58,7 +56,7 @@ in
 
           startup = [
             {
-              command = "feh --bg-scale ~/Pictures/wallpapers/current.png";
+              command = "${pkgs.xorg.xsetroot}/bin/xsetroot -solid '${palette.bg}'";
               always = true;
             }
           ];
