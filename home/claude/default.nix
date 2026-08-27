@@ -25,6 +25,8 @@ in
       ccusage
     ];
 
+    home.sessionVariables.CLAUDE_CONFIG_DIR = "${config.home.homeDirectory}/.claude";
+
     xdg.configFile = statusline.configFile;
 
     programs.claude-code = {
