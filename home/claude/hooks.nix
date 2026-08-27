@@ -19,13 +19,15 @@ let
     in
     soundHook "bash -c 'set -- ${paths}; shift $((RANDOM % ${count})); ${pkgs.mpv}/bin/mpv --no-video --really-quiet \"$1\"'";
 
+  configDir = "\${CLAUDE_CONFIG_DIR:-$HOME/.claude}";
+
   postToolUseLog = pkgs.writeShellScript "claude-post-tool-log" ''
     input=$(cat)
     command=$(echo "$input" | ${pkgs.jq}/bin/jq -r '.tool_input.command // ""')
     cwd=$(echo "$input" | ${pkgs.jq}/bin/jq -r '.cwd // ""')
     project=$(${pkgs.coreutils}/bin/basename "$cwd")
     timestamp=$(${pkgs.coreutils}/bin/date -u +"%Y-%m-%dT%H:%M:%SZ")
-    echo "[$timestamp] [$project] [Bash] $command" >> ~/.claude/bash-commands.log
+    echo "[$timestamp] [$project] [Bash] $command" >> ${configDir}/bash-commands.log
   '';
 
   permissionRequestLog = pkgs.writeShellScript "claude-permission-request-log" ''
@@ -40,19 +42,19 @@ let
     cwd=$(echo "$input" | ${pkgs.jq}/bin/jq -r '.cwd // ""')
     project=$(${pkgs.coreutils}/bin/basename "$cwd")
     timestamp=$(${pkgs.coreutils}/bin/date -u +"%Y-%m-%dT%H:%M:%SZ")
-    echo "[$timestamp] [$project] [$tool] $detail" >> ~/.claude/permission-requests.log
+    echo "[$timestamp] [$project] [$tool] $detail" >> ${configDir}/permission-requests.log
   '';
 
   startSessionHook = pkgs.writeShellScript "start-session-hook" ''
     timestamp=$(${pkgs.coreutils}/bin/date -u +"%Y-%m-%dT%H:%M:%SZ")
-    echo "=== New Session Started: $timestamp ===" >> ~/claude.log
+    echo "=== New Session Started: $timestamp ===" >> ${configDir}/sessions.log
 
-    echo "--- Environment Variables ---" >> ~/claude.log
-    ${pkgs.coreutils}/bin/env >> ~/claude.log
+    echo "--- Environment Variables ---" >> ${configDir}/sessions.log
+    ${pkgs.coreutils}/bin/env >> ${configDir}/sessions.log
 
-    echo "--- Hook Input ---" >> ~/claude.log
-    cat >> ~/claude.log
-    echo "" >> ~/claude.log
+    echo "--- Hook Input ---" >> ${configDir}/sessions.log
+    cat >> ${configDir}/sessions.log
+    echo "" >> ${configDir}/sessions.log
   '';
 in
 {
