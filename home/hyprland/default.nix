@@ -229,8 +229,8 @@ in
 
     home.pointerCursor = {
       enable = true;
-      package = pkgs.catppuccin-cursors.mochaDark;
-      name = "catppuccin-mocha-dark-cursors";
+      package = pkgs.bibata-cursors;
+      name = "Bibata-Modern-Classic";
       size = 24;
       gtk.enable = true;
       hyprcursor.enable = true;
