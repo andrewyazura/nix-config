@@ -25,7 +25,7 @@ in
           layer = "top";
           position = "top";
           height = 20;
-          modules-left = [ "hyprland/workspaces" ];
+          modules-left = [ "ext/workspaces" ];
           modules-center = [ ];
           modules-right = [
             "network"
@@ -34,8 +34,8 @@ in
             "battery"
           ];
 
-          "hyprland/workspaces" = {
-            disable-scroll = true;
+          "ext/workspaces" = {
+            on-click = "activate";
             format = "{name}";
           };
 
@@ -91,7 +91,12 @@ in
           color: ${colors.muted};
         }
 
-        #workspaces button.active, #workspaces button.visible {
+        #workspaces button:hover {
+          color: ${colors.text};
+          box-shadow: inset 0 -2px ${colors.muted};
+        }
+
+        #workspaces button.active {
           color: ${colors.accent};
           box-shadow: inset 0 -2px ${colors.accent};
         }
