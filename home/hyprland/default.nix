@@ -95,6 +95,7 @@ in
             glow = {
               enabled = true;
               color = palette.accent;
+              color_inactive = "rgba(00000000)";
             };
           };
 
