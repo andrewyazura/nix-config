@@ -24,7 +24,7 @@ in
         mainBar = {
           layer = "top";
           position = "top";
-          height = 24;
+          height = 20;
           modules-left = [ "hyprland/workspaces" ];
           modules-center = [ ];
           modules-right = [
@@ -76,7 +76,7 @@ in
           border: none;
           border-radius: 0;
           font-family: "JetBrainsMono Nerd Font";
-          font-size: 14px;
+          font-size: 12px;
           min-height: 0;
         }
 

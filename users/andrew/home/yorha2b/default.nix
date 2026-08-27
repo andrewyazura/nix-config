@@ -2,7 +2,9 @@
 {
   modules = {
     cs2.enable = true;
-    ghostty.fontStyle = "Medium";
+    ghostty = {
+      fontSize = 10;
+    };
     profiles = {
       development.enable = true;
       desktop.enable = true;
