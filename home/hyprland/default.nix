@@ -71,9 +71,9 @@ in
       settings = {
         config = {
           general = {
-            gaps_in = 5;
-            gaps_out = 20;
-            border_size = 2;
+            gaps_in = 2;
+            gaps_out = 2;
+            border_size = 1;
             col = {
               active_border = palette.accent;
               inactive_border = palette.overlay;
@@ -116,6 +116,13 @@ in
             disable_hyprland_logo = true;
             disable_splash_rendering = true;
             force_default_wallpaper = 0;
+          };
+
+          plugin = {
+            hyprbars = {
+              bar_height = 12;
+              bar_text_size = 8;
+            };
           };
 
           xwayland = {
