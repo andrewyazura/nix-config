@@ -37,6 +37,8 @@ in
           "ext/workspaces" = {
             on-click = "activate";
             format = "{name}";
+            sort-by-name = false;
+            sort-by-coordinates = true;
           };
 
           "clock" = {
