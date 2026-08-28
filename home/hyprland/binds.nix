@@ -83,6 +83,7 @@ in
     (mkBind "SUPER + V" "function() hl.dispatch(hl.plugin.hy3.make_group('v')) end")
     (mkBind "SUPER + F" "hl.dsp.window.fullscreen()")
     (mkBind "SUPER + SHIFT + N" "hl.dsp.window.float({ action = 'toggle' })")
+    (mkBind "SUPER + P" "hl.dsp.window.pin()")
 
     (mkBind "SUPER + MINUS" "hl.dsp.workspace.toggle_special('')")
     (mkBind "SUPER + SHIFT + MINUS" "hl.dsp.window.move({ workspace = 'special' })")
