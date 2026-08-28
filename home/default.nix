@@ -26,6 +26,7 @@
     ./ssh
     ./theme
     ./tmux
+    ./vesktop
     ./waybar
     ./yazi
     ./zsh

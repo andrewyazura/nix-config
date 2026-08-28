@@ -27,7 +27,6 @@ in
       signal-desktop
       spotify
       telegram-desktop
-      vesktop
     ];
   };
 }

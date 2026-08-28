@@ -10,6 +10,7 @@
       desktop.enable = true;
       ai-tools.enable = true;
     };
+    vesktop.enable = true;
   };
   home.stateVersion = "24.11";
 
