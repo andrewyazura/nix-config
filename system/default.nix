@@ -17,6 +17,7 @@
     ./nix
     ./ollama
     ./profiles
+    ./sunshine
     ./tailscale
     ./wooting
     ./wivrn

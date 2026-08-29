@@ -19,6 +19,7 @@
     hyprland.enable = true;
     logitech-g920.enable = true;
     ollama.enable = true;
+    sunshine.enable = true;
     tailscale.enable = true;
     wooting.enable = true;
     wivrn.enable = true;
