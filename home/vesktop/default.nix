@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 with lib;
 let
   cfg = config.modules.vesktop;
@@ -11,6 +16,13 @@ in
   config = mkIf cfg.enable {
     programs.vesktop = {
       enable = true;
+
+      package = pkgs.vesktop.overrideAttrs (prev: {
+        postFixup = prev.postFixup + ''
+          wrapProgram $out/bin/vesktop \
+            --add-flags "--disable-features=WebRtcAllowInputVolumeAdjustment"
+        '';
+      });
 
       settings = {
         arRPC = true;
