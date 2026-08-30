@@ -12,6 +12,7 @@
       ai-tools.enable = true;
     };
     vesktop.enable = true;
+    video-editing.enable = true;
   };
   home.stateVersion = "24.11";
 

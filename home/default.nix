@@ -28,6 +28,7 @@
     ./theme
     ./tmux
     ./vesktop
+    ./video-editing
     ./waybar
     ./yazi
     ./zsh
