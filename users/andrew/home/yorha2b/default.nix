@@ -23,8 +23,14 @@
         sopsFile = ../../../../secrets/ssh-config;
         format = "binary";
       };
+      google-calendar-env = {
+        sopsFile = ../../../../secrets/google-calendar-env;
+        format = "binary";
+      };
     };
   };
+
+  home.sessionVariables.GOOGLE_CALENDAR_ENV = config.sops.secrets.google-calendar-env.path;
 
   programs = {
     ssh = {
