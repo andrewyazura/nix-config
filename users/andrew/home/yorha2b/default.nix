@@ -5,6 +5,7 @@
     ghostty = {
       fontSize = 10;
     };
+    obs.enable = true;
     profiles = {
       development.enable = true;
       desktop.enable = true;

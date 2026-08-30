@@ -21,7 +21,6 @@ in
       anki
       discord
       google-chrome
-      obs-studio
       obsidian
       qbittorrent
       signal-desktop
