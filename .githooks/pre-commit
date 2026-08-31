@@ -1,0 +1,7 @@
+#!/bin/sh
+set -e
+if git diff --cached --quiet -- home/cs2/autoexec.cfg home/cs2/render_binds.py; then
+  exit 0
+fi
+python3 home/cs2/render_binds.py home/cs2/autoexec.cfg > home/cs2/binds.svg
+git add home/cs2/binds.svg
