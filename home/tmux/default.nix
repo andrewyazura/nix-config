@@ -109,6 +109,7 @@ in
         unbind C-b
         set -g prefix C-Space
         bind C-Space send-prefix
+        set -g prefix2 C-a
 
         bind -T copy-mode-vi v send-keys -X begin-selection
         bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel
