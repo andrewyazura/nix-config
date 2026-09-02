@@ -65,7 +65,6 @@ in
     (mkBind "CTRL + ALT + Q" "hl.dsp.exec_cmd('hyprlock')")
 
     (mkBind "ALT + Q" "hl.dsp.window.close()")
-    (mkBind "ALT + W" "hl.dsp.window.close()")
 
     (mkBind "SUPER + H" "function() hl.dispatch(hl.plugin.hy3.move_focus('l')) end")
     (mkBind "SUPER + J" "function() hl.dispatch(hl.plugin.hy3.move_focus('d')) end")
