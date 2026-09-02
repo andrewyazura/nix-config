@@ -56,7 +56,7 @@ in
 
           startup = [
             {
-              command = "${pkgs.xorg.xsetroot}/bin/xsetroot -solid '${palette.bg}'";
+              command = "${pkgs.xsetroot}/bin/xsetroot -solid '${palette.bg}'";
               always = true;
             }
           ];
