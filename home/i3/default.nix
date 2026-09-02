@@ -73,7 +73,6 @@ in
               "${super}+Return" = "exec ${terminal}";
               "${super}+Escape" = "exec xsecurelock";
               "${alt}+q" = "kill";
-              "${alt}+w" = "kill";
 
               "${super}+h" = "focus left";
               "${super}+j" = "focus down";
