@@ -39,7 +39,7 @@ in
       settings = {
         # Response formatting style
         # https://code.claude.com/docs/en/output-styles
-        outputStyle = "Explanatory";
+        outputStyle = "Concise";
 
         # Honor .gitignore patterns in file picker and search
         # https://code.claude.com/docs/en/settings
@@ -49,7 +49,7 @@ in
         showTurnDuration = true;
 
         # Days before inactive session transcripts are auto-deleted
-        cleanupPeriodDays = 365;
+        cleanupPeriodDays = 30;
 
         # Auto-save learnings per-project to ~/.claude/projects/<project>/memory/
         # https://code.claude.com/docs/en/memory
@@ -69,7 +69,7 @@ in
         # https://code.claude.com/docs/en/agent-teams
         teammateMode = "tmux";
         alwaysThinkingEnabled = true;
-        effortLevel = "xhigh";
+        effortLevel = "high";
 
         # Bottom status bar showing model and context usage
         # https://code.claude.com/docs/en/statusline
