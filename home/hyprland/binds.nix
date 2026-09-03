@@ -89,6 +89,7 @@ in
 
     (mkBind "SUPER + R" "hl.dsp.submap('resize')")
 
+    (mkBind "ALT + SHIFT + 3" "hl.dsp.exec_cmd('grim - | wl-copy')")
     (mkBind "ALT + SHIFT + 4" ''hl.dsp.exec_cmd('grim -g "$(slurp)" - | wl-copy')'')
 
     (mkLockedBind "XF86AudioRaiseVolume" "hl.dsp.exec_cmd('wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+')")
