@@ -9,47 +9,10 @@ let
       outputJson ? "{}",
     }:
     pkgs.writeShellScript "agy-play-${lib.removeSuffix ".ogg" file}" ''
-      input=$(cat)
-      convId=$(echo "$input" | ${pkgs.jq}/bin/jq -r '.conversationId // "default"')
-      rm -f "''${XDG_RUNTIME_DIR:-/tmp}/agy-turn-$convId"
       ( ${pkgs.mpv}/bin/mpv --no-video --really-quiet "${soundsDir}/${file}" >/dev/null 2>&1 & )
+      cat >/dev/null
       echo '${outputJson}'
     '';
-
-  playRandomSoundScript =
-    {
-      files,
-      outputJson ? "{}",
-    }:
-    let
-      count = toString (builtins.length files);
-      paths = lib.concatMapStringsSep " " (f: "\"${soundsDir}/${f}\"") files;
-    in
-    pkgs.writeShellScript "agy-play-random" ''
-      input=$(cat)
-      convId=$(echo "$input" | ${pkgs.jq}/bin/jq -r '.conversationId // "default"')
-      turnId=$(echo "$input" | ${pkgs.jq}/bin/jq -r '[(.lastUserInput // "" | @base64), (.initialNumSteps // "" | tostring)] | join(":")')
-      marker="''${XDG_RUNTIME_DIR:-/tmp}/agy-turn-$convId"
-      savedTurn=""
-      if [ -f "$marker" ]; then
-        savedTurn=$(cat "$marker" 2>/dev/null)
-      fi
-      if [ "$savedTurn" != "$turnId" ]; then
-        echo "$turnId" > "$marker"
-        set -- ${paths}
-        shift $((RANDOM % ${count}))
-        ( ${pkgs.mpv}/bin/mpv --no-video --really-quiet "$1" >/dev/null 2>&1 & )
-      fi
-      echo '${outputJson}'
-    '';
-
-  playSubmit = playRandomSoundScript {
-    files = [
-      "officer1.ogg"
-      "officer2.ogg"
-    ];
-    outputJson = builtins.toJSON { injectSteps = [ ]; };
-  };
 
   playStop = playSoundScript {
     file = "upgbar.ogg";
@@ -71,13 +34,6 @@ in
 {
   sound-effects = {
     enabled = true;
-    PreInvocation = [
-      {
-        type = "command";
-        command = "${playSubmit}";
-        timeout = 5;
-      }
-    ];
     Stop = [
       {
         type = "command";
