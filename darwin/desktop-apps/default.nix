@@ -15,11 +15,11 @@ in
       "ghostty"
       "google-chrome"
       "hiddenbar"
+      "moonlight"
       "obsidian"
       "signal"
       "slack"
       "telegram"
-      "wispr-flow"
     ];
   };
 }
