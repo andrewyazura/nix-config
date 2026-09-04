@@ -22,10 +22,10 @@ let
 
   wallpapers = {
     starfield-noise = toString ./wallpapers/starfield-noise.jpg;
-    castle-gate-bonfire = toString ./wallpapers/castle-gate-bonfire.jpg;
-    pixel-bonfire-city = toString ./wallpapers/pixel-bonfire-city.png;
-    pixel-bonfire-tower = toString ./wallpapers/pixel-bonfire-tower.png;
     candle-circle-bonfire = toString ./wallpapers/candle-circle-bonfire.png;
+    synthwave-city-sunset = toString ./wallpapers/synthwave-city-sunset.jpg;
+    cyberpunk-skyline = toString ./wallpapers/cyberpunk-skyline.jpg;
+    earthrise-duo = toString ./wallpapers/earthrise-duo.png;
   };
 in
 {
@@ -57,7 +57,7 @@ in
 
     wallpaper = mkOption {
       type = enum (attrNames wallpapers);
-      default = "candle-circle-bonfire";
+      default = "cyberpunk-skyline";
       description = "Which wallpaper to display via hyprpaper.";
     };
   };
