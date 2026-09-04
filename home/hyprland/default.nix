@@ -57,7 +57,7 @@ in
 
     wallpaper = mkOption {
       type = enum (attrNames wallpapers);
-      default = "pixel-bonfire-city";
+      default = "candle-circle-bonfire";
       description = "Which wallpaper to display via hyprpaper.";
     };
   };

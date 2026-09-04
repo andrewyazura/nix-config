@@ -52,8 +52,13 @@ in
           };
 
           "pulseaudio" = {
-            format = "🔊 {volume}%";
+            format = "{icon} {volume}%";
             format-muted = "🔇 muted";
+            format-icons = [
+              "🔈"
+              "🔉"
+              "🔊"
+            ];
             on-click = "pavucontrol";
           };
 
