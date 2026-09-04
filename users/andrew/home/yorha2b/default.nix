@@ -2,9 +2,7 @@
 {
   modules = {
     cs2.enable = true;
-    ghostty = {
-      fontSize = 10;
-    };
+    ghostty.fontSize = 10;
     obs.enable = true;
     profiles = {
       development.enable = true;

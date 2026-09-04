@@ -81,6 +81,9 @@ in
         font-family = cfg.fontFamily;
         font-size = cfg.fontSize;
         font-style = cfg.fontStyle;
+        keybind = [
+          "ctrl+enter=unbind"
+        ];
         shell-integration-features = [
           "ssh-terminfo"
           "ssh-env"

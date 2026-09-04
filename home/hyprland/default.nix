@@ -19,6 +19,14 @@ let
   hy3Pkgs = inputs.hy3.packages.${system};
 
   binds = import ./binds.nix { inherit lib; };
+
+  wallpapers = {
+    starfield-noise = toString ./wallpapers/starfield-noise.jpg;
+    castle-gate-bonfire = toString ./wallpapers/castle-gate-bonfire.jpg;
+    pixel-bonfire-city = toString ./wallpapers/pixel-bonfire-city.png;
+    pixel-bonfire-tower = toString ./wallpapers/pixel-bonfire-tower.png;
+    candle-circle-bonfire = toString ./wallpapers/candle-circle-bonfire.png;
+  };
 in
 {
   options.modules.hyprland = with types; {
@@ -46,9 +54,28 @@ in
         };
       });
     };
+
+    wallpaper = mkOption {
+      type = enum (attrNames wallpapers);
+      default = "pixel-bonfire-city";
+      description = "Which wallpaper to display via hyprpaper.";
+    };
   };
 
   config = mkIf cfg.enable {
+    services.hyprpaper = {
+      enable = true;
+      settings = {
+        splash = false;
+        preload = attrValues wallpapers;
+        wallpaper = map (o: {
+          monitor = o.output;
+          path = wallpapers.${cfg.wallpaper};
+          fit_mode = "fill";
+        }) cfg.output;
+      };
+    };
+
     home.packages = with pkgs; [
       grim
       playerctl
@@ -71,8 +98,8 @@ in
       settings = {
         config = {
           general = {
-            gaps_in = 2;
-            gaps_out = 2;
+            gaps_in = 5;
+            gaps_out = 10;
             border_size = 1;
             col = {
               active_border = palette.accent;
@@ -92,6 +119,7 @@ in
             rounding_power = 4.0;
             blur.enabled = true;
             shadow.enabled = false;
+            inactive_opacity = 0.85;
             glow = {
               enabled = true;
               color = palette.accent;
@@ -115,14 +143,17 @@ in
           misc = {
             background_color = palette.bg;
             disable_hyprland_logo = true;
-            disable_splash_rendering = true;
-            force_default_wallpaper = 0;
           };
 
           plugin = {
             hyprbars = {
-              bar_height = 12;
-              bar_text_size = 8;
+              bar_height = 26;
+              bar_color = palette.surface;
+              bar_text_size = 13;
+              bar_text_weight = "medium";
+              bar_text_font = "JetBrainsMono Nerd Font";
+              bar_text_align = "center";
+              bar_part_of_window = true;
             };
           };
 
@@ -147,6 +178,26 @@ in
                   class = "cs2";
                 };
                 immediate = true;
+              }
+            ];
+          }
+          {
+            _args = [
+              {
+                match = {
+                  focus = true;
+                };
+                "hyprbars:title_color" = rgb palette.accent;
+              }
+            ];
+          }
+          {
+            _args = [
+              {
+                match = {
+                  focus = false;
+                };
+                "hyprbars:title_color" = rgb palette.muted;
               }
             ];
           }

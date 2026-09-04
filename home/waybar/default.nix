@@ -24,7 +24,10 @@ in
         mainBar = {
           layer = "top";
           position = "top";
-          height = 20;
+          height = 32;
+          margin-top = 5;
+          margin-left = 8;
+          margin-right = 8;
           modules-left = [ "ext/workspaces" ];
           modules-center = [ ];
           modules-right = [
@@ -49,8 +52,8 @@ in
           };
 
           "pulseaudio" = {
-            format = "{volume}%";
-            format-muted = "muted";
+            format = "🔊 {volume}%";
+            format-muted = "🔇 muted";
             on-click = "pavucontrol";
           };
 
@@ -70,6 +73,10 @@ in
               "█"
             ];
           };
+
+          "battery" = {
+            format = "🔋 {capacity}%";
+          };
         };
       };
 
@@ -78,39 +85,56 @@ in
           border: none;
           border-radius: 0;
           font-family: "JetBrainsMono Nerd Font";
-          font-size: 12px;
+          font-size: 16px;
           min-height: 0;
         }
 
         window#waybar {
-          background: ${colors.bg};
+          background: transparent;
           color: ${colors.text};
+        }
+
+        #workspaces, #network, #pulseaudio, #clock, #battery {
+          background: alpha(${colors.surface}, 0.9);
+          border: 1px solid ${colors.overlay};
+          border-radius: 8px;
+        }
+
+        #workspaces {
+          padding: 3px;
+          margin: 0px 0 4px 6px;
+        }
+
+        #network, #pulseaudio, #clock, #battery {
+          padding: 0 10px;
+          margin: 4px 3px;
+          color: ${colors.subtle};
+        }
+
+        #battery {
+          margin-right: 6px;
         }
 
         #workspaces button {
           padding: 0 8px;
+          border-radius: 6px;
           background: transparent;
           color: ${colors.muted};
         }
 
         #workspaces button:hover {
+          background: ${colors.overlay};
           color: ${colors.text};
-          box-shadow: inset 0 -2px ${colors.muted};
         }
 
         #workspaces button.active {
-          color: ${colors.accent};
-          box-shadow: inset 0 -2px ${colors.accent};
+          background: ${colors.accent};
+          color: ${colors.bg};
         }
 
         #workspaces button.urgent {
-          color: ${colors.red};
-          box-shadow: inset 0 -2px ${colors.red};
-        }
-
-        #clock, #pulseaudio, #network, #battery {
-          margin-right: 12px;
-          color: ${colors.subtle};
+          background: ${colors.red};
+          color: ${colors.bg};
         }
 
         #network {

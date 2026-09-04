@@ -16,10 +16,8 @@ in
       "google-chrome"
       "hiddenbar"
       "obsidian"
-      "openwhispr"
       "signal"
       "slack"
-      "spotify"
       "telegram"
       "wispr-flow"
     ];
