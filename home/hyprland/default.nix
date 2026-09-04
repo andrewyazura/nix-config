@@ -89,7 +89,6 @@ in
       portalPackage = hyprlandPkgs.xdg-desktop-portal-hyprland;
 
       plugins = with hyprlandPlugins; [
-        csgo-vulkan-fix
         hy3Pkgs.hy3
         hyprbars
       ];
