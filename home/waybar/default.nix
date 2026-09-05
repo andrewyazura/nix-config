@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   config,
   ...
 }:
@@ -7,6 +8,21 @@ with lib;
 let
   cfg = config.modules.waybar;
   colors = import ../../common/colors.nix;
+
+  keyboardLayout = pkgs.writeShellScript "waybar-keyboard-layout" ''
+    keyboard=$(hyprctl -j devices | ${pkgs.jq}/bin/jq '.keyboards[] | select(.main == true)')
+    name=$(echo "$keyboard" | ${pkgs.jq}/bin/jq -r '.name')
+    index=$(echo "$keyboard" | ${pkgs.jq}/bin/jq -r '.active_layout_index')
+    layout=$(echo "$keyboard" | ${pkgs.jq}/bin/jq -r '.layout' | cut -d, -f$((index + 1)))
+
+    case "$layout" in
+      us) text="🇬🇧 en" ;;
+      ua) text="🇺🇦 ua" ;;
+      *) text="$layout" ;;
+    esac
+
+    ${pkgs.jq}/bin/jq -n --arg text "$text" --arg tooltip "$name" '{text: $text, tooltip: $tooltip}'
+  '';
 in
 {
   options.modules.waybar = {
@@ -31,7 +47,7 @@ in
           modules-left = [ "ext/workspaces" ];
           modules-center = [ ];
           modules-right = [
-            "hyprland/language"
+            "custom/keyboard-layout"
             "network"
             "pulseaudio"
             "clock"
@@ -45,10 +61,10 @@ in
             sort-by-coordinates = true;
           };
 
-          "hyprland/language" = {
-            format = "{}";
-            format-en = "🇬🇧 en";
-            format-uk = "🇺🇦 ua";
+          "custom/keyboard-layout" = {
+            exec = "${keyboardLayout}";
+            interval = 1;
+            return-type = "json";
           };
 
           "clock" = {
@@ -97,7 +113,7 @@ in
           color: ${colors.text};
         }
 
-        #workspaces, #language, #network, #pulseaudio, #clock, #battery {
+        #workspaces, #custom-keyboard-layout, #network, #pulseaudio, #clock, #battery {
           background: alpha(${colors.surface}, 0.9);
           border: 1px solid ${colors.overlay};
           border-radius: 8px;
@@ -108,7 +124,7 @@ in
           margin: 0px 0 4px 6px;
         }
 
-        #language, #network, #pulseaudio, #clock, #battery {
+        #custom-keyboard-layout, #network, #pulseaudio, #clock, #battery {
           padding: 0 10px;
           margin: 4px 3px;
           color: ${colors.subtle};
