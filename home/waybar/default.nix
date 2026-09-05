@@ -31,6 +31,7 @@ in
           modules-left = [ "ext/workspaces" ];
           modules-center = [ ];
           modules-right = [
+            "hyprland/language"
             "network"
             "pulseaudio"
             "clock"
@@ -42,6 +43,12 @@ in
             format = "{name}";
             sort-by-name = false;
             sort-by-coordinates = true;
+          };
+
+          "hyprland/language" = {
+            format = "{}";
+            format-en = "🇬🇧 en";
+            format-uk = "🇺🇦 ua";
           };
 
           "clock" = {
@@ -64,19 +71,10 @@ in
 
           "network" = {
             interface = "wlp4s0";
-            format-wifi = "{icon} {essid} {bandwidthDownBytes}";
-            format-ethernet = "{ifname} {bandwidthDownBytes}";
-            format-disconnected = "not connected";
+            format-wifi = "{essid} {bandwidthDownBytes}";
+            format-ethernet = "󰈀 {ifname} {bandwidthDownBytes}";
+            format-disconnected = "󰤭 not connected";
             tooltip-format = "{ipaddr}";
-
-            format-icons = [
-              "▁"
-              "▂"
-              "▃"
-              "▅"
-              "▇"
-              "█"
-            ];
           };
 
           "battery" = {
@@ -99,7 +97,7 @@ in
           color: ${colors.text};
         }
 
-        #workspaces, #network, #pulseaudio, #clock, #battery {
+        #workspaces, #language, #network, #pulseaudio, #clock, #battery {
           background: alpha(${colors.surface}, 0.9);
           border: 1px solid ${colors.overlay};
           border-radius: 8px;
@@ -110,7 +108,7 @@ in
           margin: 0px 0 4px 6px;
         }
 
-        #network, #pulseaudio, #clock, #battery {
+        #language, #network, #pulseaudio, #clock, #battery {
           padding: 0 10px;
           margin: 4px 3px;
           color: ${colors.subtle};
