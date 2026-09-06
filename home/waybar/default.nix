@@ -21,7 +21,7 @@ let
       *) text="$layout" ;;
     esac
 
-    ${pkgs.jq}/bin/jq -n --arg text "$text" --arg tooltip "$name" '{text: $text, tooltip: $tooltip}'
+    ${pkgs.jq}/bin/jq -nc --arg text "$text" --arg tooltip "$name" '{text: $text, tooltip: $tooltip}'
   '';
 in
 {
