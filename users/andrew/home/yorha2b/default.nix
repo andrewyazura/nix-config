@@ -3,14 +3,11 @@
   modules = {
     cs2.enable = true;
     ghostty.fontSize = 10;
-    obs.enable = true;
     profiles = {
       development.enable = true;
       desktop.enable = true;
       ai-tools.enable = true;
     };
-    vesktop.enable = true;
-    video-editing.enable = true;
   };
   home.stateVersion = "24.11";
 

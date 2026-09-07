@@ -42,7 +42,10 @@ in
       modules = {
         ghostty.enable = mkDefault true;
         media-packages.enable = mkDefault true;
+        obs.enable = mkDefault true;
         theme.enable = mkDefault true;
+        vesktop.enable = mkDefault true;
+        video-editing.enable = mkDefault true;
       };
     })
 
