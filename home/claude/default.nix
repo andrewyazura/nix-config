@@ -41,6 +41,10 @@ in
         # https://code.claude.com/docs/en/output-styles
         outputStyle = "Concise";
 
+        # Vim keybindings in the prompt input
+        # https://code.claude.com/docs/en/interactive-mode
+        editorMode = "vim";
+
         # Honor .gitignore patterns in file picker and search
         # https://code.claude.com/docs/en/settings
         respectGitignore = true;
