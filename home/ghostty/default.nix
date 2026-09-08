@@ -78,6 +78,7 @@ in
         ];
 
         background-opacity = cfg.backgroundOpacity;
+        background-opacity-cells = true;
         font-family = cfg.fontFamily;
         font-size = cfg.fontSize;
         font-style = cfg.fontStyle;
