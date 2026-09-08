@@ -200,6 +200,16 @@ in
               }
             ];
           }
+          {
+            _args = [
+              {
+                match = {
+                  pin = true;
+                };
+                opacity = "1.0 override";
+              }
+            ];
+          }
         ];
 
         device = [
