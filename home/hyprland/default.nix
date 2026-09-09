@@ -146,9 +146,9 @@ in
 
           plugin = {
             hyprbars = {
-              bar_height = 26;
+              bar_height = 20;
               bar_color = palette.surface;
-              bar_text_size = 13;
+              bar_text_size = 12;
               bar_text_weight = "medium";
               bar_text_font = "JetBrainsMono Nerd Font";
               bar_text_align = "center";
