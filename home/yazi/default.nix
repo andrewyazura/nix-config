@@ -19,6 +19,31 @@ in
         mgr = {
           show_hidden = true;
         };
+
+        opener = {
+          image = [
+            {
+              run = "google-chrome-stable %s";
+              for = "linux";
+              orphan = true;
+              desc = "Open in Chrome";
+            }
+            {
+              run = ''open -a "Google Chrome" %s'';
+              for = "macos";
+              desc = "Open in Chrome";
+            }
+          ];
+        };
+
+        open = {
+          prepend_rules = [
+            {
+              mime = "image/*";
+              use = "image";
+            }
+          ];
+        };
       };
 
       theme = {
