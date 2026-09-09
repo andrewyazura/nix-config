@@ -12,6 +12,7 @@ in
     base.enable = mkEnableOption "Base CLI tools profile";
     development.enable = mkEnableOption "Development environment profile";
     desktop.enable = mkEnableOption "Desktop applications profile";
+    content-creation.enable = mkEnableOption "Recording and video editing profile";
     ai-tools.enable = mkEnableOption "AI coding tools profile";
   };
 
@@ -42,9 +43,14 @@ in
       modules = {
         ghostty.enable = mkDefault true;
         media-packages.enable = mkDefault true;
-        obs.enable = mkDefault true;
         theme.enable = mkDefault true;
         vesktop.enable = mkDefault true;
+      };
+    })
+
+    (mkIf cfg.content-creation.enable {
+      modules = {
+        obs.enable = mkDefault true;
         video-editing.enable = mkDefault true;
       };
     })

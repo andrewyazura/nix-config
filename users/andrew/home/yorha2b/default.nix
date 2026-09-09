@@ -9,6 +9,7 @@
     profiles = {
       development.enable = true;
       desktop.enable = true;
+      content-creation.enable = true;
       ai-tools.enable = true;
     };
   };
