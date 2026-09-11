@@ -26,8 +26,8 @@
     gnupg.agent = {
       enable = true;
       settings = {
-        default-cache-ttl = 86400;
-        max-cache-ttl = 86400;
+        default-cache-ttl = 31536000;
+        max-cache-ttl = 31536000;
       };
     };
 
