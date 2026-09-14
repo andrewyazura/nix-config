@@ -134,5 +134,17 @@
       formatter = nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-darwin" ] (
         system: nixpkgs.legacyPackages.${system}.nixfmt-tree
       );
+
+      checks = {
+        x86_64-linux = {
+          yorha2b = self.nixosConfigurations.yorha2b.config.system.build.toplevel;
+          yorha9s = self.nixosConfigurations.yorha9s.config.system.build.toplevel;
+          bunker = self.nixosConfigurations.bunker.config.system.build.toplevel;
+        };
+
+        aarch64-darwin = {
+          yorhaA2 = self.darwinConfigurations.yorhaA2.config.system.build.toplevel;
+        };
+      };
     };
 }
