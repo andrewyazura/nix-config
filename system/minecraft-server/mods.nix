@@ -14,10 +14,11 @@ with pkgs;
     url = "https://cdn.modrinth.com/data/gvQqBUqZ/versions/WXHRsMRl/lithium-fabric-0.26.1%2Bmc26.3.jar";
     sha512 = "1crqr1z83p23r0a1i46di0sw1qbpg8dbf9hj53ys9vhv3rgnpn029cscccvj4lah1j7dljspd53h6b0hvcz22x20dg00gr0g81rpfxc";
   };
-  "vanish" = fetchurl {
-    url = "https://cdn.modrinth.com/data/UL4bJFDY/versions/QGY1aFDb/vanish-1.6.15%2B26.2.jar";
-    sha512 = "2g9dbyvagvgxvivjr3b5yy6xz1lv8xqrr710973bn9m2lksfws6y3fj2y5w9j7hr8h4v3gqdxiy84xbgchhxa9k6xfijxa5vsz2lf9r";
-  };
+  # vanish has no 26.3 build; its datapack uses the removed predicate format.
+  # "vanish" = fetchurl {
+  #   url = "https://cdn.modrinth.com/data/UL4bJFDY/versions/QGY1aFDb/vanish-1.6.15%2B26.2.jar";
+  #   sha512 = "2g9dbyvagvgxvivjr3b5yy6xz1lv8xqrr710973bn9m2lksfws6y3fj2y5w9j7hr8h4v3gqdxiy84xbgchhxa9k6xfijxa5vsz2lf9r";
+  # };
   "proxy-protocol-support" = fetchurl {
     url = "https://cdn.modrinth.com/data/mfONdVnp/versions/ULyNKtAz/proxy-protocol-support-1.2.1-fabric.jar";
     sha512 = "1p5bvlw01wfqfwf32b3jvp05f5bfz91sahczy9g2ykwhlzkxs74rzkj20bbhbrnk13qj5jpis31y60pr8haf0j42bz75233wganf0m1";
