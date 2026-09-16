@@ -2,35 +2,27 @@
 with pkgs;
 {
   "fabric-api" = fetchurl {
-    url = "https://cdn.modrinth.com/data/P7dR8mSH/versions/BQfN2OGk/fabric-api-0.160.6%2B26.3.jar";
-    sha512 = "0c6srq17vmlacyg1d63154bi2zshy36by6ngmq6c9gdmmkjabk71w3nz4jxynra892z507nd386q6033nkgz8lnqrgi3fs4rs0b2dc7";
+    url = "https://cdn.modrinth.com/data/P7dR8mSH/versions/yALY9gHM/fabric-api-0.151.0%2B26.1.2.jar";
+    sha512 = "3fkqc6i51srfzy1p7339zg18hr64fa3kgnw7hpiw2m0dipzkgym1k94i6pdscz6bm1q7mzl91w56py7ggpzjj4jm15l2qmr8ac391yh";
   };
-  # skin-restorer has no 26.3 build; it crashes on a removed authlib class.
-  # "skin-restorer" = fetchurl {
-  #   url = "https://cdn.modrinth.com/data/ghrZDhGW/versions/rPmMM0mv/skinrestorer-2.11.0%2B26.1-fabric.jar";
-  #   sha512 = "38iilm0s6b88j7xs3lxd5vq78pm0c2d4lmr16plgsjlxyx2rjm88aamb0a6g5bs4axlpagkg6kq6mriqv29k6byrsncr29g2585axlr";
-  # };
+  "skin-restorer" = fetchurl {
+    url = "https://cdn.modrinth.com/data/ghrZDhGW/versions/9MoU6vsD/skinrestorer-2.8.0%2B26.1-fabric.jar";
+    sha512 = "0bfxbcn6a1jm1rk40j847xy210ad528acd7mymrarqk93vyl8fnnkprbcqb5hhbwvs4vyvm58k9yqqlxrbwgjp56hn9dyqcd8dg0hgr";
+  };
   "lithium" = fetchurl {
-    url = "https://cdn.modrinth.com/data/gvQqBUqZ/versions/WXHRsMRl/lithium-fabric-0.26.1%2Bmc26.3.jar";
-    sha512 = "1crqr1z83p23r0a1i46di0sw1qbpg8dbf9hj53ys9vhv3rgnpn029cscccvj4lah1j7dljspd53h6b0hvcz22x20dg00gr0g81rpfxc";
+    url = "https://cdn.modrinth.com/data/gvQqBUqZ/versions/GiCfpS6V/lithium-fabric-0.24.5%2Bmc26.1.2.jar";
+    sha512 = "0vsv0pm0dcdj2fbds8jxg974qb15y7pdikclrbzgpipx63y5hzy4ag2c80phnnv6pjd6gy72s8py32q90nkvllp7fz7ckch5lsvscaw";
   };
-  # vanish has no 26.3 build; its datapack uses the removed predicate format.
-  # "vanish" = fetchurl {
-  #   url = "https://cdn.modrinth.com/data/UL4bJFDY/versions/QGY1aFDb/vanish-1.6.15%2B26.2.jar";
-  #   sha512 = "2g9dbyvagvgxvivjr3b5yy6xz1lv8xqrr710973bn9m2lksfws6y3fj2y5w9j7hr8h4v3gqdxiy84xbgchhxa9k6xfijxa5vsz2lf9r";
-  # };
+  "vanish" = fetchurl {
+    url = "https://cdn.modrinth.com/data/UL4bJFDY/versions/MAfndrvo/vanish-1.6.9%2B26.1.2.jar";
+    sha512 = "1v3wyjfwdkx00dzyc01z2v0djkkk8r9yqjxswcc98ycw67n7x0y9fgvhsv1l8w901dkdx2v68ak8v75bbzp812wv1pqlznj9a0kqw7g";
+  };
   "proxy-protocol-support" = fetchurl {
     url = "https://cdn.modrinth.com/data/mfONdVnp/versions/ULyNKtAz/proxy-protocol-support-1.2.1-fabric.jar";
     sha512 = "1p5bvlw01wfqfwf32b3jvp05f5bfz91sahczy9g2ykwhlzkxs74rzkj20bbhbrnk13qj5jpis31y60pr8haf0j42bz75233wganf0m1";
   };
   "easy-auth" = fetchurl {
-    url = "https://cdn.modrinth.com/data/aZj58GfX/versions/3d6BOvmm/easyauth-mc26.2-3.4.4.jar";
-    sha512 = "1pfkk3knb05grwglaf8h8396cmk2bfdsay3nbljx94gvvfjv75qrl7z9mhfnvr0lfd9hngb270kjg60vb7np5wlmynz0l190mrbm0js";
-  };
-  # easyauth bundles server-translations-api 26.2, which calls a ResourceManager
-  # method that 26.3 removed. This standalone 26.3 build overrides the nested one.
-  "server-translations-api" = fetchurl {
-    url = "https://maven.nucleoid.xyz/xyz/nucleoid/server-translations-api/3.2.0%2B26.3/server-translations-api-3.2.0%2B26.3.jar";
-    sha512 = "1xi1zjiyb0i56aznwv7fi65s8vid5fl3wd54k15bsirgwgkh9q8j0pg16x9q6czdy6fjnrhjn96j345p486b25hxvc5gdyqfii033jj";
+    url = "https://cdn.modrinth.com/data/aZj58GfX/versions/h9nSM2ZF/easyauth-mc26.1-3.4.3-SNAPSHOT.48.jar";
+    sha512 = "1rx1d55jskkhh3i8rxkkzzk8whrba2d6frjkckal29wd1c2hfk0s3pm4ckwlxdwq42xdrp3kvzpllrwaxn9vbr7p6lxwd10shm8j6hb";
   };
 }
