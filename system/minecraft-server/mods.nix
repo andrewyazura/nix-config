@@ -27,4 +27,10 @@ with pkgs;
     url = "https://cdn.modrinth.com/data/aZj58GfX/versions/3d6BOvmm/easyauth-mc26.2-3.4.4.jar";
     sha512 = "1pfkk3knb05grwglaf8h8396cmk2bfdsay3nbljx94gvvfjv75qrl7z9mhfnvr0lfd9hngb270kjg60vb7np5wlmynz0l190mrbm0js";
   };
+  # easyauth bundles server-translations-api 26.2, which calls a ResourceManager
+  # method that 26.3 removed. This standalone 26.3 build overrides the nested one.
+  "server-translations-api" = fetchurl {
+    url = "https://maven.nucleoid.xyz/xyz/nucleoid/server-translations-api/3.2.0%2B26.3/server-translations-api-3.2.0%2B26.3.jar";
+    sha512 = "1xi1zjiyb0i56aznwv7fi65s8vid5fl3wd54k15bsirgwgkh9q8j0pg16x9q6czdy6fjnrhjn96j345p486b25hxvc5gdyqfii033jj";
+  };
 }
