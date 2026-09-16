@@ -1,6 +1,7 @@
 {
   imports = [
     ./aerospace
+    ./binary-cache
     ./desktop-apps
     ./development-apps
     ../common/fonts

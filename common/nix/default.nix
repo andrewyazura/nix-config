@@ -3,6 +3,7 @@
   imports = [ ../binary-cache ];
 
   modules.binary-cache.enable = lib.mkDefault true;
+  modules.binary-cache.push.enable = lib.mkDefault true;
 
   nixpkgs.config.allowUnfree = true;
 
