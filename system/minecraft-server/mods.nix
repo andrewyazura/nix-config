@@ -5,10 +5,11 @@ with pkgs;
     url = "https://cdn.modrinth.com/data/P7dR8mSH/versions/BQfN2OGk/fabric-api-0.160.6%2B26.3.jar";
     sha512 = "0c6srq17vmlacyg1d63154bi2zshy36by6ngmq6c9gdmmkjabk71w3nz4jxynra892z507nd386q6033nkgz8lnqrgi3fs4rs0b2dc7";
   };
-  "skin-restorer" = fetchurl {
-    url = "https://cdn.modrinth.com/data/ghrZDhGW/versions/rPmMM0mv/skinrestorer-2.11.0%2B26.1-fabric.jar";
-    sha512 = "38iilm0s6b88j7xs3lxd5vq78pm0c2d4lmr16plgsjlxyx2rjm88aamb0a6g5bs4axlpagkg6kq6mriqv29k6byrsncr29g2585axlr";
-  };
+  # skin-restorer has no 26.3 build; it crashes on a removed authlib class.
+  # "skin-restorer" = fetchurl {
+  #   url = "https://cdn.modrinth.com/data/ghrZDhGW/versions/rPmMM0mv/skinrestorer-2.11.0%2B26.1-fabric.jar";
+  #   sha512 = "38iilm0s6b88j7xs3lxd5vq78pm0c2d4lmr16plgsjlxyx2rjm88aamb0a6g5bs4axlpagkg6kq6mriqv29k6byrsncr29g2585axlr";
+  # };
   "lithium" = fetchurl {
     url = "https://cdn.modrinth.com/data/gvQqBUqZ/versions/WXHRsMRl/lithium-fabric-0.26.1%2Bmc26.3.jar";
     sha512 = "1crqr1z83p23r0a1i46di0sw1qbpg8dbf9hj53ys9vhv3rgnpn029cscccvj4lah1j7dljspd53h6b0hvcz22x20dg00gr0g81rpfxc";
