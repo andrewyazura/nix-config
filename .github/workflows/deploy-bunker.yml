@@ -16,7 +16,7 @@ jobs:
         with:
           extra-conf: |
             substituters = https://cache.andrewyazura.com/main?priority=30 https://cache.nixos.org?priority=40
-            trusted-public-keys = main:T8v5SdwjNhvJowlHJFFNB1O9PbXyLrZ+vRKe7OWGCa8= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
+            trusted-public-keys = main:3p3SLFLPh7NUwZ/1940Ez5F3DX/LmMOfJeWSoMaSgxI= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
 
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.9.0
