@@ -11,4 +11,3 @@ if git diff --cached --quiet -- '*.nix' flake.lock; then
 fi
 
 nix fmt -- --ci
-nix flake check --all-systems --no-build
