@@ -11,9 +11,12 @@ in
   config = mkIf cfg.enable {
     homebrew.casks = [
       "1password"
+      "chatgpt"
+      "claude"
       "discord"
       "ghostty"
       "google-chrome"
+      "google-gemini"
       "hiddenbar"
       "moonlight"
       "obsidian"
