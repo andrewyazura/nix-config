@@ -12,6 +12,7 @@ in
     homebrew.casks = [
       "1password"
       "antigravity"
+      "bitwarden"
       "chatgpt"
       "claude"
       "discord"
