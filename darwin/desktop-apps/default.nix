@@ -11,6 +11,7 @@ in
   config = mkIf cfg.enable {
     homebrew.casks = [
       "1password"
+      "antigravity"
       "chatgpt"
       "claude"
       "discord"
