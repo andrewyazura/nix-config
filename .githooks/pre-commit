@@ -6,8 +6,9 @@ if ! git diff --cached --quiet -- home/cs2/autoexec.cfg home/cs2/render_binds.py
   git add home/cs2/binds.svg
 fi
 
-if git diff --cached --quiet -- '*.nix'; then
+if git diff --cached --quiet -- '*.nix' flake.lock; then
   exit 0
 fi
 
 nix fmt -- --ci
+nix eval --json .#checks >/dev/null
