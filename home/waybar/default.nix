@@ -90,7 +90,7 @@ in
           ];
 
           "custom/launcher" = {
-            format = "󰀻";
+            format = "";
             tooltip = false;
             on-click = "hyprlauncher";
           };
@@ -185,14 +185,15 @@ in
           margin: 0px 0 4px 0px;
         }
 
-        #custom-launcher, #custom-keyboard-layout, #network, #pulseaudio, #clock, #battery, #custom-power {
+        #custom-keyboard-layout, #network, #pulseaudio, #clock, #battery, #custom-power {
           padding: 0 10px;
           margin: 4px 3px;
           color: ${colors.subtle};
         }
 
         #custom-launcher {
-          margin-left: 6px;
+          padding: 0 12px;
+          margin: 0px 3px 4px 6px;
           color: ${colors.accent};
         }
 
