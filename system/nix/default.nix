@@ -1,4 +1,5 @@
 {
+  pkgs,
   ...
 }:
 {
@@ -25,6 +26,7 @@
   programs = {
     gnupg.agent = {
       enable = true;
+      pinentryPackage = pkgs.pinentry-curses;
       settings = {
         default-cache-ttl = 31536000;
         max-cache-ttl = 31536000;
