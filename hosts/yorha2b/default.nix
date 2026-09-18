@@ -73,6 +73,13 @@
       }
     ];
 
+    kernelParams = [ "zfs.zfs_arc_max=8589934592" ];
+
+    kernel.sysctl = {
+      "vm.swappiness" = 10;
+      "kernel.split_lock_mitigate" = 0;
+    };
+
     supportedFilesystems = [ "zfs" ];
     zfs = {
       forceImportRoot = false;
