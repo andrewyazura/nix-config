@@ -23,6 +23,37 @@ let
 
     ${pkgs.jq}/bin/jq -nc --arg text "$text" --arg tooltip "$name" '{text: $text, tooltip: $tooltip}'
   '';
+
+  powerMenu = pkgs.writeText "waybar-power-menu.xml" ''
+    <?xml version="1.0" encoding="UTF-8"?>
+    <interface>
+      <object class="GtkMenu" id="menu">
+        <child>
+          <object class="GtkMenuItem" id="lock">
+            <property name="label">Lock</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkMenuItem" id="suspend">
+            <property name="label">Suspend</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkSeparatorMenuItem" id="separator" />
+        </child>
+        <child>
+          <object class="GtkMenuItem" id="reboot">
+            <property name="label">Reboot</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkMenuItem" id="shutdown">
+            <property name="label">Shut down</property>
+          </object>
+        </child>
+      </object>
+    </interface>
+  '';
 in
 {
   options.modules.waybar = {
@@ -44,15 +75,45 @@ in
           margin-top = 5;
           margin-left = 8;
           margin-right = 8;
-          modules-left = [ "ext/workspaces" ];
-          modules-center = [ ];
+          modules-left = [
+            "custom/launcher"
+            "ext/workspaces"
+          ];
+          modules-center = [ "wlr/taskbar" ];
           modules-right = [
             "custom/keyboard-layout"
             "network"
             "pulseaudio"
             "clock"
             "battery"
+            "custom/power"
           ];
+
+          "custom/launcher" = {
+            format = "󰀻";
+            tooltip = false;
+            on-click = "hyprlauncher";
+          };
+
+          "wlr/taskbar" = {
+            format = "{name}";
+            tooltip-format = "{title}";
+            on-click = "activate";
+            on-click-right = "close";
+          };
+
+          "custom/power" = {
+            format = "󰐥";
+            tooltip = false;
+            menu = "on-click";
+            menu-file = "${powerMenu}";
+            menu-actions = {
+              lock = "loginctl lock-session";
+              suspend = "systemctl suspend";
+              reboot = "systemctl reboot";
+              shutdown = "systemctl poweroff";
+            };
+          };
 
           "ext/workspaces" = {
             on-click = "activate";
@@ -113,37 +174,64 @@ in
           color: ${colors.text};
         }
 
-        #workspaces, #custom-keyboard-layout, #network, #pulseaudio, #clock, #battery {
+        #custom-launcher, #workspaces, #taskbar, #custom-keyboard-layout, #network, #pulseaudio, #clock, #battery, #custom-power {
           background: alpha(${colors.surface}, 0.9);
           border: 1px solid ${colors.overlay};
           border-radius: 8px;
         }
 
-        #workspaces {
+        #workspaces, #taskbar {
           padding: 3px;
-          margin: 0px 0 4px 6px;
+          margin: 0px 0 4px 0px;
         }
 
-        #custom-keyboard-layout, #network, #pulseaudio, #clock, #battery {
+        #custom-launcher, #custom-keyboard-layout, #network, #pulseaudio, #clock, #battery, #custom-power {
           padding: 0 10px;
           margin: 4px 3px;
           color: ${colors.subtle};
         }
 
-        #battery {
+        #custom-launcher {
+          margin-left: 6px;
+          color: ${colors.accent};
+        }
+
+        #custom-power {
           margin-right: 6px;
         }
 
-        #workspaces button {
+        #workspaces button, #taskbar button {
           padding: 0 8px;
           border-radius: 6px;
           background: transparent;
           color: ${colors.muted};
         }
 
-        #workspaces button:hover {
+        #workspaces button:hover, #taskbar button:hover {
           background: ${colors.overlay};
           color: ${colors.text};
+        }
+
+        #taskbar button.active {
+          background: ${colors.accent};
+          color: ${colors.bg};
+        }
+
+        menu {
+          background: ${colors.surface};
+          border: 1px solid ${colors.overlay};
+          border-radius: 8px;
+          color: ${colors.text};
+        }
+
+        menuitem {
+          padding: 4px 12px;
+          border-radius: 6px;
+        }
+
+        menuitem:hover {
+          background: ${colors.accent};
+          color: ${colors.bg};
         }
 
         #workspaces button.active {
