@@ -3,7 +3,7 @@ let
   settings = {
     version = 3;
     lines = [
-      # Line 1: model, context, session timer, cost
+      # Line 1: model, effort, context, cost
       [
         {
           id = "1";
@@ -16,8 +16,8 @@ let
         }
         {
           id = "3";
-          type = "context-bar";
-          color = "brightBlack";
+          type = "thinking-effort";
+          color = "magenta";
         }
         {
           id = "4";
@@ -25,7 +25,7 @@ let
         }
         {
           id = "5";
-          type = "context-percentage";
+          type = "context-bar";
           color = "brightBlack";
         }
         {
@@ -34,15 +34,6 @@ let
         }
         {
           id = "7";
-          type = "session-clock";
-          color = "blue";
-        }
-        {
-          id = "8";
-          type = "separator";
-        }
-        {
-          id = "9";
           type = "session-cost";
           color = "green";
         }
@@ -51,8 +42,17 @@ let
       # Line 2: token breakdown, git info
       [
         {
-          id = "10";
+          id = "8";
           type = "tokens-input";
+          color = "brightBlack";
+        }
+        {
+          id = "9";
+          type = "separator";
+        }
+        {
+          id = "10";
+          type = "tokens-output";
           color = "brightBlack";
         }
         {
@@ -61,7 +61,7 @@ let
         }
         {
           id = "12";
-          type = "tokens-output";
+          type = "tokens-cached";
           color = "brightBlack";
         }
         {
@@ -70,8 +70,8 @@ let
         }
         {
           id = "14";
-          type = "tokens-cached";
-          color = "brightBlack";
+          type = "git-branch";
+          color = "magenta";
         }
         {
           id = "15";
@@ -79,15 +79,6 @@ let
         }
         {
           id = "16";
-          type = "git-branch";
-          color = "magenta";
-        }
-        {
-          id = "17";
-          type = "separator";
-        }
-        {
-          id = "18";
           type = "git-changes";
           color = "yellow";
         }
