@@ -28,7 +28,7 @@ in
         arRPC = true;
         audio.workaround = true;
         discordBranch = "stable";
-        hardwareAcceleration = false;
+        hardwareAcceleration = true;
         minimizeToTray = true;
         spellCheckLanguages = [
           "en-US"
