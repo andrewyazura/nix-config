@@ -210,6 +210,16 @@ in
               }
             ];
           }
+          {
+            _args = [
+              {
+                match = {
+                  class = "com.mitchellh.ghostty";
+                };
+                opacity = "0.9 0.85 override";
+              }
+            ];
+          }
         ];
 
         device = [

@@ -4,7 +4,7 @@
     cs2.enable = true;
     ghostty = {
       fontSize = 10;
-      backgroundOpacity = 0.98;
+      backgroundOpacity = 0.9;
     };
     profiles = {
       development.enable = true;
