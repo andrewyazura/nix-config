@@ -139,6 +139,10 @@ in
             };
           };
 
+          render = {
+            direct_scanout = 1;
+          };
+
           misc = {
             background_color = palette.bg;
             disable_hyprland_logo = true;
