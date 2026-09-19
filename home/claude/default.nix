@@ -29,6 +29,10 @@ in
 
     xdg.configFile = statusline.configFile;
 
+    # Custom slash commands. The home-manager module exposes no `commands`
+    # option, so link the directory directly.
+    home.file.".claude/commands".source = ./commands;
+
     programs.claude-code = {
       enable = true;
       package = llm-agents.claude-code;
