@@ -48,6 +48,11 @@
             position = "0x0";
             bitdepth = 8;
           }
+          {
+            output = "HEADLESS-1";
+            mode = "preferred";
+            position = "auto";
+          }
         ];
       };
     };
