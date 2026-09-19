@@ -79,7 +79,7 @@ in
             "custom/launcher"
             "ext/workspaces"
           ];
-          modules-center = [ "wlr/taskbar" ];
+          modules-center = [ ];
           modules-right = [
             "custom/keyboard-layout"
             "network"
@@ -93,13 +93,6 @@ in
             format = "";
             tooltip = false;
             on-click = "hyprlauncher";
-          };
-
-          "wlr/taskbar" = {
-            format = "{name}";
-            tooltip-format = "{title}";
-            on-click = "activate";
-            on-click-right = "close";
           };
 
           "custom/power" = {
@@ -174,13 +167,13 @@ in
           color: ${colors.text};
         }
 
-        #custom-launcher, #workspaces, #taskbar, #custom-keyboard-layout, #network, #pulseaudio, #clock, #battery, #custom-power {
+        #custom-launcher, #workspaces, #custom-keyboard-layout, #network, #pulseaudio, #clock, #battery, #custom-power {
           background: alpha(${colors.surface}, 0.9);
           border: 1px solid ${colors.overlay};
           border-radius: 8px;
         }
 
-        #workspaces, #taskbar {
+        #workspaces {
           padding: 3px;
           margin: 0px 0 4px 0px;
         }
@@ -192,7 +185,7 @@ in
         }
 
         #custom-launcher {
-          padding: 0 12px;
+          padding: 0 15px 0 9px;
           margin: 0px 3px 4px 6px;
           color: ${colors.accent};
         }
@@ -201,38 +194,16 @@ in
           margin-right: 6px;
         }
 
-        #workspaces button, #taskbar button {
+        #workspaces button {
           padding: 0 8px;
           border-radius: 6px;
           background: transparent;
           color: ${colors.muted};
         }
 
-        #workspaces button:hover, #taskbar button:hover {
+        #workspaces button:hover {
           background: ${colors.overlay};
           color: ${colors.text};
-        }
-
-        #taskbar button.active {
-          background: ${colors.accent};
-          color: ${colors.bg};
-        }
-
-        menu {
-          background: ${colors.surface};
-          border: 1px solid ${colors.overlay};
-          border-radius: 8px;
-          color: ${colors.text};
-        }
-
-        menuitem {
-          padding: 4px 12px;
-          border-radius: 6px;
-        }
-
-        menuitem:hover {
-          background: ${colors.accent};
-          color: ${colors.bg};
         }
 
         #workspaces button.active {
@@ -263,6 +234,23 @@ in
 
         #battery.critical {
           color: ${colors.red};
+        }
+
+        menu {
+          background: ${colors.surface};
+          border: 1px solid ${colors.overlay};
+          border-radius: 8px;
+          color: ${colors.text};
+        }
+
+        menuitem {
+          padding: 4px 12px;
+          border-radius: 6px;
+        }
+
+        menuitem:hover {
+          background: ${colors.accent};
+          color: ${colors.bg};
         }
       '';
     };
