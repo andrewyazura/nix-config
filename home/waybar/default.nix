@@ -174,8 +174,8 @@ in
         }
 
         #workspaces {
-          padding: 3px;
-          margin: 0px 0 4px 0px;
+          padding: 1px;
+          margin: 4px 0;
         }
 
         #custom-keyboard-layout, #network, #pulseaudio, #clock, #battery, #custom-power {
@@ -186,7 +186,7 @@ in
 
         #custom-launcher {
           padding: 0 15px 0 9px;
-          margin: 0px 3px 4px 6px;
+          margin: 4px 3px 4px 6px;
           color: ${colors.accent};
         }
 
