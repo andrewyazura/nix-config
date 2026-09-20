@@ -29,16 +29,13 @@ in
 
     xdg.configFile = statusline.configFile;
 
-    # Custom slash commands. The home-manager module exposes no `commands`
-    # option, so link the directory directly.
-    home.file.".claude/commands".source = ./commands;
-
     programs.claude-code = {
       enable = true;
       package = llm-agents.claude-code;
       enableMcpIntegration = true;
       context = ../../common/llm-memory.md;
       skills = ./skills;
+      commandsDir = ./commands;
 
       settings = {
         # Response formatting style
@@ -78,6 +75,9 @@ in
         teammateMode = "tmux";
         alwaysThinkingEnabled = true;
         effortLevel = "xhigh";
+
+        # Deliver messages from other sessions without a review prompt
+        crossSessionInbound = "accept";
 
         # Bottom status bar showing model and context usage
         # https://code.claude.com/docs/en/statusline
