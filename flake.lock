@@ -1183,11 +1183,11 @@
         "nixpkgs": "nixpkgs_12"
       },
       "locked": {
-        "lastModified": 1789748199,
-        "narHash": "sha256-rMR9mgPTerlPJB8uWcDgitdUtTZ0DXtNYltlviG6hDk=",
+        "lastModified": 1789985266,
+        "narHash": "sha256-ch9y4IVo/0XGi6n7Y9Vl5c68E8CflSmSiyD1iTOzy1U=",
         "ref": "refs/heads/main",
-        "rev": "f34807f7291d0d91df565c45fd914f01a8e5a6f3",
-        "revCount": 63,
+        "rev": "6e53fd38dc1676fb10abbc1bff64e27f93e4cfd1",
+        "revCount": 64,
         "type": "git",
         "url": "ssh://git@github.com/andrewyazura/private-nix-config.git"
       },
