@@ -20,6 +20,8 @@ in
 
       google-chrome
       obsidian
+      proton-vpn
+      proton-vpn-cli
       qbittorrent
       signal-desktop
       telegram-desktop
