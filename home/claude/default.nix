@@ -13,21 +13,18 @@ let
 
   hooks = import ./hooks.nix { inherit lib pkgs; };
   statusline = import ./statusline.nix { inherit lib pkgs; };
-in
-{
-  options.modules.claude = {
-    enable = mkEnableOption "Enable claude configuration";
-  };
 
-  config = mkIf cfg.enable {
-    home.packages = with llm-agents; [
-      ccstatusline
-      ccusage
+  homeDirectory = config.home.homeDirectory;
+  mcp = { inherit (config.programs.mcp) enable servers; };
+
+  instance = {
+    imports = [
+      ./stubs.nix
+      "${inputs.home-manager}/modules/programs/claude-code"
     ];
 
-    home.sessionVariables.CLAUDE_CONFIG_DIR = "${config.home.homeDirectory}/.claude";
-
-    xdg.configFile = statusline.configFile;
+    home.homeDirectory = homeDirectory;
+    programs.mcp = mcp;
 
     programs.claude-code = {
       enable = true;
@@ -102,9 +99,6 @@ in
           # Shell used for Bash tool execution
           CLAUDE_CODE_SHELL = "zsh";
 
-          # Disable crash/error reporting (pairs with DISABLE_TELEMETRY)
-          DISABLE_ERROR_REPORTING = 1;
-
           # Disable built-in auto-updater — Claude is managed via Nix flake input
           DISABLE_AUTOUPDATER = 1;
 
@@ -117,5 +111,54 @@ in
         };
       };
     };
+  };
+
+  instances = attrValues cfg.instances;
+
+  wrapper =
+    i:
+    pkgs.writeShellScriptBin i.command ''
+      export CLAUDE_CONFIG_DIR=${i.programs.claude-code.configDir}
+      exec ${i.programs.claude-code.finalPackage}/bin/claude "$@"
+    '';
+in
+{
+  options.modules.claude = {
+    enable = mkEnableOption "Enable claude configuration";
+
+    instances = mkOption {
+      type = types.attrsOf (
+        types.submoduleWith {
+          specialArgs = { inherit lib pkgs; };
+          modules = [ instance ];
+        }
+      );
+      default = { };
+    };
+  };
+
+  config = mkIf cfg.enable {
+    modules.claude.instances.personal = {
+      command = "claude";
+
+      # Disable crash/error reporting (pairs with DISABLE_TELEMETRY)
+      programs.claude-code.settings.env.DISABLE_ERROR_REPORTING = 1;
+    };
+
+    home.packages =
+      (with llm-agents; [
+        ccstatusline
+        ccusage
+      ])
+      ++ map wrapper instances;
+
+    home.file = mkMerge (map (i: i.home.file) instances);
+
+    home.sessionVariables.CLAUDE_CONFIG_DIR = "${homeDirectory}/.claude";
+
+    warnings = concatMap (i: i.warnings) instances;
+    assertions = concatMap (i: i.assertions) instances;
+
+    xdg.configFile = statusline.configFile;
   };
 }
