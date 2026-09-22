@@ -142,3 +142,68 @@ To provide a custom list of Workshop map IDs that plugins (like MatchZy or map c
    };
    ```
 2. On startup, the configuration automatically creates and populates `mapcycle.txt` and `maplist.txt` inside your CS2 installation directories with these maps formatted with the standard `ds:` workshop map prefix.
+
+---
+
+## 5. Rotating the Server Credentials
+
+All three secrets live in `secrets/cs2-env`, a sops-encrypted `KEY=value` file:
+
+| Key | Where it comes from |
+| --- | --- |
+| `GSLT_TOKEN` | <https://steamcommunity.com/dev/managegameservers> — game server account token, app ID 730 |
+| `STEAM_WEB_API_KEY` | <https://steamcommunity.com/dev/apikey> |
+| `RCON_PASSWORD` | Generate your own, e.g. `head -c 24 /dev/urandom \| base32` |
+
+### Steps
+
+1. Issue the new value at the URL above, or generate it.
+2. Edit the secret and replace the line:
+   ```bash
+   sops secrets/cs2-env
+   ```
+3. Commit and push. `restartUnits` on the `cs2-env` secret restarts
+   `cs2-server-1.service`, so the new values take effect without a manual
+   restart.
+4. Revoke the old value at Steam once the new one is confirmed live.
+
+### Verifying a rotation
+
+The decrypted secret on the host is `/run/secrets/cs2-env`. Compare it against
+the repo without printing either value:
+
+```bash
+sops -d secrets/cs2-env | grep -oP '^STEAM_WEB_API_KEY=\K.*' | sha256sum
+ssh bunker 'sudo grep -oP "^STEAM_WEB_API_KEY=\K.*" /run/secrets/cs2-env | sha256sum'
+```
+
+Matching hashes mean the rotation is live. A mismatch usually means the change
+was never committed and pushed, so no deploy ran.
+
+Confirm the server still authenticates:
+
+```bash
+ssh bunker 'journalctl -u cs2-server-1 --since "5 min ago" | grep -i "logon token"'
+```
+
+### Keeping the secrets out of the journal
+
+Do not pass a secret as a launch argument. Two separate things print the CS2
+command line — the engine itself, and CounterStrikeSharp — so anything on it
+lands in the journal, and in `/proc/<pid>/cmdline`. The engine masks the GSLT
+token but **not** `-authkey`.
+
+- `rcon_password` and `sv_setsteamaccount` are convars, so `preStart` writes
+  them to `cfg/secrets.cfg` at mode 600 and the server reads it via
+  `+exec secrets.cfg`.
+- `-authkey` has no convar and must stay on the command line, so
+  `LogFilterPatterns` drops both command-line lines before journald stores them.
+
+If a secret does reach the journal, rotate it — vacuuming is time-based and
+cannot remove a single recent entry without taking the surrounding logs too.
+Check with the value itself, never with a log message:
+
+```bash
+ssh bunker 'K=$(sudo grep -oP "^STEAM_WEB_API_KEY=\K.*" /run/secrets/cs2-env)
+  journalctl -u cs2-server-1 --no-pager | grep -cF "$K"'
+```
