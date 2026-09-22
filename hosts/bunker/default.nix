@@ -168,6 +168,7 @@
       cs2-env = {
         sopsFile = ../../secrets/cs2-env;
         format = "binary";
+        restartUnits = [ "cs2-server-1.service" ];
       };
 
       netrc = {
