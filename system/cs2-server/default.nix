@@ -113,7 +113,10 @@ in
           RestartSec = "10s";
           EnvironmentFile = v.environmentFiles;
           TimeoutStartSec = "15min";
-          LogFilterPatterns = "~Initializing with command line";
+          LogFilterPatterns = [
+            "~Initializing with command line"
+            "~-authkey"
+          ];
         };
 
         preStart = ''
@@ -148,6 +151,7 @@ in
           chmod -R +w ${installDir}/game/csgo/addons ${installDir}/game/csgo/cfg
 
           # Setup secrets, kept out of the command line so they stay out of the journal
+          rm -f ${installDir}/game/csgo/cfg/server.cfg
           rm -f ${installDir}/game/csgo/cfg/secrets.cfg
           (
             umask 077
