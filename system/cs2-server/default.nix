@@ -155,7 +155,7 @@ in
           rm -f ${installDir}/game/csgo/cfg/secrets.cfg
           (
             umask 077
-            printf 'rcon_password "%s"\nsv_setsteamaccount "%s"\n' "$RCON_PASSWORD" "$GSLT_TOKEN" > ${installDir}/game/csgo/cfg/secrets.cfg
+            printf 'sv_setsteamaccount "%s"\n' "$GSLT_TOKEN" > ${installDir}/game/csgo/cfg/secrets.cfg
           )
 
           # Inject Metamod into gameinfo.gi
