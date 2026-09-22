@@ -81,6 +81,7 @@ in
     (mkBind "SUPER + B" "function() hl.dispatch(hl.plugin.hy3.make_group('h')) end")
     (mkBind "SUPER + V" "function() hl.dispatch(hl.plugin.hy3.make_group('v')) end")
     (mkBind "SUPER + F" "hl.dsp.window.fullscreen()")
+    (mkBind "SUPER + N" "function() hl.dispatch(hl.dsp.window.cycle_next({ floating = not hl.get_active_window().floating })) end")
     (mkBind "SUPER + SHIFT + N" "hl.dsp.window.float({ action = 'toggle' })")
     (mkBind "SUPER + P" "hl.dsp.window.pin()")
 
