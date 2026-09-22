@@ -206,6 +206,11 @@
       enable = true;
       package = pkgs.postgresql_16;
     };
+
+    journald.settings.Journal = {
+      SystemMaxUse = "2G";
+      MaxRetentionSec = "1month";
+    };
   };
 
   networking.firewall.allowedTCPPorts = [
