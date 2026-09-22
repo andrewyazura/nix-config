@@ -28,14 +28,14 @@ in
         font = "Inter 11";
         background-color = "${colors.surface}e6";
         text-color = colors.text;
-        border-color = colors.overlay;
+        border-color = colors.accent;
         border-size = 1;
         border-radius = 10;
         progress-color = "over ${colors.accent}";
 
         icons = true;
         max-icon-size = 48;
-        format = "<b>%s</b>\\n%b";
+        format = "<span color='${colors.subtle}'>%a</span>\\n<b>%s</b>\\n%b";
 
         "urgency=low".text-color = colors.subtle;
 
