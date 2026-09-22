@@ -146,6 +146,13 @@ in
 
           chmod -R +w ${installDir}/game/csgo/addons ${installDir}/game/csgo/cfg
 
+          # Setup RCON
+          rm -f ${installDir}/game/csgo/cfg/server.cfg
+          (
+            umask 077
+            printf 'rcon_password "%s"\n' "$RCON_PASSWORD" > ${installDir}/game/csgo/cfg/server.cfg
+          )
+
           # Inject Metamod into gameinfo.gi
           GAMEINFO="${installDir}/game/csgo/gameinfo.gi"
           if [ -f "$GAMEINFO" ]; then
@@ -206,7 +213,6 @@ in
               -maxplayers 10 \
               -authkey $STEAM_WEB_API_KEY \
               +sv_setsteamaccount $GSLT_TOKEN \
-              +rcon_password $RCON_PASSWORD \
               +${
                 if v.workshopCollection != null then
                   "host_workshop_collection ${v.workshopCollection}"
