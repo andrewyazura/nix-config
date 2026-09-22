@@ -206,6 +206,7 @@ in
               -maxplayers 10 \
               -authkey $STEAM_WEB_API_KEY \
               +sv_setsteamaccount $GSLT_TOKEN \
+              +rcon_password $RCON_PASSWORD \
               +${
                 if v.workshopCollection != null then
                   "host_workshop_collection ${v.workshopCollection}"
