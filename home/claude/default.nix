@@ -71,7 +71,17 @@ let
         # https://code.claude.com/docs/en/agent-teams
         teammateMode = "tmux";
         alwaysThinkingEnabled = true;
-        effortLevel = "xhigh";
+        modelSettings =
+          genAttrs
+            [
+              "claude-opus-5-5"
+              "claude-fable-5-1"
+              "claude-sonnet-5"
+              "claude-haiku-4-5"
+            ]
+            (_: {
+              effortLevel = "xhigh";
+            });
 
         # Deliver messages from other sessions without a review prompt
         crossSessionInbound = "accept";
