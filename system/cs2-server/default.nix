@@ -113,6 +113,7 @@ in
           RestartSec = "10s";
           EnvironmentFile = v.environmentFiles;
           TimeoutStartSec = "15min";
+          LogFilterPatterns = "~Initializing with command line";
         };
 
         preStart = ''
@@ -146,11 +147,11 @@ in
 
           chmod -R +w ${installDir}/game/csgo/addons ${installDir}/game/csgo/cfg
 
-          # Setup RCON
-          rm -f ${installDir}/game/csgo/cfg/server.cfg
+          # Setup secrets, kept out of the command line so they stay out of the journal
+          rm -f ${installDir}/game/csgo/cfg/secrets.cfg
           (
             umask 077
-            printf 'rcon_password "%s"\n' "$RCON_PASSWORD" > ${installDir}/game/csgo/cfg/server.cfg
+            printf 'rcon_password "%s"\nsv_setsteamaccount "%s"\n' "$RCON_PASSWORD" "$GSLT_TOKEN" > ${installDir}/game/csgo/cfg/secrets.cfg
           )
 
           # Inject Metamod into gameinfo.gi
@@ -212,7 +213,7 @@ in
               -tickrate ${toString v.tickrate} \
               -maxplayers 10 \
               -authkey $STEAM_WEB_API_KEY \
-              +sv_setsteamaccount $GSLT_TOKEN \
+              +exec secrets.cfg \
               +${
                 if v.workshopCollection != null then
                   "host_workshop_collection ${v.workshopCollection}"
