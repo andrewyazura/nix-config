@@ -178,6 +178,16 @@ in
             _args = [
               {
                 match = {
+                  class = ".*";
+                };
+                float = true;
+              }
+            ];
+          }
+          {
+            _args = [
+              {
+                match = {
                   class = "cs2";
                 };
                 immediate = true;
