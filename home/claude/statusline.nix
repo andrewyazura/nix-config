@@ -1,7 +1,7 @@
 { lib, pkgs }:
 let
   settings = {
-    version = 3;
+    version = 4;
     lines = [
       # Line 1: model, effort, context, cost
       [
