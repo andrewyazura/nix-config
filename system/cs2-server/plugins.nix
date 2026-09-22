@@ -36,7 +36,8 @@ stdenv.mkDerivation {
     mkdir -p $out
     tar -xf ${metamod} -C $out
     unzip -q ${cssharp} -d $out
-    unzip -q ${matchzy} -d $out
+    unzip -q ${matchzy} -d $TMPDIR/matchzy
+    cp -r $TMPDIR/matchzy/*/. $out/
 
     # Remove executable stack flag from CounterStrikeSharp to fix the plugin load error
     find $out -name "*.so" -exec sh -c 'execstack -c "$1" 2>/dev/null || true' _ {} \;
