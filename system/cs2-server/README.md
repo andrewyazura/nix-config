@@ -45,10 +45,10 @@ Plugins are pinned via fixed-output derivations in [plugins.nix](file:///home/an
      `https://github.com/roflmuffin/CounterStrikeSharp/releases/download/v1.0.XXXX/counterstrikesharp-with-runtime-linux-1.0.XXXX.zip`
 
 3. **MatchZy-Enhanced**:
-   - Visit: [MatchZy-Enhanced Releases](https://github.com/sivert-io/MatchZy-Enhanced/releases)
-   - Find the latest release version (e.g., `v1.4.21`).
+   - Visit: [MatchZy-Enhanced Releases](https://github.com/Auto-Tournament/cs2-plugin/releases)
+   - Find the latest release version (e.g., `v1.4.33`).
    - Construct the download URL:
-     `https://github.com/sivert-io/MatchZy-Enhanced/releases/download/vX.Y.Z/MatchZy-X.Y.Z.zip`
+     `https://github.com/Auto-Tournament/cs2-plugin/releases/download/vX.Y.Z/MatchZy-X.Y.Z.zip`
 
 ### Step 2: Prefetch the Nix SHA256 Hashes
 For each of the new URLs, compute the Nix store hash using `nix-prefetch-url`:
