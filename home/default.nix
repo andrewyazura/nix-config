@@ -16,6 +16,7 @@
     ./i3
     ./ideavim
     ./lazygit
+    ./mako
     ./mcp
     ./media-packages
     ./neovim

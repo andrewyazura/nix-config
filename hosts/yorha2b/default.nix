@@ -37,6 +37,7 @@
     modules = {
       gnome.enable = false;
       guitar.enable = true;
+      mako.enable = true;
       waybar.enable = true;
 
       hyprland = {
