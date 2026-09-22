@@ -6,8 +6,8 @@
 
 let
   metamod = pkgs.fetchurl {
-    url = "https://mms.alliedmods.net/mmsdrop/2.0/mmsource-2.0.0-git1469-linux.tar.gz";
-    sha256 = "1bbpy4k6lfa5ksy37jx963wicgfxdcghz24j25dd3klr2g5y8lm5";
+    url = "https://mms.alliedmods.net/mmsdrop/2.0/mmsource-2.0.0-git1411-linux.tar.gz";
+    sha256 = "0jb615c59i64w33ygp53s33n20x0li485gg8g586mj51azac7m73";
   };
 
   cssharp = pkgs.fetchurl {

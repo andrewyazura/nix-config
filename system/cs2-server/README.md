@@ -36,6 +36,13 @@ Plugins are pinned via fixed-output derivations in [plugins.nix](file:///home/an
 1. **Metamod:Source (2.0.0 Dev Builds)**:
    - Visit: [Metamod 2.0.0 Snapshots](https://mms.alliedmods.net/mmsdrop/2.0/)
    - Find the latest build matching `mmsource-2.0.0-gitXXXX-linux.tar.gz`.
+   - **Do not blindly take the newest build.** Metamod bumped its SourceHook
+     interface from 17 to 18 in the KHook change (builds from `git1459`,
+     2026-09-08, onwards). CounterStrikeSharp is still built against 17, so
+     those builds make it fail with `Plugin uses old SourceHook Metamod build`
+     and the server loads 0 plugins. `git1411` is the newest build on
+     SourceHook 17. Only move past it once CounterStrikeSharp ships a release
+     built against 18.
    - Record the URL: `https://mms.alliedmods.net/mmsdrop/2.0/mmsource-2.0.0-gitXXXX-linux.tar.gz`
 
 2. **CounterStrikeSharp**:
