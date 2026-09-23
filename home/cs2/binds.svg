@@ -109,10 +109,14 @@
 <rect x="520.0" y="189" width="52" height="52" rx="8" fill="#334155" stroke="#cbd5e1" stroke-opacity="0.55"/>
 <text x="527.0" y="203" font-size="10" fill="#cbd5e1">I</text>
 <text x="546.0" y="222.0" font-size="11.5" font-weight="600" text-anchor="middle" fill="#e2e8f0" textLength="42" lengthAdjust="spacingAndGlyphs">Loadout</text>
-<rect x="578.0" y="189" width="52" height="52" rx="8" fill="#16202f" stroke="#233043" stroke-opacity="0.55"/>
-<text x="585.0" y="203" font-size="10" fill="#475569">O</text>
-<rect x="636.0" y="189" width="52" height="52" rx="8" fill="#16202f" stroke="#233043" stroke-opacity="0.55"/>
-<text x="643.0" y="203" font-size="10" fill="#475569">P</text>
+<rect x="578.0" y="189" width="52" height="52" rx="8" fill="#1e3a8a" stroke="#93c5fd" stroke-opacity="0.55"/>
+<text x="585.0" y="203" font-size="10" fill="#93c5fd">O</text>
+<text x="604.0" y="216.0" font-size="11.5" font-weight="600" text-anchor="middle" fill="#e2e8f0">Radio</text>
+<text x="604.0" y="229.0" font-size="11.5" font-weight="600" text-anchor="middle" fill="#e2e8f0">wheel</text>
+<rect x="636.0" y="189" width="52" height="52" rx="8" fill="#1e3a8a" stroke="#93c5fd" stroke-opacity="0.55"/>
+<text x="643.0" y="203" font-size="10" fill="#93c5fd">P</text>
+<text x="662.0" y="216.0" font-size="11.5" font-weight="600" text-anchor="middle" fill="#e2e8f0">Radio</text>
+<text x="662.0" y="229.0" font-size="11.5" font-weight="600" text-anchor="middle" fill="#e2e8f0">wheel</text>
 <rect x="694.0" y="189" width="52" height="52" rx="8" fill="#581c87" stroke="#d8b4fe" stroke-opacity="0.55"/>
 <text x="701.0" y="203" font-size="10" fill="#d8b4fe">[</text>
 <text x="720.0" y="216.0" font-size="11.5" font-weight="600" text-anchor="middle" fill="#e2e8f0" textLength="42" lengthAdjust="spacingAndGlyphs">Rethrow</text>
