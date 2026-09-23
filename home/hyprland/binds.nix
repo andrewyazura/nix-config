@@ -66,10 +66,10 @@ in
 
     (mkBind "ALT + Q" "hl.dsp.window.close()")
 
-    (mkBind "SUPER + H" "function() hl.dispatch(hl.plugin.hy3.move_focus('l')) end")
-    (mkBind "SUPER + J" "function() hl.dispatch(hl.plugin.hy3.move_focus('d')) end")
-    (mkBind "SUPER + K" "function() hl.dispatch(hl.plugin.hy3.move_focus('u')) end")
-    (mkBind "SUPER + L" "function() hl.dispatch(hl.plugin.hy3.move_focus('r')) end")
+    (mkBind "SUPER + H" "function() hl.dispatch(hl.plugin.hy3.move_focus('l')); hl.dispatch(hl.dsp.window.bring_to_top()) end")
+    (mkBind "SUPER + J" "function() hl.dispatch(hl.plugin.hy3.move_focus('d')); hl.dispatch(hl.dsp.window.bring_to_top()) end")
+    (mkBind "SUPER + K" "function() hl.dispatch(hl.plugin.hy3.move_focus('u')); hl.dispatch(hl.dsp.window.bring_to_top()) end")
+    (mkBind "SUPER + L" "function() hl.dispatch(hl.plugin.hy3.move_focus('r')); hl.dispatch(hl.dsp.window.bring_to_top()) end")
 
     (mkBind "SUPER + SHIFT + H" "function() hl.dispatch(hl.plugin.hy3.move_window('l')) end")
     (mkBind "SUPER + SHIFT + J" "function() hl.dispatch(hl.plugin.hy3.move_window('d')) end")
