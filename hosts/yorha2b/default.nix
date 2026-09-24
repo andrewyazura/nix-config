@@ -17,6 +17,7 @@
 
     gnome.enable = false;
     hyprland.enable = true;
+    jellyfin.enable = true;
     logitech-g920.enable = true;
     ollama.enable = true;
     sunshine.enable = true;

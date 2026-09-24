@@ -11,6 +11,7 @@
     ./home-manager
     ./hyprland
     ./i3
+    ./jellyfin
     ./logitech-g920
     ./minecraft-server
     ./networking
