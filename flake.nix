@@ -46,7 +46,7 @@
       flake = false;
     };
 
-    attic.url = "github:zhaofengli/attic/67599729477b8a083fc9381a3c8ef81bfe34dd1f";
+    attic.url = "github:zhaofengli/attic/7a19204df10d606c5070e6bb72615c3461900c05";
     beast-music-app.url = "git+ssh://git@github.com/yaroslavpashynskyi/BeastMusic.git";
     bingo-app.url = "git+ssh://git@github.com/andrewyazura/bingo.git";
     birthday-api-app.url = "github:orehzzz/birthday-api";
