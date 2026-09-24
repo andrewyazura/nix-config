@@ -168,6 +168,7 @@ in
             kb_layout = "us,ua";
             kb_options = "grp:win_space_toggle,caps:swapescape";
             follow_mouse = 2;
+            float_switch_override_focus = 0;
             force_no_accel = true;
             sensitivity = 0;
           };
