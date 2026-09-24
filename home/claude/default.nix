@@ -70,6 +70,7 @@ let
         # Agent team display mode: split panes in tmux, fallback to in-process
         # https://code.claude.com/docs/en/agent-teams
         teammateMode = "tmux";
+        model = "opus";
         alwaysThinkingEnabled = true;
         modelSettings =
           genAttrs
