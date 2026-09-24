@@ -34,7 +34,7 @@
 
     settings = {
       listen = "[::]:8080";
-      database.url = "postgresql:///atticd";
+      database.url = "postgresql:///atticd?user=atticd";
 
       storage = {
         type = "local";
