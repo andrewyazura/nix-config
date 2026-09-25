@@ -15,6 +15,7 @@ in
   config = lib.mkIf cfg.enable {
     services.jellyfin = {
       enable = true;
+      forceEncodingConfig = true;
 
       hardwareAcceleration = {
         enable = true;

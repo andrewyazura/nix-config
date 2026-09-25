@@ -182,6 +182,10 @@ in
                   class = ".*";
                 };
                 float = true;
+                size = [
+                  "min(window_w, monitor_w * 0.9)"
+                  "min(window_h, monitor_h * 0.9)"
+                ];
               }
             ];
           }
