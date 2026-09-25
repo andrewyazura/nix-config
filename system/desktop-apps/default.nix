@@ -26,5 +26,7 @@ in
       signal-desktop
       telegram-desktop
     ];
+
+    environment.sessionVariables.PROTON_LOADER_OVERRIDES = "keyring=json";
   };
 }
