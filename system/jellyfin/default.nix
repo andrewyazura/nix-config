@@ -19,7 +19,6 @@ in
       hardwareAcceleration = {
         enable = true;
         type = "vaapi";
-        device = "/dev/dri/renderD128";
       };
 
       transcoding = {
@@ -33,7 +32,6 @@ in
         };
         hardwareEncodingCodecs = {
           hevc = true;
-          av1 = true;
         };
       };
     };

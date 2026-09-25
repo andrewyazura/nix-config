@@ -112,6 +112,8 @@
   networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ 9999 ];
   powerManagement.cpuFreqGovernor = "performance";
 
+  services.jellyfin.hardwareAcceleration.device = "/dev/dri/by-path/pci-0000:11:00.0-render";
+
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
