@@ -80,6 +80,7 @@ in
     (mkBind "SUPER + W" "function() hl.dispatch(hl.plugin.hy3.change_group('tab')) end")
     (mkBind "SUPER + B" "function() hl.dispatch(hl.plugin.hy3.make_group('h')) end")
     (mkBind "SUPER + V" "function() hl.dispatch(hl.plugin.hy3.make_group('v')) end")
+    (mkBind "SUPER + A" "function() hl.dispatch(hl.plugin.hy3.change_focus('raise')) end")
     (mkBind "SUPER + F" "hl.dsp.window.fullscreen()")
     (mkBind "SUPER + N" "function() hl.dispatch(hl.dsp.window.cycle_next({ floating = not hl.get_active_window().floating })); hl.dispatch(hl.dsp.window.bring_to_top()) end")
     (mkBind "SUPER + SHIFT + N" "hl.dsp.window.float({ action = 'toggle' })")
