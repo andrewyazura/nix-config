@@ -183,8 +183,8 @@ in
                 };
                 float = true;
                 size = [
-                  "min(window_w, monitor_w * 0.9)"
-                  "min(window_h, monitor_h * 0.9)"
+                  "min(window_w, monitor_w * 0.65)"
+                  "min(window_h, monitor_h * 0.65)"
                 ];
               }
             ];
