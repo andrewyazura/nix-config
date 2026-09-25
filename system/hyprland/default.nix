@@ -32,11 +32,6 @@ in
     services = {
       playerctld.enable = true;
 
-      gnome = {
-        gnome-keyring.enable = true;
-        gcr-ssh-agent.enable = false;
-      };
-
       greetd = {
         enable = true;
         settings = {
