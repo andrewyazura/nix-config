@@ -1,4 +1,6 @@
 {
+  users.users.andrew.extraGroups = [ "gamemode" ];
+
   security.sudo.extraRules = [
     {
       users = [ "andrew" ];

@@ -114,6 +114,12 @@
 
   services.jellyfin.hardwareAcceleration.device = "/dev/dri/by-path/pci-0000:11:00.0-render";
 
+  programs.gamemode.settings.gpu = {
+    apply_gpu_optimisations = "accept-responsibility";
+    gpu_device = 1;
+    amd_performance_level = "high";
+  };
+
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
