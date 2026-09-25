@@ -97,7 +97,7 @@ in
       settings = {
         config = {
           general = {
-            gaps_in = 5;
+            gaps_in = 2;
             gaps_out = 10;
             border_size = 1;
             col = {
