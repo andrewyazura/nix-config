@@ -24,6 +24,7 @@ in
       proton-vpn-cli
       qbittorrent
       signal-desktop
+      spotify
       telegram-desktop
     ];
 
