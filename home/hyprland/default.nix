@@ -118,7 +118,8 @@ in
             rounding_power = 4.0;
             blur.enabled = true;
             shadow.enabled = false;
-            inactive_opacity = 0.85;
+            active_opacity = 0.95;
+            inactive_opacity = 0.8;
             glow = {
               enabled = true;
               color = palette.accent;
@@ -225,17 +226,7 @@ in
                 match = {
                   pin = true;
                 };
-                opacity = "1.0 override";
-              }
-            ];
-          }
-          {
-            _args = [
-              {
-                match = {
-                  class = "com.mitchellh.ghostty";
-                };
-                opacity = "0.9 0.85 override";
+                opacity = "0.7 override";
               }
             ];
           }
