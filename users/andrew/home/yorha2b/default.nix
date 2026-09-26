@@ -2,6 +2,13 @@
 {
   modules = {
     cs2.enable = true;
+    mcp.servers = {
+      anki = {
+        enable = true;
+        directories = [ "Documents/notes" ];
+      };
+      sequential-thinking.enable = true;
+    };
     ghostty = {
       fontSize = 10;
       backgroundOpacity = 0.9;

@@ -130,7 +130,13 @@ let
     i:
     pkgs.writeShellScriptBin i.command ''
       export CLAUDE_CONFIG_DIR=${i.programs.claude-code.configDir}
-      exec ${i.programs.claude-code.finalPackage}/bin/claude "$@"
+      args=()
+      ${concatStrings (
+        mapAttrsToList (dir: file: ''
+          case "$PWD/" in ${escapeShellArg "${dir}/"}*) args+=(--mcp-config=${file}) ;; esac
+        '') config.modules.mcp.claudeConfigs
+      )}
+      exec ${i.programs.claude-code.finalPackage}/bin/claude "''${args[@]}" "$@"
     '';
 in
 {

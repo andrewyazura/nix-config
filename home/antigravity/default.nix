@@ -46,6 +46,9 @@ in
         force = true;
       };
       ".gemini/antigravity-cli/settings.json".force = true;
+      ".gemini/config/mcp_config.json" = mkIf (config.programs.antigravity-cli.mcpServers != { }) {
+        force = true;
+      };
     };
   };
 }
