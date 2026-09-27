@@ -118,8 +118,8 @@ in
             rounding_power = 4.0;
             blur.enabled = true;
             shadow.enabled = false;
-            active_opacity = 0.95;
-            inactive_opacity = 0.8;
+            active_opacity = 0.9;
+            inactive_opacity = 0.9;
             glow = {
               enabled = true;
               color = palette.accent;
@@ -158,6 +158,7 @@ in
               bar_text_font = "JetBrainsMono Nerd Font";
               bar_text_align = "center";
               bar_part_of_window = true;
+              bar_blur = true;
             };
           };
 
@@ -224,9 +225,19 @@ in
             _args = [
               {
                 match = {
+                  class = "com.mitchellh.ghostty";
+                };
+                opacity = "1.0 override";
+              }
+            ];
+          }
+          {
+            _args = [
+              {
+                match = {
                   pin = true;
                 };
-                opacity = "0.7 override";
+                opacity = "0.8 override";
               }
             ];
           }
