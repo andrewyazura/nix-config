@@ -16,6 +16,7 @@ let
 
   homeDirectory = config.home.homeDirectory;
   mcp = { inherit (config.programs.mcp) enable servers; };
+  jsonFormat = pkgs.formats.json { };
 
   instance = {
     imports = [
@@ -126,6 +127,22 @@ let
 
   instances = attrValues cfg.instances;
 
+  mcpConfigs = mapAttrs (
+    _: servers:
+    jsonFormat.generate "claude-mcp.json" {
+      mcpServers = mapAttrs (
+        name: server:
+        hm.mcp.transformMcpServer {
+          inherit server;
+          extraTransforms = [
+            hm.mcp.addType
+            (hm.mcp.wrapEnvFilesCommand { inherit pkgs name; })
+          ];
+        }
+      ) servers;
+    }
+  ) config.modules.mcp.scoped;
+
   wrapper =
     i:
     pkgs.writeShellScriptBin i.command ''
@@ -134,7 +151,7 @@ let
       ${concatStrings (
         mapAttrsToList (dir: file: ''
           case "$PWD/" in ${escapeShellArg "${dir}/"}*) args+=(--mcp-config=${file}) ;; esac
-        '') config.modules.mcp.claudeConfigs
+        '') mcpConfigs
       )}
       exec ${i.programs.claude-code.finalPackage}/bin/claude "''${args[@]}" "$@"
     '';

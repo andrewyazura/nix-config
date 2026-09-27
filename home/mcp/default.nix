@@ -15,9 +15,6 @@ let
   directories = unique (concatMap (s: s.directories) (attrValues scoped));
 
   serversIn = dir: mapAttrs (_: s: s.server) (filterAttrs (_: s: elem dir s.directories) scoped);
-
-  toAntigravity =
-    server: removeAttrs server [ "url" ] // optionalAttrs (server ? url) { serverUrl = server.url; };
 in
 {
   imports = [
@@ -49,44 +46,27 @@ in
       default = { };
     };
 
-    claudeConfigs = mkOption {
-      type = types.attrsOf types.path;
+    scoped = mkOption {
+      type = types.attrsOf (types.attrsOf jsonFormat.type);
       internal = true;
       readOnly = true;
-      description = "MCP config file for each scoped directory, keyed by absolute path.";
+      description = "Enabled servers for each scoped directory, keyed by absolute path.";
     };
   };
 
   config = {
-    modules.mcp.claudeConfigs = listToAttrs (
-      map (
-        dir:
-        nameValuePair "${config.home.homeDirectory}/${dir}" (
-          jsonFormat.generate "claude-mcp.json" {
-            mcpServers = mapAttrs (_: hm.mcp.addType) (serversIn dir);
-          }
-        )
-      ) directories
+    assertions = mapAttrsToList (name: s: {
+      assertion = (s.server ? command) != (s.server ? url);
+      message = "modules.mcp.servers.${name}: exactly one of `command` or `url` must be set.";
+    }) enabled;
+
+    modules.mcp.scoped = listToAttrs (
+      map (dir: nameValuePair "${config.home.homeDirectory}/${dir}" (serversIn dir)) directories
     );
 
     programs.mcp = mkIf (global != { }) {
       enable = true;
       servers = mapAttrs (_: s: s.server) global;
     };
-
-    programs.antigravity-cli.settings.trustedWorkspaces = mkIf (directories != [ ]) (
-      map (dir: "${config.home.homeDirectory}/${dir}") directories
-    );
-
-    home.file = mkMerge (
-      map (dir: {
-        "${dir}/.agents/plugins/nix-mcp/plugin.json".source = jsonFormat.generate "plugin.json" {
-          name = "nix-mcp";
-        };
-        "${dir}/.agents/plugins/nix-mcp/mcp_config.json".source = jsonFormat.generate "mcp_config.json" {
-          mcpServers = mapAttrs (_: toAntigravity) (serversIn dir);
-        };
-      }) directories
-    );
   };
 }

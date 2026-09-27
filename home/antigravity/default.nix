@@ -13,6 +13,18 @@ let
 
   hooks = import ./hooks.nix { inherit lib pkgs; };
   jsonFormat = pkgs.formats.json { };
+
+  scoped = config.modules.mcp.scoped;
+
+  toAntigravity =
+    name: server:
+    let
+      s = hm.mcp.transformMcpServer {
+        inherit server;
+        extraTransforms = [ (hm.mcp.wrapEnvFilesCommand { inherit pkgs name; }) ];
+      };
+    in
+    removeAttrs s [ "url" ] // optionalAttrs (s ? url) { serverUrl = s.url; };
 in
 {
   options.modules.antigravity = {
@@ -37,6 +49,7 @@ in
         notifications = true;
         runningLightSpeed = "fast";
         toolPermission = "always-proceed";
+        trustedWorkspaces = mkIf (scoped != { }) (attrNames scoped);
       };
     };
 
@@ -49,6 +62,14 @@ in
       ".gemini/config/mcp_config.json" = mkIf (config.programs.antigravity-cli.mcpServers != { }) {
         force = true;
       };
-    };
+    }
+    // concatMapAttrs (dir: servers: {
+      "${dir}/.agents/plugins/nix-mcp/plugin.json".source = jsonFormat.generate "plugin.json" {
+        name = "nix-mcp";
+      };
+      "${dir}/.agents/plugins/nix-mcp/mcp_config.json".source = jsonFormat.generate "mcp_config.json" {
+        mcpServers = mapAttrs toAntigravity servers;
+      };
+    }) scoped;
   };
 }
