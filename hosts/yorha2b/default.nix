@@ -125,6 +125,8 @@
     enable32Bit = true;
   };
 
+  virtualisation.podman.enable = true;
+
   time.timeZone = "Europe/Warsaw";
 
   system.stateVersion = "24.11";
