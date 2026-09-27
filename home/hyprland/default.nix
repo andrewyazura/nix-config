@@ -47,6 +47,10 @@ in
             default = null;
             type = nullOr int;
           };
+          transform = mkOption {
+            default = null;
+            type = nullOr int;
+          };
           cm = mkOption {
             default = null;
             type = nullOr str;
