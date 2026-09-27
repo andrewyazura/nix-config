@@ -151,6 +151,7 @@ in
           misc = {
             background_color = palette.bg;
             disable_hyprland_logo = true;
+            mouse_move_focuses_monitor = false;
           };
 
           plugin = {
