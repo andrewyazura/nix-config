@@ -10,8 +10,8 @@
       sequential-thinking.enable = true;
     };
     ghostty = {
-      fontSize = 10;
-      backgroundOpacity = 0.9;
+      fontSize = 9;
+      backgroundOpacity = 0.8;
     };
     profiles = {
       development.enable = true;
