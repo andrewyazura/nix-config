@@ -29,7 +29,5 @@ in
         HSA_OVERRIDE_GFX_VERSION = "11.0.0";
       };
     };
-
-    networking.firewall.interfaces."podman+".allowedTCPPorts = [ 11434 ];
   };
 }
