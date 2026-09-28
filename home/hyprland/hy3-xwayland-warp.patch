@@ -1,0 +1,30 @@
+diff --git a/src/Hy3Layout.cpp b/src/Hy3Layout.cpp
+--- a/src/Hy3Layout.cpp
++++ b/src/Hy3Layout.cpp
+@@ -802,7 +802,10 @@
+ 			if (next_window != nullptr) {
+ 				g_pInputManager->unconstrainMouse();
+ 				Desktop::focusState()->fullWindowFocus(next_window, Desktop::FOCUS_REASON_KEYBIND);
+-				if (warp) Hy3Layout::warpCursorToBox(next_window->m_reportedPosition, next_window->m_reportedSize);
++				if (warp) {
++					const auto box = next_window->layoutBox();
++					Hy3Layout::warpCursorToBox(box.pos(), box.size());
++				}
+ 			}
+ 			return;
+ 		}
+diff --git a/src/Hy3Node.cpp b/src/Hy3Node.cpp
+--- a/src/Hy3Node.cpp
++++ b/src/Hy3Node.cpp
+@@ -241,7 +241,10 @@
+ 		auto window = this->as_window();
+ 		window->setHidden(false);
+ 		Desktop::focusState()->fullWindowFocus(window, reason);
+-		if (warp) Hy3Layout::warpCursorToBox(window->m_reportedPosition, window->m_reportedSize);
++		if (warp) {
++			const auto box = window->layoutBox();
++			Hy3Layout::warpCursorToBox(box.pos(), box.size());
++		}
+ 		break;
+ 	}
+ 	case Hy3NodeType::Group: {
