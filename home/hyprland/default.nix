@@ -93,9 +93,7 @@ in
       portalPackage = hyprlandPkgs.xdg-desktop-portal-hyprland;
 
       plugins = with hyprlandPlugins; [
-        (hy3Pkgs.hy3.overrideAttrs (old: {
-          patches = (old.patches or [ ]) ++ [ ./hy3-xwayland-warp.patch ];
-        }))
+        hy3Pkgs.hy3
         hyprbars
       ];
 
