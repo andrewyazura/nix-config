@@ -319,6 +319,18 @@ in
 
       hyprlauncher = {
         enable = true;
+        package = pkgs.hyprlauncher.override {
+          hyprtoolkit = pkgs.hyprtoolkit.overrideAttrs (prev: {
+            version = "0.6.0";
+            src = pkgs.fetchFromGitHub {
+              owner = "hyprwm";
+              repo = "hyprtoolkit";
+              tag = "v0.6.0";
+              hash = "sha256-0rb1yZZ0PR4lRrXC2BdiMjGFttZe6MFQFSnx3wD4dko=";
+            };
+            buildInputs = prev.buildInputs ++ [ pkgs.abseil-cpp ];
+          });
+        };
         settings = {
           general = {
             grab_focus = true;
