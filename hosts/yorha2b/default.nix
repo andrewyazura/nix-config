@@ -50,14 +50,16 @@
           {
             output = "DP-1";
             mode = "2560x1440@500";
-            position = "2160x1200";
+            position = "3840x360";
             bitdepth = 8;
+            workspace = "10";
           }
           {
             output = "DP-2";
             mode = "3840x2160@144";
             position = "0x0";
-            transform = 1;
+            transform = 0;
+            workspace = "1";
           }
           {
             output = "HEADLESS-1";

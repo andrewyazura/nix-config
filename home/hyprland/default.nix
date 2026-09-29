@@ -55,6 +55,10 @@ in
             default = null;
             type = nullOr str;
           };
+          workspace = mkOption {
+            default = null;
+            type = nullOr str;
+          };
         };
       });
     };
@@ -270,8 +274,18 @@ in
         ];
 
         monitor = builtins.map (monitor: {
-          _args = [ (filterAttrs (_: v: v != null) monitor) ];
+          _args = [ (filterAttrs (n: v: n != "workspace" && v != null) monitor) ];
         }) cfg.output;
+
+        workspace_rule = builtins.map (monitor: {
+          _args = [
+            {
+              inherit (monitor) workspace;
+              monitor = monitor.output;
+              default = true;
+            }
+          ];
+        }) (filter (monitor: monitor.workspace != null) cfg.output);
       }
       // binds;
     };
