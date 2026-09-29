@@ -9,7 +9,7 @@
       };
     };
     ghostty = {
-      fontSize = 8;
+      fontSize = 9;
       backgroundOpacity = 0.8;
     };
     profiles = {
