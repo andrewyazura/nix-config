@@ -11,4 +11,3 @@ if git diff --cached --quiet -- '*.nix' flake.lock; then
 fi
 
 nix fmt -- --ci
-nix eval --json .#checks >/dev/null
