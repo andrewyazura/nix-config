@@ -179,16 +179,18 @@ in
       programs.claude-code.settings.env.DISABLE_ERROR_REPORTING = 1;
     };
 
-    home.packages =
-      (with llm-agents; [
-        ccstatusline
-        ccusage
-      ])
-      ++ map wrapper instances;
+    home = {
+      packages =
+        (with pkgs; [ sox ])
+        ++ (with llm-agents; [
+          ccstatusline
+          ccusage
+        ])
+        ++ map wrapper instances;
 
-    home.file = mkMerge (map (i: i.home.file) instances);
-
-    home.sessionVariables.CLAUDE_CONFIG_DIR = "${homeDirectory}/.claude";
+      file = mkMerge (map (i: i.home.file) instances);
+      sessionVariables.CLAUDE_CONFIG_DIR = "${homeDirectory}/.claude";
+    };
 
     warnings = concatMap (i: i.warnings) instances;
     assertions = concatMap (i: i.assertions) instances;
