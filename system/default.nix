@@ -20,7 +20,8 @@
     ./profiles
     ./sunshine
     ./tailscale
-    ./wooting
+    ./whisper-cpp
     ./wivrn
+    ./wooting
   ];
 }

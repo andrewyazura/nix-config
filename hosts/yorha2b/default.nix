@@ -21,8 +21,12 @@
     logitech-g920.enable = true;
     sunshine.enable = true;
     tailscale.enable = true;
-    wooting.enable = true;
+    whisper-cpp = {
+      enable = true;
+      package = pkgs.whisper-cpp-vulkan;
+    };
     wivrn.enable = true;
+    wooting.enable = true;
   };
 
   home-manager.users.andrew = {
