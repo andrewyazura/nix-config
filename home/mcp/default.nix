@@ -21,7 +21,6 @@ in
     ./servers/anki.nix
     ./servers/context7.nix
     ./servers/mongodb.nix
-    ./servers/sequential-thinking.nix
   ];
 
   options.modules.mcp = {

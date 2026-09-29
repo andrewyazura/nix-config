@@ -7,7 +7,6 @@
         enable = true;
         directories = [ "Documents/notes" ];
       };
-      sequential-thinking.enable = true;
     };
     ghostty = {
       fontSize = 9;
