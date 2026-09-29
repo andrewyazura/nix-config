@@ -2,7 +2,7 @@
 {
   modules = {
     ghostty.backgroundOpacity = 0.8;
-    ghostty.fontSize = 11;
+    ghostty.fontSize = 10;
 
     profiles = {
       development.enable = true;

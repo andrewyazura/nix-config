@@ -1,7 +1,6 @@
 {
   lib,
   config,
-  pkgs,
   inputs,
   ...
 }:
@@ -15,7 +14,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [
+    environment.systemPackages = [
       inputs.ghostty.packages.x86_64-linux.default
     ];
   };
