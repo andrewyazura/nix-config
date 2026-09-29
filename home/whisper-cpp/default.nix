@@ -14,6 +14,7 @@ let
       cfg.package
       libnotify
       sox
+      wl-clipboard
     ];
     runtimeEnv = {
       WHISPER_CPP_MODEL = "${cfg.model}";
@@ -36,6 +37,6 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = [ recordScript ];
+    home.packages = [ recordScript ];
   };
 }

@@ -31,6 +31,7 @@
     ./vesktop
     ./video-editing
     ./waybar
+    ./whisper-cpp
     ./yazi
     ./zsh
   ];
