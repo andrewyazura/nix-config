@@ -91,6 +91,9 @@ in
             AlternativeGlobalDLSpeedLimit = 5120;
             AlternativeGlobalUPSpeedLimit = 1024;
             DiskIOType = "Posix";
+            GlobalMaxRatio = 2;
+            GlobalMaxSeedingMinutes = 43200;
+            ShareLimitAction = "Stop";
           };
           Preferences = {
             Connection.UPnP = false;
