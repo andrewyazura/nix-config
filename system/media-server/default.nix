@@ -90,6 +90,7 @@ in
             QueueingSystemEnabled = false;
             AlternativeGlobalDLSpeedLimit = 5120;
             AlternativeGlobalUPSpeedLimit = 1024;
+            DiskIOType = "Posix";
           };
           Preferences = {
             Connection.UPnP = false;
