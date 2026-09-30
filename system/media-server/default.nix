@@ -132,7 +132,19 @@ in
                 standard = "jellyfin-tmdb";
               };
             };
-            quality_definition.type = "movie";
+            quality_definition = {
+              type = "movie";
+              qualities = [
+                {
+                  name = "Bluray-1080p";
+                  min = 12.5;
+                }
+                {
+                  name = "Bluray-720p";
+                  min = 12.5;
+                }
+              ];
+            };
             quality_profiles = [
               {
                 trash_id = "d1d67249d3890e49bc12e275d989a7e9";
@@ -164,7 +176,15 @@ in
                 standard = "default";
               };
             };
-            quality_definition.type = "series";
+            quality_definition = {
+              type = "series";
+              qualities = [
+                {
+                  name = "Bluray-1080p";
+                  min = 15;
+                }
+              ];
+            };
             quality_profiles = [
               {
                 trash_id = "72dae194fc92bf828f32cde7744e51a1";
