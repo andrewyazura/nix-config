@@ -88,6 +88,8 @@ in
             DefaultSavePath = "${cfg.dataDir}/torrents";
             DisableAutoTMMByDefault = false;
             QueueingSystemEnabled = false;
+            AlternativeGlobalDLSpeedLimit = 5120;
+            AlternativeGlobalUPSpeedLimit = 1024;
           };
           Preferences = {
             Connection.UPnP = false;
@@ -240,6 +242,9 @@ in
         (lib.genAttrs [ "qbittorrent" "sonarr" "radarr" "bazarr" ] (_: {
           serviceConfig.UMask = lib.mkForce "0002";
         }))
+        (lib.genAttrs [ "qbittorrent" "sonarr" "radarr" "prowlarr" "bazarr" ] (_: {
+          serviceConfig.CPUSchedulingPolicy = "idle";
+        }))
         {
           qbittorrent.vpnConfinement = {
             enable = true;
@@ -278,6 +283,17 @@ in
             };
           });
     };
+
+    programs.gamemode.settings.custom =
+      let
+        speedLimitsMode =
+          mode:
+          "${lib.getExe pkgs.curl} -s -X POST -d mode=${mode} http://${config.vpnNamespaces.proton.namespaceAddress}:${toString config.services.qbittorrent.webuiPort}/api/v2/transfer/setSpeedLimitsMode";
+      in
+      {
+        start = speedLimitsMode "1";
+        end = speedLimitsMode "0";
+      };
 
     users.groups.media = { };
 
