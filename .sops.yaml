@@ -79,3 +79,14 @@ creation_rules:
       - *bunker
       - *yorha2b
     format: binary
+
+  - path_regex: secrets/media-server\.yaml
+    key_groups:
+    - age:
+      - *yorha2b
+
+  - path_regex: secrets/proton-wireguard
+    key_groups:
+    - age:
+      - *yorha2b
+    format: binary

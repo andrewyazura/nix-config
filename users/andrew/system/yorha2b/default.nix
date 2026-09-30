@@ -1,5 +1,8 @@
 {
-  users.users.andrew.extraGroups = [ "gamemode" ];
+  users.users.andrew.extraGroups = [
+    "gamemode"
+    "media"
+  ];
 
   security.sudo.extraRules = [
     {

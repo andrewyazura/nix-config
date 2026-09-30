@@ -17,8 +17,13 @@
 
     gnome.enable = false;
     hyprland.enable = true;
-    jellyfin.enable = true;
     logitech-g920.enable = true;
+
+    media-server = {
+      enable = true;
+      dataDir = "/disk_alpha";
+    };
+
     sunshine.enable = true;
     tailscale.enable = true;
     wivrn.enable = true;
