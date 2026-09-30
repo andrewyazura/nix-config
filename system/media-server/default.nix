@@ -125,6 +125,13 @@ in
           radarr.radarr = {
             base_url = "http://127.0.0.1:7878";
             api_key._secret = config.sops.secrets.radarr-api-key.path;
+            media_naming = {
+              folder = "jellyfin-tmdb";
+              movie = {
+                rename = true;
+                standard = "jellyfin-tmdb";
+              };
+            };
             quality_definition.type = "movie";
             quality_profiles = [
               {
@@ -149,11 +156,34 @@ in
           sonarr.sonarr = {
             base_url = "http://127.0.0.1:8989";
             api_key._secret = config.sops.secrets.sonarr-api-key.path;
+            media_naming = {
+              series = "jellyfin-tvdb";
+              season = "default";
+              episodes = {
+                rename = true;
+                standard = "default";
+              };
+            };
             quality_definition.type = "series";
             quality_profiles = [
               {
                 trash_id = "72dae194fc92bf828f32cde7744e51a1";
                 reset_unmatched_scores.enabled = true;
+                qualities = [
+                  {
+                    name = "1080p";
+                    qualities = [
+                      "Bluray-1080p"
+                      "WEBDL-1080p"
+                      "WEBRip-1080p"
+                    ];
+                  }
+                ];
+                upgrade = {
+                  allowed = true;
+                  until_quality = "1080p";
+                  until_score = 2000;
+                };
               }
             ];
             custom_format_groups.skip = [ "158188097a58d7687dee647e04af0da3" ];
