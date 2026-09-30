@@ -87,6 +87,7 @@ in
           BitTorrent.Session = {
             DefaultSavePath = "${cfg.dataDir}/torrents";
             DisableAutoTMMByDefault = false;
+            QueueingSystemEnabled = false;
           };
           Preferences = {
             Connection.UPnP = false;
