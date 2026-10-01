@@ -10,8 +10,12 @@ Declarative CS2 configuration.
 
 ![CS2 binds](binds.svg)
 
-The map is regenerated and staged by `.githooks/pre-commit` whenever `autoexec.cfg` or `render_binds.py` changes. One-time setup per clone:
+The map is regenerated and staged by `.githooks/pre-commit` whenever `autoexec.cfg` or `render_binds.py` changes. See the root `README.md` for the hook setup.
+
+The hook needs `python3` on `PATH`, and the system does not install it. Commit these changes in a nix shell:
 
 ```
-git config core.hooksPath .githooks
+nix shell nixpkgs#python3 --command git commit
 ```
+
+Without `python3`, the commit fails and leaves `binds.svg` empty. Restore it with `git checkout home/cs2/binds.svg`.

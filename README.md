@@ -82,3 +82,14 @@ different system:
 ```
 nix run github:serokell/deploy-rs -- .#<machine> --remote-build
 ```
+
+### git hooks
+
+Run this once in each clone:
+
+```
+git config core.hooksPath .githooks
+```
+
+`.githooks/pre-commit` runs `nix fmt` on staged Nix files and renders the CS2
+bind map (see `home/cs2/README.md`).
