@@ -13,7 +13,7 @@
     ../../users/andrew/system
     ../../users/andrew/system/bunker
 
-    ./apps/attic.nix
+    ./apps/attic
     ./apps/beast-music.nix
     ./apps/bingo.nix
     ./apps/birthday-api.nix
