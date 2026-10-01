@@ -94,6 +94,9 @@ in
     (mkBind "ALT + SHIFT + 3" "hl.dsp.exec_cmd('grim - | wl-copy')")
     (mkBind "ALT + SHIFT + 4" ''hl.dsp.exec_cmd('grim -g "$(slurp)" - | wl-copy')'')
 
+    (mkBind "SUPER + D" "hl.dsp.exec_cmd('dictate')")
+    (mkBind "SUPER + SHIFT + D" "hl.dsp.exec_cmd('dictate cancel')")
+
     (mkLockedBind "XF86AudioRaiseVolume" "hl.dsp.exec_cmd('wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+')")
     (mkLockedBind "XF86AudioLowerVolume" "hl.dsp.exec_cmd('wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-')")
     (mkLockedBind "XF86AudioMute" "hl.dsp.exec_cmd('wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle')")

@@ -7,13 +7,13 @@
 
 let
   cfg = config.modules.whisper-cpp;
-  recordScript = pkgs.writeShellApplication {
-    name = "whisper-record";
-    text = (builtins.readFile ./record.sh);
+  dictateScript = pkgs.writeShellApplication {
+    name = "dictate";
+    text = (builtins.readFile ./dictate.sh);
     runtimeInputs = with pkgs; [
       cfg.package
       libnotify
-      sox
+      pipewire
       wl-clipboard
     ];
     runtimeEnv = {
@@ -37,6 +37,6 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [ recordScript ];
+    home.packages = [ dictateScript ];
   };
 }
