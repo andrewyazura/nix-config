@@ -42,8 +42,6 @@ in
         GEMINI = ../../common/llm-memory.md;
       };
 
-      skills = ../claude/skills;
-
       settings = {
         model = "Gemini 3.8 Flash (High)";
         notifications = true;

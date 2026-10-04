@@ -32,7 +32,6 @@ let
       package = llm-agents.claude-code;
       enableMcpIntegration = true;
       context = ../../common/llm-memory.md;
-      skills = ./skills;
       commandsDir = ./commands;
 
       settings = {
