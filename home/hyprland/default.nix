@@ -26,6 +26,7 @@ let
     synthwave-city-sunset = toString ./wallpapers/synthwave-city-sunset.jpg;
     cyberpunk-skyline = toString ./wallpapers/cyberpunk-skyline.jpg;
     earthrise-duo = toString ./wallpapers/earthrise-duo.png;
+    overwatch-yorha = toString ./wallpapers/overwatch-yorha.png;
   };
 in
 {
@@ -65,7 +66,7 @@ in
 
     wallpaper = mkOption {
       type = enum (attrNames wallpapers);
-      default = "cyberpunk-skyline";
+      default = "overwatch-yorha";
       description = "Which wallpaper to display via hyprpaper.";
     };
   };
