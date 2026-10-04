@@ -397,5 +397,10 @@ in
       gtk.enable = true;
       hyprcursor.enable = true;
     };
+
+    systemd.user.sessionVariables = {
+      XCURSOR_THEME = config.home.pointerCursor.name;
+      XCURSOR_SIZE = config.home.pointerCursor.size;
+    };
   };
 }
