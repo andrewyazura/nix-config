@@ -391,9 +391,9 @@ in
 
     home.pointerCursor = {
       enable = true;
-      package = pkgs.callPackage ./dark-souls-3-cursors.nix { };
-      name = "Dark-Souls-III";
-      size = 24;
+      package = pkgs.callPackage ./nier-cursors.nix { };
+      name = "NieR-Cursors";
+      size = 32;
       gtk.enable = true;
       hyprcursor.enable = true;
     };
