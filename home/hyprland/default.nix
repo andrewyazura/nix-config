@@ -16,7 +16,6 @@ let
   system = pkgs.stdenv.hostPlatform.system;
   hyprlandPkgs = inputs.hyprland.packages.${system};
   hyprlandPlugins = inputs.hyprland-plugins.packages.${system};
-  hy3Pkgs = inputs.hy3.packages.${system};
 
   binds = import ./binds.nix { inherit lib; };
 
@@ -98,7 +97,6 @@ in
       portalPackage = hyprlandPkgs.xdg-desktop-portal-hyprland;
 
       plugins = with hyprlandPlugins; [
-        hy3Pkgs.hy3
         hyprbars
       ];
 
@@ -118,7 +116,7 @@ in
 
             no_focus_fallback = true;
             resize_on_border = true;
-            layout = "hy3";
+            layout = "dwindle";
             allow_tearing = true;
           };
 
@@ -134,6 +132,14 @@ in
               color = palette.accent;
               color_inactive = "rgba(00000000)";
             };
+          };
+
+          dwindle = {
+            preserve_split = true;
+          };
+
+          binds = {
+            movefocus_cycles_groupfirst = true;
           };
 
           group = {

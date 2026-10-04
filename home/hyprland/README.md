@@ -11,13 +11,8 @@ hyprctl eval "..."
 
 Then read `hyprctl activewindow -j` and `hyprctl cursorpos`.
 
-`hl.plugin.hy3.debug_nodes()` output does not reach the log, even with
-`debug.disable_logs = false`.
-
 ## Rebuilds and sessions
 
-- A switch that changes the hy3 store path reloads the plugin. hy3 then
-  rebuilds every workspace tree, and all window layouts are lost.
 - A Hyprland version change needs a new session. Use `nixos-rebuild boot`,
   then reboot.
 - Linger is off and tty1 is the only session. A Hyprland logout stops the
