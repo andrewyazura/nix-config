@@ -391,8 +391,8 @@ in
 
     home.pointerCursor = {
       enable = true;
-      package = pkgs.bibata-cursors;
-      name = "Bibata-Modern-Classic";
+      package = pkgs.callPackage ./dark-souls-3-cursors.nix { };
+      name = "Dark-Souls-III";
       size = 24;
       gtk.enable = true;
       hyprcursor.enable = true;
