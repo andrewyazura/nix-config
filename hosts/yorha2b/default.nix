@@ -129,7 +129,10 @@
   networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ 9999 ];
   powerManagement.cpuFreqGovernor = "performance";
 
-  services.jellyfin.hardwareAcceleration.device = "/dev/dri/by-path/pci-0000:11:00.0-render";
+  services = {
+    zfs.autoScrub.enable = true;
+    jellyfin.hardwareAcceleration.device = "/dev/dri/by-path/pci-0000:11:00.0-render";
+  };
 
   programs.gamemode.settings.gpu = {
     apply_gpu_optimisations = "accept-responsibility";
