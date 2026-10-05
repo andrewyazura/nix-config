@@ -2,12 +2,6 @@
 {
   modules = {
     cs2.enable = true;
-    mcp.servers = {
-      anki = {
-        enable = true;
-        directories = [ "Documents/notes" ];
-      };
-    };
     ghostty = {
       fontSize = 9;
       backgroundOpacity = 0.8;
