@@ -10,7 +10,6 @@ let
   cfg = config.modules.antigravity;
   system = pkgs.stdenv.hostPlatform.system;
   llm-agents = inputs.llm-agents.packages.${system};
-
 in
 {
   options.modules.antigravity = {
@@ -56,9 +55,6 @@ in
 
     home.file = {
       ".gemini/antigravity-cli/settings.json".force = true;
-      ".gemini/config/mcp_config.json" = mkIf (config.programs.antigravity-cli.mcpServers != { }) {
-        force = true;
-      };
     };
   };
 }
