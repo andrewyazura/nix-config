@@ -1,5 +1,6 @@
 {
   imports = [
+    ./anki
     ./antigravity
     ./base-packages
     ./btop

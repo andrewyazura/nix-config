@@ -31,6 +31,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    anki-mcp = {
+      url = "github:ankimcp/anki-mcp-server-addon";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins/64d6f514ea94fe4742faa0e299a3ccce23feaea5";
       inputs.hyprland.follows = "hyprland";

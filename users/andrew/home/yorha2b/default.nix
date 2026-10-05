@@ -1,6 +1,7 @@
 { config, ... }:
 {
   modules = {
+    anki.enable = true;
     cs2.enable = true;
     ghostty = {
       fontSize = 9;
