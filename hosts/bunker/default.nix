@@ -1,5 +1,6 @@
 {
   config,
+  hostname,
   inputs,
   lib,
   pkgs,
@@ -220,6 +221,8 @@
     80
     443
   ];
+
+  networking.hostName = hostname;
 
   system.stateVersion = "25.11";
 }
