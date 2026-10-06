@@ -28,6 +28,7 @@ let
 
     programs.claude-code = {
       enable = true;
+      mutableSettings = true;
       package = llm-agents.claude-code;
       enableMcpIntegration = true;
       context = ../../common/llm-memory.md;
@@ -116,6 +117,11 @@ in
         ++ map wrapper instances;
 
       file = mkMerge (map (i: i.home.file) instances);
+      activation = mkMerge (
+        mapAttrsToList (
+          name: i: mapAttrs' (n: nameValuePair "${n}-${name}") i.home.activation
+        ) cfg.instances
+      );
       sessionVariables.CLAUDE_CONFIG_DIR = "${homeDirectory}/.claude";
     };
 
