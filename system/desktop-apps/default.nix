@@ -24,7 +24,7 @@ in
       proton-vpn-cli
       qbittorrent
       signal-desktop
-      spotify
+      spotifast
       telegram-desktop
     ];
 
