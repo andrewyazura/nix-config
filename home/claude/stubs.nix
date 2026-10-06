@@ -39,6 +39,11 @@ with lib;
         type = types.attrsOf types.raw;
         default = { };
       };
+
+      activation = mkOption {
+        type = types.attrsOf types.raw;
+        default = { };
+      };
     };
 
     programs.mcp = {
