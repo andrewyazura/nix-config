@@ -26,10 +26,14 @@ in
     xdg.portal = {
       enable = true;
       extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-      config.common.default = [ "gtk" ];
+      config.common = {
+        default = [ "gtk" ];
+        "org.freedesktop.impl.portal.Secret" = [ "none" ];
+      };
     };
 
     services = {
+      oo7.enable = true;
       playerctld.enable = true;
 
       greetd = {
