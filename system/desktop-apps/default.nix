@@ -21,7 +21,6 @@ in
       antigravity-hub
       google-chrome
       obsidian
-      proton-vpn
       proton-vpn-cli
       qbittorrent
       signal-desktop
