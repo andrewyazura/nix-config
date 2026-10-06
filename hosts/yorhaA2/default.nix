@@ -66,7 +66,6 @@ in
   environment = {
     systemPackages = with pkgs; [
       gnupg
-      mosh
     ];
   };
 

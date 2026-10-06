@@ -13,7 +13,5 @@ in
       tailscale.enable = true;
       openssh.enable = true;
     };
-
-    programs.mosh.enable = true;
   };
 }
