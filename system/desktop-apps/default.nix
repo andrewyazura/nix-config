@@ -28,9 +28,5 @@ in
       spotifast
       telegram-desktop
     ];
-
-    environment.sessionVariables.PROTON_LOADER_OVERRIDES = mkIf (
-      !config.services.oo7.enable
-    ) "keyring=json";
   };
 }
