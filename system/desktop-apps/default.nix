@@ -18,6 +18,7 @@ in
     environment.systemPackages = with pkgs; [
       inputs.ghostty.packages.x86_64-linux.default
 
+      antigravity-hub
       google-chrome
       obsidian
       proton-vpn
