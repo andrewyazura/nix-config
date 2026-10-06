@@ -26,11 +26,13 @@ in
       context.AGENTS = ../../common/llm-memory.md;
 
       settings = {
+        allowNonWorkspaceAccess = true;
         altScreenMode = "never";
         artifactReviewPolicy = "agent-decides";
         colorScheme = "terminal";
         editor = "nvim";
         editorMode = "vim";
+        enableTerminalSandbox = false;
         model = "Gemini 3.8 Flash (High)";
         notifications = true;
         pickerGrouping = "grouped";
