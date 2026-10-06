@@ -51,6 +51,8 @@ in
       unitConfig.After = mkForce [ "multi-user.target" ];
     };
 
+    systemd.user.services.oo7-daemon.serviceConfig.MemorySwapMax = 0;
+
     security.pam.services.hyprlock = { };
   };
 }
