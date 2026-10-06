@@ -36,6 +36,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    hyprland = {
+      url = "github:hyprwm/Hyprland/ae50c4d6bbbcb8ee7a0b0d89341a8e93fc9b99e7";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins/64d6f514ea94fe4742faa0e299a3ccce23feaea5";
       inputs.hyprland.follows = "hyprland";
@@ -52,7 +57,6 @@
     birthday-api-app.url = "github:orehzzz/birthday-api";
     birthday-bot-app.url = "github:orehzzz/birthday-telegram-bot";
     ghostty.url = "github:ghostty-org/ghostty";
-    hyprland.url = "github:hyprwm/Hyprland/ae50c4d6bbbcb8ee7a0b0d89341a8e93fc9b99e7";
     llm-agents.url = "github:numtide/llm-agents.nix";
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
     private-config.url = "git+ssh://git@github.com/andrewyazura/private-nix-config.git";
