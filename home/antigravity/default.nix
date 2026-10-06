@@ -20,6 +20,7 @@ in
     programs.antigravity-cli = {
       enable = true;
       enableMcpIntegration = true;
+      mutableSettings = true;
 
       package = llm-agents.antigravity-cli;
       context.AGENTS = ../../common/llm-memory.md;
@@ -51,10 +52,6 @@ in
           "execute_url(*)"
         ];
       };
-    };
-
-    home.file = {
-      ".gemini/antigravity-cli/settings.json".force = true;
     };
   };
 }
