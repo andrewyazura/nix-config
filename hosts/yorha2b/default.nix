@@ -24,6 +24,7 @@
       dataDir = "/disk_alpha";
     };
 
+    oo7.enable = true;
     sunshine.enable = true;
     tailscale.enable = true;
     wivrn.enable = true;

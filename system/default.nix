@@ -17,6 +17,7 @@
     ./networking
     ./nix
     ./ollama
+    ./oo7
     ./profiles
     ./sunshine
     ./tailscale
