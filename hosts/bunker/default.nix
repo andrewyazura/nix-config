@@ -37,7 +37,7 @@
     };
 
     cs2-server = {
-      enable = true;
+      enable = false;
 
       servers = {
         server-1 = {
@@ -88,6 +88,8 @@
         };
       };
     };
+
+    tailscale.enable = true;
   };
 
   home-manager.users.andrew = {
@@ -217,7 +219,14 @@
     22
     80
     443
-    8443
+  ];
+
+  programs.mosh.openFirewall = false;
+  networking.firewall.interfaces.tailscale0.allowedUDPPortRanges = [
+    {
+      from = 60000;
+      to = 61000;
+    }
   ];
 
   system.stateVersion = "25.11";
