@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          fetch-depth: 0
 
       - uses: DeterminateSystems/nix-installer-action@main
         with:
@@ -51,7 +51,7 @@ jobs:
         if: github.event_name == 'push'
         run: |
           ATTR="nixosConfigurations.bunker.config.system.build.toplevel"
-          OLD_DRV=$(nix eval --raw ".?rev=$(git rev-parse HEAD~1)#${ATTR}.drvPath" 2>/dev/null) || OLD_DRV="unknown"
+          OLD_DRV=$(nix eval --raw ".?rev=${{ github.event.before }}#${ATTR}.drvPath" 2>/dev/null) || OLD_DRV="unknown"
           NEW_DRV=$(nix eval --raw ".#${ATTR}.drvPath")
           if [[ "$OLD_DRV" == "$NEW_DRV" ]]; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
