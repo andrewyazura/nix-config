@@ -337,6 +337,13 @@ in
           }
         ];
 
+        env = optional (config.home.sessionVariables ? QT_QPA_PLATFORMTHEME) {
+          _args = [
+            "QT_QPA_PLATFORMTHEME"
+            config.home.sessionVariables.QT_QPA_PLATFORMTHEME
+          ];
+        };
+
         monitor = builtins.map (monitor: {
           _args = [ (filterAttrs (n: v: n != "workspace" && v != null) monitor) ];
         }) cfg.output;
