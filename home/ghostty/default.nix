@@ -73,7 +73,7 @@ in
           "11=${colors.yellow}"
           "12=${colors.indigo}"
           "13=${colors.pink}"
-          "14=${colors.accentAlt}"
+          "14=${colors.teal}"
           "15=${colors.bright}"
         ];
 
