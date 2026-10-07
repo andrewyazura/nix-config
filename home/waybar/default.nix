@@ -123,6 +123,11 @@ in
             tooltip-format = ''
               <big>{:%Y %B}</big>
               <tt><small>{calendar}</small></tt>'';
+            calendar.format = {
+              months = "<span color='${colors.text}'><b>{}</b></span>";
+              weekdays = "<span color='${colors.subtle}'>{}</span>";
+              today = "<span background='${colors.text}' color='${colors.bg}'><b>{}</b></span>";
+            };
           };
 
           "pulseaudio" = {
@@ -235,6 +240,16 @@ in
         menuitem:hover {
           background: ${colors.text};
           color: ${colors.bg};
+        }
+
+        tooltip {
+          background: ${colors.bg};
+          border: 1px solid ${colors.text};
+          border-radius: 0;
+        }
+
+        tooltip label {
+          color: ${colors.text};
         }
       '';
     };
