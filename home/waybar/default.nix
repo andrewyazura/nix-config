@@ -177,6 +177,10 @@ in
           color: ${colors.bg};
         }
 
+        #network.disconnected {
+          margin: 5px 3px 7px 3px;
+        }
+
         #language, #network, #pulseaudio, #clock, #custom-power {
           padding: 0 10px;
           color: ${colors.text};
