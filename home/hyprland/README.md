@@ -123,6 +123,20 @@ NixOS passes `console.colors` as the kernel parameters `vt.default_red`,
 so new console colors show only after the next boot. `console.font` is
 Terminus `ter-v32n` with `earlySetup`, so the initrd and the greeter use it.
 
+## Login greeter (yorha2b)
+
+greetd runs tuigreet with `--config` and a TOML file that
+`system/hyprland/default.nix` builds. To check a new file, run:
+
+```
+tuigreet --config <file> --dump-config
+tuigreet --config <file> --mock
+```
+
+`--mock` draws the greeter in the current terminal and fakes the login. The
+0.11.1 help does not list it. greetd does not restart on a switch, so the
+running session stays. A new greeter shows after the next logout or boot.
+
 ## Direct scanout
 
 Set the instance signature again first. An old shell can point at a dead

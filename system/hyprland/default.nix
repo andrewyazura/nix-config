@@ -10,6 +10,50 @@ let
   cfg = config.modules.hyprland;
   system = pkgs.stdenv.hostPlatform.system;
   hyprlandPkgs = inputs.hyprland.packages.${system};
+
+  tuigreetConfig = (pkgs.formats.toml { }).generate "tuigreet.toml" {
+    session.command = "start-hyprland";
+    remember.username = true;
+    display = {
+      show_time = true;
+      time_format = "%a %d %b %H:%M";
+      show_title = true;
+      custom_title = "YoRHa UNIT ${toUpper (removePrefix "yorha" config.networking.hostName)}";
+    };
+    secret = {
+      mode = "characters";
+      characters = "*";
+    };
+    layout = {
+      width = 40;
+      window_padding = 0;
+      container_padding = 2;
+      prompt_padding = 1;
+      widgets.status_bar = {
+        show_command = true;
+        show_session = false;
+        show_power = true;
+        show_background = false;
+        show_caps_lock = true;
+      };
+    };
+    power = {
+      shutdown = "systemctl poweroff";
+      reboot = "systemctl reboot";
+    };
+    theme = {
+      text = "gray";
+      time = "gray";
+      container = "black";
+      border = "gray";
+      title = "white";
+      greet = "gray";
+      prompt = "darkgray";
+      input = "white";
+      action = "darkgray";
+      button = "gray";
+    };
+  };
 in
 {
   options.modules.hyprland = {
@@ -36,7 +80,7 @@ in
         enable = true;
         settings = {
           default_session = {
-            command = "${pkgs.tuigreet}/bin/tuigreet -r --time --cmd start-hyprland";
+            command = "${pkgs.tuigreet}/bin/tuigreet --config ${tuigreetConfig}";
           };
         };
       };
