@@ -50,6 +50,8 @@ let
     '';
 in
 {
+  imports = [ ./qt.nix ];
+
   options.modules.theme = {
     enable = mkEnableOption "Enable the global dark theme";
   };
@@ -71,12 +73,6 @@ in
       gtk4.theme = null;
       gtk4.extraConfig.gtk-application-prefer-dark-theme = 1;
       gtk4.extraCss = gtkCss;
-    };
-
-    qt = mkIf isLinux {
-      enable = true;
-      platformTheme.name = "adwaita";
-      style.name = "adwaita-dark";
     };
 
     dconf = mkIf isLinux {
