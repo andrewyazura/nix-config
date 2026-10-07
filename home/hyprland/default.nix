@@ -172,6 +172,8 @@ in
               border_inactive = palette.overlay;
             };
             groupbar = {
+              text_color = palette.bg;
+              text_color_inactive = palette.text;
               col = {
                 active = palette.text;
                 inactive = palette.surface;
