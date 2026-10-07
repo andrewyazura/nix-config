@@ -20,7 +20,6 @@ in
         anchor = "top-right";
         layer = "overlay";
         margin = "0,10,10";
-        outer-margin = "-1,0,0";
         padding = 12;
         width = 380;
         height = 160;
