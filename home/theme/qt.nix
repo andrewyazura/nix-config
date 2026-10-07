@@ -102,7 +102,7 @@ let
           border-radius: 7px;
           margin-left: 3px;
       }
-      QCheckBox:focus, QRadioButton:focus {
+      QCheckBox:focus, QRadioButton:focus, QGroupBox:focus {
           outline: 1px solid ${subtle};
       }
       QCheckBox::indicator:checked, QAbstractItemView::indicator:checked, QGroupBox::indicator:checked {
