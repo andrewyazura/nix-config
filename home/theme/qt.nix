@@ -81,11 +81,54 @@ let
     disabled_colors=${row disabled}
   '';
 
+  check = pkgs.writeText "check.svg" ''
+    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path d="M2.5 6.5 5 9 9.5 3" fill="none" stroke="${colors.bg}" stroke-width="2"/></svg>
+  '';
+
+  dot = pkgs.writeText "dot.svg" ''
+    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><circle cx="6" cy="6" r="2.5" fill="${colors.bg}"/></svg>
+  '';
+
+  indicators = pkgs.writeText "indicators.qss" (
+    with colors;
+    ''
+      QCheckBox::indicator, QAbstractItemView::indicator, QGroupBox::indicator, QRadioButton::indicator {
+          width: 12px;
+          height: 12px;
+          border: 1px solid ${text};
+          background: ${bg};
+      }
+      QRadioButton::indicator {
+          border-radius: 7px;
+      }
+      QCheckBox::indicator:checked, QAbstractItemView::indicator:checked, QGroupBox::indicator:checked {
+          background: ${text};
+          image: url(${check});
+      }
+      QRadioButton::indicator:checked {
+          background: ${text};
+          image: url(${dot});
+      }
+      QCheckBox::indicator:indeterminate, QAbstractItemView::indicator:indeterminate {
+          background: ${muted};
+      }
+      QCheckBox::indicator:disabled, QAbstractItemView::indicator:disabled, QGroupBox::indicator:disabled, QRadioButton::indicator:disabled {
+          border-color: ${muted};
+      }
+      QCheckBox::indicator:checked:disabled, QAbstractItemView::indicator:checked:disabled, QGroupBox::indicator:checked:disabled, QRadioButton::indicator:checked:disabled {
+          background: ${muted};
+      }
+    ''
+  );
+
   qtct = name: {
     Appearance = {
       style = "Fusion";
       custom_palette = true;
       color_scheme_path = "${config.xdg.configHome}/${name}/colors/yorha.conf";
+    };
+    Interface = {
+      stylesheets = "${indicators}";
     };
     Fonts = {
       general = ''"Noto Sans CJK JP,11"'';
