@@ -14,7 +14,7 @@ with lib;
     fonts.fontconfig = {
       defaultFonts = {
         monospace = [ "JetBrainsMono Nerd Font" ];
-        sansSerif = [ "Inter" ];
+        sansSerif = [ "Noto Sans CJK JP" ];
         serif = [ "Noto Serif" ];
       };
     };
