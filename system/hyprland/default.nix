@@ -47,6 +47,12 @@ in
       unitConfig.After = mkForce [ "multi-user.target" ];
     };
 
+    console = {
+      colors = map (removePrefix "#") (import ../../common/ansi.nix);
+      font = "${pkgs.terminus_font}/share/consolefonts/ter-v32n.psf.gz";
+      earlySetup = true;
+    };
+
     security.pam.services.hyprlock = { };
   };
 }

@@ -112,6 +112,17 @@ translucent here, so blur has no other visible effect.
 The defect follows repaints, so test with translucent windows and take many
 pixel samples. One sample can miss it.
 
+## Console colors and font (yorha2b)
+
+`common/ansi.nix` holds the 16 terminal colors. The Ghostty palette and
+`console.colors` in `system/hyprland/default.nix` both read it. On the virtual
+console, slot 0 is the screen background and slot 7 the default text.
+
+NixOS passes `console.colors` as the kernel parameters `vt.default_red`,
+`vt.default_grn` and `vt.default_blu`. A rebuild writes them to the boot entry,
+so new console colors show only after the next boot. `console.font` is
+Terminus `ter-v32n` with `earlySetup`, so the initrd and the greeter use it.
+
 ## Direct scanout
 
 Set the instance signature again first. An old shell can point at a dead

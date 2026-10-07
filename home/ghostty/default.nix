@@ -58,24 +58,7 @@ in
         selection-background = colors.overlay;
         selection-foreground = colors.bright;
 
-        palette = [
-          "0=${colors.overlay}"
-          "1=${colors.red}"
-          "2=${colors.green}"
-          "3=${colors.yellow}"
-          "4=${colors.blue}"
-          "5=${colors.pink}"
-          "6=${colors.teal}"
-          "7=${colors.text}"
-          "8=${colors.muted}"
-          "9=#f0968b"
-          "10=#cdd7ab"
-          "11=#eedaae"
-          "12=${colors.indigo}"
-          "13=#e2bdd0"
-          "14=#aad4c8"
-          "15=${colors.bright}"
-        ];
+        palette = imap0 (i: c: "${toString i}=${c}") (import ../../common/ansi.nix);
 
         background-opacity = cfg.backgroundOpacity;
         background-opacity-cells = true;

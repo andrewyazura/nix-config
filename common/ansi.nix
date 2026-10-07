@@ -1,0 +1,19 @@
+with import ./colors.nix;
+[
+  bg
+  red
+  green
+  yellow
+  blue
+  pink
+  teal
+  text
+  muted
+  "#f0968b"
+  "#cdd7ab"
+  "#eedaae"
+  "#b8cee1"
+  "#e2bdd0"
+  "#aad4c8"
+  bright
+]
