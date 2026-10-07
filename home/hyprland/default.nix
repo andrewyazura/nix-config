@@ -143,8 +143,8 @@ in
             border_size = 1;
             col = {
               active_border = palette.text;
-              inactive_border = palette.surface;
-              nogroup_border = palette.surface;
+              inactive_border = palette.overlay;
+              nogroup_border = palette.overlay;
               nogroup_border_active = palette.text;
             };
 
@@ -182,7 +182,7 @@ in
           group = {
             col = {
               border_active = palette.text;
-              border_inactive = palette.surface;
+              border_inactive = palette.overlay;
             };
             groupbar = {
               gradients = true;
@@ -197,7 +197,7 @@ in
               text_color_inactive = palette.text;
               col = {
                 active = palette.text;
-                inactive = palette.surface;
+                inactive = palette.overlay;
               };
             };
           };
@@ -215,7 +215,7 @@ in
           plugin = {
             hyprbars = {
               bar_height = 20;
-              bar_color = palette.surface;
+              bar_color = palette.overlay;
               bar_text_size = 12;
               bar_text_weight = "medium";
               bar_text_font = "Noto Sans CJK JP";
