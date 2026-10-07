@@ -39,6 +39,8 @@ let
         -size ${size} tile:mpr:cell $out
     '';
 
+  gutter = 10;
+
   launcher = rec {
     fontSize = 15;
     rows = 3;
@@ -136,8 +138,8 @@ in
       settings = {
         config = {
           general = {
-            gaps_in = 2;
-            gaps_out = 10;
+            gaps_in = gutter / 2;
+            gaps_out = gutter;
             border_size = 1;
             col = {
               active_border = palette.text;
