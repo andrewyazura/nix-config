@@ -9,21 +9,6 @@ let
   cfg = config.modules.waybar;
   colors = import ../../common/colors.nix;
 
-  keyboardLayout = pkgs.writeShellScript "waybar-keyboard-layout" ''
-    keyboard=$(hyprctl -j devices | ${pkgs.jq}/bin/jq '.keyboards[] | select(.main == true)')
-    name=$(echo "$keyboard" | ${pkgs.jq}/bin/jq -r '.name')
-    index=$(echo "$keyboard" | ${pkgs.jq}/bin/jq -r '.active_layout_index')
-    layout=$(echo "$keyboard" | ${pkgs.jq}/bin/jq -r '.layout' | cut -d, -f$((index + 1)))
-
-    case "$layout" in
-      us) text="󰌌 EN" ;;
-      ua) text="󰌌 UA" ;;
-      *) text="$layout" ;;
-    esac
-
-    ${pkgs.jq}/bin/jq -nc --arg text "$text" --arg tooltip "$name" '{text: $text, tooltip: $tooltip}'
-  '';
-
   powerMenu = pkgs.writeText "waybar-power-menu.xml" ''
     <?xml version="1.0" encoding="UTF-8"?>
     <interface>
@@ -78,7 +63,7 @@ in
           ];
           modules-center = [ ];
           modules-right = [
-            "custom/keyboard-layout"
+            "hyprland/language"
             "network"
             "pulseaudio"
             "clock"
@@ -111,10 +96,10 @@ in
             sort-by-coordinates = true;
           };
 
-          "custom/keyboard-layout" = {
-            exec = "${keyboardLayout}";
-            interval = 1;
-            return-type = "json";
+          "hyprland/language" = {
+            format = "󰌌 {}";
+            format-en = "EN";
+            format-uk = "UA";
           };
 
           "clock" = {
@@ -192,10 +177,14 @@ in
           color: ${colors.bg};
         }
 
-        #custom-keyboard-layout, #network, #pulseaudio, #clock, #custom-power {
+        #language, #network, #pulseaudio, #clock, #custom-power {
           padding: 0 10px;
           color: ${colors.text};
           letter-spacing: 1px;
+        }
+
+        #language {
+          letter-spacing: 0;
         }
 
         #clock {
