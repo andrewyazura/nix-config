@@ -82,7 +82,6 @@ in
             "network"
             "pulseaudio"
             "clock"
-            "battery"
             "custom/power"
           ];
 
@@ -143,10 +142,6 @@ in
             format-disconnected = "󰤭 not connected";
             tooltip-format = "{ipaddr}";
           };
-
-          "battery" = {
-            format = "󰁹 {capacity}%";
-          };
         };
       };
 
@@ -197,7 +192,7 @@ in
           color: ${colors.bg};
         }
 
-        #custom-keyboard-layout, #network, #pulseaudio, #clock, #battery, #custom-power {
+        #custom-keyboard-layout, #network, #pulseaudio, #clock, #custom-power {
           padding: 0 10px;
           color: ${colors.text};
           letter-spacing: 1px;
@@ -217,14 +212,6 @@ in
 
         #pulseaudio.muted {
           color: ${colors.subtle};
-        }
-
-        #battery.warning {
-          color: ${colors.yellow};
-        }
-
-        #battery.critical {
-          color: ${colors.red};
         }
 
         menu {
