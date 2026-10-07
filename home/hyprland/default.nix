@@ -289,6 +289,16 @@ in
             _args = [
               {
                 match = {
+                  group = true;
+                };
+                "hyprbars:no_bar" = true;
+              }
+            ];
+          }
+          {
+            _args = [
+              {
+                match = {
                   class = "com.mitchellh.ghostty";
                 };
                 opacity = "1.0 override";
