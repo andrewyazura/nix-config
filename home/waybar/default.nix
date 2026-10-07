@@ -148,7 +148,7 @@ in
         #custom-launcher, #workspaces button {
           background: ${colors.bg};
           color: ${colors.text};
-          box-shadow: 3px 3px 0 alpha(black, 0.42);
+          box-shadow: 3px 3px 0 alpha(black, 0.4);
         }
 
         #custom-launcher {
