@@ -34,7 +34,7 @@ let
   mkGrid =
     size:
     pkgs.runCommand "yorha-grid-${size}.png" { nativeBuildInputs = [ pkgs.imagemagick ]; } ''
-      magick -size 12x12 xc:'${palette.raised}' -fill '${palette.surface}' \
+      magick -size 12x12 xc:'${palette.surface}' -fill '${palette.bg}' \
         -draw 'rectangle 1,1 11,11' -write mpr:cell +delete \
         -size ${size} tile:mpr:cell $out
     '';
@@ -417,7 +417,7 @@ in
           };
 
           background = [
-            { color = rgb palette.surface; }
+            { color = rgb palette.bg; }
           ]
           ++ concatMap (
             o:
