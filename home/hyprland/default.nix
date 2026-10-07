@@ -410,7 +410,7 @@ in
             {
               size = "92%, 1";
               color = rgb palette.text;
-              position = "0, -9%";
+              position = "0, -130";
               halign = "center";
               valign = "top";
             }
@@ -442,7 +442,7 @@ in
               color = rgb palette.text;
               font_family = "Noto Sans CJK JP";
               font_size = 20;
-              position = "4%, -5%";
+              position = "4%, -72";
               halign = "left";
               valign = "top";
             }
@@ -451,7 +451,7 @@ in
               color = rgb palette.text;
               font_family = "Noto Sans CJK JP";
               font_size = 20;
-              position = "-4%, -5%";
+              position = "-4%, -72";
               halign = "right";
               valign = "top";
             }
