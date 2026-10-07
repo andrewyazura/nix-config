@@ -65,12 +65,24 @@ capture state after a failed share.
 The trigger: Chromium fails the DMA-BUF import on the RX 7900
 (`EGL_BAD_MATCH`), the share falls back to SHM, and xdph then breaks.
 
-## hyprlauncher override
+## hyprlauncher input border
 
-`default.nix` overrides hyprtoolkit to 0.6.0 for hyprlauncher only.
-hyprtoolkit 0.5.x drops keys when the pointer is not over the window, so the
-launcher ignored keys after a mouse click. Remove the override when nixpkgs
-has hyprtoolkit 0.6.0 or later. On 2026-10-01, nixpkgs has 0.5.4.
+hyprtoolkit draws the border of a text box in two colors:
+
+- Without keyboard focus, the border is `alternate_base`.
+- With keyboard focus, the border is `alternate_base` brightened by 0.5.
+
+`brighten(c)` multiplies each sRGB channel by `1 + c`, with no clamp. The
+source is `src/palette/Color.cpp` in hyprtoolkit 0.6.0.
+
+The launcher input box has focus while the launcher is open. To hide its
+border, `unbrighten 0.5 palette.bg` in `default.nix` sets `alternate_base` to
+bg divided by 1.5 per channel, rounded. For bg `#2b2924` the value is
+`0xFF1D1B18`. A bg channel that is not a multiple of 3 has no exact result,
+and the border is then half of one 8-bit step from bg.
+
+The scroll bar track of the result list also uses `alternate_base`, with
+alpha.
 
 To debug a layer client, run its daemon with `WAYLAND_DEBUG=1` through
 `setsid`. Read the `wl_keyboard` and `wl_pointer` enter events.

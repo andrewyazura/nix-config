@@ -12,6 +12,17 @@ let
 
   rgb = c: "rgb(${removePrefix "#" c})";
   argb = c: "0xFF${removePrefix "#" c}";
+  unbrighten =
+    coeff: c:
+    let
+      hex = removePrefix "#" c;
+      channel =
+        i:
+        fixedWidthString 2 "0" (
+          toHexString (builtins.floor (fromHexString (substring i 2 hex) / (1 + coeff) + 0.5))
+        );
+    in
+    "0xFF${channel 0}${channel 2}${channel 4}";
 
   system = pkgs.stdenv.hostPlatform.system;
   hyprlandPkgs = inputs.hyprland.packages.${system};
@@ -326,7 +337,7 @@ in
     xdg.configFile."hypr/hyprtoolkit.conf".text = ''
       background = ${argb palette.bg}
       base = ${argb palette.bg}
-      alternate_base = 0xFF1D1B18
+      alternate_base = ${unbrighten 0.5 palette.bg}
       text = ${argb palette.text}
       bright_text = ${argb palette.bright}
       link_text = ${argb palette.blue}
