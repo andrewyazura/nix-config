@@ -137,10 +137,10 @@ in
 
           "network" = {
             interface = "wlp4s0";
-            format-wifi = "󰖩 {essid} {bandwidthDownBytes}";
-            format-ethernet = "󰈀 {ifname} {bandwidthDownBytes}";
+            format-wifi = "󰖩";
+            format-ethernet = "󰈀";
             format-disconnected = "󰤭 NOT CONNECTED";
-            tooltip-format = "{ipaddr}";
+            tooltip-format = "{essid}\n{ipaddr}\n{bandwidthDownBytes} down";
           };
         };
       };
