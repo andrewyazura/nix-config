@@ -99,7 +99,7 @@ in
 
     wallpaper = mkOption {
       type = enum (attrNames wallpapers);
-      default = "overwatch-yorha";
+      default = "yorha-grid";
       description = "Which wallpaper to display via hyprpaper.";
     };
   };
