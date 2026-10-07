@@ -17,6 +17,7 @@ in
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       inputs.ghostty.packages.x86_64-linux.default
+      inputs.llm-agents.packages.x86_64-linux.claude-desktop
 
       antigravity-hub
       google-chrome
