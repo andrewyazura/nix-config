@@ -168,13 +168,9 @@ in
         extraCommands = concatMapStrings (
           port:
           concatMapStrings (ip: ''
-            iptables -A INPUT -p tcp -s ${ip} --dport ${port} -j ACCEPT
+            iptables -A nixos-fw -p tcp -s ${ip} --dport ${port} -j nixos-fw-accept
           '') allowedIps
         ) uniquePorts;
-
-        extraStopCommands = concatMapStrings (port: ''
-          iptables -D INPUT -p tcp --dport ${port} -j ACCEPT || true
-        '') uniquePorts;
       };
 
     systemd.services = mapAttrs' (
