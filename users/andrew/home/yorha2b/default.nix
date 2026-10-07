@@ -3,9 +3,7 @@
   modules = {
     anki.enable = true;
     cs2.enable = true;
-    ghostty = {
-      backgroundOpacity = 0.9;
-    };
+    ghostty.backgroundOpacity = 0.8;
     profiles = {
       development.enable = true;
       desktop.enable = true;
