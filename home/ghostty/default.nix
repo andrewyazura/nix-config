@@ -68,12 +68,12 @@ in
           "6=${colors.teal}"
           "7=${colors.text}"
           "8=${colors.muted}"
-          "9=${colors.red}"
+          "9=#f0968b"
           "10=${colors.green}"
           "11=${colors.yellow}"
           "12=${colors.indigo}"
-          "13=${colors.pink}"
-          "14=${colors.teal}"
+          "13=#e2bdd0"
+          "14=#aad4c8"
           "15=${colors.bright}"
         ];
 
