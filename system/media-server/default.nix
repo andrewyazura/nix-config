@@ -110,6 +110,7 @@ in
         enable = true;
         group = "media";
         environmentFiles = [ config.sops.templates.sonarr-env.path ];
+        settings.server.port = 8990;
       };
 
       radarr = {
@@ -173,7 +174,7 @@ in
           };
 
           sonarr.sonarr = {
-            base_url = "http://127.0.0.1:8989";
+            base_url = "http://127.0.0.1:8990";
             api_key._secret = config.sops.secrets.sonarr-api-key.path;
             media_naming = {
               series = "jellyfin-tvdb";
@@ -322,7 +323,7 @@ in
       6767
       7878
       8096
-      8989
+      8990
       9696
     ];
   };
