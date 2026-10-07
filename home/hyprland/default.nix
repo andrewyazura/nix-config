@@ -350,6 +350,10 @@ in
       font_family_monospace = JetBrainsMono Nerd Font
     '';
 
+    systemd.user.services.hyprlauncher.Unit.X-Restart-Triggers = [
+      "${config.xdg.configFile."hypr/hyprtoolkit.conf".source}"
+    ];
+
     services = {
       hypridle = {
         enable = true;
