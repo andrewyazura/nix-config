@@ -178,8 +178,8 @@ in
 
           group = {
             col = {
-              border_active = palette.edge;
-              border_inactive = palette.overlay;
+              border_active = palette.text;
+              border_inactive = palette.surface;
             };
             groupbar = {
               text_color = palette.bg;
