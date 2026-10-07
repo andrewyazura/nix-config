@@ -1,8 +1,6 @@
 { config, lib, ... }:
 {
   modules = {
-    ghostty.backgroundOpacity = 0.8;
-
     profiles = {
       development.enable = true;
       desktop.enable = true;
