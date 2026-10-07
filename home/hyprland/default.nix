@@ -325,7 +325,7 @@ in
     xdg.configFile."hypr/hyprtoolkit.conf".text = ''
       background = ${argb palette.bg}
       base = ${argb palette.bg}
-      alternate_base = ${argb palette.surface}
+      alternate_base = 0xFF1D1B18
       text = ${argb palette.text}
       bright_text = ${argb palette.bright}
       link_text = ${argb palette.blue}
@@ -333,6 +333,7 @@ in
       accent_secondary = ${argb palette.accentAlt}
       rounding_large = 0
       rounding_small = 0
+      font_size = 15
       font_family = Noto Sans CJK JP
       font_family_monospace = JetBrainsMono Nerd Font
     '';
@@ -354,6 +355,9 @@ in
         settings = {
           general = {
             grab_focus = true;
+          };
+          ui = {
+            window_size = "440, 151";
           };
         };
       };
@@ -408,6 +412,7 @@ in
               check_color = rgb palette.accentAlt;
               fail_color = rgb palette.red;
               placeholder_text = "<span foreground='##${removePrefix "#" palette.subtle}' letter_spacing='3072'>󰌾  ENTER ACCESS CODE</span>";
+              fail_text = "<span letter_spacing='3072'>󰀦  $FAIL</span>";
               fade_on_empty = false;
             }
           ];
