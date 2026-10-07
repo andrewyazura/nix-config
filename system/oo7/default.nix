@@ -13,6 +13,9 @@ in
 
     xdg.portal.config.common."org.freedesktop.impl.portal.Secret" = [ "none" ];
 
-    systemd.user.services.oo7-daemon.serviceConfig.MemorySwapMax = 0;
+    systemd.user.services.oo7-daemon = {
+      restartIfChanged = false;
+      serviceConfig.MemorySwapMax = 0;
+    };
   };
 }
