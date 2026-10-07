@@ -87,7 +87,7 @@ in
 
           "custom/launcher" = {
             format = "YoRHa";
-            tooltip = false;
+            tooltip-format = "Open launcher: Alt+Space";
             on-click = "hyprlauncher";
           };
 
@@ -178,7 +178,7 @@ in
           margin: 5px 3px 7px 3px;
         }
 
-        #workspaces button:hover {
+        #custom-launcher:hover, #workspaces button:hover {
           background: ${colors.raised};
         }
 
