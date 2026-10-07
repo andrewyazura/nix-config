@@ -185,6 +185,14 @@ in
               border_inactive = palette.surface;
             };
             groupbar = {
+              gradients = true;
+              gradient_rounding = 0;
+              height = 20;
+              indicator_height = 0;
+              font_family = "Noto Sans CJK JP";
+              font_size = 12;
+              font_weight_active = "medium";
+              font_weight_inactive = "medium";
               text_color = palette.bg;
               text_color_inactive = palette.text;
               col = {
