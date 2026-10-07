@@ -3,6 +3,7 @@
   config,
   pkgs,
   inputs,
+  osConfig,
   ...
 }:
 with lib;
@@ -38,11 +39,11 @@ let
         -size ${size} tile:mpr:cell $out
     '';
 
-  lockUnit = pkgs.writeShellScript "hyprlock-unit" ''
-    host=$(<${"/"}proc/sys/kernel/hostname)
-    host=''${host#yorha}
-    echo "UNIT ''${host^^}"
-  '';
+  launcher = rec {
+    fontSize = 15;
+    rows = 3;
+    height = 45 + rows * (2 * fontSize + 4) + (rows - 1) * 2;
+  };
 
   lockDate = pkgs.writeShellScript "hyprlock-date" ''
     date=$(${pkgs.coreutils}/bin/date +'%A %d %B')
@@ -345,7 +346,7 @@ in
       accent_secondary = ${argb palette.accentAlt}
       rounding_large = 0
       rounding_small = 0
-      font_size = 15
+      font_size = ${toString launcher.fontSize}
       font_family = Noto Sans CJK JP
       font_family_monospace = JetBrainsMono Nerd Font
     '';
@@ -373,7 +374,7 @@ in
             grab_focus = true;
           };
           ui = {
-            window_size = "440, 151";
+            window_size = "440, ${toString launcher.height}";
           };
         };
       };
@@ -444,7 +445,7 @@ in
               valign = "top";
             }
             {
-              text = "cmd[] ${lockUnit}";
+              text = "UNIT ${toUpper (removePrefix "yorha" osConfig.networking.hostName)}";
               color = rgb palette.text;
               font_family = "Noto Sans CJK JP";
               font_size = 20;

@@ -87,6 +87,20 @@ alpha.
 To debug a layer client, run its daemon with `WAYLAND_DEBUG=1` through
 `setsid`. Read the `wl_keyboard` and `wl_pointer` enter events.
 
+## hyprlauncher window height
+
+`launcher.rows` and `launcher.fontSize` in `default.nix` give the height in
+`window_size`. hyprlauncher 0.1.6 builds the window from these parts, in
+`src/ui/UI.cpp` and `src/ui/ResultButton.cpp`:
+
+- Fixed parts: 45 px. These are a 4 px margin at the top and at the bottom,
+  the 28 px input box, a 4 px gap, the 1 px rule and a 4 px gap.
+- Each result row: 2 × font size + 4 px. The row uses the font size in points
+  as logical pixels.
+- Between two rows: a 2 px gap.
+
+With 3 rows at font size 15, the height is 45 + 3 × 34 + 2 × 2 = 151.
+
 ## Direct scanout
 
 Set the instance signature again first. An old shell can point at a dead
