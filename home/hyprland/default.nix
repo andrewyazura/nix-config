@@ -167,8 +167,8 @@ in
               ];
               color = "rgba(00000066)";
             };
-            active_opacity = 0.96;
-            inactive_opacity = 0.96;
+            active_opacity = 1.0;
+            inactive_opacity = 1.0;
           };
 
           dwindle = {
