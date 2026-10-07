@@ -258,7 +258,7 @@ in
                 match = {
                   focus = false;
                 };
-                "hyprbars:title_color" = rgb palette.subtle;
+                "hyprbars:title_color" = rgb palette.text;
               }
             ];
           }
