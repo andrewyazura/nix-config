@@ -156,7 +156,7 @@ in
 
           decoration = {
             rounding = 0;
-            blur.enabled = true;
+            blur.enabled = false;
             shadow = {
               enabled = true;
               sharp = true;
@@ -221,7 +221,6 @@ in
               bar_text_font = "Noto Sans CJK JP";
               bar_text_align = "center";
               bar_part_of_window = true;
-              bar_blur = true;
             };
           };
 
