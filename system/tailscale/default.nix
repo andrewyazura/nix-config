@@ -10,7 +10,11 @@ in
 
   config = lib.mkIf cfg.enable {
     services = {
-      tailscale.enable = true;
+      tailscale = {
+        enable = true;
+        openFirewall = true;
+        extraSetFlags = [ "--netfilter-mode=off" ];
+      };
       openssh.enable = true;
     };
   };
