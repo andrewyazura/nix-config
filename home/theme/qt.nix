@@ -100,6 +100,10 @@ let
       }
       QRadioButton::indicator {
           border-radius: 7px;
+          margin-left: 3px;
+      }
+      QCheckBox:focus, QRadioButton:focus {
+          outline: 1px solid ${subtle};
       }
       QCheckBox::indicator:checked, QAbstractItemView::indicator:checked, QGroupBox::indicator:checked {
           background: ${text};
