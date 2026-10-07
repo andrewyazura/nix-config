@@ -74,6 +74,7 @@
       whisper-cpp = {
         enable = true;
         package = pkgs.whisper-cpp-vulkan;
+        source = "alsa_input.pci-0000_11_00.6.analog-stereo";
       };
     };
   };

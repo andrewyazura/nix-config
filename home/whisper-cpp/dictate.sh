@@ -11,6 +11,6 @@ if [ -f "$pidf" ]; then
   whisper-cli -m "$WHISPER_CPP_MODEL" -f "$wav" -nt -np -l en 2>"$logf" | tr '\n' ' ' | sed 's/^ *//; s/ *$//' | wl-copy
   notify-send whisper "Copied"
 elif [ "${1:-}" != cancel ]; then
-  pw-record --rate 16000 --channels 1 --format s16 "$wav" & echo $! > "$pidf"
+  pw-record ${DICTATE_SOURCE:+--target "$DICTATE_SOURCE"} --rate 16000 --channels 1 --format s16 "$wav" & echo $! > "$pidf"
   notify-send whisper "Listening"
 fi

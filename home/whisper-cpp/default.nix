@@ -18,6 +18,9 @@ let
     ];
     runtimeEnv = {
       WHISPER_CPP_MODEL = "${cfg.model}";
+    }
+    // lib.optionalAttrs (cfg.source != null) {
+      DICTATE_SOURCE = cfg.source;
     };
   };
 in
@@ -33,6 +36,11 @@ in
         hash = "sha256-H8cPd0046xaZk6w5Huo1fvR8iHV+9y7llDh5t+jivGk=";
       };
       description = "ggml model file for whisper-cli";
+    };
+    source = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      default = null;
+      description = "PipeWire node.name of the source to record from; null uses the default source";
     };
   };
 
