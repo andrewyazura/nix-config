@@ -192,6 +192,7 @@
   services = {
     openssh = {
       enable = true;
+      openFirewall = false;
       settings = {
         PermitRootLogin = "no";
         PasswordAuthentication = false;
@@ -217,10 +218,10 @@
   };
 
   networking.firewall.allowedTCPPorts = [
-    22
     80
     443
   ];
+  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ 22 ];
 
   networking.hostName = hostname;
 
