@@ -128,10 +128,10 @@ in
             gaps_out = 10;
             border_size = 1;
             col = {
-              active_border = palette.edge;
-              inactive_border = palette.overlay;
-              nogroup_border = palette.overlay;
-              nogroup_border_active = palette.edge;
+              active_border = palette.text;
+              inactive_border = palette.surface;
+              nogroup_border = palette.surface;
+              nogroup_border_active = palette.text;
             };
 
             no_focus_fallback = true;
@@ -152,7 +152,6 @@ in
                 6
               ];
               color = "rgba(00000066)";
-              color_inactive = "rgba(00000033)";
             };
             active_opacity = 0.96;
             inactive_opacity = 0.96;
