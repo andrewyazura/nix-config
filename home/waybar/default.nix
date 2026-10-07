@@ -8,6 +8,7 @@ with lib;
 let
   cfg = config.modules.waybar;
   colors = import ../../common/colors.nix;
+  gap = "<span letter_spacing='4608'> </span>";
 
   powerMenu = pkgs.writeText "waybar-power-menu.xml" ''
     <?xml version="1.0" encoding="UTF-8"?>
@@ -99,13 +100,13 @@ in
           };
 
           "hyprland/language" = {
-            format = "󰌌 {}";
+            format = "󰌌${gap}{}";
             format-en = "EN";
             format-uk = "UA";
           };
 
           "clock" = {
-            format = "󰥔 {:%a %d %b %H:%M}";
+            format = "󰥔${gap}{:%a %d %b %H:%M}";
             tooltip-format = ''
               <big>{:%Y %B}</big>
               <tt><small>{calendar}</small></tt>'';
@@ -117,8 +118,8 @@ in
           };
 
           "pulseaudio" = {
-            format = "󰕾 {volume}%";
-            format-muted = "󰖁 MUTED";
+            format = "󰕾${gap}{volume}%";
+            format-muted = "󰖁${gap}MUTED";
             on-click = "pwvucontrol";
           };
 
@@ -126,7 +127,7 @@ in
             interface = "wlp4s0";
             format-wifi = "󰖩";
             format-ethernet = "󰈀";
-            format-disconnected = "󰤭 NOT CONNECTED";
+            format-disconnected = "󰤭${gap}NOT CONNECTED";
             tooltip-format = "{essid}\n{ipaddr}\n{bandwidthDownBytes} down";
           };
         };
