@@ -134,7 +134,7 @@ in
         * {
           border: none;
           border-radius: 0;
-          font-family: "Noto Sans CJK JP", "JetBrainsMono Nerd Font";
+          font-family: "Noto Sans CJK JP", "JetBrainsMono Nerd Font Propo";
           font-size: 15px;
           min-height: 0;
         }
