@@ -15,6 +15,7 @@ in
       "bitwarden"
       "chatgpt"
       "claude"
+      "crmne/tap/spotifast"
       "discord"
       "ghostty"
       "google-chrome"
@@ -24,7 +25,6 @@ in
       "obsidian"
       "signal"
       "slack"
-      "spotify"
       "telegram"
     ];
   };
