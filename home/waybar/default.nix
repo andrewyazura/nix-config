@@ -139,7 +139,7 @@ in
             interface = "wlp4s0";
             format-wifi = "󰖩 {essid} {bandwidthDownBytes}";
             format-ethernet = "󰈀 {ifname} {bandwidthDownBytes}";
-            format-disconnected = "󰤭 not connected";
+            format-disconnected = "󰤭 NOT CONNECTED";
             tooltip-format = "{ipaddr}";
           };
         };
@@ -187,7 +187,7 @@ in
           color: ${colors.bg};
         }
 
-        #workspaces button.urgent {
+        #workspaces button.urgent, #network.disconnected {
           background: ${colors.red};
           color: ${colors.bg};
         }
@@ -204,10 +204,6 @@ in
 
         #custom-power {
           margin-right: 6px;
-        }
-
-        #network.disconnected {
-          color: ${colors.red};
         }
 
         #pulseaudio.muted {
