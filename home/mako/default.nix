@@ -19,13 +19,14 @@ in
       settings = {
         anchor = "top-right";
         layer = "overlay";
-        margin = 8;
+        margin = "0,10,10";
+        outer-margin = "-1,0,0";
         padding = 12;
         width = 380;
         height = 160;
         default-timeout = 5000;
 
-        font = "Noto Sans CJK JP, JetBrainsMono Nerd Font 11";
+        font = "Noto Sans CJK JP 11";
         background-color = "${colors.bg}f0";
         text-color = colors.text;
         border-color = colors.text;
@@ -35,7 +36,7 @@ in
 
         icons = true;
         max-icon-size = 48;
-        format = "<span color='${colors.subtle}'>󰍡 %a</span>\\n<b>%s</b>\\n%b";
+        format = "<span color='${colors.subtle}'>%a</span>\\n<b>%s</b>\\n%b";
 
         "urgency=low".text-color = colors.subtle;
 
