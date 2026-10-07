@@ -16,8 +16,8 @@ let
     layout=$(echo "$keyboard" | ${pkgs.jq}/bin/jq -r '.layout' | cut -d, -f$((index + 1)))
 
     case "$layout" in
-      us) text="🇬🇧 en" ;;
-      ua) text="🇺🇦 ua" ;;
+      us) text="󰌌 EN" ;;
+      ua) text="󰌌 UA" ;;
       *) text="$layout" ;;
     esac
 
@@ -71,10 +71,7 @@ in
         mainBar = {
           layer = "top";
           position = "top";
-          height = 32;
-          margin-top = 5;
-          margin-left = 8;
-          margin-right = 8;
+          height = 35;
           modules-left = [
             "custom/launcher"
             "ext/workspaces"
@@ -90,7 +87,7 @@ in
           ];
 
           "custom/launcher" = {
-            format = "";
+            format = "YoRHa";
             tooltip = false;
             on-click = "hyprlauncher";
           };
@@ -122,33 +119,28 @@ in
           };
 
           "clock" = {
-            format = "{:%A, %B %d %H:%M}";
+            format = "󰥔 {:%a %d %b %H:%M}";
             tooltip-format = ''
               <big>{:%Y %B}</big>
               <tt><small>{calendar}</small></tt>'';
           };
 
           "pulseaudio" = {
-            format = "{icon} {volume}%";
-            format-muted = "🔇 muted";
-            format-icons = [
-              "🔈"
-              "🔉"
-              "🔊"
-            ];
+            format = "󰕾 {volume}%";
+            format-muted = "󰖁 MUTED";
             on-click = "pavucontrol";
           };
 
           "network" = {
             interface = "wlp4s0";
-            format-wifi = "{essid} {bandwidthDownBytes}";
+            format-wifi = "󰖩 {essid} {bandwidthDownBytes}";
             format-ethernet = "󰈀 {ifname} {bandwidthDownBytes}";
             format-disconnected = "󰤭 not connected";
             tooltip-format = "{ipaddr}";
           };
 
           "battery" = {
-            format = "🔋 {capacity}%";
+            format = "󰁹 {capacity}%";
           };
         };
       };
@@ -157,57 +149,41 @@ in
         * {
           border: none;
           border-radius: 0;
-          font-family: "JetBrainsMono Nerd Font";
-          font-size: 16px;
+          font-family: "Noto Sans CJK JP", "JetBrainsMono Nerd Font";
+          font-size: 15px;
           min-height: 0;
         }
 
         window#waybar {
-          background: transparent;
+          background: alpha(${colors.surface}, 0.94);
+          border-bottom: 1px solid ${colors.text};
           color: ${colors.text};
         }
 
-        #custom-launcher, #workspaces, #custom-keyboard-layout, #network, #pulseaudio, #clock, #battery, #custom-power {
-          background: alpha(${colors.surface}, 0.9);
-          border: 1px solid ${colors.overlay};
-          border-radius: 8px;
-        }
-
-        #workspaces {
-          padding: 1px;
-          margin: 4px 0;
-        }
-
-        #custom-keyboard-layout, #network, #pulseaudio, #clock, #battery, #custom-power {
-          padding: 0 10px;
-          margin: 4px 3px;
-          color: ${colors.subtle};
+        #custom-launcher, #workspaces button {
+          background: ${colors.bg};
+          color: ${colors.text};
+          box-shadow: 3px 3px 0 alpha(black, 0.42);
         }
 
         #custom-launcher {
-          padding: 0 15px 0 9px;
-          margin: 4px 3px 4px 6px;
-          color: ${colors.accent};
-        }
-
-        #custom-power {
-          margin-right: 6px;
+          padding: 0 14px;
+          margin: 5px 10px 7px 8px;
+          font-weight: 500;
+          letter-spacing: 2px;
         }
 
         #workspaces button {
-          padding: 0 8px;
-          border-radius: 6px;
-          background: transparent;
-          color: ${colors.muted};
+          padding: 0 12px;
+          margin: 5px 3px 7px 3px;
         }
 
         #workspaces button:hover {
-          background: ${colors.overlay};
-          color: ${colors.text};
+          background: ${colors.raised};
         }
 
         #workspaces button.active {
-          background: ${colors.accent};
+          background: ${colors.text};
           color: ${colors.bg};
         }
 
@@ -216,8 +192,18 @@ in
           color: ${colors.bg};
         }
 
-        #network {
-          color: ${colors.accent};
+        #custom-keyboard-layout, #network, #pulseaudio, #clock, #battery, #custom-power {
+          padding: 0 10px;
+          color: ${colors.text};
+          letter-spacing: 1px;
+        }
+
+        #clock {
+          font-weight: 500;
+        }
+
+        #custom-power {
+          margin-right: 6px;
         }
 
         #network.disconnected {
@@ -225,7 +211,7 @@ in
         }
 
         #pulseaudio.muted {
-          color: ${colors.muted};
+          color: ${colors.subtle};
         }
 
         #battery.warning {
@@ -237,19 +223,17 @@ in
         }
 
         menu {
-          background: ${colors.surface};
-          border: 1px solid ${colors.overlay};
-          border-radius: 8px;
+          background: ${colors.bg};
+          border: 1px solid ${colors.text};
           color: ${colors.text};
         }
 
         menuitem {
           padding: 4px 12px;
-          border-radius: 6px;
         }
 
         menuitem:hover {
-          background: ${colors.accent};
+          background: ${colors.text};
           color: ${colors.bg};
         }
       '';

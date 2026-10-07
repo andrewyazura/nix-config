@@ -25,17 +25,17 @@ in
         height = 160;
         default-timeout = 5000;
 
-        font = "Inter 11";
-        background-color = "${colors.surface}e6";
+        font = "Noto Sans CJK JP, JetBrainsMono Nerd Font 11";
+        background-color = "${colors.bg}f0";
         text-color = colors.text;
-        border-color = colors.accent;
+        border-color = colors.text;
         border-size = 1;
-        border-radius = 10;
-        progress-color = "over ${colors.accent}";
+        border-radius = 0;
+        progress-color = "over ${colors.raised}";
 
         icons = true;
         max-icon-size = 48;
-        format = "<span color='${colors.subtle}'>%a</span>\\n<b>%s</b>\\n%b";
+        format = "<span color='${colors.subtle}'>󰍡 %a</span>\\n<b>%s</b>\\n%b";
 
         "urgency=low".text-color = colors.subtle;
 

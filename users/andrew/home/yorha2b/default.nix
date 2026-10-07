@@ -4,8 +4,7 @@
     anki.enable = true;
     cs2.enable = true;
     ghostty = {
-      fontSize = 9;
-      backgroundOpacity = 0.8;
+      backgroundOpacity = 0.9;
     };
     profiles = {
       development.enable = true;

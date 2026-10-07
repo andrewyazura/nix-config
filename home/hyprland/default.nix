@@ -19,6 +19,25 @@ let
 
   binds = import ./binds.nix { inherit lib; };
 
+  mkGrid =
+    size:
+    pkgs.runCommand "yorha-grid-${size}.png" { nativeBuildInputs = [ pkgs.imagemagick ]; } ''
+      magick -size 12x12 xc:'${palette.raised}' -fill '${palette.surface}' \
+        -draw 'rectangle 1,1 11,11' -write mpr:cell +delete \
+        -size ${size} tile:mpr:cell $out
+    '';
+
+  lockUnit = pkgs.writeShellScript "hyprlock-unit" ''
+    host=$(<${"/"}proc/sys/kernel/hostname)
+    host=''${host#yorha}
+    echo "UNIT ''${host^^}"
+  '';
+
+  lockDate = pkgs.writeShellScript "hyprlock-date" ''
+    date=$(${pkgs.coreutils}/bin/date +'%A %d %B')
+    echo "<span letter_spacing='6144'>''${date^^}</span>"
+  '';
+
   wallpapers = {
     starfield-noise = toString ./wallpapers/starfield-noise.jpg;
     candle-circle-bonfire = toString ./wallpapers/candle-circle-bonfire.png;
@@ -26,6 +45,7 @@ let
     cyberpunk-skyline = toString ./wallpapers/cyberpunk-skyline.jpg;
     earthrise-duo = toString ./wallpapers/earthrise-duo.png;
     overwatch-yorha = toString ./wallpapers/overwatch-yorha.png;
+    yorha-grid = toString (mkGrid "12x12");
   };
 in
 {
@@ -79,7 +99,7 @@ in
         wallpaper = map (o: {
           monitor = o.output;
           path = wallpapers.${cfg.wallpaper};
-          fit_mode = "fill";
+          fit_mode = if cfg.wallpaper == "yorha-grid" then "tile" else "fill";
         }) cfg.output;
       };
     };
@@ -108,10 +128,10 @@ in
             gaps_out = 10;
             border_size = 1;
             col = {
-              active_border = palette.accent;
+              active_border = palette.edge;
               inactive_border = palette.overlay;
               nogroup_border = palette.overlay;
-              nogroup_border_active = palette.accent;
+              nogroup_border_active = palette.edge;
             };
 
             no_focus_fallback = true;
@@ -121,17 +141,21 @@ in
           };
 
           decoration = {
-            rounding = 10;
-            rounding_power = 4.0;
+            rounding = 0;
             blur.enabled = true;
-            shadow.enabled = false;
-            active_opacity = 0.9;
-            inactive_opacity = 0.9;
-            glow = {
+            shadow = {
               enabled = true;
-              color = palette.accent;
-              color_inactive = "rgba(00000000)";
+              sharp = true;
+              range = 0;
+              offset = [
+                6
+                6
+              ];
+              color = "rgba(00000066)";
+              color_inactive = "rgba(00000033)";
             };
+            active_opacity = 0.96;
+            inactive_opacity = 0.96;
           };
 
           dwindle = {
@@ -144,12 +168,12 @@ in
 
           group = {
             col = {
-              border_active = palette.accent;
+              border_active = palette.edge;
               border_inactive = palette.overlay;
             };
             groupbar = {
               col = {
-                active = palette.accent;
+                active = palette.text;
                 inactive = palette.surface;
               };
             };
@@ -171,7 +195,7 @@ in
               bar_color = palette.surface;
               bar_text_size = 12;
               bar_text_weight = "medium";
-              bar_text_font = "JetBrainsMono Nerd Font";
+              bar_text_font = "Noto Sans CJK JP";
               bar_text_align = "center";
               bar_part_of_window = true;
               bar_blur = true;
@@ -223,7 +247,8 @@ in
                 match = {
                   focus = true;
                 };
-                "hyprbars:title_color" = rgb palette.accent;
+                "hyprbars:bar_color" = rgb palette.text;
+                "hyprbars:title_color" = rgb palette.bg;
               }
             ];
           }
@@ -233,7 +258,7 @@ in
                 match = {
                   focus = false;
                 };
-                "hyprbars:title_color" = rgb palette.muted;
+                "hyprbars:title_color" = rgb palette.subtle;
               }
             ];
           }
@@ -299,16 +324,16 @@ in
 
     xdg.configFile."hypr/hyprtoolkit.conf".text = ''
       background = ${argb palette.bg}
-      base = ${argb palette.surface}
-      alternate_base = ${argb palette.raised}
+      base = ${argb palette.bg}
+      alternate_base = ${argb palette.surface}
       text = ${argb palette.text}
       bright_text = ${argb palette.bright}
       link_text = ${argb palette.blue}
-      accent = ${argb palette.accent}
+      accent = ${argb palette.text}
       accent_secondary = ${argb palette.accentAlt}
-      rounding_large = 10
-      rounding_small = 5
-      font_family = Inter
+      rounding_large = 0
+      rounding_small = 0
+      font_family = Noto Sans CJK JP
       font_family_monospace = JetBrainsMono Nerd Font
     '';
 
@@ -345,34 +370,82 @@ in
           };
 
           background = [
-            { color = rgb palette.bg; }
+            { color = rgb palette.surface; }
+          ]
+          ++ concatMap (
+            o:
+            let
+              size = builtins.match "([0-9]+x[0-9]+)@.*" o.mode;
+            in
+            optional (size != null) {
+              monitor = o.output;
+              path = "${mkGrid (head size)}";
+            }
+          ) cfg.output;
+
+          shape = [
+            {
+              size = "92%, 1";
+              color = rgb palette.text;
+              position = "0, -9%";
+              halign = "center";
+              valign = "top";
+            }
           ];
 
           input-field = [
             {
-              size = "320, 48";
-              position = "0, -80";
+              size = "420, 56";
+              position = "0, -90";
               halign = "center";
               valign = "center";
-              rounding = 4;
+              rounding = 0;
               outline_thickness = 2;
-              outer_color = rgb palette.accent;
-              inner_color = rgb palette.surface;
+              outer_color = rgb palette.text;
+              inner_color = rgb palette.bg;
               font_color = rgb palette.text;
+              font_family = "Noto Sans CJK JP, JetBrainsMono Nerd Font";
               check_color = rgb palette.accentAlt;
               fail_color = rgb palette.red;
-              placeholder_text = "";
+              placeholder_text = "<span foreground='##${removePrefix "#" palette.subtle}' letter_spacing='3072'>󰌾  ENTER ACCESS CODE</span>";
               fade_on_empty = false;
             }
           ];
 
           label = [
             {
+              text = "YoRHa";
+              color = rgb palette.text;
+              font_family = "Noto Sans CJK JP";
+              font_size = 20;
+              position = "4%, -5%";
+              halign = "left";
+              valign = "top";
+            }
+            {
+              text = "cmd[] ${lockUnit}";
+              color = rgb palette.text;
+              font_family = "Noto Sans CJK JP";
+              font_size = 20;
+              position = "-4%, -5%";
+              halign = "right";
+              valign = "top";
+            }
+            {
               text = "$TIME";
               color = rgb palette.text;
-              font_family = "Inter";
-              font_size = 96;
-              position = "0, 80";
+              font_family = "Noto Sans CJK JP Light";
+              font_size = 120;
+              position = "0, 110";
+              halign = "center";
+              valign = "center";
+            }
+            {
+              text = "cmd[update:60000] ${lockDate}";
+              color = rgb palette.text;
+              font_family = "Noto Sans CJK JP";
+              font_size = 18;
+              position = "0, 0";
               halign = "center";
               valign = "center";
             }
