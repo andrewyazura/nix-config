@@ -14,7 +14,7 @@ if [ -f "$pidf" ]; then
   fi
   notify -t 0 Transcribing "The text goes to the clipboard"
   text=$(whisper-cli -m "$WHISPER_CPP_MODEL" -f "$wav" -nt -np -l en 2>"$logf" | tr '\n' ' ' | sed 's/^ *//; s/ *$//')
-  if [ -z "$(sed 's/\[BLANK_AUDIO\]//g; s/ //g' <<<"$text")" ]; then
+  if ! grep -q '[[:alnum:]]' <<<"${text//"[BLANK_AUDIO]"/}"; then
     notify "Nothing heard" "Clipboard unchanged"
   else
     printf '%s' "$text" | wl-copy
