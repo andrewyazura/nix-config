@@ -46,6 +46,8 @@ in
   };
 
   config = mkIf cfg.enable {
+    home.packages = [ pkgs.pwvucontrol ];
+
     programs.waybar = {
       enable = true;
       systemd = {
@@ -117,7 +119,7 @@ in
           "pulseaudio" = {
             format = "󰕾 {volume}%";
             format-muted = "󰖁 MUTED";
-            on-click = "pavucontrol";
+            on-click = "pwvucontrol";
           };
 
           "network" = {
