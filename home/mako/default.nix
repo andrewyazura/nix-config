@@ -26,7 +26,7 @@ in
         default-timeout = 5000;
 
         font = "Noto Sans CJK JP 11";
-        background-color = "${colors.bg}f0";
+        background-color = colors.bg;
         text-color = colors.text;
         border-color = colors.text;
         border-size = 1;
