@@ -17,6 +17,10 @@ in
       enable = true;
       openFirewall = true;
       capSysAdmin = true;
+      settings = {
+        capture = "kms";
+        csrf_allowed_origins = "https://100.125.181.10:47990";
+      };
     };
 
     services.udev.extraRules = ''
