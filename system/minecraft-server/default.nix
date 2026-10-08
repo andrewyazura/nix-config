@@ -238,6 +238,7 @@ in
           SystemCallFilter = [
             "@system-service"
             "~@privileged"
+            "@chown"
           ];
           UMask = "0077";
         };
