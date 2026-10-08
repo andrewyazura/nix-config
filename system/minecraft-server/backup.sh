@@ -8,7 +8,7 @@ set -euo pipefail
 # - RCLONE_SECRET_CONFIG (optional, path to read-only sops secret)
 
 DATA_DIR="/srv/minecraft/$SERVER_NAME"
-BACKUP_DIR="/tmp/minecraft-backup-$SERVER_NAME"
+BACKUP_DIR="${STATE_DIRECTORY:-/tmp/minecraft-backup-$SERVER_NAME}"
 DATE=$(date +%Y-%m-%d_%H-%M-%S)
 BACKUP_FILE="$BACKUP_DIR/${SERVER_NAME}_backup_${DATE}.tar"
 
