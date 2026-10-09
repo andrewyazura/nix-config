@@ -143,11 +143,11 @@
         "uv2nix": "uv2nix_2"
       },
       "locked": {
-        "lastModified": 1761335568,
-        "narHash": "sha256-U1zG0oHth5BT8PKRe0PoYKMLnIGOox1M8ZbnGSUOS/M=",
+        "lastModified": 1791485893,
+        "narHash": "sha256-vQy1bBVHFXOrCwGEF/5Dp88lBIFmJrzDLrK1hjpxcIg=",
         "owner": "orehzzz",
         "repo": "birthday-telegram-bot",
-        "rev": "35870137eb20dd1b0a30248873ff0c044ad83169",
+        "rev": "3491ad872299e5ad76d7b6983a2e4298ed47fe5d",
         "type": "github"
       },
       "original": {
