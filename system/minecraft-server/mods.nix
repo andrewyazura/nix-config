@@ -25,4 +25,12 @@ with pkgs;
     url = "https://cdn.modrinth.com/data/aZj58GfX/versions/Qd0CWVQP/easyauth-mc26.3-3.4.4.jar";
     sha512 = "2mvwc08lngys0dvd0cwgyvfp6ydbj0d3gzz1nqndv48j46ygifgmxxcfr48hwygnchk5bv9gmpsxcjkpmsg8lq0n4kn9r5xdpl3p6l4";
   };
+  "c2me" = fetchurl {
+    url = "https://cdn.modrinth.com/data/VSNURh3q/versions/ODMLK8M9/c2me-fabric-mc26.3-0.4.2-alpha.0.90.jar";
+    sha512 = "37c58cys5ysjjv42mz1w04vsf1ibrkk2dwgqr7r4q7xgi4z3c0x2rxwagxbmnnfk3ph0044c9snck95pdfnh5sf5h0fxdr2mnyhw56h";
+  };
+  "scalablelux" = fetchurl {
+    url = "https://cdn.modrinth.com/data/Ps1zyz6x/versions/g4eqNSKd/ScalableLux-fabric-mc26.3-0.3.0-alpha.0.6-all.jar";
+    sha512 = "34wqs8mmp2kzxs3zf7d31qs2igg4qjfdbf9ix77k7xxpj2fk4i9b016nrkxbirrz5nz3pr8pcypfl40p6lpq51vyg0q3ar0zcwskmfy";
+  };
 }

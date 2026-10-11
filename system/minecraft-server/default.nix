@@ -117,6 +117,7 @@ in
             bombas = {
               serverProperties = {
                 motd = "[26.3] \\u00A7a\\u00A7l8 let dambili\\u00A7r\\u00A7r";
+                view-distance = 16;
               };
 
               symlinks = {
