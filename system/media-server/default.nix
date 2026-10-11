@@ -251,9 +251,14 @@ in
           serviceConfig.CPUSchedulingPolicy = "idle";
         }))
         {
-          qbittorrent.vpnConfinement = {
-            enable = true;
-            vpnNamespace = "proton";
+          qbittorrent = {
+            vpnConfinement = {
+              enable = true;
+              vpnNamespace = "proton";
+            };
+            serviceConfig.ExecStartPre = [
+              "${pkgs.coreutils}/bin/rm -f ${config.services.qbittorrent.profileDir}/qBittorrent/config/lockfile"
+            ];
           };
 
           qbittorrent-natpmp = {
