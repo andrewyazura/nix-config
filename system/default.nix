@@ -12,7 +12,6 @@
     ./hyprland
     ./i3
     ./logitech-g920
-    ./logitech-pro-x-2
     ./media-server
     ./minecraft-server
     ./networking
