@@ -87,7 +87,8 @@ in
           BitTorrent.Session = {
             DefaultSavePath = "${cfg.dataDir}/torrents";
             DisableAutoTMMByDefault = false;
-            QueueingSystemEnabled = false;
+            QueueingSystemEnabled = true;
+            IgnoreSlowTorrentsForQueueing = true;
             AlternativeGlobalDLSpeedLimit = 5120;
             AlternativeGlobalUPSpeedLimit = 1024;
             DiskIOType = "Posix";
