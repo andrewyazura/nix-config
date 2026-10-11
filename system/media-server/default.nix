@@ -91,6 +91,7 @@ in
             IgnoreSlowTorrentsForQueueing = true;
             AlternativeGlobalDLSpeedLimit = 5120;
             AlternativeGlobalUPSpeedLimit = 1024;
+            GlobalDLSpeedLimit = 24576;
             DiskIOType = "Posix";
             GlobalMaxRatio = 2;
             GlobalMaxSeedingMinutes = 43200;
