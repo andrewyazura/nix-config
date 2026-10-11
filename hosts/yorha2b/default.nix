@@ -18,6 +18,7 @@
     gnome.enable = false;
     hyprland.enable = true;
     logitech-g920.enable = true;
+    logitech-pro-x-2.enable = true;
 
     media-server = {
       enable = true;
