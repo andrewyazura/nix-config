@@ -137,6 +137,14 @@
     jellyfin.hardwareAcceleration.device = "/dev/dri/by-path/pci-0000:11:00.0-render";
   };
 
+  systemd.services.jellyfin = {
+    environment.ROCR_VISIBLE_DEVICES = "1";
+    serviceConfig.DeviceAllow = [
+      "/dev/kfd rw"
+      "/dev/dri/by-path/pci-0000:03:00.0-render rw"
+    ];
+  };
+
   programs.gamemode.settings.gpu = {
     apply_gpu_optimisations = "accept-responsibility";
     gpu_device = 1;
@@ -147,6 +155,8 @@
     enable = true;
     enable32Bit = true;
   };
+
+  hardware.amdgpu.opencl.enable = true;
 
   virtualisation.podman.enable = true;
 
