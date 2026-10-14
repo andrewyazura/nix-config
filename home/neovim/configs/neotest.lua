@@ -5,7 +5,6 @@ neotest.setup({
 		require("neotest-python")({
 			runner = "pytest",
 		}),
-		require("neotest-gradle"),
 	},
 })
 

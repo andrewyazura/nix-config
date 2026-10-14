@@ -826,22 +826,6 @@
         "type": "github"
       }
     },
-    "neotest-gradle-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1772014894,
-        "narHash": "sha256-3px68aXmP0wAUwDQ8TyH4RMgAgNWt5ETiVOouYnukm8=",
-        "owner": "andrewyazura",
-        "repo": "neotest-gradle",
-        "rev": "5845d76ab22641770f7b2cdd5be49b93a822d0b6",
-        "type": "github"
-      },
-      "original": {
-        "owner": "andrewyazura",
-        "repo": "neotest-gradle",
-        "type": "github"
-      }
-    },
     "nix-darwin": {
       "inputs": {
         "nixpkgs": [
@@ -1330,7 +1314,6 @@
         "hyprland": "hyprland",
         "hyprland-plugins": "hyprland-plugins",
         "llm-agents": "llm-agents",
-        "neotest-gradle-src": "neotest-gradle-src",
         "nix-darwin": "nix-darwin",
         "nix-minecraft": "nix-minecraft",
         "nixos-hardware": "nixos-hardware",

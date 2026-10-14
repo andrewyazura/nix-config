@@ -2,22 +2,13 @@
   lib,
   config,
   pkgs,
-  inputs,
   ...
 }:
 with lib;
 let
   cfg = config.modules.neovim;
-  neotest-gradle = pkgs.vimUtils.buildVimPlugin {
-    pname = "neotest-gradle";
-    version = "unstable";
-    src = inputs.neotest-gradle-src;
-    dependencies = with pkgs.vimPlugins; [
-      neotest
-      nvim-nio
-      plenary-nvim
-    ];
-  };
+  kotlin-lsp =
+    if pkgs.stdenv.hostPlatform.isLinux then import ./kotlin-lsp.nix { inherit pkgs; } else null;
 in
 {
   options.modules.neovim = {
@@ -42,27 +33,30 @@ in
       withRuby = false;
       withPython3 = false;
 
-      extraPackages = with pkgs; [
-        # tools
-        fd
-        ripgrep
-        tree-sitter
+      extraPackages =
+        with pkgs;
+        [
+          # tools
+          fd
+          ripgrep
+          tree-sitter
 
-        # formatters
-        ktfmt
-        nixfmt
-        prettier
-        ruff
-        stylua
+          # formatters
+          ktfmt
+          nixfmt
+          prettier
+          ruff
+          stylua
 
-        # lsp servers
-        gopls
-        lua-language-server
-        nil
-        ty
-        typescript-language-server
-        zls
-      ];
+          # lsp servers
+          gopls
+          lua-language-server
+          nil
+          ty
+          typescript-language-server
+          zls
+        ]
+        ++ lib.optional (kotlin-lsp != null) kotlin-lsp;
 
       plugins = with pkgs.vimPlugins; [
         {
@@ -109,7 +103,6 @@ in
           config = builtins.readFile ./configs/neotest.lua;
         }
         neotest-python # for neotest
-        neotest-gradle # for neotest
 
         {
           plugin = nvim-autopairs;

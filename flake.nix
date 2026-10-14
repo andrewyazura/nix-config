@@ -45,11 +45,6 @@
       inputs.hyprland.follows = "hyprland";
     };
 
-    neotest-gradle-src = {
-      url = "github:andrewyazura/neotest-gradle";
-      flake = false;
-    };
-
     spotifast = {
       url = "github:crmne/spotifast/v0.13.0";
       inputs.nixpkgs.follows = "nixpkgs";
