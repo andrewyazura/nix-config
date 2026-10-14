@@ -64,7 +64,6 @@
     ghostty.url = "github:ghostty-org/ghostty";
     llm-agents.url = "github:numtide/llm-agents.nix";
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
-    nixpkgs-26-05.url = "github:nixos/nixpkgs/nixos-26.05";
     private-config.url = "git+ssh://git@github.com/andrewyazura/private-nix-config.git";
     stresses-bot-app.url = "git+ssh://git@github.com/yaroslavpashynskyi/stresses-bot-nix.git";
     vpn-confinement.url = "github:Maroka-chan/VPN-Confinement";
