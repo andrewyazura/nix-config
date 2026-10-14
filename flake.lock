@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1790357911,
-        "narHash": "sha256-cQUSMvhtkvPBx+FB27l65B/wtTwAYUV8hQOG2roDq7s=",
+        "lastModified": 1791741963,
+        "narHash": "sha256-QMTAhieadrLxXoBUGshMMW7GFl1TCWQ19UrpmnPnxRk=",
         "owner": "ankimcp",
         "repo": "anki-mcp-server-addon",
-        "rev": "a9bfedc05533f4c5c6fb7b619e3863a72fad8358",
+        "rev": "b67c914b4560944b095eb58a94c4e9b821a72128",
         "type": "github"
       },
       "original": {
@@ -397,11 +397,11 @@
         "zon2nix": "zon2nix"
       },
       "locked": {
-        "lastModified": 1788461685,
-        "narHash": "sha256-vaxpmLbSy9hTu1dqsMsxeWUi5X9kUQIp1r4zxkD00dI=",
+        "lastModified": 1791932430,
+        "narHash": "sha256-N1WgE5B2bIJMIJ/XNfajqZwFTf9pacpryqk9Ipsc6Bs=",
         "owner": "ghostty-org",
         "repo": "ghostty",
-        "rev": "07bccf7a311acdfa6afc77f2016160d49b1f1982",
+        "rev": "81598385d608dda4946093d6d6a234d204a2f225",
         "type": "github"
       },
       "original": {
@@ -1724,16 +1724,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1784080626,
-        "narHash": "sha256-Hvnmnuu0VpHiZl+8z+UkMoxC7JZJvRYBqu2Asb0ZJOE=",
+        "lastModified": 1790583033,
+        "narHash": "sha256-Eo3hR521Yc2Gsqw7m/aqd5sn3/qi0XoSpJBIPPIYKkg=",
         "owner": "jcollie",
         "repo": "zon2nix",
-        "rev": "776b5f6864a607c141d7966421b433fa1657ba9a",
+        "rev": "8e91c0d44aa49d0ac415f7e3046662e9aa754335",
         "type": "github"
       },
       "original": {
         "owner": "jcollie",
-        "ref": "main",
+        "ref": "v0.9.0",
         "repo": "zon2nix",
         "type": "github"
       }
