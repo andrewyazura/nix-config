@@ -7,8 +7,6 @@
 with lib;
 let
   cfg = config.modules.neovim;
-  kotlin-lsp =
-    if pkgs.stdenv.hostPlatform.isLinux then import ./kotlin-lsp.nix { inherit pkgs; } else null;
 in
 {
   options.modules.neovim = {
@@ -56,7 +54,7 @@ in
           typescript-language-server
           zls
         ]
-        ++ lib.optional (kotlin-lsp != null) kotlin-lsp;
+        ++ lib.optional pkgs.stdenv.hostPlatform.isLinux (import ./kotlin-lsp.nix { inherit pkgs; });
 
       plugins = with pkgs.vimPlugins; [
         {
