@@ -46,9 +46,11 @@ let
     RecFormat2=hybrid_mp4
     RecEncoder=hevc_ffmpeg_vaapi_tex
     RecAudioEncoder=libfdk_aac
-    RecTracks=1
+    RecTracks=7
     RecUseRescale=false
     Track1Bitrate=320
+    Track2Bitrate=320
+    Track3Bitrate=320
 
     [Video]
     BaseCX=2560
@@ -73,7 +75,13 @@ in
   };
 
   config = mkIf cfg.enable {
-    programs.obs-studio.enable = true;
+    programs.obs-studio = {
+      enable = true;
+      plugins = with pkgs.obs-studio-plugins; [
+        obs-vkcapture
+        obs-pipewire-audio-capture
+      ];
+    };
 
     home.packages = with pkgs; [
       libva-utils
