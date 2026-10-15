@@ -90,7 +90,7 @@ in
             QueueingSystemEnabled = true;
             IgnoreSlowTorrentsForQueueing = true;
             MaxActiveDownloads = 6;
-            MaxActiveTorrents = 9;
+            MaxActiveTorrents = -1;
             AlternativeGlobalDLSpeedLimit = 5120;
             AlternativeGlobalUPSpeedLimit = 1024;
             GlobalDLSpeedLimit = 24576;
