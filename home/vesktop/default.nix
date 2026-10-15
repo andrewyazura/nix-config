@@ -24,18 +24,24 @@ in
         '';
       });
 
+      mutableSettings = true;
       settings = {
-        arRPC = true;
-        audio.workaround = true;
+        arRPC = false;
+        audio.workaround = false;
         discordBranch = "stable";
         hardwareAcceleration = true;
-        minimizeToTray = true;
-        spellCheckLanguages = [
-          "en-US"
-          "en"
-        ];
+        minimizeToTray = false;
         splashBackground = "rgb(0, 0, 0)";
         splashColor = "rgb(220, 220, 223)";
+      };
+
+      vencord = {
+        mutableSettings = true;
+        settings.plugins = {
+          FakeNitro.enabled = true;
+          VolumeBooster.enabled = true;
+          WebScreenShareFixes.enabled = true;
+        };
       };
     };
   };
