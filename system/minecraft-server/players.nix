@@ -61,7 +61,8 @@ let
     )
     (mkPlayer "GameMax" "e249f570-bf3b-3ff3-aa8a-12a5909698ca" "c0f697f2-8300-4725-ab4e-9de702b5fc21" 0
       false
-    ) # TODO: delete
+    )
+    (mkPlayer "MAKGREEN" "7a40695f-ff71-37c4-be95-af4e7ce70e24" "" 0 false)
   ];
 in
 {
