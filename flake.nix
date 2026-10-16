@@ -138,6 +138,11 @@
         system: nixpkgs.legacyPackages.${system}.nixfmt-tree
       );
 
+      apps.x86_64-linux.deploy-rs = {
+        type = "app";
+        program = "${nixpkgs.legacyPackages.x86_64-linux.deploy-rs}/bin/deploy";
+      };
+
       checks = {
         x86_64-linux = {
           yorha2b = self.nixosConfigurations.yorha2b.config.system.build.toplevel;

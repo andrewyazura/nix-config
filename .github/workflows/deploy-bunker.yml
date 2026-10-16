@@ -36,7 +36,7 @@ jobs:
 
       - name: Configure SSH for bunker
         run: |
-          echo "${{ secrets.BUNKER_HOST }} ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEsVdIcP8vUWDXLCvRWuVoHrd9oggAgB+nHT2D84pFM+" >> ~/.ssh/known_hosts
+          echo "${{ secrets.BUNKER_HOST }} $(cat hosts/bunker/ssh_host_ed25519_key.pub)" >> ~/.ssh/known_hosts
           printf 'Host bunker\n  HostName %s\n  StrictHostKeyChecking yes\n' "${{ secrets.BUNKER_HOST }}" >> ~/.ssh/config
 
       - name: Setup Attic
@@ -67,4 +67,4 @@ jobs:
 
       - name: Deploy to bunker
         if: github.event_name == 'workflow_dispatch' || steps.check.outputs.changed == 'true'
-        run: nix run "github:serokell/deploy-rs/$(jq -r '.nodes["deploy-rs"].locked.rev' flake.lock)" -- .#bunker --ssh-user deploy --skip-checks
+        run: nix run .#deploy-rs -- .#bunker --ssh-user deploy --skip-checks
