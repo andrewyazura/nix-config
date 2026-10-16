@@ -40,50 +40,6 @@ let
       done
     '';
   };
-
-  qbittorrentStalled = pkgs.writeShellApplication {
-    name = "qbittorrent-stalled";
-    runtimeInputs = with pkgs; [
-      curl
-      jq
-    ];
-    text = ''
-      qbittorrent=http://${config.vpnNamespaces.proton.namespaceAddress}:${toString config.services.qbittorrent.webuiPort}/api/v2
-      state=$STATE_DIRECTORY/state.json
-      now=$(date +%s)
-      [ -f "$state" ] || echo '{}' > "$state"
-
-      curl -fsS "$qbittorrent/torrents/info" \
-        | jq --argjson now "$now" --argjson transfer "$(curl -fsS "$qbittorrent/transfer/info")" --slurpfile old "$state" '
-            ($transfer.dl_info_data + $transfer.up_info_data) as $total
-            | ($total > ($old[0].total // 0)) as $online
-            | {
-                total: $total,
-                torrents: map(
-                  select(.state | IN("downloading", "stalledDL", "metaDL", "forcedDL", "forcedMetaDL"))
-                  | $old[0].torrents[.hash] as $o
-                  | {key: .hash, value: (if $online and $o.downloaded == .downloaded then $o else {downloaded, since: $now} end)}
-                ) | from_entries
-              }' > "$state.new"
-      mv "$state.new" "$state"
-
-      dead=$(jq -c --argjson now "$now" '[.torrents | to_entries[] | select($now - .value.since >= 1800) | .key]' "$state")
-
-      remove() {
-        stalled=$(curl -fsS -H "X-Api-Key: $2" "http://127.0.0.1:$1/api/v3/queue?pageSize=10000" \
-          | jq -c --argjson dead "$dead" '[.records[] | select(.downloadId // "" | ascii_downcase | IN($dead[]))]')
-        if [ "$stalled" != "[]" ]; then
-          jq -r '.[].title' <<< "$stalled" | sort -u
-          curl -fsS -o /dev/null -X DELETE -H "X-Api-Key: $2" -H "Content-Type: application/json" \
-            --data "$(jq -c '{ids: map(.id)}' <<< "$stalled")" \
-            "http://127.0.0.1:$1/api/v3/queue/bulk?removeFromClient=true&blocklist=true&skipRedownload=false"
-        fi
-      }
-
-      remove ${toString config.services.radarr.settings.server.port} "$RADARR__AUTH__APIKEY"
-      remove ${toString config.services.sonarr.settings.server.port} "$SONARR__AUTH__APIKEY"
-    '';
-  };
 in
 {
   imports = [ inputs.vpn-confinement.nixosModules.default ];
@@ -131,10 +87,7 @@ in
           BitTorrent.Session = {
             DefaultSavePath = "${cfg.dataDir}/torrents";
             DisableAutoTMMByDefault = false;
-            QueueingSystemEnabled = true;
-            IgnoreSlowTorrentsForQueueing = true;
-            MaxActiveDownloads = 6;
-            MaxActiveTorrents = -1;
+            QueueingSystemEnabled = false;
             AlternativeGlobalDLSpeedLimit = 5120;
             AlternativeGlobalUPSpeedLimit = 1024;
             DiskIOType = "Posix";
@@ -320,26 +273,6 @@ in
               ExecStart = lib.getExe qbittorrentNatpmp;
               Restart = "always";
               RestartSec = 10;
-            };
-          };
-
-          qbittorrent-stalled = {
-            description = "Replace qBittorrent downloads with no progress for 30 minutes";
-            after = [
-              "qbittorrent.service"
-              "radarr.service"
-              "sonarr.service"
-            ];
-            startAt = "*:0/5";
-            serviceConfig = {
-              Type = "oneshot";
-              ExecStart = lib.getExe qbittorrentStalled;
-              EnvironmentFile = [
-                config.sops.templates.radarr-env.path
-                config.sops.templates.sonarr-env.path
-              ];
-              DynamicUser = true;
-              StateDirectory = "qbittorrent-stalled";
             };
           };
         }
