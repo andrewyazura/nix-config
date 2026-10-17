@@ -88,6 +88,7 @@ in
             DefaultSavePath = "${cfg.dataDir}/torrents";
             DisableAutoTMMByDefault = false;
             QueueingSystemEnabled = false;
+            GlobalDLSpeedLimit = 24576;
             AlternativeGlobalDLSpeedLimit = 5120;
             AlternativeGlobalUPSpeedLimit = 1024;
             DiskIOType = "Posix";
