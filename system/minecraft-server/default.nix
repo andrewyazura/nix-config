@@ -100,7 +100,6 @@ in
             extraStopPre = ''
               sock=/run/minecraft/${name}.sock
               if ${getExe pkgs.tmux} -S "$sock" has-session 2>/dev/null; then
-                ${getExe pkgs.tmux} -S "$sock" send-keys C-u 'title @a times 10 280 10' Enter
                 ${getExe pkgs.tmux} -S "$sock" send-keys C-u 'title @a subtitle {"text":"in 15 seconds"}' Enter
                 ${getExe pkgs.tmux} -S "$sock" send-keys C-u 'title @a title {"text":"Server restarts","color":"red"}' Enter
                 sleep 15
