@@ -93,9 +93,20 @@ in
           players = import ./players.nix;
           mods = import ./mods.nix { inherit pkgs; };
 
-          serverTemplate = {
+          serverTemplate = name: {
             enable = true;
             enableReload = true;
+
+            extraStopPre = ''
+              sock=/run/minecraft/${name}.sock
+              if ${getExe pkgs.tmux} -S "$sock" has-session 2>/dev/null; then
+                ${getExe pkgs.tmux} -S "$sock" send-keys C-u 'title @a times 10 280 10' Enter
+                ${getExe pkgs.tmux} -S "$sock" send-keys C-u 'title @a subtitle {"text":"in 15 seconds"}' Enter
+                ${getExe pkgs.tmux} -S "$sock" send-keys C-u 'title @a title {"text":"Server restarts","color":"red"}' Enter
+                sleep 15
+              fi
+            '';
+
             package = pkgs.fabricServers.fabric-26_3.override { jre_headless = pkgs.jdk25_headless; };
 
             symlinks.mods = pkgs.linkFarmFromDrvs "mods" (attrValues mods);
@@ -132,7 +143,7 @@ in
         in
         mapAttrs (
           name: value:
-          recursiveUpdate (recursiveUpdate serverTemplate value) (
+          recursiveUpdate (recursiveUpdate (serverTemplate name) value) (
             builtins.removeAttrs (cfg.servers.${name} or { }) [ "backup" ]
           )
         ) customServers;
