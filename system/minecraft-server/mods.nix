@@ -33,4 +33,8 @@ with pkgs;
     url = "https://cdn.modrinth.com/data/Ps1zyz6x/versions/g4eqNSKd/ScalableLux-fabric-mc26.3-0.3.0-alpha.0.6-all.jar";
     sha512 = "34wqs8mmp2kzxs3zf7d31qs2igg4qjfdbf9ix77k7xxpj2fk4i9b016nrkxbirrz5nz3pr8pcypfl40p6lpq51vyg0q3ar0zcwskmfy";
   };
+  "spark" = fetchurl {
+    url = "https://cdn.modrinth.com/data/l6YH9Als/versions/e3hsPc1o/spark-1.10.187-fabric.jar";
+    sha512 = "2a3iag9ns7w8qi7cj04xhyn1nxd39xk8h1ppws1z484ahwdhw8lm77rybk2fnmzly8izs8mh0m2fas1av3yl5x7dvn4a93bl7azajy7";
+  };
 }
