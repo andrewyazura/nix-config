@@ -63,6 +63,7 @@ let
       false
     )
     (mkPlayer "MAKGREEN" "7a40695f-ff71-37c4-be95-af4e7ce70e24" "" 0 false)
+    (mkPlayer "1000BEKOB" "2af17f0e-a14d-3a42-a262-be3787afe531" "" 0 false)
   ];
 in
 {
