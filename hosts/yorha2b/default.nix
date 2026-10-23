@@ -52,7 +52,7 @@
           {
             output = "DP-1";
             mode = "2560x1440@500";
-            position = "3072x144";
+            position = "3840x360";
             bitdepth = 8;
             workspace = "10";
           }
@@ -60,7 +60,6 @@
             output = "DP-2";
             mode = "3840x2160@144";
             position = "0x0";
-            scale = 1.25;
             transform = 0;
             workspace = "1";
           }
