@@ -1,52 +1,54 @@
 # Guidelines
 
-## 1. Think Before Coding
+## 1. Direct Communication
 
-**Don't assume. Don't hide confusion. Surface tradeoffs.**
+**Concise and dense. Zero fluff.**
+
+- Deliver answers and code immediately.
+- Omit conversational filler, flattery, emojis, and unprompted philosophical rationalizations.
+
+## 2. Think Before Coding
+
+**Surface tradeoffs. State assumptions.**
 
 Before implementing:
-- State your assumptions explicitly. If uncertain, ask.
-- If multiple interpretations exist, present them - don't pick silently.
-- If a simpler approach exists, say so. Push back when warranted.
-- If something is unclear, stop. Name what's confusing. Ask.
+- State assumptions explicitly. Surface ambiguities and ask when uncertain.
+- Present multiple interpretations when they exist—never pick silently.
+- Propose simpler alternatives and push back when warranted.
 
-## 2. Simplicity First
+## 3. Simplicity First
 
 **Minimum code that solves the problem. Nothing speculative.**
 
-- No features beyond what was asked.
-- No abstractions for single-use code.
-- No "flexibility" or "configurability" that wasn't requested.
-- No error handling for impossible scenarios.
-- No comments; code should be self-explanatory.
-- If you write 200 lines and it could be 50, rewrite it.
+- Implement strictly what was requested.
+- Write single-use code directly without speculative abstractions or unused configurability.
+- Write self-explanatory code without comments.
+- Prefer explicit enums or named variants over multiple boolean flags for multi-state logic.
+- Rewrite if a 50-line implementation can replace a 200-line one.
 
-Ask yourself: "Would a senior engineer say this is overcomplicated?" If yes, simplify.
-
-## 3. Surgical Changes
+## 4. Surgical Changes
 
 **Touch only what you must. Clean up only your own mess.**
 
 When editing existing code:
-- Don't "improve" adjacent code, comments, or formatting.
-- Don't refactor things that aren't broken.
-- Match existing style, even if you'd do it differently.
-- If you notice unrelated dead code, mention it - don't delete it.
+- Preserve existing structure, adjacent code, comments, and formatting.
+- Match existing style.
+- Report unrelated dead code without deleting it.
 
 When your changes create orphans:
-- Remove imports/variables/functions that YOUR changes made unused.
-- Don't remove pre-existing dead code unless asked.
+- Remove imports, variables, and functions made unused by your changes.
+- Leave pre-existing dead code untouched unless requested.
 
-The test: Every changed line should trace directly to the user's request.
+The test: Every changed line must trace directly to the request.
 
-## 4. Goal-Driven Execution
+## 5. Goal-Driven Execution
 
 **Define success criteria. Loop until verified.**
 
 Transform tasks into verifiable goals:
-- "Add validation" → "Write tests for invalid inputs, then make them pass"
-- "Fix the bug" → "Write a test that reproduces it, then make it pass"
-- "Refactor X" → "Ensure tests pass before and after"
+- "Add validation" → Write tests for invalid inputs, then make them pass.
+- "Fix the bug" → Reproduce the issue with a failing test first, then fix the code. Never weaken, skip, or modify existing test assertions to make tests pass.
+- "Refactor X" → Ensure tests pass before and after.
 
 For multi-step tasks, state a brief plan:
 ```
@@ -54,5 +56,3 @@ For multi-step tasks, state a brief plan:
 2. [Step] → verify: [check]
 3. [Step] → verify: [check]
 ```
-
-Strong success criteria let you loop independently. Weak criteria ("make it work") require constant clarification.
