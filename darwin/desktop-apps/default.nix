@@ -25,6 +25,7 @@ in
       "obsidian"
       "signal"
       "slack"
+      "spotify"
       "telegram"
     ];
   };
