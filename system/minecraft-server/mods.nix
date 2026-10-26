@@ -37,4 +37,8 @@ with pkgs;
     url = "https://cdn.modrinth.com/data/l6YH9Als/versions/e3hsPc1o/spark-1.10.187-fabric.jar";
     sha512 = "2a3iag9ns7w8qi7cj04xhyn1nxd39xk8h1ppws1z484ahwdhw8lm77rybk2fnmzly8izs8mh0m2fas1av3yl5x7dvn4a93bl7azajy7";
   };
+  "servux" = fetchurl {
+    url = "https://cdn.modrinth.com/data/zQhsx8KF/versions/azA4UG3T/servux-fabric-26.3-0.12.2.jar";
+    sha512 = "2y0h0i8q0lkg17sxwr193g2ffb4gn76v38s2gr0g5pv3b1rs88qp3sk3i1jw4pl59l7j58fl9y8q8dzysa3rz5xgxwb40hmqrqh6qza";
+  };
 }
