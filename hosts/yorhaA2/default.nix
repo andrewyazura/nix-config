@@ -73,6 +73,13 @@ in
     stateVersion = 6;
     primaryUser = username;
     defaults.smb.NetBIOSName = hostname;
+
+    keyboard = {
+      enableKeyMapping = true;
+      nonUS.remapTilde = true;
+      swapCapsLockAndEscape = true;
+      swapLeftCtrlAndFn = true;
+    };
   };
 
   time.timeZone = "Europe/Warsaw";
