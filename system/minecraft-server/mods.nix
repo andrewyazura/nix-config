@@ -41,4 +41,16 @@ with pkgs;
     url = "https://cdn.modrinth.com/data/zQhsx8KF/versions/azA4UG3T/servux-fabric-26.3-0.12.2.jar";
     sha512 = "2y0h0i8q0lkg17sxwr193g2ffb4gn76v38s2gr0g5pv3b1rs88qp3sk3i1jw4pl59l7j58fl9y8q8dzysa3rz5xgxwb40hmqrqh6qza";
   };
+  "fabric-language-kotlin" = fetchurl {
+    url = "https://cdn.modrinth.com/data/Ha28R6CL/versions/SKW1BTL3/fabric-language-kotlin-1.14.2%2Bkotlin.2.4.21.jar";
+    sha512 = "1fpwh793mabxcnj9rfx8fkc68ilaqkinf0c23j9r67d01sziciz87hryzxlvwwc7vggpcfm8cacam53b257kdd4mk8gigg7lz27bd3z";
+  };
+  "ledger" = fetchurl {
+    url = "https://cdn.modrinth.com/data/LVN9ygNV/versions/pxv5cN0d/ledger-1.3.25.jar";
+    sha512 = "14jv37clwnsshd15y6ki3mrlp49abskmpimvliifr283bylgp5xah4vdn2shh0wiqkl9fyvardma4xaj846mwlrz2nxs9d2imr48bpk";
+  };
+  "server-replay" = fetchurl {
+    url = "https://cdn.modrinth.com/data/qCvSZ8ra/versions/rCmC09FF/ServerReplay-3.6.0-beta.5%2B26.3.jar";
+    sha512 = "2c8rpdz31qmnk9nibjsn52v5szhcbdskhdya2qbw8m2qlyxbddh1v0zggw1igi9h3f9b82kvyamds1lr7lfijksic4dv5apzy27b1gy";
+  };
 }
