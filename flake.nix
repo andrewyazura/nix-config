@@ -49,6 +49,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    sysc-greet = {
+      url = "github:Nomadcxx/sysc-greet";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     attic.url = "github:zhaofengli/attic/7a19204df10d606c5070e6bb72615c3461900c05";
     beast-music-app.url = "git+ssh://git@github.com/yaroslavpashynskyi/BeastMusic.git";
     bingo-app.url = "git+ssh://git@github.com/andrewyazura/bingo.git";
