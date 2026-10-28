@@ -39,11 +39,6 @@
       url = "github:hyprwm/Hyprland";
     };
 
-    hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins";
-      inputs.hyprland.follows = "hyprland";
-    };
-
     spotifast = {
       url = "github:crmne/spotifast/v0.14.2";
       inputs.nixpkgs.follows = "nixpkgs";

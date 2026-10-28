@@ -101,17 +101,6 @@ To debug a layer client, run its daemon with `WAYLAND_DEBUG=1` through
 
 With 3 rows at font size 15, the height is 45 + 3 × 34 + 2 × 2 = 151.
 
-## hyprbars and blur
-
-Keep window blur off while hyprbars draws the title band. With blur on, the
-band of a floating window drops out where it overlaps a translucent tiled
-window that repaints. The floating window's own shadow shows there instead.
-`bar_blur` and `bar_part_of_window` do not change this. Only Ghostty is
-translucent here, so blur has no other visible effect.
-
-The defect follows repaints, so test with translucent windows and take many
-pixel samples. One sample can miss it.
-
 ## Console colors and font (yorha2b)
 
 `common/ansi.nix` holds the 16 terminal colors. The Ghostty palette and

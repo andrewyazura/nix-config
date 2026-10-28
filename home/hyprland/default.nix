@@ -3,7 +3,6 @@
   config,
   pkgs,
   inputs,
-  osConfig,
   ...
 }:
 with lib;
@@ -27,7 +26,6 @@ let
 
   system = pkgs.stdenv.hostPlatform.system;
   hyprlandPkgs = inputs.hyprland.packages.${system};
-  hyprlandPlugins = inputs.hyprland-plugins.packages.${system};
 
   binds = import ./binds.nix { inherit lib; };
 
@@ -39,7 +37,15 @@ let
         -size ${size} tile:mpr:cell $out
     '';
 
-  gutter = 10;
+  gutter = 12;
+
+  focusGradient = {
+    colors = [
+      palette.accent
+      palette.accentAlt
+    ];
+    angle = 45;
+  };
 
   launcher = rec {
     fontSize = 15;
@@ -99,7 +105,7 @@ in
 
     wallpaper = mkOption {
       type = enum (attrNames wallpapers);
-      default = "yorha-grid";
+      default = "starfield-noise";
       description = "Which wallpaper to display via hyprpaper.";
     };
   };
@@ -130,22 +136,18 @@ in
       package = hyprlandPkgs.hyprland;
       portalPackage = hyprlandPkgs.xdg-desktop-portal-hyprland;
 
-      plugins = with hyprlandPlugins; [
-        hyprbars
-      ];
-
       configType = "lua";
       settings = {
         config = {
           general = {
             gaps_in = gutter / 2;
             gaps_out = gutter;
-            border_size = 1;
+            border_size = 2;
             col = {
-              active_border = palette.text;
+              active_border = focusGradient;
               inactive_border = palette.overlay;
               nogroup_border = palette.overlay;
-              nogroup_border_active = palette.text;
+              nogroup_border_active = focusGradient;
             };
 
             no_focus_fallback = true;
@@ -155,18 +157,9 @@ in
           };
 
           decoration = {
-            rounding = 0;
+            rounding = 10;
             blur.enabled = false;
-            shadow = {
-              enabled = true;
-              sharp = true;
-              range = 0;
-              offset = [
-                6
-                6
-              ];
-              color = "rgba(00000066)";
-            };
+            shadow.enabled = false;
             active_opacity = 1.0;
             inactive_opacity = 1.0;
           };
@@ -181,12 +174,12 @@ in
 
           group = {
             col = {
-              border_active = palette.text;
+              border_active = focusGradient;
               border_inactive = palette.overlay;
             };
             groupbar = {
               gradients = true;
-              gradient_rounding = 0;
+              gradient_rounding = 6;
               height = 20;
               indicator_height = 0;
               font_family = "Noto Sans CJK JP";
@@ -196,7 +189,7 @@ in
               text_color = palette.bg;
               text_color_inactive = palette.text;
               col = {
-                active = palette.text;
+                active = palette.accent;
                 inactive = palette.overlay;
               };
             };
@@ -210,18 +203,6 @@ in
             background_color = palette.bg;
             disable_hyprland_logo = true;
             mouse_move_focuses_monitor = false;
-          };
-
-          plugin = {
-            hyprbars = {
-              bar_height = 20;
-              bar_color = palette.overlay;
-              bar_text_size = 12;
-              bar_text_weight = "medium";
-              bar_text_font = "Noto Sans CJK JP";
-              bar_text_align = "center";
-              bar_part_of_window = true;
-            };
           };
 
           xwayland = {
@@ -261,37 +242,6 @@ in
                   class = "cs2";
                 };
                 immediate = true;
-              }
-            ];
-          }
-          {
-            _args = [
-              {
-                match = {
-                  focus = true;
-                };
-                "hyprbars:bar_color" = rgb palette.text;
-                "hyprbars:title_color" = rgb palette.bg;
-              }
-            ];
-          }
-          {
-            _args = [
-              {
-                match = {
-                  focus = false;
-                };
-                "hyprbars:title_color" = rgb palette.text;
-              }
-            ];
-          }
-          {
-            _args = [
-              {
-                match = {
-                  group = true;
-                };
-                "hyprbars:no_bar" = true;
               }
             ];
           }
@@ -369,10 +319,10 @@ in
       text = ${argb palette.text}
       bright_text = ${argb palette.bright}
       link_text = ${argb palette.blue}
-      accent = ${argb palette.text}
+      accent = ${argb palette.accent}
       accent_secondary = ${argb palette.accentAlt}
-      rounding_large = 0
-      rounding_small = 0
+      rounding_large = 14
+      rounding_small = 8
       font_size = ${toString launcher.fontSize}
       font_family = Noto Sans CJK JP
       font_family_monospace = JetBrainsMono Nerd Font
@@ -418,72 +368,37 @@ in
           };
 
           background = [
-            { color = rgb palette.bg; }
-          ]
-          ++ concatMap (
-            o:
-            let
-              size = builtins.match "([0-9]+x[0-9]+)@.*" o.mode;
-            in
-            optional (size != null) {
-              monitor = o.output;
-              path = "${mkGrid (head size)}";
-            }
-          ) cfg.output;
-
-          shape = [
             {
-              size = "92%, 1";
-              color = rgb palette.text;
-              position = "0, -130";
-              halign = "center";
-              valign = "top";
+              color = rgb palette.bg;
+              path = wallpapers.starfield-noise;
             }
           ];
 
           input-field = [
             {
-              size = "420, 56";
-              position = "0, -90";
+              size = "380, 50";
+              position = "0, -110";
               halign = "center";
               valign = "center";
-              rounding = 0;
-              outline_thickness = 2;
-              outer_color = rgb palette.text;
+              rounding = -1;
+              outline_thickness = 1;
+              outer_color = rgb palette.overlay;
               inner_color = rgb palette.bg;
               font_color = rgb palette.text;
               font_family = "Noto Sans CJK JP, JetBrainsMono Nerd Font";
               check_color = rgb palette.accentAlt;
               fail_color = rgb palette.red;
-              placeholder_text = "<span foreground='##${removePrefix "#" palette.subtle}' letter_spacing='3072'>󰌾  ENTER ACCESS CODE</span>";
-              fail_text = "<span letter_spacing='3072'>󰀦  $FAIL</span>";
+              placeholder_text = "<span foreground='##${removePrefix "#" palette.accent}'>󰌾</span>  <span foreground='##${removePrefix "#" palette.subtle}'>password</span>";
+              fail_text = "󰀦  $FAIL";
               fade_on_empty = false;
             }
           ];
 
           label = [
             {
-              text = "YoRHa";
-              color = rgb palette.text;
-              font_family = "Noto Sans CJK JP";
-              font_size = 20;
-              position = "4%, -72";
-              halign = "left";
-              valign = "top";
-            }
-            {
-              text = "UNIT ${toUpper (removePrefix "yorha" osConfig.networking.hostName)}";
-              color = rgb palette.text;
-              font_family = "Noto Sans CJK JP";
-              font_size = 20;
-              position = "-4%, -72";
-              halign = "right";
-              valign = "top";
-            }
-            {
               text = "$TIME";
-              color = rgb palette.text;
-              font_family = "Noto Sans CJK JP Light";
+              color = rgb palette.bright;
+              font_family = "Noto Sans CJK JP Thin";
               font_size = 120;
               position = "0, 110";
               halign = "center";
@@ -491,10 +406,19 @@ in
             }
             {
               text = "cmd[update:60000] ${lockDate}";
-              color = rgb palette.text;
+              color = rgb palette.subtle;
               font_family = "Noto Sans CJK JP";
               font_size = 18;
               position = "0, 0";
+              halign = "center";
+              valign = "center";
+            }
+            {
+              text = "$USER";
+              color = rgb palette.subtle;
+              font_family = "Noto Sans CJK JP";
+              font_size = 16;
+              position = "0, -48";
               halign = "center";
               valign = "center";
             }
@@ -507,8 +431,8 @@ in
 
     home.pointerCursor = {
       enable = true;
-      package = pkgs.callPackage ./nier-cursors.nix { };
-      name = "NieR-Cursors";
+      package = pkgs.bibata-cursors;
+      name = "Bibata-Modern-Ice";
       size = 32;
       gtk.enable = true;
       hyprcursor.enable = true;
