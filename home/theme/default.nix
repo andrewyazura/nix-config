@@ -29,24 +29,8 @@ let
     )
     + ''
       @define-color sidebar_backdrop_color ${colors.bg};
-      @define-color accent_bg_color ${colors.text};
+      @define-color accent_bg_color ${colors.accent};
       @define-color accent_fg_color ${colors.bg};
-
-      * {
-        border-radius: 0;
-      }
-
-      radio {
-        border-radius: 100%;
-      }
-
-      switch {
-        border-radius: 14px;
-      }
-
-      switch slider {
-        border-radius: 50%;
-      }
     '';
 in
 {

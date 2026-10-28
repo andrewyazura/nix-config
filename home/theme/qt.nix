@@ -48,9 +48,9 @@ let
     Mid = bg;
     Dark = bg;
     Shadow = bg;
-    Highlight = text;
+    Highlight = accent;
     HighlightedText = bg;
-    Accent = text;
+    Accent = accent;
     Link = blue;
     LinkVisited = pink;
     NoRole = bg;
@@ -106,11 +106,11 @@ let
           outline: 1px solid ${subtle};
       }
       QCheckBox::indicator:checked, QAbstractItemView::indicator:checked, QGroupBox::indicator:checked {
-          background: ${text};
+          background: ${accent};
           image: url(${check});
       }
       QRadioButton::indicator:checked {
-          background: ${text};
+          background: ${accent};
           image: url(${dot});
       }
       QCheckBox::indicator:indeterminate, QAbstractItemView::indicator:indeterminate {

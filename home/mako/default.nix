@@ -28,9 +28,9 @@ in
         font = "Noto Sans CJK JP 11";
         background-color = colors.bg;
         text-color = colors.text;
-        border-color = colors.text;
+        border-color = colors.overlay;
         border-size = 1;
-        border-radius = 0;
+        border-radius = 12;
         progress-color = "over ${colors.raised}";
 
         icons = true;
