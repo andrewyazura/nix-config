@@ -85,9 +85,6 @@ in
     (mkBind "SUPER + SHIFT + N" "hl.dsp.window.float({ action = 'toggle' })")
     (mkBind "SUPER + P" "hl.dsp.window.pin()")
 
-    (mkBind "SUPER + MINUS" "hl.dsp.workspace.toggle_special('')")
-    (mkBind "SUPER + SHIFT + MINUS" "hl.dsp.window.move({ workspace = 'special' })")
-
     (mkBind "SUPER + R" "hl.dsp.submap('resize')")
 
     (mkBind "ALT + SHIFT + 3" "hl.dsp.exec_cmd('grim - | wl-copy')")
