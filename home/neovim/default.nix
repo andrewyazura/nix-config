@@ -7,6 +7,26 @@
 with lib;
 let
   cfg = config.modules.neovim;
+  colors = import ../../common/colors.nix;
+
+  base16 = with colors; {
+    base00 = bg;
+    base01 = raised;
+    base02 = overlay;
+    base03 = subtle;
+    base04 = subtle;
+    base05 = text;
+    base06 = bright;
+    base07 = bright;
+    base08 = red;
+    base09 = pink;
+    base0A = yellow;
+    base0B = green;
+    base0C = teal;
+    base0D = blue;
+    base0E = accentAlt;
+    base0F = indigo;
+  };
 in
 {
   options.modules.neovim = {
@@ -58,9 +78,18 @@ in
 
       plugins = with pkgs.vimPlugins; [
         {
-          plugin = oxocarbon-nvim;
+          plugin = mini-base16;
           type = "lua";
-          config = builtins.readFile ./configs/options.lua;
+          config = builtins.readFile ./configs/options.lua + ''
+            require("mini.base16").setup({ palette = ${generators.toLua { } base16} })
+
+            for name, hl in pairs(vim.api.nvim_get_hl(0, {})) do
+              if hl.bg and (name:find("^LineNr") or name:find("Sign") or name:find("Fold") or name:find("^CursorLine%u")) then
+                hl.bg = nil
+                vim.api.nvim_set_hl(0, name, hl)
+              end
+            end
+          '';
           # this hack sets leader key before any other hotkeys are added
         }
 
