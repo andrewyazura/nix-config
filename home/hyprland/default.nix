@@ -406,18 +406,26 @@ in
             }
             {
               text = "cmd[update:60000] ${lockDate}";
-              color = rgb palette.subtle;
+              color = rgb palette.text;
               font_family = "Noto Sans CJK JP";
               font_size = 18;
+              shadow_passes = 3;
+              shadow_size = 6;
+              shadow_color = rgb palette.bg;
+              shadow_boost = 1.5;
               position = "0, 0";
               halign = "center";
               valign = "center";
             }
             {
               text = "$USER";
-              color = rgb palette.subtle;
+              color = rgb palette.text;
               font_family = "Noto Sans CJK JP";
               font_size = 16;
+              shadow_passes = 3;
+              shadow_size = 6;
+              shadow_color = rgb palette.bg;
+              shadow_boost = 1.5;
               position = "0, -48";
               halign = "center";
               valign = "center";
