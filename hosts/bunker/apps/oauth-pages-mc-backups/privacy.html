@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MC Backups — privacy policy</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+      body {
+        font-family: system-ui, -apple-system, "Segoe UI", Helvetica, Arial,
+          sans-serif;
+        line-height: 1.6;
+        max-width: 42rem;
+        margin: 0 auto;
+        padding: 2rem 1.25rem 4rem;
+      }
+      h1 {
+        font-size: 1.6rem;
+        margin-bottom: 0.25rem;
+      }
+      h2 {
+        font-size: 1.15rem;
+        margin-top: 2rem;
+      }
+      .sub {
+        opacity: 0.7;
+        margin-top: 0;
+      }
+      ul {
+        padding-left: 1.25rem;
+      }
+      footer {
+        margin-top: 3rem;
+        padding-top: 1rem;
+        border-top: 1px solid rgba(128, 128, 128, 0.35);
+        font-size: 0.9rem;
+        opacity: 0.8;
+      }
+      code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.9em;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Privacy policy</h1>
+    <p class="sub">MC Backups — Minecraft world backups.</p>
+
+    <p>
+      MC Backups is a single-user personal tool built and run by Andrew Yazura.
+      It has exactly one user: the owner. There is no sign-up, no account
+      system and no other person whose data it could hold.
+    </p>
+
+    <h2>What it accesses</h2>
+    <p>
+      MC Backups requests a single Google permission, <code>drive.file</code>,
+      which grants access only to files and folders the app created itself.
+      Within those files it:
+    </p>
+    <ul>
+      <li>Creates the folders that hold the backups.</li>
+      <li>Uploads backup archives into them.</li>
+      <li>
+        Reads the names, sizes and dates of the files it uploaded, so that it
+        does not upload the same archive twice.
+      </li>
+    </ul>
+    <p>
+      It cannot list, open, change or delete any other file in the Google
+      Drive, and it accesses no other Google service — no mail, no calendar, no
+      contacts.
+    </p>
+
+    <h2>Why it accesses it</h2>
+    <p>
+      To keep an off-site copy of the owner's Minecraft server worlds, so that
+      they can be restored after data loss. There is no other purpose.
+    </p>
+
+    <h2>Where the data goes</h2>
+    <ul>
+      <li>
+        Backup archives are created on a server the owner controls and uploaded
+        to the owner's own Google Drive. They contain Minecraft world files, not
+        data taken from the Google account.
+      </li>
+      <li>
+        The OAuth credentials are stored on that same server, readable only by
+        the backup service.
+      </li>
+      <li>
+        Nothing is sold. Nothing is shared with any other person or company.
+        Nothing is transferred to a third party beyond Google's own Drive API,
+        which is where the backups are stored.
+      </li>
+      <li>
+        There is no analytics, no tracking, no advertising and no third-party
+        script on this website — these pages are static HTML and set no cookies.
+      </li>
+    </ul>
+
+    <h2>Retention and deletion</h2>
+    <p>
+      Uploaded archives stay in the owner's Google Drive until the owner
+      deletes them. Local copies on the server are deleted automatically after
+      a configured number of days. The owner can revoke MC Backups' access at
+      any time from the
+      <a href="https://myaccount.google.com/permissions"
+        >Google Account permissions page</a
+      >, which stops all further access immediately.
+    </p>
+
+    <h2>Contact</h2>
+    <p>
+      Questions about this policy:
+      <a href="mailto:andrewyazura203@gmail.com">andrewyazura203@gmail.com</a>
+    </p>
+
+    <footer>
+      Last updated 27 October 2026. <a href="/">Home</a> ·
+      <a href="/terms.html">Terms of service</a>
+    </footer>
+  </body>
+</html>

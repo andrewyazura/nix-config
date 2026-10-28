@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MC Backups — Minecraft world backups</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+      body {
+        font-family: system-ui, -apple-system, "Segoe UI", Helvetica, Arial,
+          sans-serif;
+        line-height: 1.6;
+        max-width: 42rem;
+        margin: 0 auto;
+        padding: 2rem 1.25rem 4rem;
+      }
+      h1 {
+        font-size: 1.6rem;
+        margin-bottom: 0.25rem;
+      }
+      h2 {
+        font-size: 1.15rem;
+        margin-top: 2rem;
+      }
+      .sub {
+        opacity: 0.7;
+        margin-top: 0;
+      }
+      ul {
+        padding-left: 1.25rem;
+      }
+      footer {
+        margin-top: 3rem;
+        padding-top: 1rem;
+        border-top: 1px solid rgba(128, 128, 128, 0.35);
+        font-size: 0.9rem;
+        opacity: 0.8;
+      }
+      code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.9em;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>MC Backups</h1>
+    <p class="sub">Off-site backups for one person's Minecraft servers.</p>
+
+    <p>
+      MC Backups is a private tool built and run by Andrew Yazura. On a fixed
+      schedule it archives the worlds of the Minecraft servers its owner hosts
+      and uploads those archives to the owner's own Google Drive, so that a
+      lost or corrupted world can be restored.
+    </p>
+
+    <h2>What it does</h2>
+    <ul>
+      <li>Creates a folder in the owner's Google Drive to hold the backups.</li>
+      <li>Uploads one world archive per server on every scheduled run.</li>
+    </ul>
+    <p>
+      It uses the <code>drive.file</code> permission, so it can see only the
+      files and folders it created itself. The rest of the Drive is invisible
+      to it.
+    </p>
+
+    <h2>Who it is for</h2>
+    <p>
+      Only its owner. MC Backups is not a product, has no sign-up, and has no
+      users other than the single Google account that authorises it. It is
+      published to Google solely so that the OAuth authorisation it uses does
+      not expire every seven days.
+    </p>
+
+    <h2>Documents</h2>
+    <ul>
+      <li><a href="/privacy.html">Privacy policy</a></li>
+      <li><a href="/terms.html">Terms of service</a></li>
+    </ul>
+
+    <h2>Contact</h2>
+    <p>
+      <a href="mailto:andrewyazura203@gmail.com">andrewyazura203@gmail.com</a>
+    </p>
+
+    <footer>Last updated 27 October 2026.</footer>
+  </body>
+</html>
