@@ -24,6 +24,7 @@ in
 
       package = llm-agents.antigravity-cli;
       context.AGENTS = ../../common/llm-memory.md;
+      skills.summarize-article = ../../common/skills/summarize-article;
 
       settings = {
         allowNonWorkspaceAccess = true;

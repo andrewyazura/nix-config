@@ -33,6 +33,7 @@ let
       enableMcpIntegration = true;
       context = ../../common/llm-memory.md;
       commandsDir = ./commands;
+      skills.summarize-article = ../../common/skills/summarize-article;
 
       settings = {
         alwaysThinkingEnabled = true;
