@@ -14,6 +14,13 @@ let
       { locked = true; }
     ];
   };
+  mkMouseBind = bind: command: {
+    _args = [
+      bind
+      (mkLua command)
+      { mouse = true; }
+    ];
+  };
 
   workspaces = [
     {
@@ -75,6 +82,9 @@ in
     (mkBind "SUPER + SHIFT + J" "hl.dsp.window.move({ direction = 'down', group_aware = true })")
     (mkBind "SUPER + SHIFT + K" "hl.dsp.window.move({ direction = 'up', group_aware = true })")
     (mkBind "SUPER + SHIFT + L" "hl.dsp.window.move({ direction = 'right', group_aware = true })")
+
+    (mkMouseBind "SUPER + mouse:272" "hl.dsp.window.drag()")
+    (mkMouseBind "SUPER + mouse:273" "hl.dsp.window.resize()")
 
     (mkBind "SUPER + E" "hl.dsp.layout('togglesplit')")
     (mkBind "SUPER + W" "hl.dsp.group.toggle()")
