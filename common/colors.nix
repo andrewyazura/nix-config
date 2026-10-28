@@ -1,21 +1,21 @@
 rec {
-  bg = "#2b2924";
-  surface = "#454138";
-  raised = "#4e4b42";
-  overlay = "#5e5a4f";
-  muted = "#7a7566";
-  subtle = "#9a957f";
-  text = "#dad4bb";
-  bright = "#ece7d2";
+  bg = "#000000";
+  surface = "#05070b";
+  raised = "#0c1018";
+  overlay = "#192030";
+  muted = "#3a4559";
+  subtle = "#6e7d96";
+  text = "#b4c0d4";
+  bright = "#e4eaf5";
 
-  accent = text;
-  accentAlt = subtle;
+  accent = blue;
+  accentAlt = "#b9a2ff";
 
-  red = "#e46a5e";
-  green = "#b3c27f";
-  yellow = "#e3c27a";
-  blue = "#9bb6cc";
-  pink = "#cfa0b8";
-  teal = "#86b8ab";
-  indigo = "#a9b4d6";
+  red = "#f28b9b";
+  green = "#8fd4a9";
+  yellow = "#ebd38f";
+  blue = "#8db0ff";
+  pink = "#d7a2f2";
+  teal = "#7fd3dc";
+  indigo = "#a6b4ff";
 }

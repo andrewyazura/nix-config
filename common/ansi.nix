@@ -8,12 +8,12 @@ with import ./colors.nix;
   pink
   teal
   text
-  muted
-  "#f0968b"
-  "#cdd7ab"
-  "#eedaae"
-  "#b8cee1"
-  "#e2bdd0"
-  "#aad4c8"
+  subtle
+  "#edacbb"
+  "#addcc4"
+  "#e9dbb3"
+  "#abc4fc"
+  "#dcbbf3"
+  "#a2dbe5"
   bright
 ]
