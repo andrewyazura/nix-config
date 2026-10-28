@@ -45,8 +45,8 @@ let
       text = "gray";
       time = "gray";
       container = "black";
-      border = "gray";
-      title = "white";
+      border = "blue";
+      title = "blue";
       greet = "gray";
       prompt = "darkgray";
       input = "white";
