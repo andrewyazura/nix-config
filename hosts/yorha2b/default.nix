@@ -127,7 +127,6 @@
   };
 
   networking.hostId = "a0489983";
-  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ 9999 ];
   powerManagement.cpuFreqGovernor = "performance";
 
   services = {
