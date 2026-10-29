@@ -110,8 +110,7 @@ in
 
     home = {
       packages =
-        (with pkgs; [ sox ])
-        ++ (with llm-agents; [
+        (with llm-agents; [
           ccstatusline
           ccusage
         ])
