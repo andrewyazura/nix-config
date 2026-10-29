@@ -73,7 +73,7 @@ creation_rules:
       - *yorhaA2
     format: binary
 
-  - path_regex: secrets/rclone-gdrive-andrewyazura-config
+  - path_regex: secrets/rclone-gdrive-minecraft-backups-config
     key_groups:
     - age:
       - *bunker

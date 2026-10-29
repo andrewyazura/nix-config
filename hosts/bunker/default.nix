@@ -82,7 +82,7 @@
 
         backup = {
           enable = true;
-          remote = "gdrive-andrewyazura:minecraft-backups";
+          remote = "gdrive-minecraft-backups:minecraft-backups";
           rcloneConfigFile = config.sops.secrets.rclone-config.path;
           calendar = "04:00";
           retentionDays = 1;
@@ -180,7 +180,7 @@
       };
 
       rclone-config = {
-        sopsFile = ../../secrets/rclone-gdrive-andrewyazura-config;
+        sopsFile = ../../secrets/rclone-gdrive-minecraft-backups-config;
         format = "binary";
         owner = "minecraft";
         group = "minecraft";
