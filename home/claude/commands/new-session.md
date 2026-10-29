@@ -57,21 +57,17 @@ Read the tmux list above.
 
 Never attach. Never run `tmux attach`. The user attaches himself.
 
-### 3. Name the window and the session
+### 3. Name the window
 
 The window name is `claude` for the personal account, `claude-corp` for the
 corporate account.
 
-The `--name` value is `<host-prefix>-<project>`. Map the host:
-
-| Hostname | Prefix |
-|---|---|
-| yorha2b | 2b |
-| yorhaA2 | a2 |
-| yorha9s | 9s |
-
 If a window of that name already exists in the session, add a number. The
-second personal Claude in `nix` gets window `claude-2` and `--name "2b-nix-2"`.
+second personal Claude in `nix` gets window `claude-2`.
+
+Do not pass `--name`. Claude Code titles the session from the first prompt,
+and a `UserPromptSubmit` hook prefixes the host (`2b: <topic>`) from the
+second prompt on. A `--name` would suppress the topic title.
 
 ### 4. Launch
 
@@ -79,7 +75,7 @@ Personal account uses `claude`. Corporate account uses `claude-corp`, which is
 the same binary with `CLAUDE_CONFIG_DIR=~/.claude-corp`. Both are allowed.
 
 ```
-tmux send-keys -t <session>:<window> '<claude|claude-corp> --dangerously-skip-permissions --remote-control --name "<prefix>-<project>"' Enter
+tmux send-keys -t <session>:<window> '<claude|claude-corp> --dangerously-skip-permissions --remote-control' Enter
 ```
 
 ### 5. Clear the start dialogs
@@ -124,11 +120,11 @@ failed. Report the pane contents. Do not retry in a loop.
 ### 7. Report
 
 Give the user two lines at most: the tmux target `<session>:<window>`, the
-remote name, the account, the path, and the `claude.ai/code/session_...` URL
-that the ready pane prints. The user opens that URL on a phone or tablet.
+account, the path, and the `claude.ai/code/session_...` URL that the ready
+pane prints. The user opens that URL on a phone or tablet.
 
-Example: "Started `2b-nix-2` in `nix:claude-2`, personal account,
-`~/Documents/nix/config` — https://claude.ai/code/session_01AbC..."
+Example: "Started `nix:claude-2`, personal account, `~/Documents/nix/config` —
+https://claude.ai/code/session_01AbC..."
 
 ## Rules
 

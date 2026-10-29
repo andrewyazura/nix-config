@@ -45,6 +45,23 @@ let
     echo "[$timestamp] [$project] [$tool] $detail" >> ${configDir}/permission-requests.log
   '';
 
+  sessionTitleHook = pkgs.writeShellScript "claude-session-title" ''
+    input=$(cat)
+    host=$(${pkgs.coreutils}/bin/uname -n)
+    host=''${host%%.*}
+    prefix=''${host#yorha}
+    prefix=''${prefix,,}
+    title=$(echo "$input" | ${pkgs.jq}/bin/jq -r '.session_title // ""')
+    if [ -z "$title" ]; then
+      transcript=$(echo "$input" | ${pkgs.jq}/bin/jq -r '.transcript_path // ""')
+      title=$(${pkgs.gnugrep}/bin/grep -F '"type":"ai-title"' "$transcript" 2>/dev/null | ${pkgs.coreutils}/bin/tail -n 1 | ${pkgs.jq}/bin/jq -r '.aiTitle // ""')
+    fi
+    case "$title" in
+      "" | "$prefix:"* | "$prefix-"*) exit 0 ;;
+    esac
+    ${pkgs.jq}/bin/jq -n --arg title "$prefix: $title" '{hookSpecificOutput: {hookEventName: "UserPromptSubmit", sessionTitle: $title}}'
+  '';
+
   startSessionHook = pkgs.writeShellScript "start-session-hook" ''
     timestamp=$(${pkgs.coreutils}/bin/date -u +"%Y-%m-%dT%H:%M:%SZ")
     echo "=== New Session Started: $timestamp ===" >> ${configDir}/sessions.log
@@ -65,6 +82,11 @@ in
           "officer1.ogg"
           "officer2.ogg"
         ])
+        {
+          type = "command";
+          command = "${sessionTitleHook}";
+          timeout = 5;
+        }
       ];
     }
   ];
