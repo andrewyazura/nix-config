@@ -17,6 +17,11 @@ in
   };
 
   config = mkIf cfg.enable {
+    home.file.".gemini/config/skills/summarize-article" = {
+      source = ../../common/skills/summarize-article;
+      recursive = true;
+    };
+
     programs.antigravity-cli = {
       enable = true;
       enableMcpIntegration = true;
@@ -24,7 +29,6 @@ in
 
       package = llm-agents.antigravity-cli;
       context.AGENTS = ../../common/llm-memory.md;
-      skills.summarize-article = ../../common/skills/summarize-article;
 
       settings = {
         allowNonWorkspaceAccess = true;
