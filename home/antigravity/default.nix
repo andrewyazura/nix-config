@@ -17,8 +17,8 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.file.".gemini/config/skills/summarize-article" = {
-      source = ../../common/skills/summarize-article;
+    home.file.".gemini/config/skills" = {
+      source = ../../common/skills;
       recursive = true;
     };
 
