@@ -9,6 +9,21 @@ with lib;
 let
   cfg = config.modules.minecraft-server;
   enabledBackupServers = filterAttrs (name: server: server.backup.enable) cfg.servers;
+
+  proxyIps = [
+    # neoprotect
+    "15.204.187.208/32"
+    "15.204.187.209/32"
+    "15.204.130.224/32"
+    "15.204.131.21/32"
+    "82.22.5.0/24"
+    "51.89.59.61/32"
+    "45.157.234.219/32"
+    "104.167.24.197/32"
+    "104.167.24.198/32"
+    "109.71.255.131/32"
+    "109.71.255.132/32"
+  ];
 in
 {
   imports = [ inputs.nix-minecraft.nixosModules.minecraft-servers ];
@@ -110,6 +125,13 @@ in
 
             symlinks.mods = pkgs.linkFarmFromDrvs "mods" (attrValues mods);
 
+            files."config/proxy_protocol_support.json".value = {
+              enableProxyProtocol = true;
+              proxyServerIPs = proxyIps;
+              directAccessIPs = [ ];
+              whitelistTCPShieldServers = false;
+            };
+
             operators = players.toOperators players.offline;
             whitelist = players.toWhitelist players.offline;
 
@@ -150,21 +172,6 @@ in
 
     networking.firewall =
       let
-        allowedIps = [
-          # neoprotect
-          "15.204.187.208/32"
-          "15.204.187.209/32"
-          "15.204.130.224/32"
-          "15.204.131.21/32"
-          "82.22.5.0/24"
-          "51.89.59.61/32"
-          "45.157.234.219/32"
-          "104.167.24.197/32"
-          "104.167.24.198/32"
-          "109.71.255.131/32"
-          "109.71.255.132/32"
-        ];
-
         allPorts = mapAttrsToList (
           name: server: toString (server.serverProperties.server-port or 25565)
         ) cfg.servers;
@@ -176,7 +183,7 @@ in
           port:
           concatMapStrings (ip: ''
             iptables -A nixos-fw -p tcp -s ${ip} --dport ${port} -j nixos-fw-accept
-          '') allowedIps
+          '') proxyIps
         ) uniquePorts;
       };
 
