@@ -189,6 +189,24 @@ in
         mode = "0400";
       };
 
+      "bin9o.crt" = {
+        sopsFile = ../../secrets/bin9o.crt;
+        format = "binary";
+
+        owner = "nginx";
+        group = "nginx";
+        mode = "0400";
+      };
+
+      "bin9o.key" = {
+        sopsFile = ../../secrets/bin9o.key;
+        format = "binary";
+
+        owner = "nginx";
+        group = "nginx";
+        mode = "0400";
+      };
+
       attic-env = {
         sopsFile = ../../secrets/attic-env;
         format = "binary";
