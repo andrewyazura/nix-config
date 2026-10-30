@@ -11,7 +11,6 @@ let
   system = pkgs.stdenv.hostPlatform.system;
   llm-agents = inputs.llm-agents.packages.${system};
 
-  hooks = import ./hooks.nix { inherit pkgs; };
   statusline = import ./statusline.nix { inherit lib pkgs; };
 
   homeDirectory = config.home.homeDirectory;
@@ -48,8 +47,6 @@ let
         showTurnDuration = true;
         spinnerTipsEnabled = true;
         terminalProgressBarEnabled = true;
-
-        inherit hooks;
 
         modelSettings =
           genAttrs
