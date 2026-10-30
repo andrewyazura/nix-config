@@ -19,6 +19,7 @@
     ./apps/bingo.nix
     ./apps/birthday-api.nix
     ./apps/birthday-bot.nix
+    ./apps/ntfy.nix
     ./apps/oauth-consent.nix
     ./apps/stresses-bot.nix
   ];
@@ -176,6 +177,11 @@
 
       netrc = {
         sopsFile = ../../secrets/netrc-bunker;
+        format = "binary";
+      };
+
+      ntfy-env = {
+        sopsFile = ../../secrets/ntfy-env;
         format = "binary";
       };
 
