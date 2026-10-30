@@ -11,10 +11,7 @@ in
   config = mkIf cfg.enable {
     homebrew = {
       enable = true;
-      onActivation = {
-        cleanup = "zap";
-        extraFlags = [ "--verbose" ];
-      };
+      onActivation.cleanup = "zap";
     };
   };
 }

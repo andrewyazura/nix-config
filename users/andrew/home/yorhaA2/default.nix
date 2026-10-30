@@ -7,6 +7,8 @@
       ai-tools.enable = true;
     };
 
+    colima.enable = true;
+
     ghostty.fontSize = 12;
     ideavim.enable = true;
     tmux.showBattery = true;

@@ -31,11 +31,20 @@ in
         "intellij-idea"
         "lens"
         "mongodb-compass"
-        "orbstack"
         "pritunl"
         "proxyman"
         "tuple"
       ];
+    };
+
+    launchd.daemons.docker-socket.serviceConfig = {
+      ProgramArguments = [
+        "/bin/ln"
+        "-sf"
+        "${config.users.users.${config.system.primaryUser}.home}/.colima/default/docker.sock"
+        "/var/run/docker.sock"
+      ];
+      RunAtLoad = true;
     };
   };
 }

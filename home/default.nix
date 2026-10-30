@@ -5,6 +5,7 @@
     ./base-packages
     ./btop
     ./claude
+    ./colima
     ./cs2
     ./dev-packages
     ./difftastic
