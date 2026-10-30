@@ -19,6 +19,7 @@ in
           "systemd"
           "processes"
         ];
+        extraFlags = [ "--collector.systemd.enable-restarts-metrics" ];
       };
 
       postgres = {
@@ -52,6 +53,58 @@ in
         static_configs = [ { targets = [ "127.0.0.1:25585" ]; } ];
       }
     ];
+
+    rules = [
+      (builtins.toJSON {
+        groups = [
+          {
+            name = "systemd";
+            rules = [
+              {
+                alert = "ServiceRestarted";
+                expr = "increase(node_systemd_service_restart_total[5m]) > 0";
+                annotations.summary = "{{ $labels.name }} was restarted automatically";
+              }
+            ];
+          }
+        ];
+      })
+    ];
+
+    alertmanagers = [
+      {
+        static_configs = [
+          { targets = [ "127.0.0.1:${toString config.services.prometheus.alertmanager.port}" ]; }
+        ];
+      }
+    ];
+
+    alertmanager = {
+      enable = true;
+      listenAddress = "127.0.0.1";
+      environmentFile = config.sops.secrets.ntfy-env.path;
+      configuration = {
+        route = {
+          receiver = "ntfy";
+          group_by = [
+            "alertname"
+            "name"
+          ];
+        };
+        receivers = [
+          {
+            name = "ntfy";
+            webhook_configs = [
+              {
+                url = "http://[::1]:2586/bunker?template=alertmanager";
+                send_resolved = false;
+                http_config.authorization.credentials = "$NTFY_TOKEN";
+              }
+            ];
+          }
+        ];
+      };
+    };
   };
 
   services.grafana = {
