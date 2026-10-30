@@ -187,77 +187,87 @@ in
         ) uniquePorts;
       };
 
-    systemd.services = mapAttrs' (
-      name: server:
-      nameValuePair "minecraft-backup-${name}" {
-        description = "Scheduled rclone backup for Minecraft server ${name}";
-        wants = [ "network-online.target" ];
-        after = [
-          "network-online.target"
-          "sops-nix.service"
-        ];
-
-        path = with pkgs; [
-          bash
-          findutils
-          gnutar
-          gzip
-          rclone
-          systemd
-          tmux
-        ];
-
-        environment = {
-          SERVER_NAME = name;
-          RCLONE_REMOTE = server.backup.remote;
-          RETENTION_DAYS = toString server.backup.retentionDays;
-          RCLONE_SECRET_CONFIG = optionalString (server.backup.rcloneConfigFile != null) (
-            toString server.backup.rcloneConfigFile
-          );
-        };
-
-        serviceConfig = {
-          Type = "oneshot";
-          User = "minecraft";
-          Group = "minecraft";
-          EnvironmentFile = optional (server.backup.environmentFile != null) server.backup.environmentFile;
-          ExecStart = "${pkgs.bash}/bin/bash ${./backup.sh}";
-          StateDirectory = "minecraft-backup-${name}";
-          StateDirectoryMode = "0700";
-
-          CapabilityBoundingSet = "";
-          LockPersonality = true;
-          MemoryDenyWriteExecute = true;
-          NoNewPrivileges = true;
-          PrivateDevices = true;
-          PrivateTmp = true;
-          ProtectClock = true;
-          ProtectControlGroups = true;
-          ProtectHome = true;
-          ProtectHostname = true;
-          ProtectKernelLogs = true;
-          ProtectKernelModules = true;
-          ProtectKernelTunables = true;
-          ProtectProc = "invisible";
-          ProtectSystem = "strict";
-          RestrictAddressFamilies = [
-            "AF_INET"
-            "AF_INET6"
-            "AF_UNIX"
+    systemd.services = mkMerge [
+      (mapAttrs' (
+        name: _:
+        nameValuePair "minecraft-server-${name}" {
+          serviceConfig = {
+            MemoryMax = "10G";
+          };
+        }
+      ) cfg.servers)
+      (mapAttrs' (
+        name: server:
+        nameValuePair "minecraft-backup-${name}" {
+          description = "Scheduled rclone backup for Minecraft server ${name}";
+          wants = [ "network-online.target" ];
+          after = [
+            "network-online.target"
+            "sops-nix.service"
           ];
-          RestrictNamespaces = true;
-          RestrictRealtime = true;
-          RestrictSUIDSGID = true;
-          SystemCallArchitectures = "native";
-          SystemCallFilter = [
-            "@system-service"
-            "~@privileged"
-            "@chown"
+
+          path = with pkgs; [
+            bash
+            findutils
+            gnutar
+            gzip
+            rclone
+            systemd
+            tmux
           ];
-          UMask = "0077";
-        };
-      }
-    ) enabledBackupServers;
+
+          environment = {
+            SERVER_NAME = name;
+            RCLONE_REMOTE = server.backup.remote;
+            RETENTION_DAYS = toString server.backup.retentionDays;
+            RCLONE_SECRET_CONFIG = optionalString (server.backup.rcloneConfigFile != null) (
+              toString server.backup.rcloneConfigFile
+            );
+          };
+
+          serviceConfig = {
+            Type = "oneshot";
+            User = "minecraft";
+            Group = "minecraft";
+            EnvironmentFile = optional (server.backup.environmentFile != null) server.backup.environmentFile;
+            ExecStart = "${pkgs.bash}/bin/bash ${./backup.sh}";
+            StateDirectory = "minecraft-backup-${name}";
+            StateDirectoryMode = "0700";
+
+            CapabilityBoundingSet = "";
+            LockPersonality = true;
+            MemoryDenyWriteExecute = true;
+            NoNewPrivileges = true;
+            PrivateDevices = true;
+            PrivateTmp = true;
+            ProtectClock = true;
+            ProtectControlGroups = true;
+            ProtectHome = true;
+            ProtectHostname = true;
+            ProtectKernelLogs = true;
+            ProtectKernelModules = true;
+            ProtectKernelTunables = true;
+            ProtectProc = "invisible";
+            ProtectSystem = "strict";
+            RestrictAddressFamilies = [
+              "AF_INET"
+              "AF_INET6"
+              "AF_UNIX"
+            ];
+            RestrictNamespaces = true;
+            RestrictRealtime = true;
+            RestrictSUIDSGID = true;
+            SystemCallArchitectures = "native";
+            SystemCallFilter = [
+              "@system-service"
+              "~@privileged"
+              "@chown"
+            ];
+            UMask = "0077";
+          };
+        }
+      ) enabledBackupServers)
+    ];
 
     systemd.timers = mapAttrs' (
       name: server:
