@@ -11,6 +11,12 @@ creation_rules:
       - *bunker
     format: binary
 
+  - path_regex: secrets/bin9o\.(crt|key)
+    key_groups:
+    - age:
+      - *bunker
+    format: binary
+
   - path_regex: secrets/ssh-config
     key_groups:
     - age:
