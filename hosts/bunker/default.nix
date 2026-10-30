@@ -75,7 +75,7 @@
       enable = true;
 
       servers.bombas = {
-        jvmOpts = "-Xms8192M -Xmx8192M";
+        jvmOpts = "-Xms8192M -Xmx8192M -XX:+ExitOnOutOfMemoryError";
 
         serverProperties = {
           server-port = 25565;
@@ -193,6 +193,11 @@
         mode = "0400";
       };
     };
+  };
+
+  zramSwap = {
+    enable = true;
+    memoryPercent = 50;
   };
 
   services = {
