@@ -61,4 +61,8 @@ with pkgs;
     url = "https://cdn.modrinth.com/data/Z5GdSH3X/versions/rTvl7ojW/crashexploitfixer-fabric-2.0.0%2B26.3.jar";
     sha512 = "04rs3fwnr6afvjyv5biw8alyl82p4ns9ybsbrdk6hqic9j0gqzaw45mfs18mrm2gq8yxyk922751w7pwfsv700lzwznq4m4zdcs3hgz";
   };
+  "fabricexporter" = fetchurl {
+    url = "https://cdn.modrinth.com/data/dbVXHSlv/versions/tuPsGk8g/fabricexporter-26.2-1.0.22.jar";
+    sha512 = "1q0hxjjp20mh5pihm5a5girmkjmq2zfxaijxvxy2ysmr1676pm8ia06jqs8zghx3hzvg5igxdsa8svp37fx1wbzfwp1s34hi71mqiw0";
+  };
 }
