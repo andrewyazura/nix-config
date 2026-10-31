@@ -49,6 +49,10 @@ with pkgs;
     url = "https://cdn.modrinth.com/data/LVN9ygNV/versions/pxv5cN0d/ledger-1.3.25.jar";
     sha512 = "14jv37clwnsshd15y6ki3mrlp49abskmpimvliifr283bylgp5xah4vdn2shh0wiqkl9fyvardma4xaj846mwlrz2nxs9d2imr48bpk";
   };
+  "ledger-databases" = fetchurl {
+    url = "https://cdn.modrinth.com/data/qo9qFPdi/versions/kF6IfYxY/ledger-databases-1.2.2.jar";
+    sha512 = "0lpfxvcrkxpdwc9fl26hqmhv7qsg47qiiaxg5aqvmi505d0clgbbps1zkj42h9yj77hyahfz213cn09sadmvgiy16mizhfp9cxrq3m8";
+  };
   "server-replay" = fetchurl {
     url = "https://cdn.modrinth.com/data/qCvSZ8ra/versions/rCmC09FF/ServerReplay-3.6.0-beta.5%2B26.3.jar";
     sha512 = "2c8rpdz31qmnk9nibjsn52v5szhcbdskhdya2qbw8m2qlyxbddh1v0zggw1igi9h3f9b82kvyamds1lr7lfijksic4dv5apzy27b1gy";

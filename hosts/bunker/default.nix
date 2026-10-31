@@ -48,6 +48,7 @@ in
     ./apps/bingo.nix
     ./apps/birthday-api.nix
     ./apps/birthday-bot.nix
+    ./apps/minecraft.nix
     ./apps/monitoring.nix
     ./apps/ntfy.nix
     ./apps/oauth-consent.nix
@@ -97,26 +98,6 @@ in
             "3070244462" # Aim Botz
             "3100869952" # Recoil Master
           ];
-        };
-      };
-    };
-
-    minecraft-server = {
-      enable = true;
-
-      servers.bombas = {
-        jvmOpts = "-Xms8192M -Xmx8192M -XX:+ExitOnOutOfMemoryError";
-
-        serverProperties = {
-          server-port = 25565;
-        };
-
-        backup = {
-          enable = true;
-          remote = "gdrive-minecraft-backups:minecraft-backups";
-          rcloneConfigFile = config.sops.secrets.rclone-config.path;
-          calendar = "04:00";
-          retentionDays = 1;
         };
       };
     };
@@ -221,6 +202,12 @@ in
         sopsFile = ../../secrets/cs2-env;
         format = "binary";
         restartUnits = [ "cs2-server-1.service" ];
+      };
+
+      minecraft-ledger-env = {
+        sopsFile = ../../secrets/minecraft-ledger-env;
+        format = "binary";
+        restartUnits = [ "minecraft-server-bombas.service" ];
       };
 
       netrc = {

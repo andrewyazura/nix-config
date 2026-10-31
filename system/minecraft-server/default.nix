@@ -50,6 +50,18 @@ in
             description = "Properties for the server.properties file";
           };
 
+          environmentFile = mkOption {
+            type = nullOr path;
+            default = null;
+            description = "Environment file for the server; its variables can be referenced in files as @VARNAME@.";
+          };
+
+          files = mkOption {
+            type = attrsOf anything;
+            default = { };
+            description = "Files to copy into the server directory (see nix-minecraft's files option).";
+          };
+
           backup = {
             enable = mkOption {
               type = bool;
@@ -165,7 +177,10 @@ in
         mapAttrs (
           name: value:
           recursiveUpdate (recursiveUpdate (serverTemplate name) value) (
-            builtins.removeAttrs (cfg.servers.${name} or { }) [ "backup" ]
+            builtins.removeAttrs (cfg.servers.${name} or { }) [
+              "backup"
+              "environmentFile"
+            ]
           )
         ) customServers;
     };
@@ -189,10 +204,11 @@ in
 
     systemd.services = mkMerge [
       (mapAttrs' (
-        name: _:
+        name: server:
         nameValuePair "minecraft-server-${name}" {
           serviceConfig = {
             MemoryMax = "10G";
+            EnvironmentFile = optional (server.environmentFile != null) server.environmentFile;
           };
         }
       ) cfg.servers)
