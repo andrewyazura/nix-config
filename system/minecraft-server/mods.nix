@@ -53,14 +53,6 @@ with pkgs;
     url = "https://cdn.modrinth.com/data/qCvSZ8ra/versions/rCmC09FF/ServerReplay-3.6.0-beta.5%2B26.3.jar";
     sha512 = "2c8rpdz31qmnk9nibjsn52v5szhcbdskhdya2qbw8m2qlyxbddh1v0zggw1igi9h3f9b82kvyamds1lr7lfijksic4dv5apzy27b1gy";
   };
-  "grimac" = fetchurl {
-    url = "https://cdn.modrinth.com/data/LJNGWSvH/versions/7l2zjPkM/grimac-fabric-2.3.75-1299a2a.jar";
-    sha512 = "042g8pi5zkx6g4hhkxv88sirr1drmkc9k3nz331p0mp2rcszk6akhyp4ni2k6lipqlky0c5wif6839r8825kd1liqr4knli53xlfx5q";
-  };
-  "crashexploitfixer" = fetchurl {
-    url = "https://cdn.modrinth.com/data/Z5GdSH3X/versions/rTvl7ojW/crashexploitfixer-fabric-2.0.0%2B26.3.jar";
-    sha512 = "04rs3fwnr6afvjyv5biw8alyl82p4ns9ybsbrdk6hqic9j0gqzaw45mfs18mrm2gq8yxyk922751w7pwfsv700lzwznq4m4zdcs3hgz";
-  };
   "fabricexporter" = fetchurl {
     url = "https://cdn.modrinth.com/data/dbVXHSlv/versions/tuPsGk8g/fabricexporter-26.2-1.0.22.jar";
     sha512 = "1q0hxjjp20mh5pihm5a5girmkjmq2zfxaijxvxy2ysmr1676pm8ia06jqs8zghx3hzvg5igxdsa8svp37fx1wbzfwp1s34hi71mqiw0";
