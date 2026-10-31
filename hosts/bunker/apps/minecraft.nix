@@ -51,9 +51,7 @@
       "postgresql.service"
       "postgresql-setup.service"
     ];
-    requires = [
-      "postgresql.service"
-      "postgresql-setup.service"
-    ];
+    requires = [ "postgresql.service" ];
+    wants = [ "postgresql-setup.service" ];
   };
 }
