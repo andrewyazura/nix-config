@@ -1,0 +1,8 @@
+REVOKE ALL ON ALL TABLES IN SCHEMA public FROM grafana;
+ALTER DEFAULT PRIVILEGES FOR ROLE ledger IN SCHEMA public REVOKE ALL ON TABLES FROM grafana;
+ALTER ROLE grafana IN DATABASE ledger RESET ALL;
+
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO grafana;
+ALTER DEFAULT PRIVILEGES FOR ROLE ledger IN SCHEMA public GRANT SELECT ON TABLES TO grafana;
+ALTER ROLE grafana IN DATABASE ledger SET default_transaction_read_only = on;
+ALTER ROLE grafana IN DATABASE ledger SET statement_timeout = '15s';

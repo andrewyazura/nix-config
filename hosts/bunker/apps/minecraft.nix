@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   ...
 }:
 {
@@ -46,12 +47,23 @@
     ];
   };
 
-  systemd.services.minecraft-server-bombas = {
-    after = [
-      "postgresql.service"
-      "postgresql-setup.service"
-    ];
-    requires = [ "postgresql.service" ];
-    wants = [ "postgresql-setup.service" ];
+  systemd.services = {
+    minecraft-server-bombas = {
+      after = [ "postgresql.target" ];
+      requires = [ "postgresql.target" ]; # TODO: check if ledger can reconnect to postgres without restarting minecraft server. any changes to postgresql might break connection between ledger and postgres, and complete server restart ensures ledger reconnects. if ledger is capable of reconnecting, drop requires= and only use wants=
+      wants = [ "postgresql.target" ];
+    };
+
+    ledger-grafana-grants = {
+      after = [ "postgresql.target" ];
+      wants = [ "postgresql.target" ];
+      wantedBy = [ "multi-user.target" ];
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+        User = "postgres";
+        ExecStart = "${lib.getExe' config.services.postgresql.finalPackage "psql"} -d ledger -v ON_ERROR_STOP=1 --single-transaction -f ${./ledger-grafana.sql}";
+      };
+    };
   };
 }
