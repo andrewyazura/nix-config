@@ -135,6 +135,17 @@ in
           url = "http://127.0.0.1:${toString config.services.prometheus.port}";
           isDefault = true;
         }
+        {
+          name = "Ledger PostgreSQL";
+          type = "postgres";
+          url = "/run/postgresql";
+          user = "grafana";
+          jsonData = {
+            database = "ledger";
+            sslmode = false;
+            postgresVersion = 1600;
+          };
+        }
       ];
     };
   };
