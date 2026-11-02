@@ -135,6 +135,7 @@ in
     ];
   };
 
+  users.mutableUsers = false;
   users.users = {
     root.hashedPassword = "!";
 

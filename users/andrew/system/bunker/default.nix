@@ -1,5 +1,7 @@
 {
   users.users.andrew = {
+    hashedPassword = "$y$j9T$9VJAl.zpBhgcxYwCE4R2y0$NoJyTsBkZupEwC8jaVNThUbWjqI.phcrUtli2lQtMDC";
+
     extraGroups = [
       "minecraft"
     ];
