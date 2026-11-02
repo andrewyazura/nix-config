@@ -142,7 +142,7 @@ in
           user = "grafana";
           jsonData = {
             database = "ledger";
-            sslmode = false;
+            sslmode = "disable";
             postgresVersion = 1600;
           };
         }
