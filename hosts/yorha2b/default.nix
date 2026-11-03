@@ -50,7 +50,10 @@
       gnome.enable = false;
       guitar.enable = true;
       mako.enable = true;
-      waybar.enable = true;
+      waybar = {
+        enable = true;
+        networkInterface = "wlp4s0";
+      };
 
       hyprland = {
         enable = true;

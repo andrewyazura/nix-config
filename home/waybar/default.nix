@@ -45,6 +45,14 @@ in
 {
   options.modules.waybar = {
     enable = mkEnableOption "Enable waybar";
+
+    networkInterface = mkOption {
+      type = types.nullOr types.str;
+      default = null;
+      description = "Interface shown by the network module. Null follows the default route.";
+    };
+
+    battery.enable = mkEnableOption "battery module";
   };
 
   config = mkIf cfg.enable {
@@ -70,8 +78,9 @@ in
             "hyprland/language"
             "network"
             "pulseaudio"
-            "custom/power"
-          ];
+          ]
+          ++ optional cfg.battery.enable "battery"
+          ++ [ "custom/power" ];
 
           "custom/power" = {
             format = "󰐥";
@@ -117,13 +126,27 @@ in
             on-click = "pwvucontrol";
           };
 
+          "battery" = {
+            format = "${icon "{icon}"}{capacity}%";
+            format-charging = "${icon "󰂄"}{capacity}%";
+            format-icons = [
+              "󰁺"
+              "󰁼"
+              "󰁾"
+              "󰂀"
+              "󰂂"
+              "󰁹"
+            ];
+            states.critical = 15;
+          };
+
           "network" = {
-            interface = "wlp4s0";
             format-wifi = "${icon "󰖩"}{essid}";
             format-ethernet = "<span color='${colors.accent}'>󰈀</span>";
             format-disconnected = "󰤭${gap}NOT CONNECTED";
             tooltip-format = "{essid}\n{ipaddr}\n{bandwidthDownBytes} down";
-          };
+          }
+          // optionalAttrs (cfg.networkInterface != null) { interface = cfg.networkInterface; };
         };
       };
 
@@ -181,7 +204,7 @@ in
           background: ${colors.red};
         }
 
-        #language, #network, #pulseaudio, #clock, #custom-power {
+        #language, #network, #pulseaudio, #battery, #clock, #custom-power {
           padding: 0 9px;
           color: ${colors.subtle};
         }
@@ -196,6 +219,10 @@ in
 
         #pulseaudio.muted {
           color: ${colors.muted};
+        }
+
+        #battery.critical:not(.charging) {
+          color: ${colors.red};
         }
 
         #network.disconnected {
