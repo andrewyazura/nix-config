@@ -2,123 +2,517 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="color-scheme" content="light dark" />
     <title>Dictate</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&display=swap"
+    />
     <style>
       :root {
-        --bg: #f4f4f5;
-        --fg: #18181b;
-        --muted: #71717a;
-        --field: #ffffff;
-        --border: #d4d4d8;
-        --accent: #2563eb;
-        --recording: #dc2626;
+        color-scheme: light;
+        --bg: #f4f4f2;
+        --surface: #ffffff;
+        --border: #e2e2de;
+        --divider: #ededea;
+        --text: #17181a;
+        --muted: #55565b;
+        --chip: #ecece8;
+        --primary-bg: #17181a;
+        --primary-fg: #ffffff;
+        --busy-bg: #e4e4e0;
+        --busy-fg: #4a4b4f;
+        --recording: #c8312f;
+        --error-bg: #fbe9e8;
+        --error-fg: #7e1d1b;
       }
 
       @media (prefers-color-scheme: dark) {
         :root {
-          --bg: #18181b;
-          --fg: #f4f4f5;
-          --muted: #a1a1aa;
-          --field: #27272a;
-          --border: #3f3f46;
-          --accent: #3b82f6;
-          --recording: #ef4444;
+          color-scheme: dark;
+          --bg: #000000;
+          --surface: #000000;
+          --border: #262626;
+          --divider: #1a1a1a;
+          --text: #e8e8e6;
+          --muted: #a1a1a1;
+          --chip: #161616;
+          --primary-bg: #e8e8e6;
+          --primary-fg: #000000;
+          --busy-bg: #1c1c1c;
+          --busy-fg: #a1a1a1;
+          --error-bg: #2b0e0d;
+          --error-fg: #ffb3ad;
         }
       }
 
-      * {
-        box-sizing: border-box;
+      [hidden] {
+        display: none !important;
       }
 
       body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Geist", system-ui, -apple-system, sans-serif;
+      }
+
+      main {
         display: flex;
         flex-direction: column;
-        gap: 16px;
+        align-items: center;
+        box-sizing: border-box;
+        min-height: 100vh;
         min-height: 100dvh;
-        margin: 0;
-        padding: max(16px, env(safe-area-inset-top)) 16px max(16px, env(safe-area-inset-bottom));
-        background: var(--bg);
-        color: var(--fg);
-        font: 17px/1.4 system-ui, sans-serif;
+        padding: clamp(16px, 4vw, 48px) 16px 16px;
+      }
+
+      .column {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+        max-width: 720px;
+      }
+
+      .card {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        min-height: 240px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        background: var(--surface);
       }
 
       textarea {
         flex: 1;
+        box-sizing: border-box;
         width: 100%;
-        padding: 12px;
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        background: var(--field);
-        color: inherit;
-        font: inherit;
+        min-height: 200px;
+        padding: 20px;
+        border: 0;
+        outline: none;
         resize: none;
+        background: transparent;
+        color: var(--text);
+        caret-color: var(--text);
+        font: inherit;
+        font-size: 18px;
+        line-height: 1.55;
       }
 
-      #status {
-        margin: 0;
-        color: var(--muted);
-        text-align: center;
-      }
-
-      .actions {
+      .toolbar {
         display: flex;
-        gap: 12px;
+        align-items: center;
+        gap: 8px;
+        padding: 8px;
+        border-top: 1px solid var(--divider);
       }
 
       button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         border: 0;
-        border-radius: 12px;
-        color: #ffffff;
-        font: inherit;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 15px;
+      }
+
+      .main {
+        border-radius: 999px;
+        background: var(--primary-bg);
+        color: var(--primary-fg);
         font-weight: 600;
       }
 
-      button:disabled {
-        opacity: 0.6;
-      }
-
-      #copy {
-        padding: 0 24px;
-        background: var(--muted);
-      }
-
-      #record {
-        flex: 1;
-        padding: 32px 0;
-        background: var(--accent);
-      }
-
-      #record.recording {
+      body[data-mode="recording"] .main {
         background: var(--recording);
+        color: #ffffff;
+      }
+
+      body[data-mode="transcribing"] .main {
+        background: var(--busy-bg);
+        color: var(--busy-fg);
+      }
+
+      .main svg,
+      .main .meter,
+      .main .time {
+        display: none;
+      }
+
+      body[data-mode="idle"] .main .icon-mic,
+      body[data-mode="recording"] .main .icon-stop,
+      body[data-mode="transcribing"] .main .icon-spinner,
+      body[data-mode="error"] .main .icon-retry {
+        display: block;
+      }
+
+      body[data-mode="recording"] .main .meter {
+        display: flex;
+      }
+
+      body[data-mode="recording"] .main .time {
+        display: block;
+      }
+
+      .icon-spinner {
+        animation: spin 0.96s linear infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .meter {
+        align-items: center;
+      }
+
+      .meter span {
+        display: block;
+        width: 3px;
+        border-radius: 2px;
+        background: rgba(255, 255, 255, 0.85);
+      }
+
+      .meter span:nth-child(1) {
+        --level: var(--level-0, 0);
+      }
+
+      .meter span:nth-child(2) {
+        --level: var(--level-1, 0);
+      }
+
+      .meter span:nth-child(3) {
+        --level: var(--level-2, 0);
+      }
+
+      .meter span:nth-child(4) {
+        --level: var(--level-3, 0);
+      }
+
+      .meter span:nth-child(5) {
+        --level: var(--level-4, 0);
+      }
+
+      .time {
+        font-family: "Geist Mono", ui-monospace, monospace;
+        font-weight: 500;
+        text-align: left;
+      }
+
+      .main-small {
+        display: none;
+        gap: 8px;
+        height: 44px;
+        min-width: 124px;
+        padding: 0 18px 0 14px;
+      }
+
+      .main-small .meter {
+        gap: 2px;
+        height: 20px;
+        margin-left: 2px;
+      }
+
+      .main-small .meter span {
+        height: calc(3px + var(--level) * 14px);
+      }
+
+      .main-small .time {
+        min-width: 34px;
+        font-size: 14px;
+      }
+
+      .main-big {
+        flex: none;
+        gap: 12px;
+        width: 100%;
+        height: 64px;
+        font-size: 18px;
+      }
+
+      .main-big .meter {
+        gap: 3px;
+        height: 22px;
+        margin-left: 4px;
+      }
+
+      .main-big .meter span {
+        height: calc(4px + var(--level) * 18px);
+      }
+
+      .main-big .time {
+        min-width: 40px;
+        font-size: 16px;
+      }
+
+      .clear {
+        gap: 8px;
+        height: 44px;
+        padding: 0 14px;
+        border-radius: 10px;
+        background: transparent;
+        color: var(--muted);
+        font-weight: 500;
+      }
+
+      .copy {
+        gap: 8px;
+        height: 44px;
+        margin-left: auto;
+        padding: 0 16px;
+        border-radius: 10px;
+        background: var(--chip);
+        color: var(--text);
+        font-weight: 600;
+      }
+
+      .clear:disabled,
+      .copy:disabled {
+        opacity: 0.4;
+      }
+
+      .copy .icon-check,
+      .copy.copied .icon-copy {
+        display: none;
+      }
+
+      .copy.copied .icon-check {
+        display: block;
+      }
+
+      .undo {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        padding-left: 8px;
+        color: var(--muted);
+        font-size: 15px;
+      }
+
+      .undo button {
+        height: 44px;
+        padding: 0 12px;
+        border-radius: 10px;
+        background: transparent;
+        color: var(--text);
+        font-weight: 600;
+        text-decoration: underline;
+      }
+
+      .alert {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 12px 8px 12px 14px;
+        border-radius: 12px;
+        background: var(--error-bg);
+        color: var(--error-fg);
+        font-size: 15px;
+        line-height: 1.4;
+      }
+
+      .alert svg {
+        flex: none;
+        margin-top: 1px;
+      }
+
+      .alert p {
+        flex: 1;
+        margin: 0;
+      }
+
+      .alert button {
+        flex: none;
+        height: 44px;
+        margin: -12px 0;
+        padding: 0 10px;
+        background: transparent;
+        color: var(--error-fg);
+        font-weight: 600;
+        text-decoration: underline;
+      }
+
+      .visually-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: 0;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        white-space: nowrap;
+      }
+
+      @media (min-width: 768px) {
+        main {
+          padding: 72px 24px 24px;
+        }
+
+        .column {
+          flex: 0 0 auto;
+          max-width: 600px;
+        }
+
+        .card {
+          flex: none;
+          min-height: 0;
+        }
+
+        textarea {
+          flex: none;
+          height: 240px;
+          min-height: 120px;
+          padding: 18px 20px;
+          resize: vertical;
+          font-size: 17px;
+        }
+
+        .main-small {
+          display: flex;
+        }
+
+        .main-big {
+          display: none;
+        }
+
+        .clear,
+        .undo {
+          margin-left: auto;
+        }
+
+        .copy {
+          margin-left: 0;
+        }
       }
     </style>
   </head>
-  <body>
-    <textarea id="output" placeholder="Transcript"></textarea>
-    <p id="status">Tap Record to start</p>
-    <div class="actions">
-      <button id="copy">Copy</button>
-      <button id="record">Record</button>
-    </div>
-    <script>
-      const output = document.getElementById("output");
-      const status = document.getElementById("status");
-      const copy = document.getElementById("copy");
-      const record = document.getElementById("record");
-      let stopRecording;
-      let timer;
+  <body data-mode="idle">
+    <main>
+      <div class="column">
+        <section class="card">
+          <label class="visually-hidden" for="transcript">Transcribed text</label>
+          <textarea id="transcript"></textarea>
+          <div class="toolbar">
+            <button class="main main-small" type="button">
+              <svg class="icon-mic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3"></path></svg>
+              <svg class="icon-stop" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="2.5" fill="currentColor"></rect></svg>
+              <svg class="icon-spinner" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9" opacity="0.25"></circle><path d="M21 12a9 9 0 0 0-9-9"></path></svg>
+              <svg class="icon-retry" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 2.6-6.4L3 8M3 3v5h5"></path></svg>
+              <span class="label">Record</span>
+              <span class="meter" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></span>
+              <span class="time">0:00</span>
+            </button>
+            <div class="undo" id="undo" hidden>
+              Text cleared.
+              <button id="undo-button" type="button">Undo</button>
+            </div>
+            <button class="clear" id="clear" type="button" disabled>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"></path></svg>
+              Clear
+            </button>
+            <button class="copy" id="copy" type="button" disabled>
+              <svg class="icon-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg>
+              <svg class="icon-copy" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h8"></path></svg>
+              <span id="copy-label">Copy</span>
+            </button>
+          </div>
+        </section>
 
-      copy.addEventListener("click", () =>
-        navigator.clipboard.writeText(output.value).then(() => (status.textContent = "Copied"), showError),
-      );
-      record.addEventListener("click", () => (stopRecording ? stop() : start()));
+        <div class="alert" id="alert" role="alert" hidden>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v6M12 16.5v.5"></path></svg>
+          <p id="alert-text"></p>
+          <button id="dismiss" type="button">Discard</button>
+        </div>
+
+        <button class="main main-big" type="button">
+          <svg class="icon-mic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3"></path></svg>
+          <svg class="icon-stop" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="2.5" fill="currentColor"></rect></svg>
+          <svg class="icon-spinner" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9" opacity="0.25"></circle><path d="M21 12a9 9 0 0 0-9-9"></path></svg>
+          <svg class="icon-retry" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 2.6-6.4L3 8M3 3v5h5"></path></svg>
+          <span class="label">Record</span>
+          <span class="meter" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></span>
+          <span class="time">0:00</span>
+        </button>
+
+        <p class="visually-hidden" id="status" aria-live="polite">Ready</p>
+      </div>
+    </main>
+    <script>
+      const transcript = document.getElementById("transcript");
+      const status = document.getElementById("status");
+      const clear = document.getElementById("clear");
+      const copy = document.getElementById("copy");
+      const copyLabel = document.getElementById("copy-label");
+      const undo = document.getElementById("undo");
+      const alertBox = document.getElementById("alert");
+      const alertText = document.getElementById("alert-text");
+      const dismiss = document.getElementById("dismiss");
+      const mainButtons = document.querySelectorAll(".main");
+      const times = document.querySelectorAll(".time");
+
+      const labels = { idle: "Record", recording: "Transcribe", transcribing: "Transcribing…", error: "Retry" };
+      const statuses = { idle: "Ready", recording: "Recording", transcribing: "Transcribing", error: "Transcription failed" };
+      const placeholders = { recording: "Listening…", transcribing: "Transcribing…" };
+
+      let mode = "idle";
+      let stopRecording;
+      let keptAudio;
+      let undoText = null;
+      let undoTimer;
+      let copyTimer;
+
+      for (const button of mainButtons) button.addEventListener("click", onMain);
+      transcript.addEventListener("input", () => {
+        undoText = null;
+        render();
+      });
+      clear.addEventListener("click", onClear);
+      document.getElementById("undo-button").addEventListener("click", onUndo);
+      copy.addEventListener("click", onCopy);
+      dismiss.addEventListener("click", onDismiss);
+      render();
+
+      function render() {
+        document.body.dataset.mode = mode;
+        for (const button of mainButtons) {
+          button.disabled = mode === "transcribing";
+          button.querySelector(".label").textContent = labels[mode];
+        }
+        transcript.placeholder = placeholders[mode] ?? "Press Record and start talking. Your text appears here.";
+        const empty = !transcript.value.trim();
+        clear.disabled = copy.disabled = empty;
+        undo.hidden = undoText === null || !empty;
+        clear.hidden = !undo.hidden;
+        status.textContent = statuses[mode];
+      }
+
+      function onMain() {
+        if (mode === "idle") {
+          start();
+        } else if (mode === "recording") {
+          mode = "transcribing";
+          render();
+          stopRecording().then(transcribe);
+        } else if (mode === "error") {
+          transcribe(keptAudio);
+        }
+      }
 
       async function start() {
-        record.disabled = true;
+        for (const button of mainButtons) button.disabled = true;
+        hideAlert();
+        setCopied(false);
+        const context = new AudioContext();
         try {
           const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
           const recorder = new MediaRecorder(stream);
@@ -127,66 +521,137 @@
             recorder.ondataavailable = (event) => chunks.push(event.data);
             recorder.onstop = () => {
               stream.getTracks().forEach((track) => track.stop());
+              context.close();
               resolve(new Blob(chunks, { type: recorder.mimeType }));
             };
           });
+          const analyser = context.createAnalyser();
+          analyser.fftSize = 256;
+          analyser.maxDecibels = -10;
+          context.createMediaStreamSource(stream).connect(analyser);
           recorder.start();
           stopRecording = () => {
             recorder.stop();
             return audio;
           };
-
-          const startedAt = Date.now();
-          const tick = () => (status.textContent = `Recording ${Math.floor((Date.now() - startedAt) / 1000)} s`);
-          tick();
-          timer = setInterval(tick, 250);
-          record.textContent = "Stop";
-          record.classList.add("recording");
+          mode = "recording";
+          showLevels(analyser, Date.now());
         } catch (error) {
-          showError(error);
+          context.close();
+          showAlert(`Couldn’t access the microphone: ${error.message}`, "Dismiss");
         }
-        record.disabled = false;
+        render();
       }
 
-      function stop() {
-        const text = stopRecording().then(transcribe);
-        stopRecording = null;
-        clearInterval(timer);
-        record.textContent = "Record";
-        record.classList.remove("recording");
-        record.disabled = true;
-        status.textContent = "Transcribing…";
-
-        const copied = navigator.clipboard
-          .write([new ClipboardItem({ "text/plain": text.then((value) => new Blob([value], { type: "text/plain" })) })])
-          .then(
-            () => true,
-            () => false,
-          );
-        text
-          .then(async (value) => {
-            output.value = value;
-            status.textContent = (await copied) ? "Copied" : "Tap Copy to copy";
-          })
-          .catch(showError)
-          .finally(() => (record.disabled = false));
+      function showLevels(analyser, startedAt) {
+        const bins = new Uint8Array(analyser.frequencyBinCount);
+        const frame = () => {
+          if (mode !== "recording") return;
+          analyser.getByteFrequencyData(bins);
+          for (let i = 0; i < 5; i++) {
+            const band = bins.subarray(1 + i * 4, 5 + i * 4);
+            const average = band.reduce((sum, value) => sum + value, 0) / band.length;
+            const level = Math.min(1, Math.max(0, (average - 100) / 130));
+            document.body.style.setProperty(`--level-${i}`, level.toFixed(2));
+          }
+          const seconds = Math.floor((Date.now() - startedAt) / 1000);
+          for (const time of times) time.textContent = `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, "0")}`;
+          requestAnimationFrame(frame);
+        };
+        frame();
       }
 
       async function transcribe(audio) {
+        keptAudio = audio;
+        mode = "transcribing";
+        hideAlert();
+        render();
+        try {
+          const text = await request(audio);
+          keptAudio = null;
+          mode = "idle";
+          if (text) append(text);
+          render();
+          if (!text) status.textContent = "Nothing heard";
+        } catch (error) {
+          mode = "error";
+          showAlert(`${error.message} Your recording is kept, so you can retry.`, "Discard");
+          render();
+        }
+      }
+
+      async function request(audio) {
         const form = new FormData();
         form.append("file", audio);
         form.append("response_format", "json");
-        const response = await fetch("/inference", { method: "POST", body: form });
-        if (!response.ok) throw new Error(`Server returned ${response.status}`);
-        const body = await response.json();
-        if (body.error) throw new Error(body.error);
+        const response = await fetch("/inference", { method: "POST", body: form }).catch(() => {
+          throw new Error("Couldn’t reach the server.");
+        });
+        const body = await response.json().catch(() => ({}));
+        if (!response.ok || body.error) {
+          const reason = body.error ?? `server returned ${response.status}`;
+          throw new Error(`Transcription failed: ${reason.replace(/\.$/, "")}.`);
+        }
         const text = body.text.replaceAll("[BLANK_AUDIO]", "").replace(/\s+/g, " ").trim();
-        if (!/[\p{L}\p{N}]/u.test(text)) throw new Error("Nothing heard");
-        return text;
+        return /[\p{L}\p{N}]/u.test(text) ? text : "";
       }
 
-      function showError(error) {
-        status.textContent = error.message;
+      function append(text) {
+        const current = transcript.value.replace(/\s+$/, "");
+        transcript.value = current ? `${current}\n\n${text}` : text;
+        undoText = null;
+      }
+
+      function onClear() {
+        undoText = transcript.value;
+        transcript.value = "";
+        setCopied(false);
+        clearTimeout(undoTimer);
+        undoTimer = setTimeout(() => {
+          undoText = null;
+          render();
+        }, 5000);
+        render();
+      }
+
+      function onUndo() {
+        clearTimeout(undoTimer);
+        transcript.value = undoText;
+        undoText = null;
+        render();
+      }
+
+      function onCopy() {
+        navigator.clipboard.writeText(transcript.value).then(
+          () => {
+            setCopied(true);
+            clearTimeout(copyTimer);
+            copyTimer = setTimeout(() => setCopied(false), 1800);
+          },
+          () => transcript.select(),
+        );
+      }
+
+      function setCopied(copied) {
+        copy.classList.toggle("copied", copied);
+        copyLabel.textContent = copied ? "Copied" : "Copy";
+      }
+
+      function onDismiss() {
+        keptAudio = null;
+        if (mode === "error") mode = "idle";
+        hideAlert();
+        render();
+      }
+
+      function showAlert(message, action) {
+        alertText.textContent = message;
+        dismiss.textContent = action;
+        alertBox.hidden = false;
+      }
+
+      function hideAlert() {
+        alertBox.hidden = true;
       }
     </script>
   </body>
