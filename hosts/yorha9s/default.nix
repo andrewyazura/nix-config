@@ -80,6 +80,16 @@
     nvidia.dynamicBoost.enable = false;
   };
 
+  programs.steam = {
+    package = pkgs.steam.override {
+      extraEnv = {
+        MANGOHUD = "1";
+        MANGOHUD_CONFIG = "fps_limit=60,no_display";
+      };
+    };
+    extraPackages = [ pkgs.mangohud ];
+  };
+
   zramSwap.enable = true;
 
   time.timeZone = "Europe/Warsaw";
