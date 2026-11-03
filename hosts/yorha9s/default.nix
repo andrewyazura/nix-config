@@ -15,7 +15,7 @@
       gaming.enable = true;
     };
 
-    i3.enable = true;
+    hyprland.enable = true;
   };
 
   home-manager.users.andrew = {
@@ -28,8 +28,23 @@
     ];
 
     modules = {
-      i3.enable = true;
-      polybar.enable = true;
+      mako.enable = true;
+
+      waybar = {
+        enable = true;
+        battery.enable = true;
+      };
+
+      hyprland = {
+        enable = true;
+        output = [
+          {
+            output = "eDP-1";
+            mode = "1920x1080@144";
+            position = "0x0";
+          }
+        ];
+      };
     };
   };
 
@@ -49,36 +64,7 @@
   services = {
     asusd.enable = true;
     supergfxd.enable = true;
-    libinput.touchpad.naturalScrolling = true;
-
-    xserver = {
-      videoDrivers = [ "nvidia" ];
-
-      inputClassSections =
-        let
-          layouts = "us,ua";
-        in
-        [
-          ''
-            Identifier "general keyboard settings"
-            MatchIsKeyboard "on"
-            Option "XkbLayout" "${layouts}"
-            Option "XkbOptions" "grp:win_space_toggle,caps:swapescape"
-          ''
-          ''
-            Identifier "disable swapescape for wooting 60he+"
-            MatchProduct "Wooting Wooting 60HE+"
-            Option "XkbLayout" "${layouts}"
-            Option "XkbOptions" "grp:win_space_toggle"
-          ''
-          ''
-            Identifier "disable swapescape for glorious gmmk compact"
-            MatchProduct "SONIX USB DEVICE"
-            Option "XkbLayout" "${layouts}"
-            Option "XkbOptions" "grp:win_space_toggle"
-          ''
-        ];
-    };
+    xserver.videoDrivers = [ "nvidia" ];
   };
 
   hardware = {

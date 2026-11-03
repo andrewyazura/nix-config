@@ -217,6 +217,7 @@ in
             float_switch_override_focus = 0;
             force_no_accel = true;
             sensitivity = 0;
+            touchpad.natural_scroll = true;
           };
         };
 
