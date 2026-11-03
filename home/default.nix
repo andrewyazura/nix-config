@@ -28,6 +28,7 @@
     ./ssh
     ./theme
     ./tmux
+    ./tuple
     ./vesktop
     ./video-editing
     ./waybar

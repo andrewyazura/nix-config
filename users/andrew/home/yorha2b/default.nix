@@ -3,6 +3,7 @@
   modules = {
     anki.enable = true;
     cs2.enable = true;
+    tuple.enable = true;
     profiles = {
       development.enable = true;
       desktop.enable = true;

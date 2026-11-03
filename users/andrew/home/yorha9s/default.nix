@@ -1,6 +1,7 @@
 { config, ... }:
 {
   modules = {
+    tuple.enable = true;
     profiles = {
       development.enable = true;
       desktop.enable = true;
