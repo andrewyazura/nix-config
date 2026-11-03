@@ -31,7 +31,6 @@
     whisper-cpp = {
       enable = true;
       package = pkgs.whisper-cpp-vulkan;
-      server.enable = true;
     };
 
     wivrn.enable = true;
