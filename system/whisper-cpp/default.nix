@@ -10,6 +10,14 @@ let
   proxyPort = 8177;
   serverPort = 8178;
 
+  public = pkgs.runCommand "whisper-public" { nativeBuildInputs = [ pkgs.librsvg ]; } ''
+    cp -r ${./public} $out
+    chmod u+w $out
+    rsvg-convert -w 192 -h 192 ${./public/icon.svg} -o $out/icon-192.png
+    rsvg-convert -w 512 -h 512 ${./public/icon.svg} -o $out/icon-512.png
+    rsvg-convert -w 512 -h 512 ${./icon-maskable.svg} -o $out/icon-maskable-512.png
+  '';
+
   waitForServer = pkgs.writeShellScript "whisper-server-ready" ''
     until ${lib.getExe pkgs.curl} -sf -o /dev/null http://127.0.0.1:${toString serverPort}/health; do
       sleep 0.1
@@ -52,7 +60,7 @@ in
         environment.MESA_SHADER_CACHE_DIR = "/var/cache/whisper-server";
         unitConfig.StopWhenUnneeded = true;
         serviceConfig = {
-          ExecStart = "${lib.getExe' cfg.package "whisper-server"} --host 127.0.0.1 --port ${toString serverPort} --model ${cfg.model} --public ${./public} --convert --tmp-dir /tmp -nt";
+          ExecStart = "${lib.getExe' cfg.package "whisper-server"} --host 127.0.0.1 --port ${toString serverPort} --model ${cfg.model} --public ${public} --convert --tmp-dir /tmp -nt";
           ExecStartPost = waitForServer;
           DynamicUser = true;
           CacheDirectory = "whisper-server";
