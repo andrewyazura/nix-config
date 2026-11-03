@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 {
   modules = {
     tuple.enable = true;
@@ -9,6 +9,11 @@
     };
   };
   home.stateVersion = "24.11";
+
+  wayland.windowManager.hyprland.settings.config.input = {
+    force_no_accel = lib.mkForce false;
+    touchpad.scroll_factor = 0.7;
+  };
 
   sops = {
     age.sshKeyPaths = [ "/home/andrew/.ssh/id_ed25519_yorha9s_nixconfig_1510" ];
