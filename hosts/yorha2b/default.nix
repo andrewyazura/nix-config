@@ -27,6 +27,13 @@
     oo7.enable = true;
     sunshine.enable = true;
     tailscale.enable = true;
+
+    whisper-cpp = {
+      enable = true;
+      package = pkgs.whisper-cpp-vulkan;
+      server.enable = true;
+    };
+
     wivrn.enable = true;
     wooting.enable = true;
   };
@@ -62,11 +69,6 @@
             position = "auto";
           }
         ];
-      };
-
-      whisper-cpp = {
-        enable = true;
-        package = pkgs.whisper-cpp-vulkan;
       };
     };
   };

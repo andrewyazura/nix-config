@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Dictate</title>
+    <style>
+      :root {
+        --bg: #f4f4f5;
+        --fg: #18181b;
+        --muted: #71717a;
+        --field: #ffffff;
+        --border: #d4d4d8;
+        --accent: #2563eb;
+        --recording: #dc2626;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #18181b;
+          --fg: #f4f4f5;
+          --muted: #a1a1aa;
+          --field: #27272a;
+          --border: #3f3f46;
+          --accent: #3b82f6;
+          --recording: #ef4444;
+        }
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        min-height: 100dvh;
+        margin: 0;
+        padding: max(16px, env(safe-area-inset-top)) 16px max(16px, env(safe-area-inset-bottom));
+        background: var(--bg);
+        color: var(--fg);
+        font: 17px/1.4 system-ui, sans-serif;
+      }
+
+      textarea {
+        flex: 1;
+        width: 100%;
+        padding: 12px;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: var(--field);
+        color: inherit;
+        font: inherit;
+        resize: none;
+      }
+
+      #status {
+        margin: 0;
+        color: var(--muted);
+        text-align: center;
+      }
+
+      .actions {
+        display: flex;
+        gap: 12px;
+      }
+
+      button {
+        border: 0;
+        border-radius: 12px;
+        color: #ffffff;
+        font: inherit;
+        font-weight: 600;
+      }
+
+      button:disabled {
+        opacity: 0.6;
+      }
+
+      #copy {
+        padding: 0 24px;
+        background: var(--muted);
+      }
+
+      #record {
+        flex: 1;
+        padding: 32px 0;
+        background: var(--accent);
+      }
+
+      #record.recording {
+        background: var(--recording);
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="output" placeholder="Transcript"></textarea>
+    <p id="status">Tap Record to start</p>
+    <div class="actions">
+      <button id="copy">Copy</button>
+      <button id="record">Record</button>
+    </div>
+    <script>
+      const output = document.getElementById("output");
+      const status = document.getElementById("status");
+      const copy = document.getElementById("copy");
+      const record = document.getElementById("record");
+      let stopRecording;
+      let timer;
+
+      copy.addEventListener("click", () =>
+        navigator.clipboard.writeText(output.value).then(() => (status.textContent = "Copied"), showError),
+      );
+      record.addEventListener("click", () => (stopRecording ? stop() : start()));
+
+      async function start() {
+        record.disabled = true;
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          const recorder = new MediaRecorder(stream);
+          const chunks = [];
+          const audio = new Promise((resolve) => {
+            recorder.ondataavailable = (event) => chunks.push(event.data);
+            recorder.onstop = () => {
+              stream.getTracks().forEach((track) => track.stop());
+              resolve(new Blob(chunks, { type: recorder.mimeType }));
+            };
+          });
+          recorder.start();
+          stopRecording = () => {
+            recorder.stop();
+            return audio;
+          };
+
+          const startedAt = Date.now();
+          const tick = () => (status.textContent = `Recording ${Math.floor((Date.now() - startedAt) / 1000)} s`);
+          tick();
+          timer = setInterval(tick, 250);
+          record.textContent = "Stop";
+          record.classList.add("recording");
+        } catch (error) {
+          showError(error);
+        }
+        record.disabled = false;
+      }
+
+      function stop() {
+        const text = stopRecording().then(transcribe);
+        stopRecording = null;
+        clearInterval(timer);
+        record.textContent = "Record";
+        record.classList.remove("recording");
+        record.disabled = true;
+        status.textContent = "Transcribing…";
+
+        const copied = navigator.clipboard
+          .write([new ClipboardItem({ "text/plain": text.then((value) => new Blob([value], { type: "text/plain" })) })])
+          .then(
+            () => true,
+            () => false,
+          );
+        text
+          .then(async (value) => {
+            output.value = value;
+            status.textContent = (await copied) ? "Copied" : "Tap Copy to copy";
+          })
+          .catch(showError)
+          .finally(() => (record.disabled = false));
+      }
+
+      async function transcribe(audio) {
+        const form = new FormData();
+        form.append("file", audio);
+        form.append("response_format", "json");
+        const response = await fetch("/inference", { method: "POST", body: form });
+        if (!response.ok) throw new Error(`Server returned ${response.status}`);
+        const body = await response.json();
+        if (body.error) throw new Error(body.error);
+        const text = body.text.replaceAll("[BLANK_AUDIO]", "").replace(/\s+/g, " ").trim();
+        if (!/[\p{L}\p{N}]/u.test(text)) throw new Error("Nothing heard");
+        return text;
+      }
+
+      function showError(error) {
+        status.textContent = error.message;
+      }
+    </script>
+  </body>
+</html>
