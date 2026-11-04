@@ -42,6 +42,7 @@
       shellAliases = {
         copy = "wl-copy";
         paste = "wl-paste";
+        kb-toggle = "hyprctl eval 'kb_disabled = not kb_disabled; for _, d in ipairs({ \"asustek-computer-inc.-n-key-device\", \"asustek-computer-inc.-n-key-device-2\" }) do hl.device({ name = d, enabled = not kb_disabled }) end'";
       };
     };
   };
