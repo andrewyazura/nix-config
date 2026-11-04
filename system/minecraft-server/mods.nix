@@ -61,4 +61,12 @@ with pkgs;
     url = "https://cdn.modrinth.com/data/dbVXHSlv/versions/tuPsGk8g/fabricexporter-26.2-1.0.22.jar";
     sha512 = "1q0hxjjp20mh5pihm5a5girmkjmq2zfxaijxvxy2ysmr1676pm8ia06jqs8zghx3hzvg5igxdsa8svp37fx1wbzfwp1s34hi71mqiw0";
   };
+  "grimac" = fetchurl {
+    url = "https://cdn.modrinth.com/data/LJNGWSvH/versions/7l2zjPkM/grimac-fabric-2.3.75-1299a2a.jar";
+    sha512 = "042g8pi5zkx6g4hhkxv88sirr1drmkc9k3nz331p0mp2rcszk6akhyp4ni2k6lipqlky0c5wif6839r8825kd1liqr4knli53xlfx5q";
+  };
+  "luckperms" = fetchurl {
+    url = "https://cdn.modrinth.com/data/Vebnzrzj/versions/DzQPkkXY/LuckPerms-Fabric-5.5.85.jar";
+    sha512 = "2fgihrryrw4g8163i47rk8nxa02bb7h6mqhvj9jbyqa8g5wqmqahmp9vx72nrkv2lcijqn52z3343c1z89g1p92yj1bysrb4wb9xpip";
+  };
 }

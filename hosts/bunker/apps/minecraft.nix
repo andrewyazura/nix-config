@@ -26,6 +26,8 @@
         };
       };
 
+      files."config/GrimAC/punishments.yml" = ./grim-punishments.yml;
+
       backup = {
         enable = true;
         remote = "gdrive-minecraft-backups:minecraft-backups";
