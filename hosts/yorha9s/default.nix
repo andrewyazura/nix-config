@@ -21,6 +21,7 @@
     };
 
     hyprland.enable = true;
+    tailscale.enable = true;
   };
 
   home-manager.users.andrew = {
