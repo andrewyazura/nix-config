@@ -72,6 +72,7 @@
   services = {
     asusd.enable = true;
     supergfxd.enable = true;
+    tlp.enable = false;
     xserver.videoDrivers = [ "nvidia" ];
   };
 
