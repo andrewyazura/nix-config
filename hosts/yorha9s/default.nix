@@ -7,6 +7,7 @@
   imports = [
     ./hardware-configuration.nix
     ../../users/andrew/system
+    ../../users/andrew/system/yorha9s
 
     inputs.nixos-hardware.nixosModules.asus-zephyrus-ga401
     inputs.private-config.nixosModules.default
