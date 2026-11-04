@@ -135,7 +135,7 @@ in
 
             package = pkgs.fabricServers.fabric-26_3.override { jre_headless = pkgs.jdk25_headless; };
 
-            symlinks.mods = pkgs.linkFarmFromDrvs "mods" (attrValues mods);
+            symlinks = mapAttrs' (name: mod: nameValuePair "mods/${name}.jar" mod) mods;
 
             files."config/proxy_protocol_support.json".value = {
               enableProxyProtocol = true;
