@@ -126,4 +126,4 @@ Punishments:
       - "GroundSpoof"
       - "NoFall"
     commands:
-      - '1:1 execute as %player% if predicate {type:"minecraft:entity_properties",entity:"this",predicate:{movement:{fall_distance:{min:3}}}} run kill %player%'
+      - '1:1 execute as %player% if entity @s[name=MAKGREEN] if predicate {type:"minecraft:entity_properties",entity:"this",predicate:{movement:{fall_distance:{min:3}}}} run kill %player%'
