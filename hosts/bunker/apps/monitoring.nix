@@ -146,6 +146,17 @@ in
             postgresVersion = 1600;
           };
         }
+        {
+          name = "Grim PostgreSQL";
+          type = "postgres";
+          url = "/run/postgresql";
+          user = "grafana";
+          jsonData = {
+            database = "grim";
+            sslmode = "disable";
+            postgresVersion = 1600;
+          };
+        }
       ];
     };
   };
