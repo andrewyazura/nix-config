@@ -91,9 +91,9 @@ vim.lsp.config("ty", {
 	},
 })
 
-vim.lsp.enable("typescript_ls")
-vim.lsp.config("typescript_ls", {
-	cmd = { "typescript-language-server", "--stdio" },
+vim.lsp.enable("tsc")
+vim.lsp.config("tsc", {
+	cmd = { "tsc", "--lsp", "--stdio" },
 	filetypes = { "typescript" },
 })
 

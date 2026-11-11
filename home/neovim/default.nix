@@ -71,7 +71,7 @@ in
           lua-language-server
           nil
           ty
-          typescript-language-server
+          typescript
           zls
         ]
         ++ lib.optional pkgs.stdenv.hostPlatform.isLinux (import ./kotlin-lsp.nix { inherit pkgs; });
