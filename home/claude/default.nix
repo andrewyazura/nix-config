@@ -22,7 +22,11 @@ let
       "${inputs.home-manager}/modules/programs/claude-code"
     ];
 
-    home.homeDirectory = homeDirectory;
+    home = {
+      inherit homeDirectory;
+      inherit (config.home) stateVersion preferXdgDirectories;
+    };
+    xdg.configHome = config.xdg.configHome;
     programs.mcp = mcp;
 
     programs.claude-code = {

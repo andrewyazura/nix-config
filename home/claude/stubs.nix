@@ -24,6 +24,8 @@ with lib;
 
     home = {
       homeDirectory = mkOption { type = types.str; };
+      stateVersion = mkOption { type = types.str; };
+      preferXdgDirectories = mkOption { type = types.bool; };
 
       packages = mkOption {
         type = types.listOf types.package;
@@ -45,6 +47,8 @@ with lib;
         default = { };
       };
     };
+
+    xdg.configHome = mkOption { type = types.str; };
 
     programs.mcp = {
       enable = mkOption {
