@@ -16,6 +16,38 @@ let
   homeDirectory = config.home.homeDirectory;
   mcp = { inherit (config.programs.mcp) enable servers; };
 
+  datadogWriteRules =
+    concatMap
+      (
+        server:
+        map (tool: "mcp__${server}__${tool}") [
+          "add_*"
+          "append_*"
+          "batch_update_*"
+          "create_*"
+          "ddsql_upsert_saved_query"
+          "delete_*"
+          "edit_*"
+          "execute_code_write"
+          "execute_datadog_workflow"
+          "manage_*"
+          "move_*"
+          "mute_*"
+          "publish_*"
+          "retry_datadog_ci_job"
+          "run_*"
+          "set_*"
+          "trigger_*"
+          "update-*"
+          "update_*"
+          "upsert_*"
+        ]
+      )
+      [
+        "claude_ai_Datadog"
+        "claude_ai_Datadog_2"
+      ];
+
   instance = {
     imports = [
       ./stubs.nix
@@ -42,27 +74,31 @@ let
         alwaysThinkingEnabled = true;
         autoMemoryEnabled = true;
         cleanupPeriodDays = 30;
-        crossSessionInbound = "accept";
         editorMode = "vim";
         enableAllProjectMcpServers = true;
-        model = "opus";
         outputStyle = "Default";
         respectGitignore = true;
         showTurnDuration = true;
         spinnerTipsEnabled = true;
         terminalProgressBarEnabled = true;
 
-        modelSettings =
-          genAttrs
-            [
-              "claude-opus-5-5"
-              "claude-fable-5-1"
-              "claude-sonnet-5"
-              "claude-haiku-4-5"
-            ]
-            (_: {
-              effortLevel = "xhigh";
-            });
+        permissions = {
+          ask = [
+            "Bash(git checkout -b *)"
+            "Bash(git switch -c *)"
+            "Bash(git -C * checkout -b *)"
+            "Bash(git -C * switch -c *)"
+            "Bash(git push *)"
+            "Bash(git -C * push)"
+            "Bash(git -C * push *)"
+            "Bash(git -c * push)"
+            "Bash(git -c * push *)"
+            "Bash(git worktree add *)"
+            "Bash(gh pr create *)"
+          ]
+          ++ datadogWriteRules;
+          deny = [ "EnterWorktree" ];
+        };
 
         statusLine = {
           type = "command";
@@ -73,8 +109,8 @@ let
           BASH_DEFAULT_TIMEOUT_MS = 300000; # Raised for long-running Nix builds and evaluations
           BASH_MAX_TIMEOUT_MS = 600000;
           CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR = 1;
-          CLAUDE_CODE_SHELL = "zsh";
-          DISABLE_AUTOUPDATER = 1;
+          CLAUDE_CODE_EFFORT_LEVEL = "xhigh";
+          CLAUDE_CODE_SHELL = "${pkgs.bash}/bin/bash";
           DISABLE_ERROR_REPORTING = 1;
           MCP_TIMEOUT = 30000;
         };

@@ -59,7 +59,7 @@ session as a number (`0:@1.%1`); the window id still resolves.
 
 ### 4. Verify before you kill
 
-Run both checks. Stop on any failure and report it. Do not kill.
+Run all three checks. Stop on any failure and report it. Do not kill.
 
 1. The record's `pid` is alive: `ps -p <pid> -o pid=` prints it.
 2. The process sits in that pane: `ps -o ppid= -p <pid>` equals the pane's

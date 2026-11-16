@@ -66,8 +66,7 @@ If a window of that name already exists in the session, add a number. The
 second personal Claude in `nix` gets window `claude-2`.
 
 Do not pass `--name`. Claude Code titles the session from the first prompt,
-and a `UserPromptSubmit` hook prefixes the host (`2b: <topic>`) from the
-second prompt on. A `--name` would suppress the topic title.
+and a `--name` would suppress that title.
 
 ### 4. Launch
 
@@ -94,8 +93,9 @@ Expect these screens:
 1. **Trust check** — "Is this a project you created or one you trust?"
    Appears once per directory.
 2. **Bypass permissions warning** — "WARNING: Claude Code running in Bypass
-   Permissions mode". Appears on EVERY launch. It is never remembered, so
-   always expect it.
+   Permissions mode". Normally skipped, because both accounts set
+   `skipDangerousModePermissionPrompt`. If it appears, answer it like the
+   others.
 3. **Remote control consent**, if it appears.
 
 Send each key separately, about 1 second apart:
