@@ -2,14 +2,16 @@
 {
   modules = {
     profiles = {
-      development.enable = true;
-      desktop.enable = true;
       ai-tools.enable = true;
+      desktop.enable = true;
+      development.enable = true;
     };
 
     colima.enable = true;
-
-    ghostty.fontSize = 12;
+    ghostty = {
+      fontSize = 12;
+      fontStyle = "SemiBold";
+    };
     ideavim.enable = true;
     tmux.showBattery = true;
   };
