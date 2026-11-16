@@ -154,5 +154,7 @@
 
   time.timeZone = "Europe/Warsaw";
 
+  system.extraDependencies = [ inputs.private-config ];
+
   system.stateVersion = "24.11";
 }
