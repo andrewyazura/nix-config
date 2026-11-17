@@ -143,7 +143,7 @@ let
     ${optionalString (
       config.home.sessionVariables ? TMUX_TMPDIR
     ) "export TMUX_TMPDIR=${config.home.sessionVariables.TMUX_TMPDIR}"}
-    tmux() { ${pkgs.tmux}/bin/tmux -L claude-rc -f /dev/null "$@"; }
+    tmux() { ${pkgs.tmux.override { withSystemd = false; }}/bin/tmux -L claude-rc -f /dev/null "$@"; }
     while true; do
     ${concatMapStrings (s: ''
       if test -d ${escapeShellArg s.directory} && ! tmux has-session -t ${escapeShellArg "=${s.session}"} 2>/dev/null; then
