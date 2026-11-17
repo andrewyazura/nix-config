@@ -51,6 +51,7 @@ let
   instance = {
     imports = [
       ./stubs.nix
+      ./remote-control.nix
       "${inputs.home-manager}/modules/programs/claude-code"
     ];
 
@@ -126,6 +127,29 @@ let
       export CLAUDE_CONFIG_DIR=${i.programs.claude-code.configDir}
       exec ${i.programs.claude-code.finalPackage}/bin/claude "$@"
     '';
+
+  remoteControlServers = concatLists (
+    mapAttrsToList (
+      name: i:
+      mapAttrsToList (server: directory: {
+        session = "${name}-${server}";
+        inherit directory;
+        pane = "${pkgs.zsh}/bin/zsh -lc ${escapeShellArg "while true; do ${i.command} remote-control --permission-mode bypassPermissions --spawn same-dir --no-create-session-in-dir; sleep 10; done"}";
+      }) i.remoteControl
+    ) cfg.instances
+  );
+
+  remoteControlScript = pkgs.writeShellScript "claude-remote-control" ''
+    tmux() { ${pkgs.tmux}/bin/tmux -L claude-rc -f /dev/null "$@"; }
+    while true; do
+    ${concatMapStrings (s: ''
+      if test -d ${escapeShellArg s.directory} && ! tmux has-session -t ${escapeShellArg "=${s.session}"} 2>/dev/null; then
+        tmux new-session -d -s ${escapeShellArg s.session} -c ${escapeShellArg s.directory} ${escapeShellArg s.pane}
+      fi
+    '') remoteControlServers}
+      sleep 60
+    done
+  '';
 in
 {
   options.modules.claude = {
@@ -166,5 +190,32 @@ in
     assertions = concatMap (i: i.assertions) instances;
 
     xdg.configFile = statusline.configFile;
+
+    systemd.user.services.claude-remote-control =
+      mkIf (pkgs.stdenv.hostPlatform.isLinux && remoteControlServers != [ ])
+        {
+          Unit.Description = "Claude Code Remote Control servers in tmux";
+          Service = {
+            ExecStart = "${remoteControlScript}";
+            KillMode = "process";
+            Restart = "always";
+            RestartSec = 10;
+          };
+          Install.WantedBy = [ "default.target" ];
+        };
+
+    launchd.agents.claude-remote-control =
+      mkIf (pkgs.stdenv.hostPlatform.isDarwin && remoteControlServers != [ ])
+        {
+          enable = true;
+          config = {
+            ProgramArguments = [ "${remoteControlScript}" ];
+            KeepAlive = true;
+            RunAtLoad = true;
+            ProcessType = "Background";
+            StandardOutPath = "${homeDirectory}/Library/Logs/claude-remote-control.log";
+            StandardErrorPath = "${homeDirectory}/Library/Logs/claude-remote-control.log";
+          };
+        };
   };
 }

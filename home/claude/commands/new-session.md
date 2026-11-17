@@ -1,12 +1,12 @@
 ---
-description: Start a Claude Code session for a project in tmux, with remote control
+description: Start a Claude Code Remote Control server for a project, in tmux
 argument-hint: <project> [corp]
 allowed-tools: Bash, AskUserQuestion
 ---
 
 ## Request
 
-Start one Claude Code session for: **$ARGUMENTS**
+Start one Remote Control server for: **$ARGUMENTS**
 
 The word `corp`, `work`, `company` or `team` in the request selects the
 corporate account. Anything else selects the personal account.
@@ -14,14 +14,15 @@ corporate account. Anything else selects the personal account.
 ## Live state
 
 - Host: !`hostname`
-- tmux now: !`tmux list-windows -a -F "#{session_name}:#{window_index} #{window_name} #{pane_current_path}" 2>/dev/null || echo "no tmux server running"`
+- Servers now: !`tmux -L claude-rc list-panes -a -F "#{session_name} on-demand=#{?@on-demand,yes,no} #{pane_current_path}" 2>/dev/null || echo "no claude-rc tmux server running"`
 - Candidate projects: !`{ ls -d ~/Documents/*/ /disk_alpha/stash/ 2>/dev/null; find ~/Documents -maxdepth 3 -name .git -type d 2>/dev/null | sed "s|/.git$|/|"; } | sort -u`
 
 ## Your task
 
-You start the session and report back. The user attaches to tmux later, from
-this machine or from a phone or tablet. So the session must run under tmux and
-must use `--remote-control`.
+You start the server and report back. The user then opens sessions on it from
+the Claude app. The server runs in tmux on the `claude-rc` socket, next to the
+permanent servers that the `claude-remote-control` service keeps alive. It
+lasts until reboot or `/close-session`.
 
 Do every step with the Bash tool.
 
@@ -43,92 +44,67 @@ Match the project name against the candidate list above.
 If two directories match, ask the user which one. Do not guess. If nothing
 matches, stop and tell the user.
 
-### 2. Find or create the tmux session
+### 2. Check for an existing server
 
-One tmux session holds one project. The session name is the short project
-slug, in lower case: `nix`, `stash`, `bass`.
+The tmux session name is `<account>-<slug>`: `personal` or `corp`, then the
+short project slug in lower case. Examples: `personal-bingo`, `corp-stash`.
 
-Read the tmux list above.
+If the server list above already has a session for this account and path,
+permanent or on demand, stop and report it. Do not start a second one.
 
-- If the session exists, add a window to it:
-  `tmux new-window -d -t <session> -c <path> -n <window>`
-- If it does not exist, create it detached:
-  `tmux new-session -d -s <session> -c <path> -n <window>`
+### 3. Launch
 
-Never attach. Never run `tmux attach`. The user attaches himself.
-
-### 3. Name the window
-
-The window name is `claude` for the personal account, `claude-corp` for the
-corporate account.
-
-If a window of that name already exists in the session, add a number. The
-second personal Claude in `nix` gets window `claude-2`.
-
-Do not pass `--name`. Claude Code titles the session from the first prompt,
-and a `--name` would suppress that title.
-
-### 4. Launch
-
-Personal account uses `claude`. Corporate account uses `claude-corp`, which is
-the same binary with `CLAUDE_CONFIG_DIR=~/.claude-corp`. Both are allowed.
+Personal account uses `claude`. Corporate account uses `claude-corp`.
 
 ```
-tmux send-keys -t <session>:<window> '<claude|claude-corp> --dangerously-skip-permissions --remote-control' Enter
+env -i HOME="$HOME" USER="$USER" LOGNAME="$USER" TERM=xterm-256color LANG=en_US.UTF-8 \
+  "$(command -v tmux)" -L claude-rc -f /dev/null new-session -d -s <name> -c <path> \
+  "$(command -v zsh) -lc 'while true; do <claude|claude-corp> remote-control --permission-mode bypassPermissions --spawn same-dir; sleep 10; done'"
+tmux -L claude-rc set-option -t '=<name>' @on-demand 1
 ```
 
-### 5. Clear the start dialogs
+`env -i` keeps this session's Claude variables out of a tmux server that the
+command may have to start. The loop restarts the server if it exits after a
+network outage.
 
-**Every dialog opens on "No, exit". A bare Enter closes Claude.** Send
-`Down`, then `Enter`, for each one.
+### 4. Clear the start prompts
 
-Wait 5 seconds, then read the screen. Never send keys blind:
-
-```
-tmux capture-pane -p -t <session>:<window>
-```
-
-Expect these screens:
-
-1. **Trust check** — "Is this a project you created or one you trust?"
-   Appears once per directory.
-2. **Bypass permissions warning** — "WARNING: Claude Code running in Bypass
-   Permissions mode". Normally skipped, because both accounts set
-   `skipDangerousModePermissionPrompt`. If it appears, answer it like the
-   others.
-3. **Remote control consent**, if it appears.
-
-Send each key separately, about 1 second apart:
+Wait 5 seconds, then read the pane. Never send keys blind:
 
 ```
-tmux send-keys -t <session>:<window> Down
-tmux send-keys -t <session>:<window> Enter
+tmux -L claude-rc capture-pane -p -t '=<name>'
 ```
 
-Capture the pane again after every answer. The trust check does not come back
-once accepted, so the set of screens differs between runs. React to the screen
-you see, not to this list.
+- **"Enable Remote Control? (y/n)"**: send `y`, then `Enter`. Appears once per
+  account.
+- **Trust check**: appears once per directory. Accept it only for a path from
+  the table above. For any other path, ask the user first: trusting a folder
+  lets its `.mcp.json` servers and `.claude` hooks run. Read the options on
+  screen and select the one that trusts the folder.
 
-### 6. Verify
+Send each key separately, about 1 second apart, and capture the pane again
+after every answer. React to the screen you see, not to this list.
 
-The session is ready when the status line shows `⏵⏵ bypass permissions on` and
-the `❯` prompt is empty. The status line shows `/rc` when remote control is on.
+### 5. Verify
+
+The server is ready when the pane shows `Connected` and a
+`claude.ai/code?environment=env_...` URL.
 
 If the pane shows an error, a login prompt or a bare shell prompt, the launch
-failed. Report the pane contents. Do not retry in a loop.
+failed. Report the pane contents. If the loop keeps failing, stop it with
+`tmux -L claude-rc kill-session -t '=<name>'`. Do not retry.
 
-### 7. Report
+### 6. Report
 
-Give the user two lines at most: the tmux target `<session>:<window>`, the
-account, the path, and the `claude.ai/code/session_...` URL that the ready
-pane prints. The user opens that URL on a phone or tablet.
+Two lines at most: the tmux session, the account, the path, and the
+environment URL from the pane.
 
-Example: "Started `nix:claude-2`, personal account, `~/Documents/nix/config` —
-https://claude.ai/code/session_01AbC..."
+Example: "Started `personal-bingo`, personal account, `~/Documents/bingo` —
+https://claude.ai/code?environment=env_01AbC..."
 
 ## Rules
 
-- Start one session per request.
-- Do not send a prompt or a task into the new Claude.
-- Do not close tmux sessions or windows.
+- Start one server per request.
+- Do not send a prompt or a task into the server or its sessions.
+- Do not touch other tmux sessions.
 - Do not edit files in the target project.

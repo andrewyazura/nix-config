@@ -7,6 +7,10 @@
       development.enable = true;
     };
 
+    claude.instances.personal.remoteControl = {
+      home = config.home.homeDirectory;
+      nix = "/etc/nix-darwin";
+    };
     colima.enable = true;
     ghostty = {
       fontSize = 12;

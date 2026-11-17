@@ -2,6 +2,11 @@
 {
   modules = {
     anki.enable = true;
+    claude.instances.personal.remoteControl = {
+      home = config.home.homeDirectory;
+      notes = "${config.home.homeDirectory}/Documents/notes";
+      nix = "${config.home.homeDirectory}/Documents/nix/config";
+    };
     cs2.enable = true;
     tuple.enable = true;
     profiles = {

@@ -1,6 +1,11 @@
 { config, lib, ... }:
 {
   modules = {
+    claude.instances.personal.remoteControl = {
+      home = config.home.homeDirectory;
+      notes = "${config.home.homeDirectory}/Documents/notes";
+      nix = "${config.home.homeDirectory}/Documents/nix/config";
+    };
     tuple.enable = true;
     profiles = {
       development.enable = true;
