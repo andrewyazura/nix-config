@@ -49,13 +49,12 @@ Send Ctrl-C first, so the server deregisters from claude.ai. A server killed
 without it keeps the folder registered, and the next server there fails with
 "This folder is already served".
 
+The pane's loop restarts the server 10 seconds after it exits, so kill the
+session 3 seconds after the Ctrl-C:
+
 ```
 tmux -L claude-rc send-keys -t '=<name>:' C-c
-```
-
-Wait up to 10 seconds for the session to end. Only if it is still there:
-
-```
+sleep 3
 tmux -L claude-rc kill-session -t '=<name>:'
 ```
 

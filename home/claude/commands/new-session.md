@@ -87,7 +87,7 @@ after every answer. React to the screen you see, not to this list.
 
 ### 5. Verify
 
-The server is ready when the pane shows `Connected` and a
+The server is ready when the pane shows `Ready` or `Connected` and a
 `claude.ai/code?environment=env_...` URL.
 
 If the pane shows an error, a login prompt or a bare shell prompt, the launch
