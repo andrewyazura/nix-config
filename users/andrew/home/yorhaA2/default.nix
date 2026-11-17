@@ -8,7 +8,7 @@
     };
 
     claude.instances.personal.remoteControl = {
-      home = config.home.homeDirectory;
+      home = "${config.home.homeDirectory}/Documents/claude";
       nix = "/etc/nix-darwin";
     };
     colima.enable = true;

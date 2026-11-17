@@ -2,7 +2,7 @@
 {
   modules = {
     claude.instances.personal.remoteControl = {
-      home = config.home.homeDirectory;
+      home = "${config.home.homeDirectory}/Documents/claude";
       notes = "${config.home.homeDirectory}/Documents/notes";
       nix = "${config.home.homeDirectory}/Documents/nix/config";
     };

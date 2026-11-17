@@ -35,7 +35,7 @@ in
       claude = {
         enable = true;
         instances.personal.remoteControl = {
-          home = "/home/agent";
+          home = "/home/agent/Documents/claude";
           notes = "/home/agent/Documents/notes";
           nix = "/home/agent/Documents/nix/config";
         };
