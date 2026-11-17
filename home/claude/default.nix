@@ -140,6 +140,9 @@ let
   );
 
   remoteControlScript = pkgs.writeShellScript "claude-remote-control" ''
+    ${optionalString (
+      config.home.sessionVariables ? TMUX_TMPDIR
+    ) "export TMUX_TMPDIR=${config.home.sessionVariables.TMUX_TMPDIR}"}
     tmux() { ${pkgs.tmux}/bin/tmux -L claude-rc -f /dev/null "$@"; }
     while true; do
     ${concatMapStrings (s: ''

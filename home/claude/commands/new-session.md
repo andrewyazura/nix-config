@@ -58,14 +58,16 @@ Personal account uses `claude`. Corporate account uses `claude-corp`.
 
 ```
 env -i HOME="$HOME" USER="$USER" LOGNAME="$USER" TERM=xterm-256color LANG=en_US.UTF-8 \
+  ${TMUX_TMPDIR:+"TMUX_TMPDIR=$TMUX_TMPDIR"} \
   "$(command -v tmux)" -L claude-rc -f /dev/null new-session -d -s <name> -c <path> \
   "$(command -v zsh) -lc 'while true; do <claude|claude-corp> remote-control --permission-mode bypassPermissions --spawn same-dir; sleep 10; done'"
 tmux -L claude-rc set-option -t '=<name>:' @on-demand 1
 ```
 
 `env -i` keeps this session's Claude variables out of a tmux server that the
-command may have to start. The loop restarts the server if it exits after a
-network outage.
+command may have to start. `TMUX_TMPDIR` passes through, so the server joins
+the socket the permanent servers use. The loop restarts the server if it exits
+after a network outage.
 
 ### 4. Clear the start prompts
 
