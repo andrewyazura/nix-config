@@ -60,7 +60,7 @@ Personal account uses `claude`. Corporate account uses `claude-corp`.
 env -i HOME="$HOME" USER="$USER" LOGNAME="$USER" TERM=xterm-256color LANG=en_US.UTF-8 \
   "$(command -v tmux)" -L claude-rc -f /dev/null new-session -d -s <name> -c <path> \
   "$(command -v zsh) -lc 'while true; do <claude|claude-corp> remote-control --permission-mode bypassPermissions --spawn same-dir; sleep 10; done'"
-tmux -L claude-rc set-option -t '=<name>' @on-demand 1
+tmux -L claude-rc set-option -t '=<name>:' @on-demand 1
 ```
 
 `env -i` keeps this session's Claude variables out of a tmux server that the
@@ -72,7 +72,7 @@ network outage.
 Wait 5 seconds, then read the pane. Never send keys blind:
 
 ```
-tmux -L claude-rc capture-pane -p -t '=<name>'
+tmux -L claude-rc capture-pane -p -t '=<name>:'
 ```
 
 - **"Enable Remote Control? (y/n)"**: send `y`, then `Enter`. Appears once per
@@ -92,7 +92,7 @@ The server is ready when the pane shows `Connected` and a
 
 If the pane shows an error, a login prompt or a bare shell prompt, the launch
 failed. Report the pane contents. If the loop keeps failing, stop it with
-`tmux -L claude-rc kill-session -t '=<name>'`. Do not retry.
+`tmux -L claude-rc kill-session -t '=<name>:'`. Do not retry.
 
 ### 6. Report
 

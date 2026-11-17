@@ -37,7 +37,7 @@ server list above by account and project.
 Read the pane:
 
 ```
-tmux -L claude-rc capture-pane -p -t '=<name>'
+tmux -L claude-rc capture-pane -p -t '=<name>:'
 ```
 
 The `Capacity: N/32` line counts running sessions. If `N` is above 0, ask the
@@ -45,11 +45,21 @@ user before you stop the server: its sessions end with it.
 
 ### 3. Stop it
 
+Send Ctrl-C first, so the server deregisters from claude.ai. A server killed
+without it keeps the folder registered, and the next server there fails with
+"This folder is already served".
+
 ```
-tmux -L claude-rc kill-session -t '=<name>'
+tmux -L claude-rc send-keys -t '=<name>:' C-c
 ```
 
-Verify that `tmux -L claude-rc has-session -t '=<name>'` fails and that no
+Wait up to 10 seconds for the session to end. Only if it is still there:
+
+```
+tmux -L claude-rc kill-session -t '=<name>:'
+```
+
+Verify that `tmux -L claude-rc has-session -t '=<name>:'` fails and that no
 `claude remote-control` process remains under the old `pane_pid`.
 
 ### 4. Report
