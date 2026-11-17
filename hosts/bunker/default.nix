@@ -48,6 +48,7 @@ in
     ./apps/bingo.nix
     ./apps/birthday-api.nix
     ./apps/birthday-bot.nix
+    ./apps/claude-agent.nix
     ./apps/minecraft.nix
     ./apps/monitoring.nix
     ./apps/ntfy.nix
