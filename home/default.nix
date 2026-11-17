@@ -13,7 +13,6 @@
     ./ghostty
     ./git
     ./gnome
-    ./guitar
     ./hyprland
     ./i3
     ./ideavim
