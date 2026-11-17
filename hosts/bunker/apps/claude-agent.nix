@@ -27,7 +27,10 @@ in
       username = "agent";
       homeDirectory = "/home/agent";
       stateVersion = "25.11";
-      packages = [ pkgs.gh ];
+      packages = with pkgs; [
+        gh
+        tmux
+      ];
     };
 
     modules = {
