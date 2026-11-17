@@ -14,6 +14,7 @@ in
       "anki"
       "antigravity"
       "betterdisplay"
+      "claude"
       "crmne/tap/spotifast"
       "discord"
       "ghostty"
