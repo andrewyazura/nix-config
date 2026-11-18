@@ -4,6 +4,14 @@
   pkgs,
   ...
 }:
+let
+  databases = [
+    "ledger"
+    "luckperms"
+    "grim"
+    "easyauth"
+  ];
+in
 {
   modules.minecraft-server = {
     enable = true;
@@ -57,24 +65,11 @@
           };
         };
       };
-
-      backup = {
-        enable = true;
-        remote = "gdrive-minecraft-backups:minecraft-backups";
-        rcloneConfigFile = config.sops.secrets.rclone-config.path;
-        calendar = "04:00";
-        retentionDays = 1;
-      };
     };
   };
 
   services.postgresql = {
-    ensureDatabases = [
-      "ledger"
-      "luckperms"
-      "grim"
-      "easyauth"
-    ];
+    ensureDatabases = databases;
     ensureUsers = [
       {
         name = "ledger";
@@ -96,10 +91,120 @@
         ensureDBOwnership = true;
         ensureClauses.password = "SCRAM-SHA-256$4096:A0ukIKW7RcvYYdUrC1Lg2A==$8hQQ7VrUZqaxj1dLxOgxPdWTzP+XH6pqWKbMKw1VlZI=:nb3EQyYwCTnAdrgA4/CSaz/xOvmbw8vtjBc0cEGScCU=";
       }
+      { name = "minecraft"; }
     ];
   };
 
+  services.restic.backups.minecraft-bombas = {
+    user = "minecraft";
+    repository = "rclone:gdrive-minecraft-backups:restic/minecraft-bombas";
+    passwordFile = config.sops.secrets.restic-password-minecraft.path;
+    rcloneConfigFile = config.sops.secrets.rclone-config.path;
+    initialize = true;
+    paths = [ "/var/lib/restic-staging/bombas" ];
+    timerConfig = {
+      OnCalendar = "*-*-* 04:00:00";
+      Persistent = true;
+    };
+    pruneOpts = [
+      "--keep-daily 14"
+      "--keep-weekly 8"
+      "--keep-monthly 12"
+    ];
+    backupPrepareCommand = lib.getExe (
+      pkgs.writeShellApplication {
+        name = "restic-prepare-minecraft-bombas";
+        runtimeInputs = [
+          pkgs.coreutils
+          pkgs.findutils
+          pkgs.gnugrep
+          pkgs.rsync
+          pkgs.systemd
+          pkgs.tmux
+          config.services.postgresql.finalPackage
+        ];
+        text = ''
+          staging=/var/lib/restic-staging/bombas
+          log=/srv/minecraft/bombas/logs/latest.log
+
+          console() {
+            tmux -S /run/minecraft/bombas.sock send-keys C-u "$1" Enter
+          }
+
+          wait_for_save() {
+            local inode=$1 size=$2 from
+            for _ in $(seq 120); do
+              from=$((size + 1))
+              if [ "$(stat -c %i "$log")" != "$inode" ]; then
+                from=1
+              fi
+              if tail -c +"$from" "$log" | grep -E '^\[[0-9:]+\] \[Server thread/INFO\]: (System chat: )?Saved the game$' > /dev/null; then
+                return 0
+              fi
+              sleep 1
+            done
+            echo "no 'Saved the game' in $log after 120 s" >&2
+            return 1
+          }
+
+          mkdir -p "$staging/world" "$staging/db"
+
+          running=false
+          if systemctl is-active --quiet minecraft-server-bombas.service; then
+            running=true
+          fi
+
+          if $running; then
+            trap 'console save-on' EXIT
+            read -r inode size < <(stat -c '%i %s' "$log")
+            console save-off
+            console 'save-all flush'
+            wait_for_save "$inode" "$size"
+          fi
+
+          rsync -a --delete /srv/minecraft/bombas/world/ "$staging/world/"
+
+          find "$staging/db" -mindepth 1 -delete
+          for db in ${lib.escapeShellArgs databases}; do
+            pg_dump "$db" > "$staging/db/$db.sql"
+          done
+
+          if $running; then
+            console save-on
+            trap - EXIT
+          fi
+        '';
+      }
+    );
+  };
+
   systemd.services = {
+    restic-backups-minecraft-bombas = {
+      after = [
+        "postgresql.target"
+        "minecraft-dump-grants.service"
+      ];
+      wants = [ "postgresql.target" ];
+      serviceConfig = {
+        StateDirectory = "restic-staging/bombas";
+        StateDirectoryMode = "0700";
+      };
+    };
+
+    restic-backups-postgres.environment.EXCLUDE_DATABASES = lib.concatStringsSep " " databases;
+
+    minecraft-dump-grants = {
+      after = [ "postgresql.target" ];
+      wants = [ "postgresql.target" ];
+      wantedBy = [ "multi-user.target" ];
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+        User = "postgres";
+        ExecStart = "${lib.getExe' config.services.postgresql.finalPackage "psql"} -d postgres -v ON_ERROR_STOP=1 --single-transaction -f ${pkgs.writeText "minecraft-dump-grants.sql" "GRANT ${lib.concatStringsSep ", " databases} TO minecraft;\n"}";
+      };
+    };
+
     minecraft-server-bombas = {
       after = [ "postgresql.target" ];
       requires = [ "postgresql.target" ]; # TODO: check if ledger can reconnect to postgres without restarting minecraft server. any changes to postgresql might break connection between ledger and postgres, and complete server restart ensures ledger reconnects. if ledger is capable of reconnecting, drop requires= and only use wants=

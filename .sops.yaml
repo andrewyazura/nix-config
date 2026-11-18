@@ -99,6 +99,13 @@ creation_rules:
       - *yorha2b
     format: binary
 
+  - path_regex: secrets/restic-password
+    key_groups:
+    - age:
+      - *bunker
+      - *yorha2b
+    format: binary
+
   - path_regex: secrets/minecraft-ledger-env
     key_groups:
     - age:

@@ -230,6 +230,30 @@ in
         group = "minecraft";
         mode = "0400";
       };
+
+      rclone-config-postgres = {
+        sopsFile = ../../secrets/rclone-gdrive-minecraft-backups-config;
+        format = "binary";
+        owner = "postgres";
+        group = "postgres";
+        mode = "0400";
+      };
+
+      restic-password-minecraft = {
+        sopsFile = ../../secrets/restic-password;
+        format = "binary";
+        owner = "minecraft";
+        group = "minecraft";
+        mode = "0400";
+      };
+
+      restic-password-postgres = {
+        sopsFile = ../../secrets/restic-password;
+        format = "binary";
+        owner = "postgres";
+        group = "postgres";
+        mode = "0400";
+      };
     };
   };
 
@@ -274,11 +298,44 @@ in
       package = pkgs.postgresql_16;
     };
 
-    postgresqlBackup = {
-      enable = true;
-      backupAll = true;
-      compression = "zstd";
-      startAt = "*-*-* 03:30:00";
+    restic.backups.postgres = {
+      user = "postgres";
+      repository = "rclone:gdrive-minecraft-backups:restic/postgres";
+      passwordFile = config.sops.secrets.restic-password-postgres.path;
+      rcloneConfigFile = config.sops.secrets.rclone-config-postgres.path;
+      initialize = true;
+      paths = [ "/var/lib/restic-staging/postgres" ];
+      timerConfig = {
+        OnCalendar = "*-*-* 03:30:00";
+        Persistent = true;
+      };
+      pruneOpts = [
+        "--keep-daily 14"
+        "--keep-weekly 8"
+        "--keep-monthly 12"
+      ];
+      backupPrepareCommand = lib.getExe (
+        pkgs.writeShellApplication {
+          name = "restic-prepare-postgres";
+          runtimeInputs = [
+            pkgs.coreutils
+            pkgs.findutils
+            config.services.postgresql.finalPackage
+          ];
+          text = ''
+            staging=/var/lib/restic-staging/postgres
+            find "$staging" -mindepth 1 -delete
+            pg_dumpall --globals-only > "$staging/globals.sql"
+            databases=$(psql -XAt -v ON_ERROR_STOP=1 -c "select datname from pg_database where not datistemplate and datname <> 'postgres' order by 1")
+            for db in $databases; do
+              case " ''${EXCLUDE_DATABASES:-} " in
+                *" $db "*) ;;
+                *) pg_dump "$db" > "$staging/$db.sql" ;;
+              esac
+            done
+          '';
+        }
+      );
     };
 
     journald.settings.Journal = {
@@ -286,6 +343,55 @@ in
       MaxRetentionSec = "1month";
     };
   };
+
+  systemd.services = lib.mkMerge [
+    (lib.mapAttrs' (
+      name: _:
+      lib.nameValuePair "restic-backups-${name}" {
+        serviceConfig = {
+          CapabilityBoundingSet = "";
+          LockPersonality = true;
+          MemoryDenyWriteExecute = true;
+          NoNewPrivileges = true;
+          PrivateDevices = true;
+          ProtectClock = true;
+          ProtectControlGroups = true;
+          ProtectHome = true;
+          ProtectHostname = true;
+          ProtectKernelLogs = true;
+          ProtectKernelModules = true;
+          ProtectKernelTunables = true;
+          ProtectProc = "invisible";
+          ProtectSystem = "strict";
+          RestrictAddressFamilies = [
+            "AF_INET"
+            "AF_INET6"
+            "AF_UNIX"
+          ];
+          RestrictNamespaces = true;
+          RestrictRealtime = true;
+          RestrictSUIDSGID = true;
+          SystemCallArchitectures = "native";
+          SystemCallFilter = [
+            "@system-service"
+            "~@privileged"
+            "@chown"
+          ];
+          UMask = "0077";
+        };
+      }
+    ) config.services.restic.backups)
+    {
+      restic-backups-postgres = {
+        after = [ "postgresql.target" ];
+        wants = [ "postgresql.target" ];
+        serviceConfig = {
+          StateDirectory = "restic-staging/postgres";
+          StateDirectoryMode = "0700";
+        };
+      };
+    }
+  ];
 
   networking.firewall.extraCommands =
     lib.concatMapStrings (ip: ''

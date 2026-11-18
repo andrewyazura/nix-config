@@ -8,7 +8,6 @@
 with lib;
 let
   cfg = config.modules.minecraft-server;
-  enabledBackupServers = filterAttrs (name: server: server.backup.enable) cfg.servers;
 
   proxyIps = [
     # neoprotect
@@ -60,44 +59,6 @@ in
             type = attrsOf anything;
             default = { };
             description = "Files to copy into the server directory (see nix-minecraft's files option).";
-          };
-
-          backup = {
-            enable = mkOption {
-              type = bool;
-              default = false;
-              description = "Enable scheduled rclone backups for this Minecraft server.";
-            };
-
-            remote = mkOption {
-              type = str;
-              example = "drive:backups/minecraft";
-              description = "rclone remote destination (e.g., 'drive:backups/minecraft').";
-            };
-
-            rcloneConfigFile = mkOption {
-              type = nullOr path;
-              default = null;
-              description = "Path to the read-only decrypted sops-nix secret configuration file.";
-            };
-
-            environmentFile = mkOption {
-              type = nullOr path;
-              default = null;
-              description = "Path to sops-decrypted or env file containing rclone secrets.";
-            };
-
-            calendar = mkOption {
-              type = str;
-              default = "04:00";
-              description = "Systemd timer calendar expression (when to run the backup).";
-            };
-
-            retentionDays = mkOption {
-              type = int;
-              default = 1;
-              description = "Number of days to keep local and remote backups.";
-            };
           };
         };
       }));
@@ -178,7 +139,6 @@ in
           name: value:
           recursiveUpdate (recursiveUpdate (serverTemplate name) value) (
             builtins.removeAttrs (cfg.servers.${name} or { }) [
-              "backup"
               "environmentFile"
             ]
           )
@@ -202,99 +162,14 @@ in
         ) uniquePorts;
       };
 
-    systemd.services = mkMerge [
-      (mapAttrs' (
-        name: server:
-        nameValuePair "minecraft-server-${name}" {
-          serviceConfig = {
-            MemoryMax = "10G";
-            EnvironmentFile = optional (server.environmentFile != null) server.environmentFile;
-          };
-        }
-      ) cfg.servers)
-      (mapAttrs' (
-        name: server:
-        nameValuePair "minecraft-backup-${name}" {
-          description = "Scheduled rclone backup for Minecraft server ${name}";
-          wants = [ "network-online.target" ];
-          after = [
-            "network-online.target"
-            "sops-nix.service"
-          ];
-
-          path = with pkgs; [
-            bash
-            findutils
-            gnutar
-            gzip
-            rclone
-            systemd
-            tmux
-          ];
-
-          environment = {
-            SERVER_NAME = name;
-            RCLONE_REMOTE = server.backup.remote;
-            RETENTION_DAYS = toString server.backup.retentionDays;
-            RCLONE_SECRET_CONFIG = optionalString (server.backup.rcloneConfigFile != null) (
-              toString server.backup.rcloneConfigFile
-            );
-          };
-
-          serviceConfig = {
-            Type = "oneshot";
-            User = "minecraft";
-            Group = "minecraft";
-            EnvironmentFile = optional (server.backup.environmentFile != null) server.backup.environmentFile;
-            ExecStart = "${pkgs.bash}/bin/bash ${./backup.sh}";
-            StateDirectory = "minecraft-backup-${name}";
-            StateDirectoryMode = "0700";
-
-            CapabilityBoundingSet = "";
-            LockPersonality = true;
-            MemoryDenyWriteExecute = true;
-            NoNewPrivileges = true;
-            PrivateDevices = true;
-            PrivateTmp = true;
-            ProtectClock = true;
-            ProtectControlGroups = true;
-            ProtectHome = true;
-            ProtectHostname = true;
-            ProtectKernelLogs = true;
-            ProtectKernelModules = true;
-            ProtectKernelTunables = true;
-            ProtectProc = "invisible";
-            ProtectSystem = "strict";
-            RestrictAddressFamilies = [
-              "AF_INET"
-              "AF_INET6"
-              "AF_UNIX"
-            ];
-            RestrictNamespaces = true;
-            RestrictRealtime = true;
-            RestrictSUIDSGID = true;
-            SystemCallArchitectures = "native";
-            SystemCallFilter = [
-              "@system-service"
-              "~@privileged"
-              "@chown"
-            ];
-            UMask = "0077";
-          };
-        }
-      ) enabledBackupServers)
-    ];
-
-    systemd.timers = mapAttrs' (
+    systemd.services = mapAttrs' (
       name: server:
-      nameValuePair "minecraft-backup-${name}" {
-        description = "Timer for scheduled rclone backup for Minecraft server ${name}";
-        wantedBy = [ "timers.target" ];
-        timerConfig = {
-          OnCalendar = server.backup.calendar;
-          Persistent = true;
+      nameValuePair "minecraft-server-${name}" {
+        serviceConfig = {
+          MemoryMax = "10G";
+          EnvironmentFile = optional (server.environmentFile != null) server.environmentFile;
         };
       }
-    ) enabledBackupServers;
+    ) cfg.servers;
   };
 }
