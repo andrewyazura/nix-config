@@ -1,4 +1,5 @@
 {
+  config,
   lib,
   pkgs,
   inputs,
@@ -7,6 +8,13 @@
 let
   username = "andrew";
   hostname = "yorhaA2";
+  capsLockAndEscapeSwap = lib.filter (
+    m:
+    lib.elem m.HIDKeyboardModifierMappingSrc [
+      30064771129
+      30064771113
+    ]
+  ) config.system.keyboard.userKeyMapping;
 in
 {
   imports = [
@@ -80,6 +88,12 @@ in
       swapCapsLockAndEscape = true;
       swapLeftCtrlAndFn = true;
     };
+
+    activationScripts.keyboard.text = lib.mkForce ''
+      echo "configuring keyboard..." >&2
+      hidutil property --set '{"UserKeyMapping":${builtins.toJSON capsLockAndEscapeSwap}}' > /dev/null
+      hidutil property --matching '{"Built-In":true,"PrimaryUsagePage":1,"PrimaryUsage":6}' --set '{"UserKeyMapping":${builtins.toJSON config.system.keyboard.userKeyMapping}}' > /dev/null
+    '';
   };
 
   time.timeZone = "Europe/Warsaw";
