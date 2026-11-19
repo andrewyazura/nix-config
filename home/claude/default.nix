@@ -45,7 +45,6 @@ let
       )
       [
         "claude_ai_Datadog"
-        "claude_ai_Datadog_2"
       ];
 
   instance = {
