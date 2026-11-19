@@ -84,7 +84,7 @@ in
 
     keyboard = {
       enableKeyMapping = true;
-      nonUS.remapTilde = true;
+      nonUS.remapTilde = false;
       swapCapsLockAndEscape = true;
       swapLeftCtrlAndFn = true;
     };

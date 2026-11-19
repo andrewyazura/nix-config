@@ -13,7 +13,7 @@
     };
     colima.enable = true;
     ghostty = {
-      fontSize = 12;
+      fontSize = 14;
       fontStyle = "SemiBold";
     };
     ideavim.enable = true;
