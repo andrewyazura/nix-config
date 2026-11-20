@@ -91,5 +91,4 @@ Run this once in each clone:
 git config core.hooksPath .githooks
 ```
 
-`.githooks/pre-commit` runs `nix fmt` on staged Nix files and renders the CS2
-bind map (see `home/cs2/README.md`).
+`.githooks/pre-commit` runs `nix fmt` on staged Nix files.
