@@ -83,13 +83,16 @@ in
     (mkBind "SUPER + SHIFT + K" "hl.dsp.window.move({ direction = 'up', group_aware = true })")
     (mkBind "SUPER + SHIFT + L" "hl.dsp.window.move({ direction = 'right', group_aware = true })")
 
+    (mkBind "SUPER + CTRL + H" "hl.dsp.layout('consume_or_expel prev')")
+    (mkBind "SUPER + CTRL + L" "hl.dsp.layout('consume_or_expel next')")
+
     (mkMouseBind "SUPER + mouse:272" "hl.dsp.window.drag()")
     (mkMouseBind "SUPER + mouse:273" "hl.dsp.window.resize()")
 
-    (mkBind "SUPER + E" "hl.dsp.layout('togglesplit')")
+    (mkBind "SUPER + E" "hl.dsp.layout('colresize +conf')")
     (mkBind "SUPER + W" "hl.dsp.group.toggle()")
-    (mkBind "SUPER + B" "hl.dsp.layout('preselect r')")
-    (mkBind "SUPER + V" "hl.dsp.layout('preselect d')")
+    (mkBind "SUPER + B" "hl.dsp.layout('fit visible')")
+    (mkBind "SUPER + V" "hl.dsp.layout('center')")
     (mkBind "SUPER + F" "hl.dsp.window.fullscreen()")
     (mkBind "SUPER + N" "function() hl.dispatch(hl.dsp.window.cycle_next({ floating = not hl.get_active_window().floating })); hl.dispatch(hl.dsp.window.bring_to_top()) end")
     (mkBind "SUPER + SHIFT + N" "hl.dsp.window.float({ action = 'toggle' })")

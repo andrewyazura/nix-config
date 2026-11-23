@@ -152,7 +152,7 @@ in
 
             no_focus_fallback = true;
             resize_on_border = true;
-            layout = "dwindle";
+            layout = "scrolling";
             allow_tearing = true;
           };
 
@@ -162,10 +162,6 @@ in
             shadow.enabled = false;
             active_opacity = 1.0;
             inactive_opacity = 1.0;
-          };
-
-          dwindle = {
-            preserve_split = true;
           };
 
           binds = {
@@ -228,11 +224,21 @@ in
                 match = {
                   class = ".*";
                 };
-                float = true;
                 size = [
                   "min(window_w, monitor_w * 0.65)"
                   "min(window_h, monitor_h * 0.65)"
                 ];
+              }
+            ];
+          }
+          {
+            _args = [
+              {
+                match = {
+                  class = "steam";
+                  title = "notificationtoasts.*";
+                };
+                float = true;
               }
             ];
           }
