@@ -27,7 +27,7 @@ in
 
     fontSize = mkOption {
       type = types.int;
-      default = 10;
+      default = 9;
       description = "Ghostty font size";
     };
 

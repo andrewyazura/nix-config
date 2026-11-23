@@ -12,10 +12,7 @@
       nix = "/etc/nix-darwin";
     };
     colima.enable = true;
-    ghostty = {
-      fontSize = 14;
-      fontStyle = "SemiBold";
-    };
+    ghostty.fontSize = 11;
     ideavim.enable = true;
     tmux.showBattery = true;
   };
