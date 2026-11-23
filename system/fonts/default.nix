@@ -12,6 +12,13 @@ with lib;
     fonts.packages = [ pkgs.noto-fonts-cjk-sans ];
 
     fonts.fontconfig = {
+      enable = true;
+      antialias = true;
+      hinting = {
+        enable = true;
+        style = "slight";
+      };
+      subpixel.rgba = "none";
       defaultFonts = {
         monospace = [ "JetBrainsMono Nerd Font" ];
         sansSerif = [ "Noto Sans CJK JP" ];

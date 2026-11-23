@@ -8,6 +8,10 @@
       nix = "${config.home.homeDirectory}/Documents/nix/config";
     };
     cs2.enable = true;
+    ghostty = {
+      fontStyle = "Medium";
+      freetypeLoadFlags = "no-hinting";
+    };
     tuple.enable = true;
     profiles = {
       development.enable = true;

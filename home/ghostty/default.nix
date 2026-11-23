@@ -37,6 +37,12 @@ in
       description = "Ghostty font style";
     };
 
+    freetypeLoadFlags = mkOption {
+      type = types.nullOr types.str;
+      default = null;
+      description = "Ghostty FreeType load flags (Linux only)";
+    };
+
     backgroundOpacity = mkOption {
       type = types.float;
       default = 1.0;
@@ -60,6 +66,7 @@ in
 
         palette = imap0 (i: c: "${toString i}=${c}") (import ../../common/ansi.nix);
 
+        alpha-blending = "linear-corrected";
         background-opacity = cfg.backgroundOpacity;
         background-opacity-cells = true;
         font-family = cfg.fontFamily;
@@ -73,6 +80,12 @@ in
           "ssh-env"
         ];
         window-decoration = "server";
+      }
+      // optionalAttrs isDarwin {
+        font-thicken = true;
+      }
+      // optionalAttrs (!isDarwin && cfg.freetypeLoadFlags != null) {
+        freetype-load-flags = cfg.freetypeLoadFlags;
       };
     };
   };

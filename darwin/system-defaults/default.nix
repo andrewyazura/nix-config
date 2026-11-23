@@ -22,6 +22,7 @@ in
         };
 
         NSGlobalDomain = {
+          AppleFontSmoothing = 1;
           ApplePressAndHoldEnabled = false;
           NSAutomaticCapitalizationEnabled = false;
           NSAutomaticPeriodSubstitutionEnabled = false;
