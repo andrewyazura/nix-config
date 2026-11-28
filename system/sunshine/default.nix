@@ -18,7 +18,7 @@ in
       openFirewall = true;
       capSysAdmin = true;
       settings = {
-        capture = "kms";
+        capture = "wlr";
         csrf_allowed_origins = "https://100.125.181.10:47990";
       };
     };
