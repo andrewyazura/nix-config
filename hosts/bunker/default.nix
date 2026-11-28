@@ -81,15 +81,12 @@ in
           admins = {
             "kenough" = {
               identity = "76561198341773564";
-              flags = [ "@css/root" ];
             };
             "yaroslave" = {
               identity = "76561198028746163";
-              flags = [ "@css/root" ];
             };
             "chief" = {
               identity = "76561199008224083";
-              flags = [ "@css/root" ];
             };
           };
           environmentFiles = [

@@ -5,20 +5,27 @@
 }:
 
 let
-  metamod = pkgs.fetchurl {
-    url = "https://mms.alliedmods.net/mmsdrop/2.0/mmsource-2.0.0-git1411-linux.tar.gz";
-    sha256 = "0jb615c59i64w33ygp53s33n20x0li485gg8g586mj51azac7m73";
+  readyupVersion = "0.2.33";
+
+  readyupComponents = {
+    core = "0cqv79acpgzbfdyxj72mmk88p6fby47c7d8n0a9jap2jv0cvgzj0";
+    essentials-plugin = "1yb2glxxh2nzjyz2mlqv15rjzv8axif25n46b50vi6knk6qczdp7";
+    match = "11ls05rnssg62kbj0mzng84jns1azscvpv8i7ma51nsp09p2lpz9";
+    fleet = "1s6bzjna6p80chqclrwwxj55zjl0wgscb4mjbdxb8p4yamwz3id0";
+    practice = "1vzlksa60sm8qpyrx6k92p8mpsn5fqb7diaz8rjxmcxk119bwf5b";
+    mapvote = "1qkd2n168pn1ci4rzhb27r5g1lp58qh1dib8rvb8i2lbj9fwp69p";
+    retakes = "00g611x039bmsgkxkj2xsgq8ibsdbw233hw6mmpl4dg04vsqg93f";
+    deathmatch = "0yxi0bjla2mbg128ykv7mflkcy9p3j96pxixqfa87hrgrhl13c6c";
+    movement = "0vwra68gp4pazmw2c9ikx9ng47zidwz797hgr79027p3zsx0aa28";
   };
 
-  cssharp = pkgs.fetchurl {
-    url = "https://github.com/roflmuffin/CounterStrikeSharp/releases/download/v1.0.374/counterstrikesharp-with-runtime-linux-1.0.374.zip";
-    sha256 = "14k7rins02c8x6a60mm1nmz2czcjw41yqb67rl6ss9p2haj4m8i2";
-  };
-
-  matchzy = pkgs.fetchurl {
-    url = "https://github.com/Auto-Tournament/cs2-plugin/releases/download/v1.4.33/MatchZy-1.4.33.zip";
-    sha256 = "0v7lin7gzr0q4yj6wcqfa2yp2jcgqzdiygriqrdh3ckykxy36s2v";
-  };
+  readyup = lib.mapAttrsToList (
+    name: sha256:
+    pkgs.fetchurl {
+      url = "https://github.com/Auto-Tournament/ready-up/releases/download/v${readyupVersion}/ready-up-${name}-${readyupVersion}-linuxsteamrt64.zip";
+      inherit sha256;
+    }
+  ) readyupComponents;
 
 in
 stdenv.mkDerivation {
@@ -27,19 +34,12 @@ stdenv.mkDerivation {
 
   nativeBuildInputs = [
     pkgs.unzip
-    pkgs.prelink
   ];
 
   dontUnpack = true;
 
   installPhase = ''
     mkdir -p $out
-    tar -xf ${metamod} -C $out
-    unzip -q ${cssharp} -d $out
-    unzip -q ${matchzy} -d $TMPDIR/matchzy
-    cp -r $TMPDIR/matchzy/*/. $out/
-
-    # Remove executable stack flag from CounterStrikeSharp to fix the plugin load error
-    find $out -name "*.so" -exec sh -c 'execstack -c "$1" 2>/dev/null || true' _ {} \;
+    ${lib.concatMapStrings (zip: "unzip -q ${zip} -d $out\n") readyup}
   '';
 }

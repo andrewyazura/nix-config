@@ -1,6 +1,6 @@
 # CS2 Server Update Guide
 
-This guide details how to update the Counter-Strike 2 server executable and its accompanying plugins (Metamod, CounterStrikeSharp, MatchZy) in this Nix configuration.
+This guide details how to update the Counter-Strike 2 server executable and its accompanying plugins (Ready Up) in this Nix configuration.
 
 ---
 
@@ -33,29 +33,18 @@ Plugins are pinned via fixed-output derivations in [plugins.nix](file:///home/an
 
 ### Step 1: Find the latest versions and URLs
 
-1. **Metamod:Source (2.0.0 Dev Builds)**:
-   - Visit: [Metamod 2.0.0 Snapshots](https://mms.alliedmods.net/mmsdrop/2.0/)
-   - Find the latest build matching `mmsource-2.0.0-gitXXXX-linux.tar.gz`.
-   - **Do not blindly take the newest build.** Metamod bumped its SourceHook
-     interface from 17 to 18 in the KHook change (builds from `git1459`,
-     2026-09-08, onwards). CounterStrikeSharp is still built against 17, so
-     those builds make it fail with `Plugin uses old SourceHook Metamod build`
-     and the server loads 0 plugins. `git1411` is the newest build on
-     SourceHook 17. Only move past it once CounterStrikeSharp ships a release
-     built against 18.
-   - Record the URL: `https://mms.alliedmods.net/mmsdrop/2.0/mmsource-2.0.0-gitXXXX-linux.tar.gz`
-
-2. **CounterStrikeSharp**:
-   - Visit: [CounterStrikeSharp Releases](https://github.com/roflmuffin/CounterStrikeSharp/releases)
-   - Find the latest release version (e.g., `v1.0.371`).
-   - Use the release version to construct the download URL for the package with pre-bundled runtime:
-     `https://github.com/roflmuffin/CounterStrikeSharp/releases/download/v1.0.XXXX/counterstrikesharp-with-runtime-linux-1.0.XXXX.zip`
-
-3. **MatchZy-Enhanced**:
-   - Visit: [MatchZy-Enhanced Releases](https://github.com/Auto-Tournament/cs2-plugin/releases)
-   - Find the latest release version (e.g., `v1.4.33`).
-   - Construct the download URL:
-     `https://github.com/Auto-Tournament/cs2-plugin/releases/download/vX.Y.Z/MatchZy-X.Y.Z.zip`
+1. **Ready Up**:
+   - Visit: [Ready Up Releases](https://github.com/Auto-Tournament/ready-up/releases)
+   - Find the latest release version (e.g., `v0.2.33`). Its release notes name
+     the CS2 build its engine signatures were verified against.
+   - Each entry of `readyupComponents` is one single-component release zip:
+     `https://github.com/Auto-Tournament/ready-up/releases/download/vX.Y.Z/ready-up-<component>-X.Y.Z-linuxsteamrt64.zip`
+     (`essentials-plugin` is the essentials plugin alone; `ready-up-essentials-...`
+     without `-plugin` is the bundle). The bundles are not used, so `hud` and
+     `addons` stay out.
+   - A CS2 update can break Ready Up's engine signatures. Run `ru selftest` in
+     the server console after one; it ends with `PASS` or `FAIL`. On `FAIL`,
+     move to a release verified against the new CS2 build.
 
 ### Step 2: Prefetch the Nix SHA256 Hashes
 For each of the new URLs, compute the Nix store hash using `nix-prefetch-url`:
@@ -66,14 +55,14 @@ nix-prefetch-url <URL>
 
 Example commands:
 ```bash
-nix-prefetch-url https://mms.alliedmods.net/mmsdrop/2.0/mmsource-2.0.0-git1407-linux.tar.gz
-nix-prefetch-url https://github.com/roflmuffin/CounterStrikeSharp/releases/download/v1.0.371/counterstrikesharp-with-runtime-linux-1.0.371.zip
+nix-prefetch-url https://github.com/Auto-Tournament/ready-up/releases/download/v0.2.33/ready-up-core-0.2.33-linuxsteamrt64.zip
+nix-prefetch-url https://github.com/Auto-Tournament/ready-up/releases/download/v0.2.33/ready-up-match-0.2.33-linuxsteamrt64.zip
 ```
 
 ### Step 3: Update `plugins.nix`
 Open [plugins.nix](file:///home/andrew/Documents/nix/config/system/cs2-server/plugins.nix) and update:
-1. The `url` fields to point to the new versions.
-2. The `sha256` fields with the prefetch hashes you just computed.
+1. `readyupVersion` to the new version.
+2. The hashes in `readyupComponents` with the prefetch hashes you just computed.
 
 ### Step 4: Verify the Plugin Build Locally
 Before deploying, run the following command from the `system/cs2-server/` directory to ensure that the plugins download and extract without issues:
@@ -131,7 +120,7 @@ To start the server with a pre-configured Workshop Collection (allowing rotation
    ```
 
 ### Populating the Map Pool and Voting Menus
-To provide a custom list of Workshop map IDs that plugins (like MatchZy or map choosers) can use for voting, map cycling, or practice commands:
+To provide a custom list of Workshop map IDs that plugins (like map choosers) can use for voting, map cycling, or practice commands:
 1. Define the `workshopMaps` list of map ID strings in your server definition:
    ```nix
    modules.cs2-server.servers.server-1 = {
@@ -188,16 +177,15 @@ ssh bunker 'journalctl -u cs2-server-1 --since "5 min ago" | grep -i "logon toke
 
 ### Keeping the secrets out of the journal
 
-Do not pass a secret as a launch argument. Two separate things print the CS2
-command line — the engine itself, and CounterStrikeSharp — so anything on it
-lands in the journal, and in `/proc/<pid>/cmdline`. The engine masks the GSLT
+Do not pass a secret as a launch argument. The engine prints the CS2 command
+line, so anything on it lands in the journal, and in `/proc/<pid>/cmdline`. The engine masks the GSLT
 token but **not** `-authkey`.
 
 - `rcon_password` and `sv_setsteamaccount` are convars, so `preStart` writes
   them to `cfg/secrets.cfg` at mode 600 and the server reads it via
   `+exec secrets.cfg`.
 - `-authkey` has no convar and must stay on the command line, so
-  `LogFilterPatterns` drops both command-line lines before journald stores them.
+  `LogFilterPatterns` drops the command-line lines before journald stores them.
 
 If a secret does reach the journal, rotate it — vacuuming is time-based and
 cannot remove a single recent entry without taking the surrounding logs too.

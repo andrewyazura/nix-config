@@ -41,10 +41,6 @@ in
             type = attrsOf (submodule {
               options = {
                 identity = mkOption { type = str; };
-                flags = mkOption {
-                  type = listOf str;
-                  default = [ "@css/root" ];
-                };
               };
             });
             default = { };
@@ -137,18 +133,17 @@ in
           fi
 
           # Install plugins
-          mkdir -p ${installDir}/game/csgo/addons ${installDir}/game/csgo/cfg
-          chmod -R +w ${installDir}/game/csgo/addons ${installDir}/game/csgo/cfg 2>/dev/null || true
+          mkdir -p ${installDir}/game/csgo/readyup ${installDir}/game/csgo/cfg/ReadyUp
+          chmod -R +w ${installDir}/game/csgo/readyup ${installDir}/game/csgo/cfg 2>/dev/null || true
 
           cp -rfT --no-preserve=mode ${
             pkgs.callPackage ./plugins.nix { }
-          }/addons ${installDir}/game/csgo/addons
+          }/readyup ${installDir}/game/csgo/readyup
 
-          if [ -d ${pkgs.callPackage ./plugins.nix { }}/cfg ]; then
-            cp -rnT --no-preserve=mode ${pkgs.callPackage ./plugins.nix { }}/cfg ${installDir}/game/csgo/cfg
-          fi
+          cp -n ${installDir}/game/csgo/readyup/bin/linuxsteamrt64/readyup.cfg.example ${installDir}/game/csgo/readyup/bin/linuxsteamrt64/readyup.cfg
+          cp -rnT ${installDir}/game/csgo/readyup/cfg-templates/ReadyUp ${installDir}/game/csgo/cfg/ReadyUp
 
-          chmod -R +w ${installDir}/game/csgo/addons ${installDir}/game/csgo/cfg
+          chmod -R +w ${installDir}/game/csgo/readyup ${installDir}/game/csgo/cfg
 
           # Setup secrets, kept out of the command line so they stay out of the journal
           rm -f ${installDir}/game/csgo/cfg/server.cfg
@@ -158,11 +153,11 @@ in
             printf 'sv_setsteamaccount "%s"\n' "$GSLT_TOKEN" > ${installDir}/game/csgo/cfg/secrets.cfg
           )
 
-          # Inject Metamod into gameinfo.gi
+          # Inject Ready Up into gameinfo.gi
           GAMEINFO="${installDir}/game/csgo/gameinfo.gi"
           if [ -f "$GAMEINFO" ]; then
-            if ! ${pkgs.gnugrep}/bin/grep -q "csgo/addons/metamod" "$GAMEINFO"; then
-              ${pkgs.gawk}/bin/awk '/SearchPaths/ {print; getline; print; print "\t\t\tGame\tcsgo/addons/metamod"; next} 1' "$GAMEINFO" > "$GAMEINFO.tmp"
+            if ! ${pkgs.gnugrep}/bin/grep -q "csgo/readyup" "$GAMEINFO"; then
+              ${pkgs.gawk}/bin/awk '/SearchPaths/ {print; getline; print; print "\t\t\tGame\tcsgo/readyup"; next} 1' "$GAMEINFO" > "$GAMEINFO.tmp"
               mv "$GAMEINFO.tmp" "$GAMEINFO"
             fi
           fi
@@ -171,9 +166,15 @@ in
           ${
             if v.admins != { } then
               ''
-                  mkdir -p ${installDir}/game/csgo/addons/counterstrikesharp/configs
-                  cat <<'EOF' > ${installDir}/game/csgo/addons/counterstrikesharp/configs/admins.json
-                ${builtins.toJSON v.admins}
+                  mkdir -p ${installDir}/game/csgo/readyup/plugins/essentials
+                  cat <<'EOF' > ${installDir}/game/csgo/readyup/plugins/essentials/admins.json
+                ${builtins.toJSON {
+                  version = 1;
+                  admins = mapAttrsToList (name: a: {
+                    steamid64 = a.identity;
+                    inherit name;
+                  }) v.admins;
+                }}
                 EOF
               ''
             else
